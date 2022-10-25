@@ -1,0 +1,14 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply from: "$rootDir/config/android-settings.gradle"
+
+android {
+
+}
+
+dependencies {
+    implementation project(':modCommon')
+    implementation project(':modModel')
+    implementation project(":modNavegacao")
+    implementation project(":modEntrega")
+}

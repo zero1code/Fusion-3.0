@@ -1,0 +1,28 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "Fusion 3.0"
+include ':app'
+include ':modSincronizacao'
+include ':modNavegacao'
+include ':modAceitarCarga'
+include ':modCommon'
+include ':modMapa'
+include ':modEntrega'
+include ':modDatastore'
+include ':modBanco'
+include ':modInternet'
+include ':modDatabase'
+include ':modModel'
+include ':modNetwork'

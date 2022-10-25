@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/card_border_radius"
+    app:cardElevation="@dimen/dimen_zero">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dimen_medium"
+        android:layout_marginHorizontal="@dimen/dimen_medium">
+
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="@dimen/dimen_large"
+            android:layout_height="@dimen/dimen_large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            style="@style/TextAppearance.App.Headline6"
+            android:id="@+id/tv_titulo"
+            android:layout_width="@dimen/dimen_zero"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:paddingVertical="@dimen/dimen_medium"
+            android:layout_marginTop="@dimen/dimen_medium"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintTop_toBottomOf="@id/progress_circular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

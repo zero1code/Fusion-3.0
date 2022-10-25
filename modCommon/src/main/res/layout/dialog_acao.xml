@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_dialog_shape"
+    android:padding="@dimen/dimen_medium">
+
+    <TextView
+        style="@style/TextAppearance.App.Headline4"
+        android:id="@+id/tv_titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Atenção"
+        android:textColor="?attr/colorOnSurface" />
+
+    <TextView
+        style="@style/TextAppearance.App.Headline6"
+        android:id="@+id/tv_mensagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_medium"
+        android:text="Você tem certeza que deseja fazer isso?" />
+
+    <Button
+        android:id="@+id/btn_confirmar"
+        style="@style/Theme.Button.Confirmar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_large"
+        android:text="Aceitar" />
+
+    <Button
+        android:id="@+id/btn_recusar"
+        style="@style/Theme.Button.Cancelar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_medium"
+        android:text="Recusar" />
+
+</LinearLayout>
+

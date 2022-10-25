@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_medium"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/dimen_big"
+            android:layout_height="@dimen/dimen_big"
+            app:srcCompat="@drawable/ic_pending" />
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pendente" />
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="33"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_medium"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/dimen_big"
+            android:layout_height="@dimen/dimen_big"
+            android:tint="@color/brand_green_success"
+            app:srcCompat="@drawable/ic_check_circle" />
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Realizada"
+            android:textColor="@color/brand_green_success" />
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12"
+            android:textColor="@color/brand_green_success"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_medium"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/dimen_big"
+            android:layout_height="@dimen/dimen_big"
+            android:tint="@color/brand_selective_yellow"
+            app:srcCompat="@drawable/ic_more_time" />
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adiada"
+            android:textColor="@color/brand_selective_yellow" />
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6"
+            android:textColor="@color/brand_selective_yellow"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_medium"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/dimen_big"
+            android:layout_height="@dimen/dimen_big"
+            android:tint="@color/brand_red"
+            app:srcCompat="@drawable/ic_devolution" />
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Devolvida"
+            android:textColor="@color/brand_red" />
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:textColor="@color/brand_red"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,29 @@
+import br.com.fusiondms.buildsrc.Deps
+
+ext.addCoroutines = {
+    implementation Deps.coroutines_core
+    implementation Deps.coroutines_android
+}
+
+ext.addDaggerHilt = {
+    implementation Deps.dagger_hilt
+    kapt Deps.kapt_dagger_hilt_compiler
+    kapt Deps.kapt_hilt_compiler
+}
+
+ext.addFragmentNavigation = {
+    implementation Deps.fragment_androidx
+    implementation Deps.navigation_ui
+    implementation Deps.navigation_androidx
+}
+
+ext.addGoogleMaps = {
+    implementation Deps.play_services_maps
+    implementation Deps.play_services_location
+}
+
+ext.addRoom = {
+    implementation Deps.room_runtime
+    implementation Deps.room_ktx
+    kapt Deps.room_kapt_compiler
+}

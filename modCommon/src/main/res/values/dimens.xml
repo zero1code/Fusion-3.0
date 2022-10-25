@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="dimen_small">4dp</dimen>
+    <dimen name="dimen_normal">8dp</dimen>
+    <dimen name="dimen_medium">16dp</dimen>
+    <dimen name="dimen_big">24dp</dimen>
+    <dimen name="dimen_large">60dp</dimen>
+    <dimen name="dimen_super">90dp</dimen>
+
+    <dimen name="small_text">8sp</dimen>
+    <dimen name="normal_text">14sp</dimen>
+    <dimen name="medium_text">18sp</dimen>
+    <dimen name="big_text">24sp</dimen>
+    <dimen name="large_text">32sp</dimen>
+
+    <dimen name="card_sincronizacao">90dp</dimen>
+    <dimen name="card_elevation">6dp</dimen>
+    <dimen name="card_border_radius">8dp</dimen>
+
+    <dimen name="bottom_sheet_peek_height">150dp</dimen>
+
+    <dimen name="dimen_zero">0dp</dimen>
+</resources>

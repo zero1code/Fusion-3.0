@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_configuracao_registrar_GCM"
+        android:title="Registrar atualização online" />
+    
+    <item
+        android:id="@+id/menu_configuracao_qtd_tabelas"
+        android:title="Registro das tabelas" />
+    <item
+        android:id="@+id/menu_configuracao_verfila"
+        android:title="Fila de transmissão" />
+    <item
+        android:id="@+id/menu_configuracao_atualizar_do_arquivo"
+        android:title="Atualizar do arquivo" />
+    <item
+        android:id="@+id/menu_configuracao_informacoes_do_aparelho"
+        android:title="Informações do aparelho" />
+
+    <item
+        android:id="@+id/menu_configuracao_desvincular_do_aparelho"
+        android:title="Desvincular aparelho" />
+
+    <item
+        android:id="@+id/menu_configuracao_limpar_dados"
+        android:title="Limpar dados" />
+</menu>

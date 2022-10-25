@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.DetalhesCargaFragment"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_detalhe_carga"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dimen_medium">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_logo"
+                android:alpha="0.2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                style="@style/TextAppearance.App.Headline4"
+                android:id="@+id/tv_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_medium"
+                android:text="Detalhes da carga"
+                tools:text="Detalhes da carga"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                style="@style/TextAppearance.App.Headline6"
+                android:id="@+id/tv_romaneio_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dimen_medium"
+                android:paddingVertical="@dimen/dimen_normal"
+                android:textColor="@color/brand_color_on_surface"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_titulo"/>
+
+            <TextView
+                style="@style/TextAppearance.App.Headline6"
+                android:id="@+id/tv_destino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dimen_medium"
+                android:paddingVertical="@dimen/dimen_normal"
+                android:textColor="@color/brand_color_on_surface"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_romaneio_id"/>
+
+            <TextView
+                style="@style/TextAppearance.App.Headline6"
+                android:id="@+id/tv_peso_carga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dimen_medium"
+                android:paddingVertical="@dimen/dimen_normal"
+                android:textColor="@color/brand_color_on_surface"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_destino"/>
+
+            <TextView
+                style="@style/TextAppearance.App.Headline6"
+                android:id="@+id/tv_km"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dimen_medium"
+                android:paddingVertical="@dimen/dimen_normal"
+                android:textColor="@color/brand_color_on_surface"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_peso_carga"/>
+
+            <TextView
+                style="@style/TextAppearance.App.Headline6"
+                android:id="@+id/tv_valor_carga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dimen_medium"
+                android:paddingVertical="@dimen/dimen_normal"
+                android:textColor="@color/brand_color_on_surface"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_km"/>
+
+            <Button
+                style="@style/Theme.Button.Confirmar"
+                android:id="@+id/btn_aceitar_carga"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/btn_recusar_carga"
+                android:layout_marginBottom="@dimen/dimen_medium"
+                android:layout_marginHorizontal="@dimen/dimen_medium"
+                android:text="Aceitar carga"/>
+
+            <Button
+                style="@style/Theme.Button.Cancelar"
+                android:id="@+id/btn_recusar_carga"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_medium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginHorizontal="@dimen/dimen_medium"
+                android:text="Recusar carga"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

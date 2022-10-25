@@ -1,0 +1,26 @@
+import br.com.fusiondms.buildsrc.Config
+
+apply plugin: 'com.android.application'
+apply from: "$rootDir/config/android-settings.gradle"
+
+android {
+
+    defaultConfig {
+        applicationId Config.applicationId
+    }
+
+    defaultConfig {
+        Properties properties = new Properties()
+
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        manifestPlaceholders = [API_MAPS_KEY: "${properties.getProperty('API_MAPS_KEY')}"]
+    }
+}
+
+dependencies {
+    implementation project(':modCommon')
+    implementation project(':modNavegacao')
+    implementation project(':modSincronizacao')
+    implementation project(':modAceitarCarga')
+    implementation project(':modMapa')
+}

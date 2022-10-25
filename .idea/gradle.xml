@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/modAceitarCarga" />
+            <option value="$PROJECT_DIR$/modBanco" />
+            <option value="$PROJECT_DIR$/modCommon" />
+            <option value="$PROJECT_DIR$/modDatabase" />
+            <option value="$PROJECT_DIR$/modDatastore" />
+            <option value="$PROJECT_DIR$/modEntrega" />
+            <option value="$PROJECT_DIR$/modInternet" />
+            <option value="$PROJECT_DIR$/modMapa" />
+            <option value="$PROJECT_DIR$/modModel" />
+            <option value="$PROJECT_DIR$/modNavegacao" />
+            <option value="$PROJECT_DIR$/modNetwork" />
+            <option value="$PROJECT_DIR$/modSincronizacao" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MapaFragment">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <fragment
+                android:id="@+id/map_fragment"
+                class="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_left_drawer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_medium"
+                android:layout_marginTop="?attr/actionBarSize"
+                app:backgroundTint="?attr/colorOnPrimarySurface"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_menu" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_direcao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_medium"
+            app:layout_anchor="@id/view"
+            app:layout_anchorGravity="start|bottom"
+            app:backgroundTint="?attr/colorOnPrimarySurface"
+            app:srcCompat="@drawable/ic_moving"/>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="@dimen/dimen_super"
+            android:layout_height="10dp"
+            app:layout_anchor="@+id/fab_espera"
+            android:layout_marginVertical="@dimen/dimen_normal"
+            app:layout_anchorGravity="center_vertical" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_espera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/bottom_sheet"
+            app:layout_anchorGravity="end"
+            android:layout_margin="@dimen/dimen_medium"
+            app:backgroundTint="?attr/colorOnPrimarySurface"
+            app:srcCompat="@drawable/ic_timer_off"/>
+
+        <include
+            android:id="@+id/bottom_sheet"
+            layout="@layout/entregas_bottom_sheet" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:theme="@style/NavigationItemRipple"
+        app:headerLayout="@layout/header_navigation_drawer"
+        app:insetForeground="@color/brand_green_light_ripple"
+        app:menu="@menu/menu_navigation_drawer" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

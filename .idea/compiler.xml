@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="11">
+      <module name="Fusion_3.0.modDataSource" target="11" />
+      <module name="Fusion_3.0.moddatasource.modDomain" target="11" />
+      <module name="modDatabase" target="11" />
+      <module name="modNetwork" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

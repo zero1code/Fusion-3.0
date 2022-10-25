@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/dimen_normal"
+    app:cardElevation="@dimen/dimen_small"
+    app:cardCornerRadius="@dimen/card_border_radius"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_normal">
+
+        <TextView
+            android:id="@+id/tv_ordem_entrega"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.App.Headline6"
+            tools:text="01"/>
+
+        <TextView
+            android:id="@+id/tv_status"
+            style="@style/TextAppearance.App.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Pendente" />
+
+
+        <TextView
+            android:id="@+id/tv_nota_fiscal"
+            style="@style/TextAppearance.App.Subtitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_ordem_entrega"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="NF/Pernota: \n123456/23453222" />
+
+        <TextView
+            android:id="@+id/tv_valor"
+            style="@style/TextAppearance.App.Subtitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_nota_fiscal"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Valor: \nR$1.452,00" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

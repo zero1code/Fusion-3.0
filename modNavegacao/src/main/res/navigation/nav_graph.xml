@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/sincronizacaoFragment">
+
+    <fragment
+        android:id="@+id/sincronizacaoFragment"
+        android:name="br.com.fusiondms.modsincronizacao.SincronizacaoFragment"
+        android:label="sincronizacao_fragment" >
+        <action
+            android:id="@+id/action_sincronizacaoFragment_to_listarCargasFragment"
+            app:destination="@id/listarCargasFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/no_animation"
+            app:popEnterAnim="@anim/no_animation"
+            app:popExitAnim="@anim/slide_out_down" />
+    </fragment>
+    <fragment
+        android:id="@+id/listarCargasFragment"
+        android:name="br.com.fusiondms.modaceitarcarga.presentation.ListarCargasFragment"
+        android:label="aceitar_fragment" >
+        <action
+            android:id="@+id/action_listarCargasFragment_to_mapaFragment"
+            app:destination="@id/mapaFragment"
+            app:popUpTo="@id/sincronizacaoFragment"
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/no_animation"
+            app:popEnterAnim="@anim/no_animation"
+            app:popExitAnim="@anim/slide_out_down"/>
+    </fragment>
+    <fragment
+        android:id="@+id/mapaFragment"
+        android:name="br.com.fusiondms.modmapa.MapaFragment"
+        android:label="fragment_mapa"
+        tools:layout="@layout/fragment_mapa" />
+</navigation>
