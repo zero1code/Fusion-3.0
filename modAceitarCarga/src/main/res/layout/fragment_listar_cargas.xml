@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.slidingpanelayout.widget.SlidingPaneLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.slidingpanelayout.widget.SlidingPaneLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/sliding_pane_layout"
@@ -57,28 +56,34 @@
                 android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:padding="@dimen/dimen_normal"
+                    android:id="@+id/rv_romaneios"
                     android:layout_width="550dp"
                     android:layout_height="match_parent"
                     android:clipToPadding="false"
                     android:overScrollMode="never"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    />
+                    android:padding="@dimen/dimen_normal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </RelativeLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <include
+            android:id="@+id/lt_lista_vazia"
+            layout="@layout/lista_carga_vazia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/detail_container"
+        android:name="br.com.fusiondms.modaceitarcarga.presentation.DetalhesCargaFragment"
         android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:name="br.com.fusiondms.modaceitarcarga.presentation.DetalhesCargaFragment"/>
+        android:layout_weight="1" />
 
 
 </androidx.slidingpanelayout.widget.SlidingPaneLayout>

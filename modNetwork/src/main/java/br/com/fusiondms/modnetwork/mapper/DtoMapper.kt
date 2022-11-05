@@ -1,6 +1,6 @@
-package br.com.fusiondms.moddatabase.mapper
+package br.com.fusiondms.modnetwork.mapper
 
-interface EntityMapper<Model, Entity> {
-    fun mapEntityToModel(entity: Entity): Model
-    fun mapModelToEntity(model: Model): Entity
+interface DtoMapper<Model, Dto> {
+    fun mapDtoToModel(dto: Dto): Model
+    fun mapModelToDto(model: Model): Dto
 }

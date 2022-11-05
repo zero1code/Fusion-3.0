@@ -1,4 +1,4 @@
-package br.com.fusiondms.modentrega.adapter
+package br.com.fusiondms.modmapa.adapter
 
 import android.text.Html
 import android.view.LayoutInflater
@@ -6,9 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.modentrega.databinding.ItemEntregaChildBinding
+import br.com.fusiondms.modmapa.databinding.ItemEntregaChildBinding
 import br.com.fusiondms.modmodel.Entrega
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 class EntregasChildAdapter :
     ListAdapter<Entrega, EntregasChildAdapter.EntregasViewHolder>(DiffCallback) {

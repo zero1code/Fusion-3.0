@@ -8,11 +8,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import br.com.fusiondms.modcommon.databinding.DialogAcaoBinding
+import br.com.fusiondms.modcommon.databinding.DialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-class DialogAcao(
+class Dialog(
     private val titulo: String,
     private val mensagem: String,
     private val textoBotaoPositivo: String,
@@ -21,9 +21,8 @@ class DialogAcao(
     acaoNegativa: (() -> Unit)?
 ) : BottomSheetDialogFragment() {
 
-    private var _binding : DialogAcaoBinding? = null
+    private var _binding : DialogBinding? = null
     private val binding get() = _binding!!
-//    private lateinit var listener: IDialogAcaoListener
     private val acaoPositivaListener = acaoPositiva
     private val acaoNegativaListener = acaoNegativa
 
@@ -32,7 +31,7 @@ class DialogAcao(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DialogAcaoBinding.inflate(inflater)
+        _binding = DialogBinding.inflate(inflater)
         return binding.root
     }
 
@@ -55,18 +54,14 @@ class DialogAcao(
 
     override fun onResume() {
         super.onResume()
-        iniciarListener()
+        bindListeners()
     }
     override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
         dismiss()
     }
 
-//    fun setListener(listener: IDialogAcaoListener) {
-//        this.listener = listener
-//    }
-
-    private fun iniciarListener() {
+    private fun bindListeners() {
         binding.btnConfirmar.setOnClickListener {
             acaoPositivaListener?.invoke()
             dismiss()
@@ -78,13 +73,7 @@ class DialogAcao(
         }
     }
 
-
-//    interface IDialogAcaoListener {
-//        fun onClickPositivo()
-//        fun onClickNegativo()
-//    }
-
     companion object {
-        const val TAG = "DialogAcao"
+        const val TAG = "Dialog"
     }
 }

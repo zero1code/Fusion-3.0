@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package br.com.fusiondms.modaceitarcarga.adapter
+package br.com.fusiondms.modaceitarcarga.presentation.adapter
 
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -27,16 +26,16 @@ import br.com.fusiondms.modaceitarcarga.databinding.ItemCargaListBinding
 import br.com.fusiondms.modmodel.Romaneio
 import java.util.*
 
-class CargasAdapter(private val onItemClicked: (Romaneio) -> Unit) :
+class CargasAdapter() :
     ListAdapter<Romaneio, CargasAdapter.CargasViewHolder>(DiffCallback) {
 
-    private lateinit var context: Context
+    var onRomaneioClickListener: (romaneio: Romaneio, position: Int) -> Unit = { _: Romaneio, _: Int -> }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): CargasViewHolder {
-        context = parent.context
+        val context = parent.context
         return CargasViewHolder(
             ItemCargaListBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
@@ -45,14 +44,10 @@ class CargasAdapter(private val onItemClicked: (Romaneio) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: CargasViewHolder, position: Int) {
-        val current = getItem(position)
-        holder.itemView.setOnClickListener {
-            onItemClicked(current)
-        }
-        holder.bind(current)
+        holder.bind(getItem(position))
     }
 
-    class CargasViewHolder(private var binding: ItemCargaListBinding) :
+    inner class CargasViewHolder(private var binding: ItemCargaListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(romaneio: Romaneio) {
@@ -68,6 +63,10 @@ class CargasAdapter(private val onItemClicked: (Romaneio) -> Unit) :
             )
             binding.viewColorIdentifier.setBackgroundColor(color)
             romaneio.corIdentificador = color
+
+            itemView.setOnClickListener {
+                onRomaneioClickListener(romaneio, adapterPosition)
+            }
         }
     }
 

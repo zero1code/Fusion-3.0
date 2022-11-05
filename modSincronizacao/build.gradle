@@ -8,4 +8,6 @@ android {
 dependencies {
     implementation project(':modCommon')
     implementation project(":modNavegacao")
+    implementation project(":modNetwork")
+    implementation project(":modModel")
 }

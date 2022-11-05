@@ -34,6 +34,9 @@ object Versions {
     const val room_ktx = "2.4.3"
     const val room_kapt_compiler = "2.4.3"
     const val gson = "2.9.1"
+    const val retrofit = "2.9.0"
+    const val retrofit_converter = "2.9.0"
+    const val okhttp = "4.10.0"
 }
 
 object Deps {
@@ -58,6 +61,9 @@ object Deps {
     const val room_ktx = "androidx.room:room-ktx:${Versions.room_ktx}"
     const val room_kapt_compiler = "androidx.room:room-compiler:${Versions.room_kapt_compiler}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val retrofit_converter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_converter}"
+    const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
 }
 
 object LocalLibs {

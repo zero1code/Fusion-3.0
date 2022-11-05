@@ -1,4 +1,4 @@
-package br.com.fusiondms.moddatabase.repository
+package br.com.fusiondms.moddatabase.repository.entregas
 
 import br.com.fusiondms.modmodel.Entrega
 

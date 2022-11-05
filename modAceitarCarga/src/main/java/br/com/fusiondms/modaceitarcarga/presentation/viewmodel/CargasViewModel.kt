@@ -18,54 +18,104 @@ package br.com.fusiondms.modaceitarcarga.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.fusiondms.moddatabase.repository.romaneios.RomaneiosRepository
+import br.com.fusiondms.modaceitarcarga.domain.cargasusecase.CargasUseCase
+import br.com.fusiondms.modaceitarcarga.domain.recusarcargausecase.RecusarCargaUseCase
 import br.com.fusiondms.modmodel.Romaneio
+import br.com.fusiondms.modnetwork.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RomaneiosViewModel @Inject constructor(
-    private val romaneiosRepository: RomaneiosRepository
+class CargasViewModel @Inject constructor(
+    private val cargasUseCase: CargasUseCase,
+    private val recusarCargaUseCase: RecusarCargaUseCase
 ) : ViewModel() {
 
-    sealed class RomaneioStatus() {
-        object Nothing: RomaneioStatus()
-        object Empty: RomaneioStatus()
-        object Loading: RomaneioStatus()
-        object Error: RomaneioStatus()
-        class Success(val lista: List<Romaneio>): RomaneioStatus()
+    sealed class CargaStatus() {
+        object Nothing : CargaStatus()
+        object Empty : CargaStatus()
+        class Loading(val isLoading: Boolean) : CargaStatus()
+        class Error(val message: String?) : CargaStatus()
+        class Selected(val romaneio: Romaneio) : CargaStatus()
+        class Deleted(val position: Int) : CargaStatus()
+        class Success(val lista: List<Romaneio>) : CargaStatus()
     }
 
-    private var _romaneioSelecionado: MutableStateFlow<Romaneio> = MutableStateFlow(Romaneio())
-    val romaneioSelecionado: StateFlow<Romaneio>
-        get() = _romaneioSelecionado
+    private var _cargaSelecionada: MutableStateFlow<CargaStatus> = MutableStateFlow(CargaStatus.Nothing)
+    val cargaSelecionada: StateFlow<CargaStatus> get() = _cargaSelecionada
 
-    private var _listaRomaneio: MutableStateFlow<RomaneioStatus> = MutableStateFlow(RomaneioStatus.Nothing)
-    val listaRomaneio: StateFlow<RomaneioStatus>
-        get() = _listaRomaneio
+    private var _listaCargaStatus: MutableStateFlow<CargaStatus> = MutableStateFlow(CargaStatus.Nothing)
+    val listaCargaStatus: StateFlow<CargaStatus> get() = _listaCargaStatus
 
-    init {
-        getListaRomaneio()
-    }
+    private var _posicao = -1
+    private var _listaCarga = mutableListOf<Romaneio>()
 
-    private fun getListaRomaneio() {
+     fun getListaCarga() =
         viewModelScope.launch {
-            _listaRomaneio.emit(RomaneioStatus.Loading)
-            delay(3000)
-            val lista = romaneiosRepository.getListaRomaneio()
-            if (lista.isEmpty()) {
-                _listaRomaneio.emit(RomaneioStatus.Empty)
-            } else {
-                _listaRomaneio.emit(RomaneioStatus.Success(lista))
-            }
-        }
-    }
+            cargasUseCase.getListaCarga()
+                .onStart {
+                    _listaCargaStatus.emit(CargaStatus.Loading(true))
+                }
+                .onCompletion {
+                    _listaCargaStatus.emit(CargaStatus.Loading(false))
+                }
+                .catch {
+                    _listaCargaStatus.emit(CargaStatus.Error(it.message))
+                }
+                .collect {
+                    delay(1500)
+                    if (it.isNotEmpty()) {
+                        _listaCarga = it.toMutableList()
+                        _listaCargaStatus.emit(CargaStatus.Success(_listaCarga))
+                    } else {
+                        _listaCargaStatus.emit(CargaStatus.Empty)
+                    }
+                }
 
-    fun setRomaneioSelecionado(romaneio: Romaneio) {
-        _romaneioSelecionado.value = romaneio
-    }
+        }
+
+    fun recusarCarga(romaneio: Romaneio) =
+        viewModelScope.launch {
+            recusarCargaUseCase.recusarCarga(romaneio)
+                .onStart {
+                    _cargaSelecionada.emit(CargaStatus.Loading(true))
+                }
+                .onCompletion {
+                    _cargaSelecionada.emit(CargaStatus.Loading(false))
+                }
+                .catch {
+                    _cargaSelecionada.emit(CargaStatus.Error(it.message))
+                }
+                .collect { result ->
+                    when (result) {
+                        is Resource.Error -> _cargaSelecionada.emit(CargaStatus.Error(result.message))
+                        is Resource.Success -> {
+                            _listaCarga.remove(romaneio)
+                            _cargaSelecionada.emit(CargaStatus.Deleted(_posicao))
+                            _listaCargaStatus.emit(CargaStatus.Deleted(_posicao))
+
+                            if (_listaCarga.size == 0) {
+                                _listaCargaStatus.emit(CargaStatus.Empty)
+                            }
+                        }
+                    }
+                }
+        }
+
+    fun setCargaSelecionada(romaneio: Romaneio, posicao: Int) =
+        viewModelScope.launch {
+            _cargaSelecionada.emit(CargaStatus.Selected(romaneio))
+            _posicao = posicao
+        }
+
+    fun resetCargaState() =
+        viewModelScope.launch {
+            _cargaSelecionada.emit(CargaStatus.Nothing)
+            _listaCargaStatus.emit(CargaStatus.Nothing)
+            _listaCarga = mutableListOf()
+        }
+
 }

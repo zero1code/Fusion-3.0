@@ -9,5 +9,6 @@ dependencies {
     implementation project(':modCommon')
     implementation project(':modModel')
     implementation project(':modDatabase')
+    implementation project(':modNetwork')
     implementation project(':modNavegacao')
 }

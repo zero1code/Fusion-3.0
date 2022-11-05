@@ -1,6 +1,12 @@
-package br.com.fusiondms.modmodel
+package br.com.fusiondms.modnetwork.model
 
-data class Sincronizacao(
-    val listaRomaneio: List<Romaneio>,
-    val listaEntrega: List<Entrega>
+import br.com.fusiondms.moddatabase.model.EntregaEntity
+import br.com.fusiondms.moddatabase.model.RomaneioEntity
+import com.google.gson.annotations.SerializedName
+
+data class SincronizacaoDto(
+    @SerializedName("romaneios")
+    val listaRomaneio: List<RomaneioEntity>,
+    @SerializedName("entregas")
+    val listaEntrega: List<EntregaEntity>
 )

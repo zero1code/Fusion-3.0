@@ -44,8 +44,10 @@
     <!-- main background !-->
     <item>
         <shape>
-            <corners android:radius="@dimen/dimen_medium" />
-            <solid android:color="?attr/backgroundColor" />
+            <corners
+                android:topLeftRadius="@dimen/dimen_medium"
+                android:topRightRadius="@dimen/dimen_medium" />
+            <solid android:color="?attr/colorSurface" />
         </shape>
     </item>
 

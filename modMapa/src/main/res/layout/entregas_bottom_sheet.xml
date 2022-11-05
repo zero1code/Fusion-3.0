@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:clickable="true"
     android:focusable="true"
-    android:background="@drawable/bottom_dialog_shape"
+    android:background="@drawable/bottom_sheet_shape"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     app:layout_insetEdge="bottom">
 

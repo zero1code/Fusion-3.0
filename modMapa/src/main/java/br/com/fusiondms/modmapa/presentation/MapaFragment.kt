@@ -1,10 +1,12 @@
-package br.com.fusiondms.modmapa
+package br.com.fusiondms.modmapa.presentation
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.location.Location
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,18 +18,22 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import br.com.fusiondms.modcommon.R.dimen
+import br.com.fusiondms.modcommon.R.*
 import br.com.fusiondms.modcommon.fabAnimation
 import br.com.fusiondms.modcommon.getActionBarSize
 import br.com.fusiondms.modcommon.getOrientacaoTela
+import br.com.fusiondms.modcommon.permissiondiaolog.PermissionRequestDialog
 import br.com.fusiondms.modcommon.setTransparentStatusBar
 import br.com.fusiondms.modcommon.snackbar.mensagemCurta
-import br.com.fusiondms.modentrega.adapter.EntregasParentAdapter
+import br.com.fusiondms.modmapa.adapter.EntregasParentAdapter
+import br.com.fusiondms.modmapa.R
 import br.com.fusiondms.modmapa.databinding.EntregasBottomSheetBinding
 import br.com.fusiondms.modmapa.databinding.EntregasInfoGeraisBinding
 import br.com.fusiondms.modmapa.databinding.FragmentMapaBinding
-import br.com.fusiondms.modmodel.Entrega
+import br.com.fusiondms.modmapa.presentation.viewmodel.MapaViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -38,7 +44,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MapaFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentMapaBinding? = null
     private var _bindingSheet: EntregasBottomSheetBinding? = null
@@ -48,12 +56,15 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     private val bindingSheet get() = _bindingSheet!!
     private val bindingSheetInfoGerais get() = _bindingSheetInfoGerais!!
 
+    private val mapaViewModel: MapaViewModel by viewModels()
+
     private val adapter by lazy { EntregasParentAdapter() }
 
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private val bottomSheetBehavior by lazy { BottomSheetBehavior.from<View>(bindingSheet.root) }
+    private var permissionRequestDialog: PermissionRequestDialog? = null
 
     private val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -61,16 +72,16 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         when {
             permission.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
                 //Localização precisa aceita
-//                binding.root.mensagemCurta("Permissão de localização precisa concedida", false)
+                binding.root.mensagemCurta("Permissão de localização concedida", false)
                 setupMap()
+                permissionRequestDialog?.dismiss()
             }
             permission.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
                 //Localização aproximada acieta
-//                binding.root.mensagemCurta("Permissão de localização aproximada concedida", false)
             }
             else -> {
                 //Permissão de localização negada
-//                binding.root.mensagemCurta("Permissão de localização negada", true)
+                permissionRequestDialog()
             }
         }
     }
@@ -100,7 +111,6 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().setTransparentStatusBar()
-        verificarPermissao()
 
         binding.apply {
             _bindingSheet = bottomSheet
@@ -112,8 +122,17 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             setupBottomSheetEntregas()
         }
 
+        bindObservers()
         bindListeners()
 
+    }
+
+    private fun bindObservers() {
+        lifecycleScope.launchWhenCreated {
+            mapaViewModel.listaEntrega.collect() { listaEntrega ->
+                adapter.submitList(listaEntrega)
+            }
+        }
     }
 
     private fun bindListeners() {
@@ -142,22 +161,12 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 
          bottomSheetBehavior.apply {
             isFitToContents = false
-            expandedOffset = getActionBarSize(requireContext())
+            expandedOffset = requireContext().getActionBarSize()
             peekHeight = resources.getDimension(dimen.bottom_sheet_peek_height).toInt()
             halfExpandedRatio = 0.5F
             this.state = BottomSheetBehavior.STATE_COLLAPSED
             addBottomSheetCallback(bottomSheetCallback)
         }
-
-        val listaEntregas = arrayListOf(
-            Entrega(),
-            Entrega(),
-            Entrega(),
-            Entrega(),
-            Entrega(),
-            Entrega()
-        )
-        adapter.submitList(listaEntregas)
     }
 
 
@@ -171,7 +180,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                         requireContext(),
                         Manifest.permission.ACCESS_COARSE_LOCATION
                     ) == PackageManager.PERMISSION_GRANTED -> {
-//                binding.root.mensagemCurta("Permissão de localização concedida", false)
+                permissionRequestDialog?.dismiss()
                 setupMap()
             }
 
@@ -183,12 +192,11 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) -> {
                 //Permissao negada mais de uma vez ir para as configurações
-                binding.root.mensagemCurta("Para continuar, aceite a permissão de localização", true)
-                solicitarPermissao()
+                permissionRequestDialog()
             }
 
             else -> {
-                solicitarPermissao()
+                permissionRequestDialog()
             }
         }
     }
@@ -225,8 +233,6 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 
     private fun setMapStyle(map: GoogleMap) {
         try {
-            // Customize the styling of the base map using a JSON object defined
-            // in a raw resource file.
             val success = map.setMapStyle(
                 MapStyleOptions.loadRawResourceStyle(
                     requireContext(),
@@ -240,6 +246,38 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         } catch (e: Resources.NotFoundException) {
             Log.e("TAG", "Can't find style. Error: ", e)
         }
+    }
+
+    private fun permissionRequestDialog() {
+        if (permissionRequestDialog == null) {
+            permissionRequestDialog = PermissionRequestDialog(
+                drawable.ic_location,
+                "Permissão de Localização",
+                "Para continuar, precisamos que permita que o Fusion tenha acesso a localização do dispositivo.",
+                "Aceitar permissão",
+                "Ir para Configurações",
+                acaoAceitarPermissao = { solicitarPermissao() },
+                acaoConfiguracoes = { actionConfiguracoes() }
+            )
+            permissionRequestDialog?.show(
+                requireActivity().supportFragmentManager,
+                PermissionRequestDialog.TAG
+            )
+        }
+    }
+
+    private fun actionConfiguracoes() {
+        val uri = Uri.fromParts("package", requireActivity().packageName, null)
+        requireActivity().startActivity(
+            Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+            ).apply {
+            data = uri
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        verificarPermissao()
     }
 
     override fun onDestroy() {

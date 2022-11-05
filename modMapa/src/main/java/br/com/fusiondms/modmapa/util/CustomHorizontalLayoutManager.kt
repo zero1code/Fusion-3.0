@@ -1,4 +1,4 @@
-package br.com.fusiondms.modentrega
+package br.com.fusiondms.modmapa.util
 
 import android.content.Context
 import android.util.AttributeSet

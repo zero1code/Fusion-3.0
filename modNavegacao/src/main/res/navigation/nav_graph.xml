@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/sincronizacaoFragment">
+    app:startDestination="@id/mapaFragment">
 
     <fragment
         android:id="@+id/sincronizacaoFragment"
-        android:name="br.com.fusiondms.modsincronizacao.SincronizacaoFragment"
+        android:name="br.com.fusiondms.modsincronizacao.presentation.SincronizacaoFragment"
         android:label="sincronizacao_fragment" >
         <action
             android:id="@+id/action_sincronizacaoFragment_to_listarCargasFragment"
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/mapaFragment"
-        android:name="br.com.fusiondms.modmapa.MapaFragment"
+        android:name="br.com.fusiondms.modmapa.presentation.MapaFragment"
         android:label="fragment_mapa"
         tools:layout="@layout/fragment_mapa" />
 </navigation>

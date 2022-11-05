@@ -48,7 +48,7 @@ data class Romaneio(
     val cnpjFilial: String = "",
     val enderecoFilial: String = "",
     val cepFilial: String? = "",
-    var corIdentificador: Int
+    var corIdentificador: Int = 0
 ) {
 
 }

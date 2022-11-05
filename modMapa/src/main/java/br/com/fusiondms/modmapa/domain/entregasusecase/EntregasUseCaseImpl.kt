@@ -1,6 +1,6 @@
-package br.com.fusiondms.modmapa.domain
+package br.com.fusiondms.modmapa.domain.entregasusecase
 
-import br.com.fusiondms.moddatabase.repository.EntregasRepository
+import br.com.fusiondms.moddatabase.repository.entregas.EntregasRepository
 import br.com.fusiondms.modmodel.Entrega
 import javax.inject.Inject
 

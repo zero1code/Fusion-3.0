@@ -5,24 +5,39 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
-import br.com.fusiondms.modaceitarcarga.adapter.CargasAdapter
+import br.com.fusiondms.modaceitarcarga.presentation.adapter.CargasAdapter
 import br.com.fusiondms.modaceitarcarga.databinding.FragmentListarCargasBinding
-import br.com.fusiondms.modaceitarcarga.viewmodel.CargasViewModel
-import br.com.fusiondms.modcommon.bottomdialog.DialogAcao
+import br.com.fusiondms.modaceitarcarga.databinding.ListaCargaVaziaBinding
+import br.com.fusiondms.modaceitarcarga.presentation.viewmodel.CargasViewModel
+import br.com.fusiondms.modcommon.bottomdialog.Dialog
+import br.com.fusiondms.modcommon.progressdialog.showProgressBar
 import br.com.fusiondms.modcommon.setDefaultStatusBarColor
 import br.com.fusiondms.modcommon.setStatusBarColor
+import br.com.fusiondms.modmodel.Romaneio
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListarCargasFragment : Fragment() {
 
     private var _binding: FragmentListarCargasBinding? = null
     private val binding get() = _binding!!
 
+    private var _listaVaziaBinding: ListaCargaVaziaBinding? = null
+    private val listaVaziaBinding get() = _listaVaziaBinding!!
+
     private val cargasViewModel: CargasViewModel by activityViewModels()
+
+    private val adapter by lazy { CargasAdapter() }
+
+    private lateinit var progressDialog: AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,38 +56,71 @@ class ListarCargasFragment : Fragment() {
             ListarCargasOnBackPressedCallback(slidingPaneLayout, requireActivity())
         )
 
-
-        val adapter = CargasAdapter {
-            motoristaTerceirizado(it)
+        binding.apply {
+            progressDialog = requireActivity().showProgressBar("Buscando romaneios")
+            rvRomaneios.adapter = adapter
+            _listaVaziaBinding = ltListaVazia
+            cargasViewModel.getListaCarga()
         }
-        binding.recyclerView.adapter = adapter
-        adapter.submitList(cargasViewModel.sportsData)
+
+        bindObservers()
+        bindListeners()
     }
 
-    private fun motoristaTerceirizado(romaneio: br.com.fusiondms.modmodel.Romaneio) {
-        val dialog = DialogAcao(
+    private fun bindObservers() {
+        lifecycleScope.launchWhenStarted {
+            cargasViewModel.listaCargaStatus.collect() { result ->
+                when (result) {
+                    CargasViewModel.CargaStatus.Empty -> avisoJornadaDeTrabalho()
+                    is CargasViewModel.CargaStatus.Loading -> progessDialogState(result.isLoading)
+                    is CargasViewModel.CargaStatus.Error -> Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
+                    is CargasViewModel.CargaStatus.Deleted -> {
+                        adapter.notifyItemRemoved(result.position)
+                    }
+                    is CargasViewModel.CargaStatus.Success -> {
+                        listaVaziaBinding.root.visibility = View.GONE
+                        adapter.submitList(result.lista)
+                        progressDialog.dismiss()
+                    }
+                    else -> Unit
+                }
+            }
+        }
+    }
+
+    private fun avisoJornadaDeTrabalho() {
+        listaVaziaBinding.root.visibility = View.VISIBLE
+    }
+
+    private fun progessDialogState(isLoading: Boolean) {
+        if (isLoading) {
+            progressDialog.show()
+        } else {
+            if (progressDialog.isShowing) progressDialog.dismiss()
+        }
+    }
+
+    private fun bindListeners() {
+        adapter.onRomaneioClickListener = {romaneio, position ->
+            motoristaTerceirizado(romaneio, position)
+        }
+    }
+
+    private fun motoristaTerceirizado(romaneio: Romaneio, position: Int) {
+        Dialog(
             "Confirmar vínculo",
             "Você é um motorista terceirizado?",
             "Sim",
-            "Não"
-        )
-
-        val iDialog = object : DialogAcao.IDialogAcaoListener {
-            override fun onClickPositivo() {
-                cargasViewModel.updateCurrentSport(romaneio)
+            "Não",
+            acaoPositiva = {
+                cargasViewModel.setCargaSelecionada(romaneio, position)
                 requireActivity().setStatusBarColor(romaneio.corIdentificador)
                 binding.slidingPaneLayout.openPane()
-                dialog.dismiss()
-            }
-
-            override fun onClickNegativo() {
-                dialog.dismiss()
+            },
+            acaoNegativa = {
                 findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_listarCargasFragment_to_mapaFragment)
             }
-        }
-
-        dialog.setListener(iDialog)
-        dialog.show(requireActivity().supportFragmentManager, DialogAcao.TAG)
+        ).show(requireActivity().supportFragmentManager, Dialog.TAG)
     }
 
     class ListarCargasOnBackPressedCallback(
@@ -103,6 +151,7 @@ class ListarCargasFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        cargasViewModel.resetCargaState()
         _binding = null
     }
 }

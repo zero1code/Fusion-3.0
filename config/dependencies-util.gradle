@@ -27,3 +27,9 @@ ext.addRoom = {
     implementation Deps.room_ktx
     kapt Deps.room_kapt_compiler
 }
+
+ext.addRetrofit = {
+    implementation Deps.retrofit
+    implementation Deps.retrofit_converter
+    implementation Deps.okhttp
+}

@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".SincronizacaoFragment"
+    tools:context=".presentation.SincronizacaoFragment"
     android:fitsSystemWindows="true"
     android:background="?attr/colorSurface">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:backgroundTint="@color/brand_green_light_ripple"
         android:background="@drawable/fundo3">
 
         <com.google.android.material.progressindicator.LinearProgressIndicator

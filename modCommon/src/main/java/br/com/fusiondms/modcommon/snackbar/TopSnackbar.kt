@@ -15,10 +15,12 @@ import br.com.fusiondms.modcommon.R
 import br.com.fusiondms.modcommon.databinding.SnackLayoutBinding
 import br.com.fusiondms.modcommon.getActionBarSize
 import br.com.fusiondms.modcommon.statusBarIconColor
+import dagger.hilt.android.internal.managers.FragmentComponentManager
+import dagger.hilt.android.internal.managers.ViewComponentManager
 
 
 fun View.mensagemCurta(message: String, isError: Boolean) {
-    val activity = this.context as Activity
+    val activity = FragmentComponentManager.findActivity(this.context) as Activity
     statusBarIconColor(activity, Color.BLACK)
     val inflater = LayoutInflater.from(this.context)
     val binding = SnackLayoutBinding.inflate(inflater)
@@ -30,7 +32,7 @@ fun View.mensagemCurta(message: String, isError: Boolean) {
     )
 
 
-    val actionBarHeight = getActionBarSize(this.context)
+    val actionBarHeight = this.context.getActionBarSize()
 
     val view = this.rootView as ViewGroup
     val params = ConstraintLayout.LayoutParams(

@@ -1,4 +1,4 @@
-package br.com.fusiondms.di
+package br.com.fusiondms.modcommon.di
 
 import dagger.Module
 import dagger.Provides

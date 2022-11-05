@@ -1,14 +1,13 @@
-package br.com.fusiondms.modentrega.adapter
+package br.com.fusiondms.modmapa.adapter
 
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.modentrega.CustomHorizontalLayoutManager
-import br.com.fusiondms.modentrega.databinding.ItemEntregaParentBinding
+import br.com.fusiondms.modmapa.util.CustomHorizontalLayoutManager
+import br.com.fusiondms.modmapa.databinding.ItemEntregaParentBinding
 import br.com.fusiondms.modmodel.Entrega
 
 class EntregasParentAdapter :

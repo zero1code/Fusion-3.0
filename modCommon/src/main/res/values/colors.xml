@@ -14,6 +14,7 @@
     <color name="brand_cyan_light">#76d4f1</color>
 
     <color name="brand_celtic_blue">#2a67cb</color>
+    <color name="brand_celtic_blue_ripple">#1F2A67CB</color>
 
     <color name="brand_color_on_surface">#24292f</color>
     <color name="brand_widget_surface">#FFFFFFFF</color>
