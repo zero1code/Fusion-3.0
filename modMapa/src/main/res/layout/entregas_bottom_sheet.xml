@@ -25,17 +25,29 @@
         style="@style/TextAppearance.App.Headline5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dimen_medium"
+        android:paddingHorizontal="@dimen/dimen_medium"
+        android:paddingTop="@dimen/dimen_medium"
         android:text="Suas entregas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_romaneio"
+        style="@style/TextAppearance.App.Subtitle2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/dimen_medium"
+        tools:text="Romaneio: 123456"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_titulo" />
 
     <include
         android:id="@+id/lt_entregas_info_gerais"
         layout="@layout/entregas_info_gerais"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_titulo" />
+        android:layout_marginTop="@dimen/dimen_medium"
+        app:layout_constraintTop_toBottomOf="@+id/tv_romaneio" />
 
     
     <View
@@ -43,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         app:layout_constraintTop_toBottomOf="@id/lt_entregas_info_gerais"
-        android:layout_marginHorizontal="@dimen/dimen_medium"
+        android:layout_marginHorizontal="@dimen/dimen_normal"
         android:background="?android:attr/listDivider"/>
 
     <androidx.recyclerview.widget.RecyclerView

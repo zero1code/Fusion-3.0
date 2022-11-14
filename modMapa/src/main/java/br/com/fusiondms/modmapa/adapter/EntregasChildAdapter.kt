@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.fusiondms.modmapa.databinding.ItemEntregaChildBinding
 import br.com.fusiondms.modmodel.Entrega
 
-class EntregasChildAdapter :
-    ListAdapter<Entrega, EntregasChildAdapter.EntregasViewHolder>(DiffCallback) {
+class EntregasChildAdapter(private val listaEntrega: List<Entrega>)
+    : RecyclerView.Adapter<EntregasChildAdapter.EntregasViewHolder>() {
 
-    var onEntregaClickListener: (entrega: String) -> Unit = {}
+    var onEntregaClickListener: (entrega: Entrega) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntregasViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -22,7 +22,7 @@ class EntregasChildAdapter :
     }
 
     override fun onBindViewHolder(holder: EntregasViewHolder, position: Int) {
-        val entrega = getItem(position)
+        val entrega = listaEntrega[position]
         holder.bind(entrega)
     }
 
@@ -32,18 +32,12 @@ class EntregasChildAdapter :
 
         fun bind(entrega: Entrega) {
             binding.tvStatus.text = Html.fromHtml("<b>Pendente</b>", 0)
-            binding.tvOrdemEntrega.text = Html.fromHtml("<b>01</b>", 0)
-            binding.tvNotaFiscal.text = Html.fromHtml(
-                "<b>NF/Pernota:</b><br>" +
-                        "123456/23453222", 0
-            )
-            binding.tvValor.text = Html.fromHtml(
-                "<b>Valor:</b><br>" +
-                        "R$1.452,00", 0
-            )
+            binding.tvOrdemEntrega.text = Html.fromHtml("<b>${entrega.idEntrega}</b>", 0)
+            binding.tvNotaFiscal.text = Html.fromHtml("<b>NF/Pernota:</b><br>${entrega.numeroNotaFiscal}", 0)
+            binding.tvValor.text = Html.fromHtml("<b>Valor:</b><br>${entrega.valor}", 0)
 
             itemView.setOnClickListener {
-                onEntregaClickListener("Clicou em uma entrega")
+                onEntregaClickListener(entrega)
             }
 
             setIsRecyclable(false)
@@ -57,4 +51,6 @@ class EntregasChildAdapter :
         override fun areContentsTheSame(oldItem: Entrega, newItem: Entrega) =
             oldItem == newItem
     }
+
+    override fun getItemCount() = listaEntrega.size
 }

@@ -6,121 +6,198 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_pendente"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimen_medium"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        app:cardCornerRadius="@dimen/card_border_radius"
+        app:cardElevation="@dimen/dimen_zero"
+        android:layout_marginHorizontal="@dimen/dimen_normal"
+        android:layout_weight="1">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/dimen_big"
-            android:layout_height="@dimen/dimen_big"
-            app:srcCompat="@drawable/ic_pending" />
-
-        <TextView
-            style="@style/TextAppearance.App.Subtitle3"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pendente" />
+            android:gravity="center"
+            android:orientation="vertical"
+            >
 
-        <TextView
-            style="@style/TextAppearance.App.Subtitle3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="33"
-            android:textStyle="bold" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/dimen_big"
+                android:layout_height="@dimen/dimen_big"
+                app:srcCompat="@drawable/ic_pending" />
 
-    </LinearLayout>
+            <TextView
+                style="@style/TextAppearance.App.Subtitle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pendente" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+            <TextView
+                style="@style/TextAppearance.App.Subtitle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="33"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/cv_pendente_indicador"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_small"
+                android:background="?attr/colorOnSurface"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_realizada"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimen_medium"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        app:cardCornerRadius="@dimen/card_border_radius"
+        app:cardElevation="@dimen/dimen_zero"
+        android:layout_marginHorizontal="@dimen/dimen_normal"
+        android:layout_weight="1">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/dimen_big"
-            android:layout_height="@dimen/dimen_big"
-            android:tint="@color/brand_green_success"
-            app:srcCompat="@drawable/ic_check_circle" />
-
-        <TextView
-            style="@style/TextAppearance.App.Subtitle3"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Realizada"
-            android:textColor="@color/brand_green_success" />
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            style="@style/TextAppearance.App.Subtitle3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="12"
-            android:textColor="@color/brand_green_success"
-            android:textStyle="bold" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/dimen_big"
+                android:layout_height="@dimen/dimen_big"
+                android:tint="@color/brand_green_success"
+                app:srcCompat="@drawable/ic_check_circle" />
 
-    </LinearLayout>
+            <TextView
+                style="@style/TextAppearance.App.Subtitle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Realizada"
+                android:textColor="@color/brand_green_success" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+            <TextView
+                style="@style/TextAppearance.App.Subtitle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12"
+                android:textColor="@color/brand_green_success"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/cv_realizada_indicador"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_small"
+                android:background="@color/brand_green_success"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_adiada"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimen_medium"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        app:cardCornerRadius="@dimen/card_border_radius"
+        app:cardElevation="@dimen/dimen_zero"
+        android:layout_marginHorizontal="@dimen/dimen_normal"
+        android:layout_weight="1">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/dimen_big"
-            android:layout_height="@dimen/dimen_big"
-            android:tint="@color/brand_selective_yellow"
-            app:srcCompat="@drawable/ic_more_time" />
-
-        <TextView
-            style="@style/TextAppearance.App.Subtitle3"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Adiada"
-            android:textColor="@color/brand_selective_yellow" />
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            style="@style/TextAppearance.App.Subtitle3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="6"
-            android:textColor="@color/brand_selective_yellow"
-            android:textStyle="bold" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/dimen_big"
+                android:layout_height="@dimen/dimen_big"
+                android:tint="@color/brand_selective_yellow"
+                app:srcCompat="@drawable/ic_more_time" />
 
-    </LinearLayout>
+            <TextView
+                style="@style/TextAppearance.App.Subtitle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adiada"
+                android:textColor="@color/brand_selective_yellow" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+            <TextView
+                style="@style/TextAppearance.App.Subtitle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6"
+                android:textColor="@color/brand_selective_yellow"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/cv_adiada_indicador"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_small"
+                android:background="@color/brand_selective_yellow"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_devolvida"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimen_medium"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        app:cardCornerRadius="@dimen/card_border_radius"
+        app:cardElevation="@dimen/dimen_zero"
+        android:layout_marginHorizontal="@dimen/dimen_normal"
+        android:layout_weight="1">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/dimen_big"
-            android:layout_height="@dimen/dimen_big"
-            android:tint="@color/brand_red"
-            app:srcCompat="@drawable/ic_devolution" />
-
-        <TextView
-            style="@style/TextAppearance.App.Subtitle3"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Devolvida"
-            android:textColor="@color/brand_red" />
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            style="@style/TextAppearance.App.Subtitle3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10"
-            android:textColor="@color/brand_red"
-            android:textStyle="bold" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/dimen_big"
+                android:layout_height="@dimen/dimen_big"
+                android:tint="@color/brand_red"
+                app:srcCompat="@drawable/ic_devolution" />
 
-    </LinearLayout>
+            <TextView
+                style="@style/TextAppearance.App.Subtitle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Devolvida"
+                android:textColor="@color/brand_red" />
+
+            <TextView
+                style="@style/TextAppearance.App.Subtitle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textColor="@color/brand_red"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/cv_devolvida_indicador"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_small"
+                android:background="@color/brand_red"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

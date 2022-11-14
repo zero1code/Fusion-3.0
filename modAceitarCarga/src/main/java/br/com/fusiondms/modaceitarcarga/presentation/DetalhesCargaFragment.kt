@@ -65,6 +65,7 @@ class DetalhesCargaFragment : Fragment() {
 
     private fun bindListeners() {
         binding.btnAceitarCarga.setOnClickListener {
+            cargasViewModel.salvarIdCargaSelecionada(cargaSelecionada.idRomaneio)
             cargasViewModel.resetCargaState()
             findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_listarCargasFragment_to_mapaFragment)
         }
@@ -80,13 +81,13 @@ class DetalhesCargaFragment : Fragment() {
                 "<b>Peso da carga:<br></b>${
                     String.format(
                         "%.2f",
-                        cargaSelecionada.pesoTotal
+                        1456.00
                     )
                 } kg", 0
             )
             tvKm.text = Html.fromHtml("<b>Total km:<br></b>${cargaSelecionada.kmTotal} km", 0)
             tvValorCarga.text = Html.fromHtml(
-                "<b>Valor carga:<br></b>${format.format(cargaSelecionada.valorTotal)}",
+                "<b>Valor carga:<br></b>${format.format(33456)}",
                 0
             )
         }

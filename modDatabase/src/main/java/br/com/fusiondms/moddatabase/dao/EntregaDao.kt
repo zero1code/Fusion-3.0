@@ -12,6 +12,6 @@ interface EntregaDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun inserirEntregas(listaEntrega: List<EntregaEntity>)
 
-    @Query("SELECT * FROM tb_entregas")
-    suspend fun getListaEntrega() : List<EntregaEntity>
+    @Query("SELECT * FROM tb_entregas WHERE idRomaneio = :idRomaneio")
+    suspend fun getListaEntrega(idRomaneio: Int) : List<EntregaEntity>
 }

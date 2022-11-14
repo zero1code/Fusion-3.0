@@ -55,6 +55,7 @@ dependencies {
     implementation Deps.sliding_pane_layout
     implementation Deps.coil
     implementation Deps.gson
+    implementation Deps.datastore
     with addFragmentNavigation
     with addCoroutines
     with addDaggerHilt

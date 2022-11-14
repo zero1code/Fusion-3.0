@@ -1,4 +1,10 @@
 package br.com.fusiondms.modmodel
 
-class EntregasPorCliente {
+data class EntregasPorCliente(
+    var idRomaneio: Int,
+    var idCliente: Int,
+    var cliente: String,
+    var local: String,
+    var entregas: List<Entrega>
+) {
 }

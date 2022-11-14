@@ -75,8 +75,8 @@ class SincronizacaoFragment : Fragment() {
 
     private fun bindListeners() {
         binding.btnAtualizarCargas.setOnClickListener {
-            startSincronizacao()
-//            findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_sincronizacaoFragment_to_listarCargasFragment)
+//            startSincronizacao()
+            findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_sincronizacaoFragment_to_listarCargasFragment)
         }
 
         binding.fabMoreOptions.setOnClickListener {

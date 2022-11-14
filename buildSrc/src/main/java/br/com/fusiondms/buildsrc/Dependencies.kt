@@ -37,6 +37,7 @@ object Versions {
     const val retrofit = "2.9.0"
     const val retrofit_converter = "2.9.0"
     const val okhttp = "4.10.0"
+    const val datastore = "1.0.0"
 }
 
 object Deps {
@@ -64,6 +65,7 @@ object Deps {
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofit_converter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_converter}"
     const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
+    const val datastore = "androidx.datastore:datastore-preferences:${Versions.datastore}"
 }
 
 object LocalLibs {

@@ -29,7 +29,7 @@ import java.util.*
 class CargasAdapter() :
     ListAdapter<Romaneio, CargasAdapter.CargasViewHolder>(DiffCallback) {
 
-    var onRomaneioClickListener: (romaneio: Romaneio, position: Int) -> Unit = { _: Romaneio, _: Int -> }
+    var onRomaneioClickListener: (carga: Romaneio, position: Int) -> Unit = { _: Romaneio, _: Int -> }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -50,10 +50,10 @@ class CargasAdapter() :
     inner class CargasViewHolder(private var binding: ItemCargaListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(romaneio: Romaneio) {
-            binding.tvRomaneioId.text = romaneio.id.toString()
-            binding.tvDestino.text = romaneio.destino
-            binding.tvKm.text = "${romaneio.kmTotal}  KM"
+        fun bind(carga: Romaneio) {
+            binding.tvRomaneioId.text = carga.idRomaneio.toString()
+            binding.tvDestino.text = carga.destino
+            binding.tvKm.text = "${carga.kmTotal}  KM"
 
             val random = Random()
             val color = Color.rgb(
@@ -62,10 +62,10 @@ class CargasAdapter() :
                 random.nextInt(256)
             )
             binding.viewColorIdentifier.setBackgroundColor(color)
-            romaneio.corIdentificador = color
+            carga.corIdentificador = color
 
             itemView.setOnClickListener {
-                onRomaneioClickListener(romaneio, adapterPosition)
+                onRomaneioClickListener(carga, adapterPosition)
             }
         }
     }

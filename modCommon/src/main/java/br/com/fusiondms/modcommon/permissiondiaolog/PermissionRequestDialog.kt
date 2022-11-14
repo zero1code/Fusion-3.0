@@ -1,10 +1,11 @@
 package br.com.fusiondms.modcommon.permissiondiaolog
 
-import android.content.res.Resources
+import  android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import br.com.fusiondms.modcommon.R
 import br.com.fusiondms.modcommon.databinding.PermissionRequestDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -25,6 +26,8 @@ class PermissionRequestDialog(
     private var _binding: PermissionRequestDialogBinding? = null
     private val binding: PermissionRequestDialogBinding get() = _binding!!
 
+    override fun getTheme(): Int = R.style.PermissionRequestDialog
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,6 +39,11 @@ class PermissionRequestDialog(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dialog?.let { d ->
+            d.window?.let { w ->
+                w.attributes.windowAnimations = R.style.Theme_Dialog_Animation
+            }
+        }
         val bottomSheet = view.parent as View
         val metrics = Resources.getSystem().displayMetrics
 
@@ -64,6 +72,8 @@ class PermissionRequestDialog(
                 acaoConfiguracoesListener?.invoke()
             }
         }
+
+
     }
 
     override fun onDestroy() {

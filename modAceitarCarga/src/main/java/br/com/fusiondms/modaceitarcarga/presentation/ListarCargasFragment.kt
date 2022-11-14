@@ -101,23 +101,24 @@ class ListarCargasFragment : Fragment() {
     }
 
     private fun bindListeners() {
-        adapter.onRomaneioClickListener = {romaneio, position ->
-            motoristaTerceirizado(romaneio, position)
+        adapter.onRomaneioClickListener = {carga, position ->
+            motoristaTerceirizado(carga, position)
         }
     }
 
-    private fun motoristaTerceirizado(romaneio: Romaneio, position: Int) {
+    private fun motoristaTerceirizado(carga: Romaneio, position: Int) {
         Dialog(
             "Confirmar vínculo",
             "Você é um motorista terceirizado?",
             "Sim",
             "Não",
             acaoPositiva = {
-                cargasViewModel.setCargaSelecionada(romaneio, position)
-                requireActivity().setStatusBarColor(romaneio.corIdentificador)
+                cargasViewModel.setCargaSelecionada(carga, position)
+                requireActivity().setStatusBarColor(carga.corIdentificador)
                 binding.slidingPaneLayout.openPane()
             },
             acaoNegativa = {
+                cargasViewModel.salvarIdCargaSelecionada(carga.idRomaneio)
                 findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_listarCargasFragment_to_mapaFragment)
             }
         ).show(requireActivity().supportFragmentManager, Dialog.TAG)

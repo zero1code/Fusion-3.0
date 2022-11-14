@@ -130,4 +130,13 @@
     </style>
     <!-- ESTILO NAVIGATIONVIEW -->
 
+    <!-- ESTILO BOTTOMSHEETDIALOG PERMISSAO -->
+    <style name="PermissionRequestDialog" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:background">@drawable/bottom_dialog_shape</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowEnterAnimation">@anim/slide_in_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_down</item>
+    </style>
+    <!-- ESTILO BOTTOMSHEETDIALOG PERMISSAO -->
+
 </resources>

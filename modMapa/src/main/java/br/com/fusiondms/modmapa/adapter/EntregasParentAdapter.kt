@@ -4,20 +4,23 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fusiondms.modmapa.util.CustomHorizontalLayoutManager
 import br.com.fusiondms.modmapa.databinding.ItemEntregaParentBinding
 import br.com.fusiondms.modmodel.Entrega
+import br.com.fusiondms.modmodel.EntregasPorCliente
 
 class EntregasParentAdapter :
-    ListAdapter<Entrega, EntregasParentAdapter.EntregasViewHolder>(EntregasChildAdapter) {
+    ListAdapter<EntregasPorCliente, EntregasParentAdapter.EntregasViewHolder>(DiffCallback) {
 
     var onClienteClickListener: (cliente: String) -> Unit = {}
-    var onEntregaClickListener: (entrega: String) -> Unit = {}
+    var onEntregaClickListener: (entrega: Entrega) -> Unit = {}
 
+    private val viewPool = RecyclerView.RecycledViewPool()
 
-    private val childAdapter by lazy { EntregasChildAdapter() }
+    private lateinit var childAdapter: EntregasChildAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntregasViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -35,34 +38,25 @@ class EntregasParentAdapter :
         private var binding: ItemEntregaParentBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        private val viewPool = RecyclerView.RecycledViewPool()
-        val listaEntregas =
-            arrayListOf(
-                Entrega(),
-                Entrega(),
-                Entrega(),
-                Entrega(),
-                Entrega(),
-                Entrega()
-            )
+        fun bind(cliente: EntregasPorCliente) {
+            childAdapter = EntregasChildAdapter(cliente.entregas)
 
-        fun bind(cliente: Entrega) {
-            binding.tvCliente.text = Html.fromHtml(
-                "<b>Cliente:</b> 5535<br>" +
-                        "<b>Razão Social:</b> CAZAJEIRAS LTDA", 0
-            )
-            binding.tvLocal.text = Html.fromHtml(
-                "<b>Bairro:</b> Centro<br>" +
-                        "<b>Cidade:</b> CAJZEIRAS/PB<br>" +
-                        "<b>Referência de entrega:</b> Próx. ao Armazém paraíba", 0
-            )
+            binding.tvCliente.text = Html.fromHtml(cliente.cliente, 0)
+            binding.tvLocal.text = Html.fromHtml(cliente.local, 0)
 
-            val childLayoutManager =
+            val childLayoutManager = if (cliente.entregas.size == 1) {
+                LinearLayoutManager(
+                    binding.root.context,
+                    RecyclerView.HORIZONTAL,
+                    false
+                )
+            } else {
                 CustomHorizontalLayoutManager(
                     binding.root.context,
                     RecyclerView.HORIZONTAL,
                     false
                 )
+            }
             childLayoutManager.initialPrefetchItemCount = 4
             binding.rvEntregasChild.apply {
                 layoutManager = childLayoutManager
@@ -70,23 +64,21 @@ class EntregasParentAdapter :
                 setRecycledViewPool(viewPool)
             }
 
-            childAdapter.submitList(listaEntregas)
-
             childAdapter.onEntregaClickListener = { entrega ->
                 onEntregaClickListener(entrega)
             }
 
-            itemView.setOnClickListener {
-                onClienteClickListener("Clicou no cliente")
-            }
+//            itemView.setOnClickListener {
+//                onClienteClickListener("Clicou no cliente")
+//            }
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Entrega>() {
-        override fun areItemsTheSame(oldItem: Entrega, newItem: Entrega) =
-            oldItem.idEntrega == newItem.idEntrega
+    companion object DiffCallback : DiffUtil.ItemCallback<EntregasPorCliente>() {
+        override fun areItemsTheSame(oldItem: EntregasPorCliente, newItem: EntregasPorCliente) =
+            oldItem.idCliente == newItem.idCliente
 
-        override fun areContentsTheSame(oldItem: br.com.fusiondms.modmodel.Entrega, newItem: br.com.fusiondms.modmodel.Entrega) =
+        override fun areContentsTheSame(oldItem: EntregasPorCliente, newItem: EntregasPorCliente) =
             oldItem == newItem
     }
 }

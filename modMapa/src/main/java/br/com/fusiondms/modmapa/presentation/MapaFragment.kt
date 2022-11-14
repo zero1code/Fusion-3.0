@@ -17,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -124,24 +125,47 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 
         bindObservers()
         bindListeners()
-
     }
 
     private fun bindObservers() {
         lifecycleScope.launchWhenCreated {
-            mapaViewModel.listaEntrega.collect() { listaEntrega ->
-                adapter.submitList(listaEntrega)
+            mapaViewModel.listaEntrega.collect() { listaCliente ->
+                adapter.submitList(listaCliente)
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            mapaViewModel.cargaId.collect { cargaId ->
+                bindingSheet.tvRomaneio.text = "Romaneio: $cargaId"
             }
         }
     }
 
     private fun bindListeners() {
-        adapter.onClienteClickListener = {cliente ->
+        adapter.onClienteClickListener = { cliente ->
             binding.root.mensagemCurta(cliente, false)
         }
 
-        adapter.onEntregaClickListener = {entrega ->
-            binding.root.mensagemCurta(entrega, true)
+        adapter.onEntregaClickListener = { entrega ->
+            binding.root.mensagemCurta(entrega.idEntrega.toString(), true)
+        }
+
+        bindingSheetInfoGerais.apply {
+            cvPendente.setOnClickListener {
+                val ativo = checarStatusEntregaFiltro(cvPendenteIndicador)
+            }
+
+            cvRealizada.setOnClickListener {
+                val ativo = checarStatusEntregaFiltro(cvRealizadaIndicador)
+            }
+
+            cvAdiada.setOnClickListener {
+                val ativo = checarStatusEntregaFiltro(cvAdiadaIndicador)
+            }
+
+            cvDevolvida.setOnClickListener {
+                val ativo = checarStatusEntregaFiltro(cvDevolvidaIndicador)
+            }
         }
     }
 
@@ -168,7 +192,6 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             addBottomSheetCallback(bottomSheetCallback)
         }
     }
-
 
     private fun verificarPermissao() {
         when {
@@ -273,6 +296,13 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             ).apply {
             data = uri
         })
+    }
+
+    private fun checarStatusEntregaFiltro(cvIndicador: View) : Boolean {
+        val isVisible = cvIndicador.isVisible
+        cvIndicador.visibility = if (isVisible) View.INVISIBLE else View.VISIBLE
+
+        return isVisible
     }
 
     override fun onResume() {

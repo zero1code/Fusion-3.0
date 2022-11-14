@@ -6,9 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:cardElevation="@dimen/card_elevation"
     app:cardCornerRadius="@dimen/card_border_radius"
-    android:layout_margin="@dimen/dimen_medium"
-    android:clickable="true"
-    android:foreground="?attr/selectableItemBackgroundBorderless">
+    android:layout_margin="@dimen/dimen_medium">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
