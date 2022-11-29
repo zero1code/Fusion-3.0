@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import br.com.fusiondms.modaceitarcarga.R
 import br.com.fusiondms.modaceitarcarga.databinding.FragmentDetalhesCargaBinding
 import br.com.fusiondms.modaceitarcarga.presentation.viewmodel.CargasViewModel
+import br.com.fusiondms.modcommon.R.*
 import br.com.fusiondms.modcommon.bottomdialog.Dialog
 import br.com.fusiondms.modcommon.progressdialog.showProgressBar
 import br.com.fusiondms.modmodel.Romaneio
@@ -64,46 +66,43 @@ class DetalhesCargaFragment : Fragment() {
     }
 
     private fun bindListeners() {
-        binding.btnAceitarCarga.setOnClickListener {
-            cargasViewModel.salvarIdCargaSelecionada(cargaSelecionada.idRomaneio)
-            cargasViewModel.resetCargaState()
-            findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_listarCargasFragment_to_mapaFragment)
-        }
+        binding.btnAceitarCarga.setOnClickListener { actionMapaFragment() }
 
         binding.btnRecusarCarga.setOnClickListener { recusarCarga() }
     }
 
     private fun bindCargaInfo() {
         binding.apply {
-            tvRomaneioId.text = Html.fromHtml("<b>ID Romaneio:<br></b>${cargaSelecionada.id}", 0)
-            tvDestino.text = Html.fromHtml("<b>Destino:<br></b>${cargaSelecionada.destino}", 0)
-            tvPesoCarga.text = Html.fromHtml(
-                "<b>Peso da carga:<br></b>${
-                    String.format(
-                        "%.2f",
-                        1456.00
-                    )
-                } kg", 0
-            )
-            tvKm.text = Html.fromHtml("<b>Total km:<br></b>${cargaSelecionada.kmTotal} km", 0)
-            tvValorCarga.text = Html.fromHtml(
-                "<b>Valor carga:<br></b>${format.format(33456)}",
-                0
-            )
+            tvRomaneioId.text =
+                Html.fromHtml(getString(string.label_romaneio_id, cargaSelecionada.idRomaneio), 0)
+            tvDestino.text =
+                Html.fromHtml(getString(string.label_destino, cargaSelecionada.destino), 0)
+            tvPesoCarga.text =
+                Html.fromHtml(getString(string.label_peso_carga, String.format("%.2f", 1456.00)), 0)
+            tvKm.text =
+                Html.fromHtml(getString(string.label_km_total, cargaSelecionada.kmTotal), 0)
+            tvValorCarga.text =
+                Html.fromHtml(getString(string.label_valor_carga, format.format(33456)), 0)
         }
     }
 
     private fun recusarCarga() {
-        progressDialog = requireActivity().showProgressBar("Recusando a carga")
+        progressDialog = requireActivity().showProgressBar(getString(string.label_recusando_carga))
         cargasViewModel.recusarCarga(cargaSelecionada)
+    }
+
+    private fun actionMapaFragment() {
+        cargasViewModel.salvarIdCargaSelecionada(cargaSelecionada.idRomaneio)
+        cargasViewModel.resetCargaState()
+        findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_listarCargasFragment_to_mapaFragment)
     }
 
     private fun dialogErro(message: String?) {
         Dialog(
-            "Erro ao recusar carga",
+            getString(string.label_erro_recusar_carga),
             message ?: "",
-            "Tentar novamente",
-            "Cancelar",
+            getString(string.label_tentar_novamente),
+            getString(string.label_cancelar),
             acaoPositiva = { recusarCarga() },
             acaoNegativa = {}
         ).show(requireActivity().supportFragmentManager, Dialog.TAG)

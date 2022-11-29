@@ -9,8 +9,8 @@ import com.google.gson.Gson
 
 @Entity(tableName = "tb_romaneios")
 data class RomaneioEntity(
-    @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
+    @PrimaryKey()
     var idRomaneio: Int = 0,
     var destino: String = "",
     var qtdEntregas: Int = 0,

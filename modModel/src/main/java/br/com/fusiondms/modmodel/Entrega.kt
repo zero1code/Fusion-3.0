@@ -1,6 +1,7 @@
 package br.com.fusiondms.modmodel
 
 data class Entrega(
+    var id: Int = 0,
     var idEntrega: Int = 0,
     var idRomaneio: Int = 0,
     var idCliente: Int = 0,

@@ -30,8 +30,9 @@ class DatabaseModule {
     @Provides
     @Singleton
     fun provideEntregasRepository(
-        entregaDao: EntregaDao
-    ) : EntregasRepository = EntregasRepositoryImpl(entregaDao, Dispatchers.IO)
+        entregaDao: EntregaDao,
+        @ApplicationContext appcontext: Context
+    ) : EntregasRepository = EntregasRepositoryImpl(entregaDao, Dispatchers.IO, appcontext)
 
     @Provides
     @Singleton

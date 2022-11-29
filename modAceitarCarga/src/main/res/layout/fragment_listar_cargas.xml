@@ -39,7 +39,7 @@
                     android:layout_height="?attr/actionBarSize"
                     android:elevation="@dimen/dimen_zero"
                     app:layout_collapseMode="pin"
-                    app:title="Selecione uma carga" />
+                    app:title="@string/label_selecionar_carga" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

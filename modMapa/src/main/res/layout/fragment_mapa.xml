@@ -30,7 +30,8 @@
                 app:backgroundTint="?attr/colorOnPrimarySurface"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_menu" />
+                app:srcCompat="@drawable/ic_menu"
+                android:contentDescription="@string/label_description_mais_opcoes" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -42,7 +43,8 @@
             app:layout_anchor="@id/view"
             app:layout_anchorGravity="start|bottom"
             app:backgroundTint="?attr/colorOnPrimarySurface"
-            app:srcCompat="@drawable/ic_moving"/>
+            app:srcCompat="@drawable/ic_moving"
+            android:contentDescription="@string/label_description_direcao" />
 
         <View
             android:id="@+id/view"
@@ -60,7 +62,8 @@
             app:layout_anchorGravity="end"
             android:layout_margin="@dimen/dimen_medium"
             app:backgroundTint="?attr/colorOnPrimarySurface"
-            app:srcCompat="@drawable/ic_timer_off"/>
+            app:srcCompat="@drawable/ic_timer_off"
+            android:contentDescription="@string/label_description_espera" />
 
         <include
             android:id="@+id/bottom_sheet"

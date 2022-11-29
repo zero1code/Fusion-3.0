@@ -8,6 +8,8 @@ import android.content.res.Resources
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
+import android.text.Html
+import android.transition.Fade
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,24 +19,27 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import br.com.fusiondms.modcommon.*
 import br.com.fusiondms.modcommon.R.*
-import br.com.fusiondms.modcommon.fabAnimation
-import br.com.fusiondms.modcommon.getActionBarSize
-import br.com.fusiondms.modcommon.getOrientacaoTela
 import br.com.fusiondms.modcommon.permissiondiaolog.PermissionRequestDialog
-import br.com.fusiondms.modcommon.setTransparentStatusBar
 import br.com.fusiondms.modcommon.snackbar.mensagemCurta
-import br.com.fusiondms.modmapa.adapter.EntregasParentAdapter
+import br.com.fusiondms.modentrega.adapter.EntregasParentAdapter
+import br.com.fusiondms.modentrega.databinding.ItemEntregaChildBinding
+import br.com.fusiondms.modentrega.presentation.viewmodel.EntregaViewModel
 import br.com.fusiondms.modmapa.R
 import br.com.fusiondms.modmapa.databinding.EntregasBottomSheetBinding
 import br.com.fusiondms.modmapa.databinding.EntregasInfoGeraisBinding
 import br.com.fusiondms.modmapa.databinding.FragmentMapaBinding
-import br.com.fusiondms.modmapa.presentation.viewmodel.MapaViewModel
+import br.com.fusiondms.modmapa.dialogeventos.DialogEventos
+import br.com.fusiondms.modmapa.dialogeventos.interfaces.IDialogEventos
+import br.com.fusiondms.modmodel.Entrega
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -47,6 +52,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MapaFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentMapaBinding? = null
@@ -57,15 +63,19 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     private val bindingSheet get() = _bindingSheet!!
     private val bindingSheetInfoGerais get() = _bindingSheetInfoGerais!!
 
-    private val mapaViewModel: MapaViewModel by viewModels()
+    private val entregaViewModel: EntregaViewModel by activityViewModels()
 
-    private val adapter by lazy { EntregasParentAdapter() }
+    private val adapterEntregas by lazy { EntregasParentAdapter() }
 
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    private val bottomSheetBehavior by lazy { BottomSheetBehavior.from<View>(bindingSheet.root) }
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     private var permissionRequestDialog: PermissionRequestDialog? = null
+
+    private lateinit var dialogEventos: DialogEventos
+
+    private var clientePosicao = -1
 
     private val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -73,7 +83,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         when {
             permission.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
                 //Localização precisa aceita
-                binding.root.mensagemCurta("Permissão de localização concedida", false)
+                binding.root.mensagemCurta(getString(string.label_permissao_localizacao_aceita), false)
                 setupMap()
                 permissionRequestDialog?.dismiss()
             }
@@ -112,14 +122,14 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().setTransparentStatusBar()
+        postponeEnterTransition()
 
         binding.apply {
+            entregaViewModel.getListaEntrega()
             _bindingSheet = bottomSheet
             _bindingSheetInfoGerais = bindingSheet.ltEntregasInfoGerais
-            fabLeftDrawer.setOnClickListener {
-                drawerLayout.openDrawer(GravityCompat.START)
-            }
-            bindingSheet.rvEntregas.adapter = adapter
+
+            setupRecyclerViewEntregas()
             setupBottomSheetEntregas()
         }
 
@@ -129,25 +139,44 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 
     private fun bindObservers() {
         lifecycleScope.launchWhenCreated {
-            mapaViewModel.listaEntrega.collect() { listaCliente ->
-                adapter.submitList(listaCliente)
+            entregaViewModel.listaEntrega.collect { listaCliente ->
+                adapterEntregas.submitList(listaCliente)
             }
         }
 
         lifecycleScope.launchWhenCreated {
-            mapaViewModel.cargaId.collect { cargaId ->
-                bindingSheet.tvRomaneio.text = "Romaneio: $cargaId"
+            entregaViewModel.cargaId.collect { cargaId ->
+                bindingSheet.tvRomaneio.text = Html.fromHtml(getString(string.label_carga_id, cargaId), 0)
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            entregaViewModel.statusEntrega.collect { result ->
+                when(result) {
+                    is EntregaViewModel.EntregaResult.ErrorUpdate -> binding.root.mensagemCurta(result.message)
+                    is EntregaViewModel.EntregaResult.SuccessUpdate -> {
+                        binding.root.mensagemCurta(result.message)
+                    }
+                    else -> Unit
+                }
             }
         }
     }
 
     private fun bindListeners() {
-        adapter.onClienteClickListener = { cliente ->
-            binding.root.mensagemCurta(cliente, false)
+        adapterEntregas.onEntregaClickListener = { binding, entrega ->
+            actionDetalheEntrega(binding, entrega)
         }
 
-        adapter.onEntregaClickListener = { entrega ->
-            binding.root.mensagemCurta(entrega.idEntrega.toString(), true)
+        adapterEntregas.onEntregaLongClickListener = { entrega, position ->
+            clientePosicao = position
+            setupDialogEvento(entrega)
+        }
+
+        binding.apply {
+            fabLeftDrawer.setOnClickListener {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
         }
 
         bindingSheetInfoGerais.apply {
@@ -169,10 +198,25 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+    private fun setupRecyclerViewEntregas() {
+        bindingSheet.rvEntregas.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+        bindingSheet.rvEntregas.apply {
+            if (!adapterEntregas.hasObservers()) {
+                adapterEntregas.setHasStableIds(true)
+            }
+            adapter = adapterEntregas
+        }
+    }
+
     private fun setupBottomSheetEntregas() {
+        val bottomSheetLastState = entregaViewModel.bottomSheetState.value
+        bottomSheetBehavior = BottomSheetBehavior.from(bindingSheet.root)
         val bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-
+                binding.fabEspera.visibility = View.VISIBLE
+                binding.fabDirecao.visibility = View.VISIBLE
             }
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
@@ -188,9 +232,17 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             expandedOffset = requireContext().getActionBarSize()
             peekHeight = resources.getDimension(dimen.bottom_sheet_peek_height).toInt()
             halfExpandedRatio = 0.5F
-            this.state = BottomSheetBehavior.STATE_COLLAPSED
+            state = bottomSheetLastState
             addBottomSheetCallback(bottomSheetCallback)
         }
+
+        binding.fabEspera.visibility =
+            if (bottomSheetLastState == BottomSheetBehavior.STATE_EXPANDED) View.INVISIBLE
+            else View.VISIBLE
+
+        binding.fabDirecao.visibility =
+            if (bottomSheetLastState == BottomSheetBehavior.STATE_EXPANDED) View.INVISIBLE
+            else View.VISIBLE
     }
 
     private fun verificarPermissao() {
@@ -233,6 +285,20 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         )
     }
 
+    private fun setupDialogEvento(entrega: Entrega) {
+        val iDialogEvento = object : IDialogEventos {
+            override fun onEventoClick(idEvento: Int) {
+                if (idEvento < 6) {
+                    entregaViewModel.updateStatusEntrega(entrega, idEvento)
+                }
+                binding.root.mensagemCurta(idEvento.toString())
+            }
+        }
+        dialogEventos = DialogEventos(entrega)
+        dialogEventos.initListener(iDialogEvento)
+        dialogEventos.show(requireActivity().supportFragmentManager, DialogEventos.TAG)
+    }
+
     @SuppressLint("MissingPermission")
     private fun setupMap() {
         val mapFragment =
@@ -243,7 +309,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
             location?.let {
                 val loc = LatLng(it.latitude, it.longitude)
-                mMap.addMarker(MarkerOptions().position(loc).title("Você esta aqui."))
+                mMap.addMarker(MarkerOptions().position(loc).title(getString(string.label_voce_esta_aqui)))
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 18.0f))
             }
         }
@@ -275,10 +341,10 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         if (permissionRequestDialog == null) {
             permissionRequestDialog = PermissionRequestDialog(
                 drawable.ic_location,
-                "Permissão de Localização",
-                "Para continuar, precisamos que permita que o Fusion tenha acesso a localização do dispositivo.",
-                "Aceitar permissão",
-                "Ir para Configurações",
+                getString(string.label_permissao_localizacao),
+                getString(string.label_permissao_localizacao_mensagem),
+                getString(string.label_aceitar_permissao),
+                getString(string.label_ir_para_configuracoes),
                 acaoAceitarPermissao = { solicitarPermissao() },
                 acaoConfiguracoes = { actionConfiguracoes() }
             )
@@ -298,6 +364,22 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         })
     }
 
+    private fun actionDetalheEntrega(binding: ItemEntregaChildBinding, entrega: Entrega) {
+        entregaViewModel.saveBottomSheetEntregasState(bottomSheetBehavior.state)
+        entregaViewModel.setEntregaSelecionada(entrega)
+        entregaViewModel.resetStatusEntrega()
+        val directions = MapaFragmentDirections.actionMapaFragmentToDetalheEntregaFragment(entrega.idEntrega)
+        val extras = FragmentNavigatorExtras(
+            binding.tvStatus to "status_${entrega.idEntrega}",
+            binding.tvOrdemEntrega to "ordem_entrega_${entrega.idEntrega}",
+            binding.root to "card_${entrega.idEntrega}"
+        )
+
+        findNavController().navigate(directions, extras).apply {
+            exitTransition = Fade(Fade.MODE_OUT)
+        }
+    }
+
     private fun checarStatusEntregaFiltro(cvIndicador: View) : Boolean {
         val isVisible = cvIndicador.isVisible
         cvIndicador.visibility = if (isVisible) View.INVISIBLE else View.VISIBLE
@@ -312,6 +394,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 
     override fun onDestroy() {
         super.onDestroy()
+        entregaViewModel.resetViewModel()
         _binding = null
         _bindingSheet = null
         _bindingSheetInfoGerais = null

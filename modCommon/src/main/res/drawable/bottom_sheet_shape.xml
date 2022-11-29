@@ -47,7 +47,7 @@
             <corners
                 android:topLeftRadius="@dimen/dimen_medium"
                 android:topRightRadius="@dimen/dimen_medium" />
-            <solid android:color="?attr/colorSurface" />
+            <solid android:color="?attr/colorOnPrimary" />
         </shape>
     </item>
 

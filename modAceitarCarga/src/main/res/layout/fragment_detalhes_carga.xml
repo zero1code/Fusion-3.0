@@ -34,8 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dimen_medium"
-                android:text="Detalhes da carga"
-                tools:text="Detalhes da carga"
+                android:text="@string/label_detalhe_carga"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -102,7 +101,7 @@
                 app:layout_constraintBottom_toTopOf="@id/btn_recusar_carga"
                 android:layout_marginBottom="@dimen/dimen_medium"
                 android:layout_marginHorizontal="@dimen/dimen_medium"
-                android:text="Aceitar carga"/>
+                android:text="@string/label_aceitar_carga"/>
 
             <Button
                 style="@style/Theme.Button.Cancelar"
@@ -112,7 +111,7 @@
                 android:layout_marginBottom="@dimen/dimen_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginHorizontal="@dimen/dimen_medium"
-                android:text="Recusar carga"/>
+                android:text="@string/label_recusar_carga"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

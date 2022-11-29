@@ -17,12 +17,15 @@
 package br.com.fusiondms.modaceitarcarga.presentation.adapter
 
 import android.graphics.Color
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import br.com.fusiondms.modaceitarcarga.R
 import br.com.fusiondms.modaceitarcarga.databinding.ItemCargaListBinding
+import br.com.fusiondms.modcommon.R.*
 import br.com.fusiondms.modmodel.Romaneio
 import java.util.*
 
@@ -51,9 +54,13 @@ class CargasAdapter() :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(carga: Romaneio) {
-            binding.tvRomaneioId.text = carga.idRomaneio.toString()
-            binding.tvDestino.text = carga.destino
-            binding.tvKm.text = "${carga.kmTotal}  KM"
+            val context = binding.root.context
+            binding.tvRomaneioId.text =
+                Html.fromHtml(context.getString(string.label_romaneio_id, carga.idRomaneio), 0)
+            binding.tvDestino.text =
+                Html.fromHtml(context.getString(string.label_destino, carga.destino), 0)
+            binding.tvKm.text =
+                Html.fromHtml(context.getString(string.label_km, carga.kmTotal), 0)
 
             val random = Random()
             val color = Color.rgb(

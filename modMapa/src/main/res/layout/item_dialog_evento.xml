@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/card_sincronizacao"
+    android:layout_height="@dimen/card_sincronizacao"
+    app:cardCornerRadius="@dimen/card_border_radius"
+    android:layout_margin="@dimen/dimen_small"
+    app:cardElevation="@dimen/dimen_zero">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icone"
+            android:layout_width="@dimen/dimen_big"
+            android:layout_height="@dimen/dimen_big"
+            app:srcCompat="@drawable/ic_caminhao"/>
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle1"
+            android:id="@+id/tv_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/dimen_small"
+            tools:text="Cheguei no cliente" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

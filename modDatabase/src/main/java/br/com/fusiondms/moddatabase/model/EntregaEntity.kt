@@ -1,6 +1,7 @@
 package br.com.fusiondms.moddatabase.model
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import br.com.fusiondms.moddatabase.mapper.EntityMapper
 import br.com.fusiondms.modmodel.Entrega
@@ -8,8 +9,8 @@ import com.google.gson.Gson
 
 @Entity(tableName = "tb_entregas")
 data class EntregaEntity(
-    @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
+    @PrimaryKey()
     var idEntrega: Int = 0,
     var idRomaneio: Int = 0,
     var idCliente: Int = 0,
@@ -18,7 +19,7 @@ data class EntregaEntity(
     var localCliente: String = "",
     var numeroNotaFiscal: Int = 0,
     var valor: String = "",
-    var statusEntrega: String = ""
+    var statusEntrega: String = "0"
 ) : EntityMapper<Entrega, EntregaEntity> {
 
     override fun mapEntityToModel(entity: EntregaEntity): Entrega {

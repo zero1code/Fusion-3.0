@@ -19,7 +19,7 @@ import dagger.hilt.android.internal.managers.FragmentComponentManager
 import dagger.hilt.android.internal.managers.ViewComponentManager
 
 
-fun View.mensagemCurta(message: String, isError: Boolean) {
+fun View.mensagemCurta(message: String, isError: Boolean = false) {
     val activity = FragmentComponentManager.findActivity(this.context) as Activity
     statusBarIconColor(activity, Color.BLACK)
     val inflater = LayoutInflater.from(this.context)

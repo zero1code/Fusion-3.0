@@ -17,14 +17,14 @@ class Dialog(
     private val mensagem: String,
     private val textoBotaoPositivo: String,
     private val textoBotaoNegativo: String,
-    acaoPositiva: (() -> Unit)?,
-    acaoNegativa: (() -> Unit)?
+    private val acaoPositiva: (() -> Unit)?,
+    private val acaoNegativa: (() -> Unit)?
 ) : BottomSheetDialogFragment() {
 
     private var _binding : DialogBinding? = null
     private val binding get() = _binding!!
-    private val acaoPositivaListener = acaoPositiva
-    private val acaoNegativaListener = acaoNegativa
+//    private val acaoPositivaListener = acaoPositiva
+//    private val acaoNegativaListener = acaoNegativa
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +48,7 @@ class Dialog(
             btnConfirmar.text = textoBotaoPositivo
             btnRecusar.text = textoBotaoNegativo
 
-            btnRecusar.visibility = if (acaoNegativaListener == null) View.GONE else View.VISIBLE
+            btnRecusar.visibility = if (acaoNegativa == null) View.GONE else View.VISIBLE
         }
     }
 
@@ -63,12 +63,12 @@ class Dialog(
 
     private fun bindListeners() {
         binding.btnConfirmar.setOnClickListener {
-            acaoPositivaListener?.invoke()
+            acaoPositiva?.invoke()
             dismiss()
         }
 
         binding.btnRecusar.setOnClickListener {
-            acaoNegativaListener?.invoke()
+            acaoNegativa?.invoke()
             dismiss()
         }
     }

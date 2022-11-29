@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dimen_medium"
+    android:layout_marginVertical="@dimen/dimen_normal"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    app:cardCornerRadius="@dimen/card_border_radius"
+    app:cardElevation="@dimen/dimen_zero">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dimen_medium">
+
+        <TextView
+            android:id="@+id/tv_titulo_status"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_status"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            style="@style/TextAppearance.App.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dimen_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_status"
+            tools:text="Pendente" />
+
+        <TextView
+            android:id="@+id/tv_id_entrega"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="ID: 1342545" />
+
+        <TextView
+            android:id="@+id/tv_ordem_entrega"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_id_entrega"
+            tools:text="Ordem da entrega: 01" />
+
+        <TextView
+            android:id="@+id/tv_chegada"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="@dimen/dimen_super"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/label_cheguei_no_cliente"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_status" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_chegada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/label_description_status_entrega"
+            app:backgroundTint="?attr/colorOnPrimarySurface"
+            app:layout_constraintEnd_toEndOf="@+id/tv_data_chegada"
+            app:layout_constraintStart_toStartOf="@+id/tv_chegada"
+            app:layout_constraintTop_toBottomOf="@id/tv_chegada"
+            app:srcCompat="@drawable/ic_local_cliente" />
+
+        <TextView
+            android:id="@+id/tv_data_chegada"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="@dimen/dimen_super"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_normal"
+            android:gravity="center"
+            android:text="18-11-22 14:45:06"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_chegada"
+            app:layout_constraintStart_toStartOf="@+id/tv_chegada"
+            app:layout_constraintTop_toBottomOf="@id/fab_chegada" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_inicio"
+            android:layout_width="@dimen/dimen_zero"
+            android:layout_height="wrap_content"
+            android:progress="50"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_chegada"
+            app:layout_constraintEnd_toStartOf="@+id/fab_inicio"
+            app:layout_constraintStart_toEndOf="@+id/fab_chegada"
+            app:layout_constraintTop_toBottomOf="@+id/tv_chegada" />
+
+        <TextView
+            android:id="@+id/tv_inicio"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="@dimen/dimen_super"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/label_entrega_iniciada"
+            app:layout_constraintBottom_toTopOf="@+id/fab_inicio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_status" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_inicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/label_description_status_entrega"
+            app:backgroundTint="?attr/colorOnPrimarySurface"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_chegada"
+            app:srcCompat="@drawable/ic_caminhao" />
+
+        <TextView
+            android:id="@+id/tv_data_inicio"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="@dimen/dimen_super"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_normal"
+            android:gravity="center"
+            android:text="18-11-22 15:15:06"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fab_inicio" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress_fim"
+            android:layout_width="@dimen/dimen_zero"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/fab_inicio"
+            app:layout_constraintEnd_toStartOf="@+id/fab_fim"
+            app:layout_constraintStart_toEndOf="@+id/fab_inicio"
+            app:layout_constraintTop_toBottomOf="@+id/tv_chegada" />
+
+        <TextView
+            android:id="@+id/tv_fim"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="@dimen/dimen_super"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/label_entrega_realizada"
+            app:layout_constraintBottom_toTopOf="@+id/fab_fim"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_status" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_fim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/label_description_status_entrega"
+            app:backgroundTint="?attr/colorOnPrimarySurface"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_data_fim"
+            app:layout_constraintTop_toBottomOf="@+id/tv_chegada"
+            app:srcCompat="@drawable/ic_check_circle" />
+
+        <TextView
+            android:id="@+id/tv_data_fim"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="@dimen/dimen_super"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_normal"
+            android:gravity="center"
+            android:text="18-11-22 16:00:01"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_fim"
+            app:layout_constraintStart_toStartOf="@+id/tv_fim"
+            app:layout_constraintTop_toBottomOf="@id/fab_fim" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

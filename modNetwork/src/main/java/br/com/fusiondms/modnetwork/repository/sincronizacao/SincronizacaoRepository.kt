@@ -1,7 +1,7 @@
 package br.com.fusiondms.modnetwork.repository.sincronizacao
 
+import br.com.fusiondms.modmodel.Resource
 import br.com.fusiondms.modnetwork.model.SincronizacaoDto
-import br.com.fusiondms.modnetwork.util.Resource
 import kotlinx.coroutines.flow.Flow
 
 

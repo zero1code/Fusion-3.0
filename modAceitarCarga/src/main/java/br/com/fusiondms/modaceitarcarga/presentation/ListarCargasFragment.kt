@@ -13,10 +13,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
+import br.com.fusiondms.modaceitarcarga.R
 import br.com.fusiondms.modaceitarcarga.presentation.adapter.CargasAdapter
 import br.com.fusiondms.modaceitarcarga.databinding.FragmentListarCargasBinding
 import br.com.fusiondms.modaceitarcarga.databinding.ListaCargaVaziaBinding
 import br.com.fusiondms.modaceitarcarga.presentation.viewmodel.CargasViewModel
+import br.com.fusiondms.modcommon.R.*
 import br.com.fusiondms.modcommon.bottomdialog.Dialog
 import br.com.fusiondms.modcommon.progressdialog.showProgressBar
 import br.com.fusiondms.modcommon.setDefaultStatusBarColor
@@ -57,7 +59,7 @@ class ListarCargasFragment : Fragment() {
         )
 
         binding.apply {
-            progressDialog = requireActivity().showProgressBar("Buscando romaneios")
+            progressDialog = requireActivity().showProgressBar(getString(string.label_buscando_carga))
             rvRomaneios.adapter = adapter
             _listaVaziaBinding = ltListaVazia
             cargasViewModel.getListaCarga()
@@ -107,6 +109,7 @@ class ListarCargasFragment : Fragment() {
     }
 
     private fun motoristaTerceirizado(carga: Romaneio, position: Int) {
+        //Dialog apenas de exemplo pois sera um parametro remover no futuro
         Dialog(
             "Confirmar vínculo",
             "Você é um motorista terceirizado?",
@@ -153,6 +156,7 @@ class ListarCargasFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         cargasViewModel.resetCargaState()
+        _listaVaziaBinding = null
         _binding = null
     }
 }

@@ -7,6 +7,12 @@ import android.view.animation.AccelerateInterpolator
 import androidx.core.animation.doOnEnd
 
 fun View.fadeOutAnimation() {
+
+    val fade = ObjectAnimator.ofFloat(this, View.ALPHA, 1f, 0f)
+    fade.start()
+}
+
+fun View.fadeOutMoveAnimation() {
     val mover = ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, 0f, -this.height.toFloat())
     mover.interpolator = AccelerateInterpolator(1f)
     val fade = ObjectAnimator.ofFloat(this, View.ALPHA, 1f, 0f)
@@ -26,7 +32,7 @@ fun View.fadeOutAnimation() {
     }
 }
 
-fun View.fadeInAnimation() {
+fun View.fadeInMoveAnimation() {
     val mover = ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, this.height.toFloat(), 0f)
     mover.interpolator = AccelerateInterpolator(1f)
     val fade = ObjectAnimator.ofFloat(this, View.ALPHA, 0f, 1f)

@@ -35,5 +35,21 @@
         android:id="@+id/mapaFragment"
         android:name="br.com.fusiondms.modmapa.presentation.MapaFragment"
         android:label="fragment_mapa"
-        tools:layout="@layout/fragment_mapa" />
+        tools:layout="@layout/fragment_mapa">
+        <action
+            android:id="@+id/action_mapaFragment_to_detalheEntregaFragment"
+            app:destination="@id/detalheEntregaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detalheEntregaFragment"
+        android:name="br.com.fusiondms.modentrega.presentation.DetalheEntregaFragment"
+        android:label="fragment_detalhe_entrega"
+        tools:layout="@layout/fragment_detalhe_entrega">
+
+        <argument
+            android:name="entregaId"
+            app:argType="integer"
+            android:defaultValue="1"/>
+    </fragment>
 </navigation>

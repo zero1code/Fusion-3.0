@@ -1,64 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/dimen_normal"
-    app:cardElevation="@dimen/card_elevation"
-    app:cardCornerRadius="@dimen/card_border_radius">
+    app:cardCornerRadius="@dimen/card_border_radius"
+    app:cardElevation="@dimen/card_elevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <View
             android:id="@+id/view_color_identifier"
             android:layout_width="@dimen/dimen_small"
             android:layout_height="0dp"
+            android:background="@color/brand_green"
             android:contentDescription="@null"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/brand_green" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_romaneio_id"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-
-            android:padding="8dp"
+            android:layout_marginStart="@dimen/dimen_normal"
+            android:padding="@dimen/dimen_normal"
             android:text="@string/title_placeholder"
-            android:textColor="@color/brand_color_on_surface"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/view_color_identifier"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/title_placeholder" />
 
         <TextView
             android:id="@+id/tv_km"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:padding="@dimen/dimen_normal"
             android:text="@string/news_title"
-            android:textColor="@color/brand_color_on_surface"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_destino" />
 
         <TextView
             android:id="@+id/tv_destino"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/dimen_normal"
             android:ellipsize="end"
-            android:padding="8dp"
-            android:text="@string/sports_info_placeholder"
+            android:padding="@dimen/dimen_normal"
             app:layout_constraintStart_toEndOf="@+id/view_color_identifier"
-            app:layout_constraintTop_toBottomOf="@+id/tv_romaneio_id" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_romaneio_id"
+            tools:text="@string/sports_info_placeholder" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

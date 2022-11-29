@@ -25,10 +25,10 @@
 
         <TextView
             android:id="@+id/txt_ola"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
             android:padding="@dimen/dimen_medium"
-            android:text="Ótima tarde Airton Oliveira!"
+            tools:text="Ótima tarde Airton Oliveira!"
             android:textColor="?attr/colorOnSurface"
             android:textSize="@dimen/large_text"
             app:layout_constraintEnd_toStartOf="@+id/fab_more_options"
@@ -43,7 +43,8 @@
             app:backgroundTint="?attr/colorOnPrimarySurface"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_more" />
+            app:srcCompat="@drawable/ic_more"
+            android:contentDescription="@string/label_description_mais_opcoes" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -51,7 +52,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:elevation="1dp"
             app:layout_constraintTop_toBottomOf="@id/txt_ola">
 
             <com.google.android.material.card.MaterialCardView
@@ -69,14 +69,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Entregas"
+                        android:text="@string/label_entregas"
                         android:textColor="@color/brand_color_on_surface" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="37"
+                        tools:text="37"
                         android:textColor="@color/brand_color_on_surface"
                         android:textStyle="bold" />
 
@@ -99,14 +99,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Pedidos"
+                        android:text="@string/label_pedidos"
                         android:textColor="@color/brand_color_on_surface" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="49"
+                        tools:text="49"
                         android:textColor="@color/brand_color_on_surface"
                         android:textStyle="bold" />
 
@@ -129,14 +129,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Pedidos entregues"
+                        android:text="@string/label_pedidos_entregues"
                         android:textColor="@color/brand_color_on_surface" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="37"
+                        tools:text="37"
                         android:textColor="@color/brand_color_on_surface"
                         android:textStyle="bold" />
 
@@ -148,13 +148,13 @@
 
         <TextView
             android:id="@+id/txt_acao"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
             android:padding="@dimen/dimen_medium"
-            android:text="O que você deseja fazer?"
+            android:text="@string/label_voce_deseja_fazer"
             android:textColor="?attr/colorOnSurface"
             android:textSize="@dimen/large_text"
-            android:elevation="0dp"
+            android:elevation="@dimen/dimen_zero"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayout"
             app:layout_constraintBottom_toTopOf="@id/btn_solicitar_carga"/>
@@ -162,13 +162,13 @@
         <Button
             android:id="@+id/btn_solicitar_carga"
             style="@style/Theme.Button.Normal"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_medium"
             android:layout_marginEnd="@dimen/dimen_normal"
             android:layout_marginBottom="@dimen/dimen_medium"
             android:drawableLeft="@drawable/ic_upload"
-            android:text="Solicitar carga"
+            android:text="@string/label_solicitar_carga"
             app:layout_constraintBottom_toTopOf="@+id/tv_ou"
 
             app:layout_constraintEnd_toStartOf="@+id/btn_atualizar_cargas"
@@ -183,7 +183,7 @@
             android:layout_marginEnd="@dimen/dimen_medium"
             android:layout_marginBottom="@dimen/dimen_medium"
             android:drawableLeft="@drawable/ic_download"
-            android:text="Atualizar cargas"
+            android:text="@string/label_atualizar_carga"
 
             app:layout_constraintBottom_toTopOf="@+id/tv_ou"
             app:layout_constraintEnd_toEndOf="parent"
@@ -193,7 +193,7 @@
             android:id="@+id/tv_ou"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ou"
+            android:text="@string/label_ou"
             android:textSize="16sp"
             android:layout_marginVertical="@dimen/dimen_medium"
             app:layout_constraintBottom_toTopOf="@+id/btn_finalizar"
@@ -207,7 +207,7 @@
             android:layout_height="@dimen/dimen_large"
             android:layout_marginBottom="@dimen/dimen_medium"
             android:layout_marginHorizontal="@dimen/dimen_medium"
-            android:text="Finalizar e Transmitir"
+            android:text="@string/label_finalizar_transmitir"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 

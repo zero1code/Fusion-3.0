@@ -1,4 +1,126 @@
 <resources>
     <string name="app_name">Fusion 3.0</string>
-    <string name="hello_blank_fragment">go to aceitar carga</string>
+
+    <string name="label_description_status_entrega">Delivery status</string>
+    <string name="label_description_direcao">Direction status</string>
+    <string name="label_description_espera">Waiting status</string>
+    <string name="label_description_mais_opcoes">More options</string>
+
+    <string name="label_romaneio_id"><![CDATA[<b>Carriage ID:<br/></b>%1$d]]></string>
+    <string name="label_destino"><![CDATA[<b>Whither:<br/></b>%1$s]]></string>
+    <string name="label_peso_carga"><![CDATA[<b>Weight:<br/></b>%1$s kg]]></string>
+    <string name="label_km_total"><![CDATA[<b>Total Km:<br/></b>%1$d km]]></string>
+    <string name="label_valor_carga"><![CDATA[<b>Carriage value:<br/></b>%1$s]]></string>
+    <string name="label_km">%1$d km</string>
+
+    <string name="label_recusando_carga">Refusing carriage</string>
+    <string name="label_buscando_carga">Searching carriages</string>
+    <string name="label_erro_recusar_carga">Error refusing carriage</string>
+    <string name="label_nenhuma_carga_encontrada">No carriages found</string>
+    <string name="label_nenhuma_carga_encontrada_info">If you only want to use the working day, click in the button below.</string>
+
+    <string name="label_tentar_novamente">Try again</string>
+    <string name="label_cancelar">Cancel</string>
+
+    <string name="label_detalhe_carga">Carriage details</string>
+    <string name="label_aceitar_carga">Accept carriage</string>
+    <string name="label_recusar_carga">Refuse carriage</string>
+    <string name="label_selecionar_carga">Select a carriage</string>
+
+    <string name="label_jornada_trabalho">Working day</string>
+
+    <string name="label_pendente">Pending</string>
+    <string name="label_aguardando">Waiting</string>
+    <string name="label_em_andamento">In progress</string>
+    <string name="label_entregue">Delivered</string>
+    <string name="label_adiada">Suspended</string>
+    <string name="label_devolvida">Refund</string>
+
+    <string name="label_status">Status</string>
+    <string name="label_id">ID: %1$d</string>
+    <string name="label_ordem_entrega">Delivered order: %1$d</string>
+    <string name="label_cheguei_no_cliente">Arrived at the customer</string>
+    <string name="label_entrega_iniciada">Delivery started</string>
+    <string name="label_entrega_realizada">Completed delivery</string>
+    <string name="label_entrega_mesmo_status">Delivery is already with this status</string>
+    <string name="label_cliente_devolveu">Refunded by costumer</string>
+    <string name="label_adiar_entrega">Suspend delivery</string>
+    <string name="label_volumes">Amounts</string>
+    <string name="label_enviar_nf_email">Send invoice on E-mail</string>
+    <string name="label_alarme_chegada">Arrival alert (SMS or E-mail)</string>
+    <string name="label_enviar_foto">Send photo</string>
+    <string name="label_solicitar_ligacao">Request call</string>
+    <string name="label_tirar_foto_canhoto">Take a carriage photo</string>
+
+<!--    <string name="label_dados_cliente"><![CDATA[<b>Customer: </b>%1$s<br/><b>Corporate name: </b>%2$s]]></string>-->
+<!--    <string name="label_localizacao_cliente"><![CDATA[<b>District: </b>%1$s<br/><b>City: </b>%2$s<br/><b>Delivery reference: </b> %3$s]]></string>-->
+
+    <string name="label_nf_pernota"><![CDATA[<b>Invoice:<br/></b>%1$d]]></string>
+    <string name="label_valor"><![CDATA[<b>Value:<br/></b>%1$s]]></string>
+
+    <string name="label_suas_entregas">Your deliveries</string>
+    <string name="label_carga_id">Invoice: %1$d</string>
+    <string name="label_eventos">Events</string>
+    <string name="label_acoes">Actions</string>
+
+    <string name="label_voce_esta_aqui">You are here</string>
+
+    <!--    Permitions label-->
+    <string name="label_aceitar_permissao">Grant permission</string>
+    <string name="label_ir_para_configuracoes">Go to settings</string>
+
+    <string name="label_permissao_localizacao">Location permission</string>
+    <string name="label_permissao_localizacao_mensagem">To continue, we need you allow Fusion to access the device\'s location.</string>
+    <string name="label_permissao_localizacao_aceita">Location permission granted</string>
+    <!--    Permitions label-->
+
+    <string name="label_entregas">Deliveries</string>
+    <string name="label_pedidos">Orders</string>
+    <string name="label_pedidos_entregues">Delivered orders</string>
+    <string name="label_voce_deseja_fazer">What do you wish to do?</string>
+    <string name="label_solicitar_carga">Request carriage</string>
+    <string name="label_atualizar_carga">Sync\ncarriage</string>
+    <string name="label_ou">or</string>
+    <string name="label_finalizar_transmitir">Finalize and transmit</string>
+
+    <string name="label_vamos_comecar">Let\'s start</string>
+    <string name="label_erro_ao_sincronizar">Could not sync</string>
+    <string name="label_algo_deu_errado">Something went wrong</string>
+
+    <string name="label_horario_do_dia">%1$s, %2$s</string>
+    <array name="bom_dia">
+        <item>Good morning</item>
+        <item>Great morning</item>
+        <item>Welcome back</item>
+        <item>It\'s a beautiful day</item>
+        <item>Have a great day</item>
+        <item>Good job today</item>
+    </array>
+
+    <array name="boa_tarde">
+        <item>Good morning</item>
+        <item>Great morning</item>
+        <item>Welcome back</item>
+        <item>It\'s a beautiful day</item>
+        <item>Have a great day</item>
+        <item>Good job today</item>
+    </array>
+
+    <array name="boa_noite">
+        <item>Good morning</item>
+        <item>Great morning</item>
+        <item>Welcome back</item>
+        <item>It\'s a beautiful day</item>
+        <item>Have a great day</item>
+        <item>Good job today</item>
+    </array>
+
+    <array name="frases_sincronizacao">
+        <item>Synchronizing carriages...</item>
+        <item>Wait a moment...</item>
+        <item>Connecting to the server...</item>
+        <item>Downloading Files...</item>
+        <item>Saving New Information</item>
+    </array>
+
 </resources>
