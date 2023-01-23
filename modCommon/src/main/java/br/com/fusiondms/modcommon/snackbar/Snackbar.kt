@@ -14,9 +14,10 @@ import androidx.core.content.ContextCompat
 import br.com.fusiondms.modcommon.R
 import br.com.fusiondms.modcommon.databinding.SnackLayoutBinding
 import br.com.fusiondms.modcommon.getActionBarSize
+import br.com.fusiondms.modcommon.getColorFromAttr
 import br.com.fusiondms.modcommon.statusBarIconColor
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.internal.managers.FragmentComponentManager
-import dagger.hilt.android.internal.managers.ViewComponentManager
 
 
 fun View.mensagemCurta(message: String, isError: Boolean = false) {
@@ -74,4 +75,30 @@ fun View.mensagemCurta(message: String, isError: Boolean = false) {
             view.removeView(binding.root)
         }
     }
+}
+
+enum class TipoMensagem {
+    NORMAL,
+    ERROR,
+    SUCCESS
+}
+
+fun Snackbar.tipoMensagem(tipoMensagem: TipoMensagem): Snackbar {
+    this.setTextColor(this.context.getColorFromAttr(com.google.android.material.R.attr.colorOnPrimary))
+    this.view.setBackgroundColor(
+        when (tipoMensagem) {
+                TipoMensagem.NORMAL-> this.context.getColorFromAttr(com.google.android.material.R.attr.colorOnSurface)
+                TipoMensagem.ERROR-> this.context.getColor(R.color.brand_red)
+                TipoMensagem.SUCCESS -> this.context.getColor(R.color.brand_green_success)
+        }
+    )
+    return this
+}
+
+fun View.showMessage(message: String, tipoMensagem: TipoMensagem) {
+    Snackbar
+        .make(this, message, Snackbar.LENGTH_LONG)
+        .tipoMensagem(tipoMensagem)
+        .show()
+
 }
