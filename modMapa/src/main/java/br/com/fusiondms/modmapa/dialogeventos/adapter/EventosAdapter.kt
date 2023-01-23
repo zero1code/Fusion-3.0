@@ -6,9 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fusiondms.modcommon.getColorFromAttr
-import br.com.fusiondms.modmapa.R
 import br.com.fusiondms.modmapa.databinding.ItemDialogEventoBinding
-import br.com.fusiondms.modmodel.Evento
+import br.com.fusiondms.modmodel.entrega.Evento
 
 class EventosAdapter : ListAdapter<Evento, EventosAdapter.EventosViewHolder>(DiffCallback) {
 

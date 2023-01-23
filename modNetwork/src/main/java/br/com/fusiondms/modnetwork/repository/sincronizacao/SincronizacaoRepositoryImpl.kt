@@ -23,6 +23,8 @@ class SincronizacaoRepositoryImpl @Inject constructor(
                     response.body()?.let {
                         appDatabase.getRomaneioDao().inserirCargas(it.listaRomaneio)
                         appDatabase.getEntregaDao().inserirEntregas(it.listaEntrega)
+                        appDatabase.getColaboradorDto().inserirColaboradores(it.listaColaborador)
+                        appDatabase.getColaboradorDto().inserirRegistrosPonto(it.listaRegistroPonto)
                     }
                     emit(Resource.Success(response.message(), response.code()))
 

@@ -1,54 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/dimen_normal"
-    android:layout_marginVertical="@dimen/dimen_small"
-    app:cardCornerRadius="@dimen/card_border_radius"
-    app:cardElevation="@dimen/card_elevation">
+    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_horario"
+        android:layout_width="@dimen/dimen_large"
+        android:layout_height="@dimen/dimen_large"
+        app:cardCornerRadius="@dimen/dimen_large"
+        app:cardElevation="@dimen/dimen_zero"
+        app:strokeWidth="1dp"
+        app:strokeColor="?attr/colorSurface"
+        app:cardBackgroundColor="@color/brand_color_on_surface_riple"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_funcao"
-            style="@style/TextAppearance.App.Subtitle2"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_normal"
-            android:layout_marginTop="@dimen/dimen_normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Motorista" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_nome"
-            style="@style/TextAppearance.App.Headline6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_normal"
-            app:layout_constraintTop_toBottomOf="@id/tv_funcao"
-            tools:text="Airton de Sousa Oliveira" />
+            <TextView
+                android:id="@+id/tv_horario_batida"
+                style="@style/TextAppearance.App.Subtitle2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="?attr/colorOnSurface"
+                app:layout_constraintTop_toBottomOf="@id/tv_funcao"
+                tools:text="18:45" />
 
-        <TextView
-            android:id="@+id/tv_sem_registro"
-            style="@style/TextAppearance.App.Subtitle2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/brand_red"
-            android:layout_marginHorizontal="@dimen/dimen_normal"
-            android:layout_marginTop="@dimen/dimen_normal"
-            app:layout_constraintTop_toBottomOf="@id/tv_nome"
-            android:text="Nenhum registro encontrado" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 

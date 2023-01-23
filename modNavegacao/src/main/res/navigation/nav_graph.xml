@@ -30,6 +30,9 @@
             app:exitAnim="@anim/no_animation"
             app:popEnterAnim="@anim/no_animation"
             app:popExitAnim="@anim/slide_out_down"/>
+        <action
+            android:id="@+id/action_listarCargasFragment_to_jornadaTrabalhoActivity"
+            app:destination="@id/jornadaTrabalhoActivity" />
     </fragment>
     <fragment
         android:id="@+id/mapaFragment"
@@ -39,6 +42,9 @@
         <action
             android:id="@+id/action_mapaFragment_to_detalheEntregaFragment"
             app:destination="@id/detalheEntregaFragment" />
+        <action
+            android:id="@+id/action_mapaFragment_to_jornadaTrabalhoActivity"
+            app:destination="@id/jornadaTrabalhoActivity" />
     </fragment>
 
     <fragment
@@ -52,4 +58,11 @@
             app:argType="integer"
             android:defaultValue="1"/>
     </fragment>
+
+    <activity
+        android:id="@+id/jornadaTrabalhoActivity"
+        android:name="br.com.fusiondms.modjornadatrabalho.presentation.JornadaTrabalhoActivity"
+        tools:layout="@layout/activity_jornada_trabalho">
+
+    </activity>
 </navigation>

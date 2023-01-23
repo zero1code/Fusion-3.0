@@ -3,10 +3,9 @@ package br.com.fusiondms.modentrega.domain.entregasusecase
 import android.content.Context
 import br.com.fusiondms.modcommon.R.*
 import br.com.fusiondms.moddatabase.repository.entregas.EntregasRepository
-import br.com.fusiondms.modentrega.R
 import br.com.fusiondms.modmodel.Conteudo
-import br.com.fusiondms.modmodel.Entrega
-import br.com.fusiondms.modmodel.EntregasPorCliente
+import br.com.fusiondms.modmodel.entrega.Entrega
+import br.com.fusiondms.modmodel.entrega.EntregasPorCliente
 import br.com.fusiondms.modmodel.Resource
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -49,7 +48,7 @@ class EntregasUseCaseImpl @Inject constructor(
                     emit(result)
                 }
 
-            } else emit(Resource.Error(context.getString(string.label_entrega_mesmo_status), -2))
+            } else emit(Resource.Error(context.getString(string.label_entrega_mesmo_status_info), -2))
         }
     }
 }

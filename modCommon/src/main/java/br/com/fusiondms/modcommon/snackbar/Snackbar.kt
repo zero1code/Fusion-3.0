@@ -85,7 +85,7 @@ enum class TipoMensagem {
 
 fun Snackbar.tipoMensagem(tipoMensagem: TipoMensagem): Snackbar {
     this.setTextColor(this.context.getColorFromAttr(com.google.android.material.R.attr.colorOnPrimary))
-    this.view.setBackgroundColor(
+    this.setBackgroundTint(
         when (tipoMensagem) {
                 TipoMensagem.NORMAL-> this.context.getColorFromAttr(com.google.android.material.R.attr.colorOnSurface)
                 TipoMensagem.ERROR-> this.context.getColor(R.color.brand_red)

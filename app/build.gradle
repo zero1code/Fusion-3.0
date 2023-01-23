@@ -18,9 +18,10 @@ android {
 }
 
 dependencies {
+    implementation project(':modAceitarCarga')
     implementation project(':modCommon')
+    implementation project(':modJornadaTrabalho')
+    implementation project(':modMapa')
     implementation project(':modNavegacao')
     implementation project(':modSincronizacao')
-    implementation project(':modAceitarCarga')
-    implementation project(':modMapa')
 }

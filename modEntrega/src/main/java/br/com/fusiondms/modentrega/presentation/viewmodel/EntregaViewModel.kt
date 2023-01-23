@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import br.com.fusiondms.moddatastore.DataStoreChaves
 import br.com.fusiondms.moddatastore.repository.DataStoreRepository
 import br.com.fusiondms.modentrega.domain.entregasusecase.EntregasUseCase
-import br.com.fusiondms.modmodel.Entrega
+import br.com.fusiondms.modmodel.entrega.Entrega
 import br.com.fusiondms.modmodel.Conteudo
 import br.com.fusiondms.modmodel.Resource
 import com.google.android.material.bottomsheet.BottomSheetBehavior

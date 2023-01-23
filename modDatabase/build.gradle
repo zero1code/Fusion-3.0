@@ -4,6 +4,11 @@ apply from: "$rootDir/config/android-settings.gradle"
 
 android {
 
+    kapt {
+        arguments {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
+    }
 }
 
 dependencies {

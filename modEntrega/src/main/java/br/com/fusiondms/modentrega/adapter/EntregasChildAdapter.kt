@@ -9,9 +9,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fusiondms.modcommon.R.*
 import br.com.fusiondms.modcommon.getColorFromAttr
-import br.com.fusiondms.modentrega.R
 import br.com.fusiondms.modentrega.databinding.ItemEntregaChildBinding
-import br.com.fusiondms.modmodel.Entrega
+import br.com.fusiondms.modmodel.entrega.Entrega
 
 class EntregasChildAdapter()
     : ListAdapter<Entrega, EntregasChildAdapter.EntregasViewHolder>(DiffCallback) {

@@ -1,6 +1,6 @@
 package br.com.fusiondms.modnetwork.model
 
-import br.com.fusiondms.modmodel.Romaneio
+import br.com.fusiondms.modmodel.romaneio.Romaneio
 import br.com.fusiondms.modnetwork.mapper.DtoMapper
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName

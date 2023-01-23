@@ -5,6 +5,7 @@
     <dimen name="dimen_normal">8dp</dimen>
     <dimen name="dimen_medium">16dp</dimen>
     <dimen name="dimen_big">24dp</dimen>
+    <dimen name="dimen_big2">40dp</dimen>
     <dimen name="dimen_large">60dp</dimen>
     <dimen name="dimen_super">80dp</dimen>
 
@@ -17,6 +18,8 @@
     <dimen name="card_sincronizacao">90dp</dimen>
     <dimen name="card_elevation">6dp</dimen>
     <dimen name="card_border_radius">8dp</dimen>
+    <dimen name="card_jornada_size">150dp</dimen>
+    <dimen name="card_stroke_width">2dp</dimen>
 
     <dimen name="bottom_sheet_peek_height">200dp</dimen>
 

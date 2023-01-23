@@ -1,4 +1,4 @@
-package br.com.fusiondms.modmodel
+package br.com.fusiondms.modmodel.entrega
 
 data class Entrega(
     var id: Int = 0,

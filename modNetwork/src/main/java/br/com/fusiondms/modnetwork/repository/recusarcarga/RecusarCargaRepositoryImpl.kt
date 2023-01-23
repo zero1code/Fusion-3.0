@@ -2,9 +2,9 @@ package br.com.fusiondms.modnetwork.repository.recusarcarga
 
 import android.content.Context
 import br.com.fusiondms.moddatabase.AppDatabase
-import br.com.fusiondms.moddatabase.model.RomaneioEntity
+import br.com.fusiondms.moddatabase.model.romaneio.RomaneioEntity
 import br.com.fusiondms.modmodel.Resource
-import br.com.fusiondms.modmodel.Romaneio
+import br.com.fusiondms.modmodel.romaneio.Romaneio
 import br.com.fusiondms.modnetwork.api.FusionApi
 import br.com.fusiondms.modnetwork.model.RomaneioDto
 import kotlinx.coroutines.CoroutineDispatcher

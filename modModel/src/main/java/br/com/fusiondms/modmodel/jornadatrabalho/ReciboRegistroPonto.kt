@@ -1,4 +1,4 @@
-package br.com.fusiondms.modmodel
+package br.com.fusiondms.modmodel.jornadatrabalho
 
 data class ReciboRegistroPonto(
     val id: Int,

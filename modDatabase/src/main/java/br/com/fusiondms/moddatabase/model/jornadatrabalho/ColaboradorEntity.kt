@@ -1,9 +1,10 @@
-package br.com.fusiondms.moddatabase.model
+package br.com.fusiondms.moddatabase.model.jornadatrabalho
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import br.com.fusiondms.moddatabase.mapper.EntityMapper
-import br.com.fusiondms.modmodel.Colaborador
+import br.com.fusiondms.modmodel.jornadatrabalho.Colaborador
 import com.google.gson.Gson
 
 @Entity(tableName = "tb_colaboradores")
@@ -11,7 +12,7 @@ data class ColaboradorEntity(
     @PrimaryKey()
     var matricula: Int = 0,
     var nome: String = "",
-    var funcao: String = ""
+    var funcao: String = "",
 ) : EntityMapper<Colaborador, ColaboradorEntity> {
     override fun mapEntityToModel(entity: ColaboradorEntity): Colaborador {
         val json = Gson().toJson(entity)

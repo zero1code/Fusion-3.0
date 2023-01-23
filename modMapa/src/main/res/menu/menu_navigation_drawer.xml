@@ -4,9 +4,9 @@
         android:id="@+id/group1"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/item1"
-            android:icon="@drawable/ic_menu"
-            android:title="menu 1" />
+            android:id="@+id/menu_jornada_trabalho"
+            android:icon="@drawable/ic_jornada_trabalho"
+            android:title="@string/label_jornada_trabalho" />
         <item
             android:id="@+id/item2"
             android:icon="@drawable/ic_more"

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/jornada_recibos">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/jornada_recibos"
+    app:startDestination="@id/recibosFragment">
+
+    <fragment
+        android:id="@+id/recibosFragment"
+        android:name="br.com.fusiondms.modjornadatrabalho.presentation.RecibosFragment"
+        tools:layout="@layout/fragment_recibos">
+
+    </fragment>
 
 </navigation>

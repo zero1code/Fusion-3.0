@@ -31,7 +31,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_menu"
-                android:contentDescription="@string/label_description_mais_opcoes" />
+                android:contentDescription="@string/label_mais_opcoes_description" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -44,7 +44,7 @@
             app:layout_anchorGravity="start|bottom"
             app:backgroundTint="?attr/colorOnPrimarySurface"
             app:srcCompat="@drawable/ic_moving"
-            android:contentDescription="@string/label_description_direcao" />
+            android:contentDescription="@string/label_direcao_description" />
 
         <View
             android:id="@+id/view"
@@ -63,7 +63,7 @@
             android:layout_margin="@dimen/dimen_medium"
             app:backgroundTint="?attr/colorOnPrimarySurface"
             app:srcCompat="@drawable/ic_timer_off"
-            android:contentDescription="@string/label_description_espera" />
+            android:contentDescription="@string/label_espera_description" />
 
         <include
             android:id="@+id/bottom_sheet"

@@ -1,39 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <color name="brand_green">#8ec952</color>
-    <color name="brand_green_dark">#3d8400</color>
-    <color name="brand_green_light">#a3e75f</color>
-    <color name="brand_green_light_ripple">#dcf1c8</color>
-
-    <color name="brand_green_success">#34AF61</color>
-    <color name="brand_green_success_ripple">#E5F5EB</color>
-
-    <color name="brand_background_color">#F5F5F5</color>
-
-    <color name="brand_cyan">#3ea3be</color>
-    <color name="brand_cyan_dark">#00748e</color>
-    <color name="brand_cyan_light">#76d4f1</color>
-
-    <color name="brand_celtic_blue">#2a67cb</color>
-    <color name="brand_celtic_blue_ripple">#E5EDF8</color>
-    <color name="brand_celtic_blue_ripple_2">#1F2A67CB</color>
-
-    <color name="brand_gomboje_orange">#FF9900</color>
-    <color name="brand_gomboje_orange_ripple">#FFF2DF</color>
-
-    <color name="brand_color_on_surface">#24292f</color>
-    <color name="brand_color_on_surface_riple">#E4E5E6</color>
-    <color name="brand_widget_surface">#FFFFFFFF</color>
-
-    <color name="brand_red">#ff4349</color>
-    <color name="brand_red_ripple">#FEE8EA</color>
-    <color name="brand_red_ripple_2">#1FFF4349</color>
-
-    <color name="brand_selective_yellow">#fbbc05</color>
-    <color name="brand_selective_yellow_ripple">#FFF7E2</color>
-
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
+    <color name="brand_color_on_surface_riple">#757575</color>
 </resources>

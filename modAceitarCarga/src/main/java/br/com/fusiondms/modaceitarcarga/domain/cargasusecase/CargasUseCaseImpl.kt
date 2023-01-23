@@ -1,7 +1,7 @@
 package br.com.fusiondms.modaceitarcarga.domain.cargasusecase
 
 import br.com.fusiondms.moddatabase.repository.romaneios.CargasRepository
-import br.com.fusiondms.modmodel.Romaneio
+import br.com.fusiondms.modmodel.romaneio.Romaneio
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

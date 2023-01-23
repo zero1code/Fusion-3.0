@@ -91,6 +91,11 @@
     <!-- ESTILO CARDVIEW -->
 
     <!-- ESTILO TEXTO -->
+    <style name="TextAppearance.App.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="fontFamily">@font/my_poppins_font</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
     <style name="TextAppearance.App.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="fontFamily">@font/my_poppins_font</item>
         <item name="android:textColor">?attr/colorOnSurface</item>

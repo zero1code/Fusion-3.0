@@ -39,7 +39,8 @@ import br.com.fusiondms.modmapa.databinding.EntregasInfoGeraisBinding
 import br.com.fusiondms.modmapa.databinding.FragmentMapaBinding
 import br.com.fusiondms.modmapa.dialogeventos.DialogEventos
 import br.com.fusiondms.modmapa.dialogeventos.interfaces.IDialogEventos
-import br.com.fusiondms.modmodel.Entrega
+import br.com.fusiondms.modmodel.entrega.Entrega
+import br.com.fusiondms.modnavegacao.R.id.*
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -135,6 +136,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 
         bindObservers()
         bindListeners()
+        bindNavView()
     }
 
     private fun bindObservers() {
@@ -195,6 +197,18 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             cvDevolvida.setOnClickListener {
                 val ativo = checarStatusEntregaFiltro(cvDevolvidaIndicador)
             }
+        }
+    }
+
+    private fun bindNavView() {
+        binding.navView.setNavigationItemSelectedListener { menuItem ->
+            when(menuItem.itemId) {
+                R.id.menu_jornada_trabalho -> {
+                    findNavController().navigate(action_mapaFragment_to_jornadaTrabalhoActivity)
+                }
+            }
+            binding.drawerLayout.close()
+            return@setNavigationItemSelectedListener false
         }
     }
 
@@ -294,7 +308,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                 binding.root.mensagemCurta(idEvento.toString())
             }
         }
-        dialogEventos = DialogEventos(entrega)
+        dialogEventos = DialogEventos(entrega, requireContext())
         dialogEventos.initListener(iDialogEvento)
         dialogEventos.show(requireActivity().supportFragmentManager, DialogEventos.TAG)
     }

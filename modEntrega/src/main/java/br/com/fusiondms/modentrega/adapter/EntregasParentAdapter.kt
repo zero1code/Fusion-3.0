@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.modcommon.R.*
-import br.com.fusiondms.modentrega.R
 import br.com.fusiondms.modentrega.databinding.ItemEntregaChildBinding
 import br.com.fusiondms.modentrega.databinding.ItemEntregaParentBinding
 import br.com.fusiondms.modentrega.interfaces.NestedRecyclerViewViewHolder
 import br.com.fusiondms.modentrega.util.CustomHorizontalLayoutManager
 import br.com.fusiondms.modentrega.util.NestedRecyclerViewStateRecoverAdapter
-import br.com.fusiondms.modmodel.Entrega
+import br.com.fusiondms.modmodel.entrega.Entrega
 import br.com.fusiondms.modmodel.Conteudo
 
 private enum class ViewType {

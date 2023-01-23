@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.core.view.WindowInsetsControllerCompat
@@ -54,6 +55,17 @@ fun Activity.getOrientacaoTela() {
             removerNotchInLandscape()
         }
     }
+}
+
+fun Activity.getStatusbarHeight() : Int{
+    val statusBarHeightId = resources.getIdentifier("status_bar_height", "dimen", "android")
+    val statusBarHeight = resources.getDimensionPixelSize(statusBarHeightId)
+    val result = if (statusBarHeight > 0) statusBarHeight else 100
+    return result / resources.displayMetrics.density.toInt()
+}
+
+fun Activity.hideKeyboard() {
+    hideKeyboard(currentFocus ?: View(this))
 }
 
 fun statusBarIconColor(activity: Activity, color: Int) {

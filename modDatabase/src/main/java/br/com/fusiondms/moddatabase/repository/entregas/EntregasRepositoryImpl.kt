@@ -3,8 +3,8 @@ package br.com.fusiondms.moddatabase.repository.entregas
 import android.content.Context
 import br.com.fusiondms.moddatabase.R
 import br.com.fusiondms.moddatabase.dao.EntregaDao
-import br.com.fusiondms.moddatabase.model.EntregaEntity
-import br.com.fusiondms.modmodel.Entrega
+import br.com.fusiondms.moddatabase.model.entrega.EntregaEntity
+import br.com.fusiondms.modmodel.entrega.Entrega
 import br.com.fusiondms.modmodel.Resource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

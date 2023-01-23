@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import br.com.fusiondms.moddatabase.model.EntregaEntity
+import br.com.fusiondms.moddatabase.model.entrega.EntregaEntity
 
 @Dao
 interface EntregaDao {

@@ -7,7 +7,7 @@ import br.com.fusiondms.modaceitarcarga.domain.recusarcargausecase.RecusarCargaU
 import br.com.fusiondms.moddatastore.DataStoreChaves
 import br.com.fusiondms.moddatastore.repository.DataStoreRepository
 import br.com.fusiondms.modmodel.Resource
-import br.com.fusiondms.modmodel.Romaneio
+import br.com.fusiondms.modmodel.romaneio.Romaneio
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*

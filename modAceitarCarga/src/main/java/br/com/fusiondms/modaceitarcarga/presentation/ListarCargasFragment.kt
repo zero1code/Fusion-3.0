@@ -13,7 +13,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
-import br.com.fusiondms.modaceitarcarga.R
 import br.com.fusiondms.modaceitarcarga.presentation.adapter.CargasAdapter
 import br.com.fusiondms.modaceitarcarga.databinding.FragmentListarCargasBinding
 import br.com.fusiondms.modaceitarcarga.databinding.ListaCargaVaziaBinding
@@ -23,7 +22,7 @@ import br.com.fusiondms.modcommon.bottomdialog.Dialog
 import br.com.fusiondms.modcommon.progressdialog.showProgressBar
 import br.com.fusiondms.modcommon.setDefaultStatusBarColor
 import br.com.fusiondms.modcommon.setStatusBarColor
-import br.com.fusiondms.modmodel.Romaneio
+import br.com.fusiondms.modmodel.romaneio.Romaneio
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -71,7 +70,7 @@ class ListarCargasFragment : Fragment() {
 
     private fun bindObservers() {
         lifecycleScope.launchWhenStarted {
-            cargasViewModel.listaCargaStatus.collect() { result ->
+            cargasViewModel.listaCargaStatus.collect { result ->
                 when (result) {
                     CargasViewModel.CargaStatus.Empty -> avisoJornadaDeTrabalho()
                     is CargasViewModel.CargaStatus.Loading -> progessDialogState(result.isLoading)
@@ -90,6 +89,18 @@ class ListarCargasFragment : Fragment() {
         }
     }
 
+    private fun bindListeners() {
+        adapter.onRomaneioClickListener = {carga, position ->
+            motoristaTerceirizado(carga, position)
+        }
+
+        listaVaziaBinding.apply {
+            btnJornadaTrabalho.setOnClickListener {
+                findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_listarCargasFragment_to_jornadaTrabalhoActivity)
+            }
+        }
+    }
+
     private fun avisoJornadaDeTrabalho() {
         listaVaziaBinding.root.visibility = View.VISIBLE
     }
@@ -99,12 +110,6 @@ class ListarCargasFragment : Fragment() {
             progressDialog.show()
         } else {
             if (progressDialog.isShowing) progressDialog.dismiss()
-        }
-    }
-
-    private fun bindListeners() {
-        adapter.onRomaneioClickListener = {carga, position ->
-            motoristaTerceirizado(carga, position)
         }
     }
 

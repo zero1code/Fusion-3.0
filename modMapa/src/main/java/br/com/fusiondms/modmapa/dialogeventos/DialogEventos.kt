@@ -1,5 +1,6 @@
 package br.com.fusiondms.modmapa.dialogeventos
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -16,13 +17,13 @@ import br.com.fusiondms.modmapa.databinding.DialogEventosBinding
 import br.com.fusiondms.modmapa.dialogeventos.adapter.AcoesAdapter
 import br.com.fusiondms.modmapa.dialogeventos.adapter.EventosAdapter
 import br.com.fusiondms.modmapa.dialogeventos.interfaces.IDialogEventos
-import br.com.fusiondms.modmodel.Acao
-import br.com.fusiondms.modmodel.Entrega
-import br.com.fusiondms.modmodel.Evento
+import br.com.fusiondms.modmodel.entrega.Acao
+import br.com.fusiondms.modmodel.entrega.Entrega
+import br.com.fusiondms.modmodel.entrega.Evento
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class DialogEventos(
-    private val entrega: Entrega) : BottomSheetDialogFragment() {
+    private val entrega: Entrega, context: Context) : BottomSheetDialogFragment() {
     private var _binding: DialogEventosBinding? = null
     private val binding get() = _binding!!
 
@@ -30,27 +31,27 @@ class DialogEventos(
 
     private val listaEvento = arrayListOf(
         Evento(
-            getString(R.string.label_cheguei_no_cliente),
+            context.getString(R.string.label_cheguei_no_cliente),
             R.drawable.ic_local_cliente,
             1
         ),
         Evento(
-            getString(R.string.label_entrega_iniciada),
+            context.getString(R.string.label_entrega_iniciada),
             R.drawable.ic_caminhao,
             2
         ),
         Evento(
-            getString(R.string.label_entrega_realizada),
+            context.getString(R.string.label_entrega_realizada),
             R.drawable.ic_check_circle,
             3
         ),
         Evento(
-            getString(R.string.label_cliente_devolveu),
+            context.getString(R.string.label_cliente_devolveu),
             R.drawable.ic_devolution,
             4
         ),
         Evento(
-            getString(R.string.label_adiar_entrega),
+            context.getString(R.string.label_adiar_entrega),
             R.drawable.ic_more_time,
             5
         )
@@ -58,32 +59,32 @@ class DialogEventos(
 
     private val listaAcao = arrayListOf(
         Acao(
-            getString(R.string.label_volumes),
+            context.getString(R.string.label_volumes),
             R.drawable.ic_volume,
             1
         ),
         Acao(
-            getString(R.string.label_enviar_nf_email),
+            context.getString(R.string.label_enviar_nf_email),
             R.drawable.ic_email,
             2
         ),
         Acao(
-            getString(R.string.label_alarme_chegada),
+            context.getString(R.string.label_alarme_chegada),
             R.drawable.ic_notificacao_ativa,
             3
         ),
         Acao(
-            getString(R.string.label_enviar_foto),
+            context.getString(R.string.label_enviar_foto),
             R.drawable.ic_camera,
             4
         ),
         Acao(
-            getString(R.string.label_solicitar_ligacao),
+            context.getString(R.string.label_solicitar_ligacao),
             R.drawable.ic_ligacao,
             5
         ),
         Acao(
-            getString(R.string.label_tirar_foto_canhoto),
+            context.getString(R.string.label_tirar_foto_canhoto),
             R.drawable.ic_canhoto,
             6
         )
@@ -112,10 +113,10 @@ class DialogEventos(
         binding.apply {
             tvNotaFiscal.text = Html.fromHtml(getString(R.string.label_nf_pernota, entrega.numeroNotaFiscal), 0)
             rvEventos.adapter = adapterEventos
-            rvEventos.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            rvEventos.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
             rvAcoes.adapter = adapterAcoes
-            rvAcoes.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.HORIZONTAL, false)
+            rvAcoes.layoutManager = GridLayoutManager(context, 2, RecyclerView.HORIZONTAL, false)
         }
 
         checarStatusEntrega(entrega.statusEntrega)

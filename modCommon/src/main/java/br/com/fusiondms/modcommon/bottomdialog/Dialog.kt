@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +45,7 @@ class Dialog(
 
         binding.apply {
             tvTitulo.text = titulo
-            tvMensagem.text = mensagem
+            tvMensagem.text = Html.fromHtml(mensagem, 0)
             btnConfirmar.text = textoBotaoPositivo
             btnRecusar.text = textoBotaoNegativo
 

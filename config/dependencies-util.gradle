@@ -13,8 +13,12 @@ ext.addDaggerHilt = {
 
 ext.addFragmentNavigation = {
     implementation Deps.fragment_androidx
+    implementation Deps.navigation_fragment
     implementation Deps.navigation_ui
+    implementation Deps.navigation_ui_ktx
     implementation Deps.navigation_androidx
+    implementation Deps.navigation_runtime
+    implementation Deps.navigation_runtime_ktx
 }
 
 ext.addGoogleMaps = {

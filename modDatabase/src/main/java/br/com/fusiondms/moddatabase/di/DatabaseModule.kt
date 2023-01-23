@@ -3,23 +3,17 @@ package br.com.fusiondms.moddatabase.di
 import android.content.Context
 import androidx.room.Room
 import br.com.fusiondms.moddatabase.AppDatabase
-import br.com.fusiondms.moddatabase.dao.EntregaDao
-import br.com.fusiondms.moddatabase.dao.CargaDao
-import br.com.fusiondms.moddatabase.repository.entregas.EntregasRepository
-import br.com.fusiondms.moddatabase.repository.entregas.EntregasRepositoryImpl
-import br.com.fusiondms.moddatabase.repository.romaneios.CargasRepository
-import br.com.fusiondms.moddatabase.repository.romaneios.CargasRepositoryImpl
+import br.com.fusiondms.moddatabase.migrations.DatabaseMirgation
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class DatabaseModule {
+object DatabaseModule {
 
     @Provides
     fun provideRomaneioDao(appDatabase: AppDatabase) = appDatabase.getRomaneioDao()
@@ -28,17 +22,7 @@ class DatabaseModule {
     fun provideEntregaDao(appDatabase: AppDatabase) = appDatabase.getEntregaDao()
 
     @Provides
-    @Singleton
-    fun provideEntregasRepository(
-        entregaDao: EntregaDao,
-        @ApplicationContext appcontext: Context
-    ) : EntregasRepository = EntregasRepositoryImpl(entregaDao, Dispatchers.IO, appcontext)
-
-    @Provides
-    @Singleton
-    fun provideCargasRepository(
-        cargaDao: CargaDao
-    ) : CargasRepository = CargasRepositoryImpl(cargaDao, Dispatchers.IO)
+    fun provideColaboradorDao(appDatabase: AppDatabase) = appDatabase.getColaboradorDto()
 
     @Provides
     @Singleton
@@ -47,6 +31,8 @@ class DatabaseModule {
             appcontext,
             AppDatabase::class.java,
             "db.fusion"
+        ).addMigrations(
+//            DatabaseMirgation.MIGRATION_3_TO_4
         ).build()
     }
 }

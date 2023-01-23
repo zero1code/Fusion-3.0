@@ -23,10 +23,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.modaceitarcarga.R
 import br.com.fusiondms.modaceitarcarga.databinding.ItemCargaListBinding
 import br.com.fusiondms.modcommon.R.*
-import br.com.fusiondms.modmodel.Romaneio
+import br.com.fusiondms.modmodel.romaneio.Romaneio
 import java.util.*
 
 class CargasAdapter() :
@@ -38,7 +37,6 @@ class CargasAdapter() :
         parent: ViewGroup,
         viewType: Int
     ): CargasViewHolder {
-        val context = parent.context
         return CargasViewHolder(
             ItemCargaListBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false

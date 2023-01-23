@@ -74,8 +74,8 @@ class SincronizacaoFragment : Fragment() {
 
     private fun bindListeners() {
         binding.btnAtualizarCargas.setOnClickListener {
-            startSincronizacao()
-//            findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_sincronizacaoFragment_to_listarCargasFragment)
+//            startSincronizacao()
+            findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_sincronizacaoFragment_to_listarCargasFragment)
         }
 
         binding.fabMoreOptions.setOnClickListener {
@@ -103,17 +103,20 @@ class SincronizacaoFragment : Fragment() {
     }
 
     private fun dialogErro(message: String?) {
-        liberarClique(true)
-        binding.linearProgressIndicator.visibility = View.GONE
-        binding.txtAcao.text = getString(label_algo_deu_errado)
-        Dialog(
-            getString(label_erro_ao_sincronizar),
-            message ?: "",
-            getString(label_tentar_novamente),
-            getString(label_cancelar),
-            acaoPositiva = { startSincronizacao() },
-            acaoNegativa = {}
-        ).show(requireActivity().supportFragmentManager, Dialog.TAG)
+        lifecycleScope.launch {
+            liberarClique(true)
+            binding.linearProgressIndicator.visibility = View.GONE
+            Dialog(
+                getString(label_erro_ao_sincronizar),
+                message ?: "",
+                getString(label_tentar_novamente),
+                getString(label_cancelar),
+                acaoPositiva = { startSincronizacao() },
+                acaoNegativa = {}
+            ).show(requireActivity().supportFragmentManager, Dialog.TAG)
+            delay(500)
+            binding.txtAcao.text = getString(label_algo_deu_errado)
+        }
     }
 
     private fun liberarClique(isClickable: Boolean) {

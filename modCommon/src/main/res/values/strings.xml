@@ -1,34 +1,64 @@
 <resources>
     <string name="app_name">Fusion 3.0</string>
 
-    <string name="label_description_status_entrega">Delivery status</string>
-    <string name="label_description_direcao">Direction status</string>
-    <string name="label_description_espera">Waiting status</string>
-    <string name="label_description_mais_opcoes">More options</string>
+    <!--    Descricoes-->
+    <string name="label_status_entrega_description">Delivery status</string>
+    <string name="label_direcao_description">Direction status</string>
+    <string name="label_espera_description">Waiting status</string>
+    <string name="label_mais_opcoes_description">More options</string>
+    <string name="menu_inicio_description">Working day menu</string>
+    <string name="menu_recibo_description">Receipts menu</string>
+    <string name="label_adicionar_colaborador_description">Add employee</string>
+    <string name="label_proximo_description">Go next</string>
+    <!--    Descricoes-->
 
+    <!--    Labels com formatacao HTML-->
     <string name="label_romaneio_id"><![CDATA[<b>Carriage ID:<br/></b>%1$d]]></string>
     <string name="label_destino"><![CDATA[<b>Whither:<br/></b>%1$s]]></string>
     <string name="label_peso_carga"><![CDATA[<b>Weight:<br/></b>%1$s kg]]></string>
     <string name="label_km_total"><![CDATA[<b>Total Km:<br/></b>%1$d km]]></string>
     <string name="label_valor_carga"><![CDATA[<b>Carriage value:<br/></b>%1$s]]></string>
-    <string name="label_km">%1$d km</string>
+    <string name="label_nf_pernota"><![CDATA[<b>Invoice:<br/></b>%1$d]]></string>
+    <string name="label_valor"><![CDATA[<b>Value:<br/></b>%1$s]]></string>
+    <!--    <string name="label_dados_cliente"><![CDATA[<b>Customer: </b>%1$s<br/><b>Corporate name: </b>%2$s]]></string>-->
+    <!--    <string name="label_localizacao_cliente"><![CDATA[<b>District: </b>%1$s<br/><b>City: </b>%2$s<br/><b>Delivery reference: </b> %3$s]]></string>-->
 
-    <string name="label_recusando_carga">Refusing carriage</string>
-    <string name="label_buscando_carga">Searching carriages</string>
-    <string name="label_erro_recusar_carga">Error refusing carriage</string>
-    <string name="label_nenhuma_carga_encontrada">No carriages found</string>
-    <string name="label_nenhuma_carga_encontrada_info">If you only want to use the working day, click in the button below.</string>
+    <!--    Labels com formatacao HTML-->
 
+    <!--    label de permissoes-->
+    <string name="label_aceitar_permissao">Grant permission</string>
+    <string name="label_ir_para_configuracoes">Go to settings</string>
+
+    <string name="label_permissao_localizacao">Location permission</string>
+    <string name="label_permissao_localizacao_mensagem">To continue, we need you allow Fusion to access the device\'s location.</string>
+    <string name="label_permissao_localizacao_aceita">Location permission granted</string>
+    <!--    label de permissoes-->
+
+    <!--    label de botoes-->
     <string name="label_tentar_novamente">Try again</string>
     <string name="label_cancelar">Cancel</string>
-
-    <string name="label_detalhe_carga">Carriage details</string>
+    <string name="label_confirmar">Confirm</string>
+    <string name="label_cheguei_no_cliente">Arrived at the customer</string>
+    <string name="label_entrega_iniciada">Delivery started</string>
+    <string name="label_entrega_realizada">Completed delivery</string>
+    <string name="label_cliente_devolveu">Refunded by costumer</string>
+    <string name="label_adiar_entrega">Suspend delivery</string>
+    <string name="label_volumes">Amounts</string>
+    <string name="label_enviar_nf_email">Send invoice on E-mail</string>
+    <string name="label_alarme_chegada">Arrival alert (SMS or E-mail)</string>
+    <string name="label_enviar_foto">Send photo</string>
+    <string name="label_solicitar_ligacao">Request call</string>
+    <string name="label_tirar_foto_canhoto">Take a carriage photo</string>
+    <string name="label_cadastrar_colaborador">Register employee</string>
+    <string name="label_finalizar_transmitir">Finalize and transmit</string>
+    <string name="label_confirmar_registro_ponto">Confirm Clock in</string>
+    <string name="label_solicitar_carga">Request carriage</string>
+    <string name="label_atualizar_carga">Sync\ncarriage</string>
     <string name="label_aceitar_carga">Accept carriage</string>
     <string name="label_recusar_carga">Refuse carriage</string>
-    <string name="label_selecionar_carga">Select a carriage</string>
+    <!--    label de botoes-->
 
-    <string name="label_jornada_trabalho">Working day</string>
-
+    <!--    label de uma palavra apenas-->
     <string name="label_pendente">Pending</string>
     <string name="label_aguardando">Waiting</string>
     <string name="label_em_andamento">In progress</string>
@@ -38,56 +68,56 @@
 
     <string name="label_status">Status</string>
     <string name="label_id">ID: %1$d</string>
-    <string name="label_ordem_entrega">Delivered order: %1$d</string>
-    <string name="label_cheguei_no_cliente">Arrived at the customer</string>
-    <string name="label_entrega_iniciada">Delivery started</string>
-    <string name="label_entrega_realizada">Completed delivery</string>
-    <string name="label_entrega_mesmo_status">Delivery is already with this status</string>
-    <string name="label_cliente_devolveu">Refunded by costumer</string>
-    <string name="label_adiar_entrega">Suspend delivery</string>
-    <string name="label_volumes">Amounts</string>
-    <string name="label_enviar_nf_email">Send invoice on E-mail</string>
-    <string name="label_alarme_chegada">Arrival alert (SMS or E-mail)</string>
-    <string name="label_enviar_foto">Send photo</string>
-    <string name="label_solicitar_ligacao">Request call</string>
-    <string name="label_tirar_foto_canhoto">Take a carriage photo</string>
-
-<!--    <string name="label_dados_cliente"><![CDATA[<b>Customer: </b>%1$s<br/><b>Corporate name: </b>%2$s]]></string>-->
-<!--    <string name="label_localizacao_cliente"><![CDATA[<b>District: </b>%1$s<br/><b>City: </b>%2$s<br/><b>Delivery reference: </b> %3$s]]></string>-->
-
-    <string name="label_nf_pernota"><![CDATA[<b>Invoice:<br/></b>%1$d]]></string>
-    <string name="label_valor"><![CDATA[<b>Value:<br/></b>%1$s]]></string>
-
-    <string name="label_suas_entregas">Your deliveries</string>
-    <string name="label_carga_id">Invoice: %1$d</string>
+    <string name="label_km">%1$d km</string>
     <string name="label_eventos">Events</string>
     <string name="label_acoes">Actions</string>
-
-    <string name="label_voce_esta_aqui">You are here</string>
-
-    <!--    Permitions label-->
-    <string name="label_aceitar_permissao">Grant permission</string>
-    <string name="label_ir_para_configuracoes">Go to settings</string>
-
-    <string name="label_permissao_localizacao">Location permission</string>
-    <string name="label_permissao_localizacao_mensagem">To continue, we need you allow Fusion to access the device\'s location.</string>
-    <string name="label_permissao_localizacao_aceita">Location permission granted</string>
-    <!--    Permitions label-->
-
     <string name="label_entregas">Deliveries</string>
     <string name="label_pedidos">Orders</string>
-    <string name="label_pedidos_entregues">Delivered orders</string>
-    <string name="label_voce_deseja_fazer">What do you wish to do?</string>
-    <string name="label_solicitar_carga">Request carriage</string>
-    <string name="label_atualizar_carga">Sync\ncarriage</string>
     <string name="label_ou">or</string>
-    <string name="label_finalizar_transmitir">Finalize and transmit</string>
+    <string name="menu_inicio">Start</string>
+    <string name="menu_recibo">Receipts</string>
+    <string name="label_matricula">Registration</string>
+    <string name="label_motorista">Driver</string>
+    <string name="label_ajudante">Assistant</string>
+    <string name="label_nome">Name</string>
+    <string name="label_funcao">Role</string>
+    <!--    label de uma palavra apenas-->
 
+    <!--    label de 2 ou 3 palavras-->
+    <string name="label_recusando_carga">Refusing carriage</string>
+    <string name="label_buscando_carga">Searching carriages</string>
+    <string name="label_erro_recusar_carga">Error refusing carriage</string>
+    <string name="label_nenhuma_carga_encontrada">No carriages found</string>
+    <string name="label_detalhe_carga">Carriage details</string>
+    <string name="label_selecionar_carga">Select a carriage</string>
+    <string name="label_jornada_trabalho">Working day</string>
+    <string name="label_ordem_entrega">Delivery order: %1$d</string>
+    <string name="label_suas_entregas">Your deliveries</string>
+    <string name="label_carga_id">Invoice: %1$d</string>
+    <string name="label_voce_esta_aqui">You are here</string>
+    <string name="label_pedidos_entregues">Delivered orders</string>
     <string name="label_vamos_comecar">Let\'s start</string>
     <string name="label_erro_ao_sincronizar">Could not sync</string>
     <string name="label_algo_deu_errado">Something went wrong</string>
-
+    <string name="label_registrar_ponto">Clock in</string>
+    <string name="label_nome_completo">Full name</string>
     <string name="label_horario_do_dia">%1$s, %2$s</string>
+    <string name="label_adicionar_colaborador">Add employee</string>
+    <string name="label_digite_matricula">Enter registration</string>
+    <string name="label_digite_nome">Enter full name</string>
+    <string name="label_confirmar_dados">Confirm data</string>
+    <!--    label de 2 ou 3 palavras-->
+
+    <!--    label de frases-->
+    <string name="label_nenhuma_carga_encontrada_info">If you only want to use the working day, click in the button below.</string>
+    <string name="label_entrega_mesmo_status_info">Delivery is already with this status</string>
+    <string name="label_voce_deseja_fazer_info">What do you wish to do?</string>
+    <string name="label_digitar_matricula_info">Enter employee registration</string>
+    <string name="label_atencao_digitar_matricula_info">Be careful when entering the license plate, it must be valid in order for the time records to be saved.</string>
+    <string name="label_digitar_nome_info">Now, enter the employee\'s full name</string>
+    <string name="label_qual_funcao_colaborador_info">What is the employee\'s role?</string>
+    <!--    label de frases-->
+
     <array name="bom_dia">
         <item>Good morning</item>
         <item>Great morning</item>

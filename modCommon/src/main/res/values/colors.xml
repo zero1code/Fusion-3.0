@@ -23,6 +23,7 @@
     <color name="brand_gomboje_orange_ripple">#FFF2DF</color>
 
     <color name="brand_color_on_surface">#24292f</color>
+    <color name="brand_color_on_surface_riple">#E4E5E6</color>
     <color name="brand_widget_surface">#FFFFFFFF</color>
 
     <color name="brand_red">#ff4349</color>

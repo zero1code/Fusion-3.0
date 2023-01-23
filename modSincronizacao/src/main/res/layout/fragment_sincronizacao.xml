@@ -44,7 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_more"
-            android:contentDescription="@string/label_description_mais_opcoes" />
+            android:contentDescription="@string/label_mais_opcoes_description" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -151,7 +151,7 @@
             android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
             android:padding="@dimen/dimen_medium"
-            android:text="@string/label_voce_deseja_fazer"
+            android:text="@string/label_voce_deseja_fazer_info"
             android:textColor="?attr/colorOnSurface"
             android:textSize="@dimen/large_text"
             android:elevation="@dimen/dimen_zero"

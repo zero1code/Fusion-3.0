@@ -4,7 +4,11 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.view.View
 import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
+import android.widget.ProgressBar
 import androidx.core.animation.doOnEnd
+import androidx.core.view.isVisible
+import com.google.android.material.progressindicator.LinearProgressIndicator
 
 fun View.fadeOutAnimation() {
 
@@ -50,6 +54,26 @@ fun View.fadeInMoveAnimation() {
             .duration = 0
         set.removeAllListeners()
     }
+}
+
+fun View.moveInAnimation() {
+    if (!this.isVisible) this.visibility = View.VISIBLE
+    val mover = ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, this.height.toFloat(), 0f)
+    mover.interpolator = AccelerateInterpolator(1f)
+    mover.duration = 500L
+    mover.start()
+}
+
+fun View.hideFabAnimation(value: Float) {
+    this.animate().scaleX(value).scaleY(value).setDuration(300).start()
+}
+
+fun LinearProgressIndicator.progressAnimation(progress: Int) {
+    val progressTo = this.progress + progress
+    val mover = ObjectAnimator.ofInt(this, "progress", this.progress, progressTo)
+    mover.interpolator = DecelerateInterpolator()
+    mover.duration = 500L
+    mover.start()
 }
 
 fun View.fabAnimation(value: Float) {

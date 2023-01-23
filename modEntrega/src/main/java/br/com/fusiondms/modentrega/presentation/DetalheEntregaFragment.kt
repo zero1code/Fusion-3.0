@@ -13,11 +13,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import br.com.fusiondms.modcommon.R.*
 import br.com.fusiondms.modcommon.getColorFromAttr
-import br.com.fusiondms.modentrega.R
 import br.com.fusiondms.modentrega.databinding.FragmentDetalheEntregaBinding
 import br.com.fusiondms.modentrega.databinding.LayoutStatusEntregaBinding
 import br.com.fusiondms.modentrega.presentation.viewmodel.EntregaViewModel
-import br.com.fusiondms.modmodel.Entrega
+import br.com.fusiondms.modmodel.entrega.Entrega
 
 class DetalheEntregaFragment : Fragment() {
 

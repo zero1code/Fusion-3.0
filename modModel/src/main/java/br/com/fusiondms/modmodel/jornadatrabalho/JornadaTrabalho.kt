@@ -1,4 +1,4 @@
-package br.com.fusiondms.modmodel
+package br.com.fusiondms.modmodel.jornadatrabalho
 
 data class JornadaTrabalho(
     val colaborador: Colaborador,

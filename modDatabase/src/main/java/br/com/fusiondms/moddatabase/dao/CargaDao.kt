@@ -5,8 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import br.com.fusiondms.moddatabase.model.RomaneioEntity
-import br.com.fusiondms.modmodel.Romaneio
+import br.com.fusiondms.moddatabase.model.romaneio.RomaneioEntity
 
 @Dao
 interface CargaDao {

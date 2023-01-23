@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/jornada_resgistro_ponto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/jornada_registro_ponto"
+    app:startDestination="@+id/registrarPontoFragment">
+
+    <fragment
+        android:id="@+id/registrarPontoFragment"
+        android:name="br.com.fusiondms.modjornadatrabalho.presentation.RegistrarPontoFragment"
+        tools:layout="@layout/fragment_registrar_ponto">
+        <action
+            android:id="@+id/action_registrarPontoFragment_to_confirmarRegistroPontoFragment"
+            app:destination="@id/confirmarRegistroPontoFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/no_animation"
+            app:popEnterAnim="@anim/no_animation"
+            app:popExitAnim="@anim/slide_out_down"/>
+        <action
+            android:id="@+id/action_registrarPontoFragment_to_adicionarColaboradorFragment"
+            app:destination="@id/adicionarColaboradorFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/no_animation"
+            app:popEnterAnim="@anim/no_animation"
+            app:popExitAnim="@anim/slide_out_down"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/adicionarColaboradorFragment"
+        android:name="br.com.fusiondms.modjornadatrabalho.presentation.AdicionarColaboradorFragment"
+        tools:layout="@layout/fragment_adicionar_colaborador">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/confirmarRegistroPontoFragment"
+        android:name="br.com.fusiondms.modjornadatrabalho.presentation.ConfirmarRegistroPontoFragment"
+        tools:layout="@layout/fragment_confirmar_registro_ponto">
+
+    </fragment>
 
 </navigation>

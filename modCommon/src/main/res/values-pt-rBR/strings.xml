@@ -1,3 +1,156 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Fusion 3.0</string>
+
+    <!--    Descricoes-->
+    <string name="label_status_entrega_description">Status Entrega</string>
+    <string name="label_direcao_description">Status Direção</string>
+    <string name="label_espera_description">Status Aguardando</string>
+    <string name="label_mais_opcoes_description">Mais opções</string>
+    <string name="menu_inicio_description">Menu Jornada de trabalho</string>
+    <string name="menu_recibo_description">Menu Recibos Registro de ponto</string>
+    <string name="label_adicionar_colaborador_description">Adicionar colaborador</string>
+    <string name="label_proximo_description">Próximo</string>
+    <!--    Descricoes-->
+
+    <!--    Labels com formatacao HTML-->
+    <string name="label_romaneio_id"><![CDATA[<b>ID Carga:<br/></b>%1$d]]></string>
+    <string name="label_destino"><![CDATA[<b>Destino:<br/></b>%1$s]]></string>
+    <string name="label_peso_carga"><![CDATA[<b>Peso:<br/></b>%1$s kg]]></string>
+    <string name="label_km_total"><![CDATA[<b>Total Km:<br/></b>%1$d km]]></string>
+    <string name="label_valor_carga"><![CDATA[<b>Valor da carga:<br/></b>%1$s]]></string>
+    <string name="label_nf_pernota"><![CDATA[<b>Nota fiscal:<br/></b>%1$d]]></string>
+    <string name="label_valor"><![CDATA[<b>Valor:<br/></b>%1$s]]></string>
+    <!--    <string name="label_dados_cliente"><![CDATA[<b>Customer: </b>%1$s<br/><b>Corporate name: </b>%2$s]]></string>-->
+    <!--    <string name="label_localizacao_cliente"><![CDATA[<b>District: </b>%1$s<br/><b>City: </b>%2$s<br/><b>Delivery reference: </b> %3$s]]></string>-->
+
+    <!--    Labels com formatacao HTML-->
+
+    <!--    label de permissoes-->
+    <string name="label_aceitar_permissao">Aceitar permissão</string>
+    <string name="label_ir_para_configuracoes">Ir para configurações</string>
+
+    <string name="label_permissao_localizacao">Permissão de localização</string>
+    <string name="label_permissao_localizacao_mensagem">Para continuar, nós precisamos que você precisa permitir que o Fusion acesse a localização do dispositivo.</string>
+    <string name="label_permissao_localizacao_aceita">Permissão de localização concedida</string>
+    <!--    label de permissoes-->
+
+    <!--    label de botoes-->
+    <string name="label_tentar_novamente">Tente novamente</string>
+    <string name="label_cancelar">Cancelar</string>
+    <string name="label_confirmar">Confirmar</string>
+    <string name="label_cheguei_no_cliente">Cheguei no cliente</string>
+    <string name="label_entrega_iniciada">Entrega iniciada</string>
+    <string name="label_entrega_realizada">Entrega realizada</string>
+    <string name="label_cliente_devolveu">Cliente devolveu</string>
+    <string name="label_adiar_entrega">Adiar entrega</string>
+    <string name="label_volumes">Volumes</string>
+    <string name="label_enviar_nf_email">Enviar nota fiscal E-mail</string>
+    <string name="label_alarme_chegada">Alerta de chegada (SMS ou E-mail)</string>
+    <string name="label_enviar_foto">Enviar foto</string>
+    <string name="label_solicitar_ligacao">Solicitar ligação</string>
+    <string name="label_tirar_foto_canhoto">Tirar foto do canhoto</string>
+    <string name="label_cadastrar_colaborador">Cadastrar colaborador</string>
+    <string name="label_finalizar_transmitir">Finalizar e transmitir</string>
+    <string name="label_confirmar_registro_ponto">Confirmar registro de ponto</string>
+    <string name="label_solicitar_carga">Solcitar cargas</string>
+    <string name="label_atualizar_carga">Sincronizar cargas</string>
+    <string name="label_aceitar_carga">Aceitar carga</string>
+    <string name="label_recusar_carga">Recusar carga</string>
+    <!--    label de botoes-->
+
+    <!--    label de uma palavra apenas-->
+    <string name="label_pendente">Pendente</string>
+    <string name="label_aguardando">Aguardando</string>
+    <string name="label_em_andamento">Em Progresso</string>
+    <string name="label_entregue">Entregue</string>
+    <string name="label_adiada">Adiada</string>
+    <string name="label_devolvida">Devolvida</string>
+
+    <string name="label_status">Status</string>
+    <string name="label_id">ID: %1$d</string>
+    <string name="label_km">%1$d km</string>
+    <string name="label_eventos">Eventos</string>
+    <string name="label_acoes">Ações</string>
+    <string name="label_entregas">Entregas</string>
+    <string name="label_pedidos">Pedidos</string>
+    <string name="label_ou">ou</string>
+    <string name="menu_inicio">Início</string>
+    <string name="menu_recibo">Recibos</string>
+    <string name="label_matricula">matrícula</string>
+    <string name="label_motorista">Motorista</string>
+    <string name="label_ajudante">Ajudante</string>
+    <string name="label_nome">Nome</string>
+    <string name="label_funcao">Função</string>
+    <!--    label de uma palavra apenas-->
+
+    <!--    label de 2 ou 3 palavras-->
+    <string name="label_recusando_carga">Recusando carga</string>
+    <string name="label_buscando_carga">Procurando cargas</string>
+    <string name="label_erro_recusar_carga">Erro ao recusar carga</string>
+    <string name="label_nenhuma_carga_encontrada">nenhuma carga encontrada</string>
+    <string name="label_detalhe_carga">Detalhe da carga</string>
+    <string name="label_selecionar_carga">Selecione uma carga</string>
+    <string name="label_jornada_trabalho">Jornada de Trabalho</string>
+    <string name="label_ordem_entrega">Ordem de entrega: %1$d</string>
+    <string name="label_suas_entregas">Suas entregas</string>
+    <string name="label_carga_id">Nota fiscal: %1$d</string>
+    <string name="label_voce_esta_aqui">Você está aqui</string>
+    <string name="label_pedidos_entregues">Pedidos entregues</string>
+    <string name="label_vamos_comecar">Vamos começar</string>
+    <string name="label_erro_ao_sincronizar">Erro ao sincronizar</string>
+    <string name="label_algo_deu_errado">Alguma coisa deu errado</string>
+    <string name="label_registrar_ponto">Registrar ponto</string>
+    <string name="label_nome_completo">Nome completo</string>
+    <string name="label_horario_do_dia">%1$s, %2$s</string>
+    <string name="label_adicionar_colaborador">Adicionar colaborador</string>
+    <string name="label_digite_matricula">Digite a matrícula</string>
+    <string name="label_digite_nome">Digite o nome completo</string>
+    <string name="label_confirmar_dados">Confirmar dados</string>
+    <!--    label de 2 ou 3 palavras-->
+
+    <!--    label de frases-->
+    <string name="label_nenhuma_carga_encontrada_info">Se você quer usar somente a jornada de trabalho, clique no botão abaixo.</string>
+    <string name="label_entrega_mesmo_status_info">A entrega já está com esse status</string>
+    <string name="label_voce_deseja_fazer_info">O que você gostaria de fazer?</string>
+    <string name="label_digitar_matricula_info">Digite a matrícula do colaborador</string>
+    <string name="label_atencao_digitar_matricula_info">Atenção ao digitar a matrícula, ela precisa ser válida para que os registros de ponto sejam salvos.</string>
+    <string name="label_digitar_nome_info">Agora, digite o nome completo do colaborador</string>
+    <string name="label_qual_funcao_colaborador_info">Qual é a função do colaborador?</string>
+    <!--    label de frases-->
+
+    <array name="bom_dia">
+        <item>Bom dia</item>
+        <item>Ótima manhã</item>
+        <item>bem vindo de volta</item>
+        <item>Está um lindo dia</item>
+        <item>Tenha um ótimo dia</item>
+        <item>Bom trabalho hoje</item>
+    </array>
+
+    <array name="boa_tarde">
+        <item>Bom dia</item>
+        <item>Ótima manhã</item>
+        <item>bem vindo de volta</item>
+        <item>Está um lindo dia</item>
+        <item>Tenha um ótimo dia</item>
+        <item>Bom trabalho hoje</item>
+    </array>
+
+    <array name="boa_noite">
+        <item>Bom dia</item>
+        <item>Ótima manhã</item>
+        <item>bem vindo de volta</item>
+        <item>Está um lindo dia</item>
+        <item>Tenha um ótimo dia</item>
+        <item>Bom trabalho hoje</item>
+    </array>
+
+    <array name="frases_sincronizacao">
+        <item>Sincronizando cargas...</item>
+        <item>Espere um momento...</item>
+        <item>Conectando-se ao servidor...</item>
+        <item>baixando arquivos...</item>
+        <item>Salvando novas informções...</item>
+    </array>
+
 </resources>

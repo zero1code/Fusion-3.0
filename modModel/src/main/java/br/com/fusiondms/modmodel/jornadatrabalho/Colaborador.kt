@@ -1,4 +1,4 @@
-package br.com.fusiondms.modmodel
+package br.com.fusiondms.modmodel.jornadatrabalho
 
 data class Colaborador(
     val matricula: Int,

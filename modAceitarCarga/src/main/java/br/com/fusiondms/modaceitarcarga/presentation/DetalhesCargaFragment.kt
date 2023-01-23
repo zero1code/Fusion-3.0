@@ -10,13 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import br.com.fusiondms.modaceitarcarga.R
 import br.com.fusiondms.modaceitarcarga.databinding.FragmentDetalhesCargaBinding
 import br.com.fusiondms.modaceitarcarga.presentation.viewmodel.CargasViewModel
 import br.com.fusiondms.modcommon.R.*
 import br.com.fusiondms.modcommon.bottomdialog.Dialog
 import br.com.fusiondms.modcommon.progressdialog.showProgressBar
-import br.com.fusiondms.modmodel.Romaneio
+import br.com.fusiondms.modmodel.romaneio.Romaneio
 import java.text.NumberFormat
 
 class DetalhesCargaFragment : Fragment() {

@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/dimen_normal"
-    android:layout_marginVertical="@dimen/dimen_small"
+    android:layout_marginHorizontal="@dimen/dimen_medium"
+    android:layout_marginVertical="@dimen/dimen_normal"
     app:cardCornerRadius="@dimen/card_border_radius"
     app:cardElevation="@dimen/card_elevation">
 
@@ -15,16 +15,28 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_funcao"
+            android:id="@+id/tv_status"
             style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dimen_normal"
             android:layout_marginTop="@dimen/dimen_normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Motorista" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/brand_green_success"
+            android:text="Status - SINCRONIZADA" />
+
+        <TextView
+            android:id="@+id/tv_empresa"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_status"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Comprovante de registro de ponto online do colaborador da empresa: FUSION DMS" />
 
         <TextView
             android:id="@+id/tv_nome"
@@ -32,35 +44,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dimen_normal"
-            app:layout_constraintTop_toBottomOf="@id/tv_funcao"
+            app:layout_constraintTop_toBottomOf="@id/tv_empresa"
             tools:text="Airton de Sousa Oliveira" />
 
         <TextView
-            android:id="@+id/tv_sem_registro"
+            android:id="@+id/tv_data"
             style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/brand_red"
             android:layout_marginHorizontal="@dimen/dimen_normal"
-            android:layout_marginVertical="@dimen/dimen_normal"
+            android:layout_marginBottom="@dimen/dimen_normal"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_nome"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="Nenhum registro encontrado" />
+            tools:text="18/01/2023 - 17:38" />
 
-        <GridLayout
-            android:id="@+id/grid_layout_registros_ponto"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginVertical="@dimen/dimen_normal"
-            android:layout_marginHorizontal="@dimen/dimen_normal"
-            android:columnCount="6"
-            android:foregroundGravity="center"
-            android:paddingVertical="@dimen/dimen_small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_nome"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

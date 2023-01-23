@@ -1,10 +1,9 @@
-package br.com.fusiondms.moddatabase.model
+package br.com.fusiondms.moddatabase.model.romaneio
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import br.com.fusiondms.moddatabase.mapper.EntityMapper
-import br.com.fusiondms.modmodel.Entrega
-import br.com.fusiondms.modmodel.Romaneio
+import br.com.fusiondms.modmodel.romaneio.Romaneio
 import com.google.gson.Gson
 
 @Entity(tableName = "tb_romaneios")
