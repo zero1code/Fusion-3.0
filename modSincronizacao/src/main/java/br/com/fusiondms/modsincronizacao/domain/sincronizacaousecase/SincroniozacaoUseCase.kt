@@ -5,5 +5,5 @@ import br.com.fusiondms.modnetwork.model.SincronizacaoDto
 import kotlinx.coroutines.flow.Flow
 
 interface SincroniozacaoUseCase {
-    suspend fun getSincronizacao() : Flow<Resource<SincronizacaoDto>>
+    suspend fun getSincronizacao() : Flow<Int>
 }

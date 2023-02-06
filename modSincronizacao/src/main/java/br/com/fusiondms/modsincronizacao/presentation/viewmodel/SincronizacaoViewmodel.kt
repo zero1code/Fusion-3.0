@@ -23,7 +23,7 @@ class SincronizacaoViewmodel @Inject constructor(
     sealed class SincronizacaoStatus() {
         object Nothing : SincronizacaoStatus()
         class Loading(val isLoading: Boolean) : SincronizacaoStatus()
-        class Success(val message: String?) : SincronizacaoStatus()
+        class Success(val resposeCode: Int) : SincronizacaoStatus()
         class Error(val message: String?) : SincronizacaoStatus()
     }
 
@@ -49,26 +49,13 @@ class SincronizacaoViewmodel @Inject constructor(
             .catch { error ->
                 _sincronizacaoCompleta.emit(SincronizacaoStatus.Error(error.message))
             }
-            .collect { result ->
-                when (result) {
-                    is Resource.Error -> _sincronizacaoCompleta.emit(
-                        SincronizacaoStatus.Error(
-                            result.message
-                        )
-                    )
-                    is Resource.Success -> _sincronizacaoCompleta.emit(
-                        SincronizacaoStatus.Success(
-                            result.message
-                        )
-                    )
-                }
+            .collect {
+                _sincronizacaoCompleta.emit(SincronizacaoStatus.Success(it))
             }
     }
 
-    fun resetSincronizacaoState() {
-        viewModelScope.launch {
-            _sincronizacaoCompleta.emit(SincronizacaoStatus.Nothing)
-        }
+    fun resetSincronizacaoState() = viewModelScope.launch {
+        _sincronizacaoCompleta.emit(SincronizacaoStatus.Nothing)
     }
 
     private fun getHoraDoDia() = viewModelScope.launch {

@@ -9,7 +9,7 @@ import javax.inject.Inject
 class SincronizacaoUseCaseImpl @Inject constructor(
     private val sincronizacaoRepository: SincronizacaoRepository
 ) : SincroniozacaoUseCase {
-    override suspend fun getSincronizacao(): Flow<Resource<SincronizacaoDto>> {
+    override suspend fun getSincronizacao(): Flow<Int> {
         return sincronizacaoRepository.getSincronizacao()
     }
 }

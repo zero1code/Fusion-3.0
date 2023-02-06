@@ -54,13 +54,13 @@ class SincronizacaoFragment : Fragment() {
 
     private fun bindObservers() {
         lifecycleScope.launchWhenCreated {
-            sincronizacaoViewmodel.sincronizacaoCompleta.collect { status ->
-                when (status) {
+            sincronizacaoViewmodel.sincronizacaoCompleta.collect { result ->
+                when (result) {
                     is SincronizacaoViewmodel.SincronizacaoStatus.Nothing -> Unit
                     is SincronizacaoViewmodel.SincronizacaoStatus.Loading -> isLoading =
-                        status.isLoading
+                        result.isLoading
                     is SincronizacaoViewmodel.SincronizacaoStatus.Success -> actionListaRomaneioFragment()
-                    is SincronizacaoViewmodel.SincronizacaoStatus.Error -> dialogErro(status.message)
+                    is SincronizacaoViewmodel.SincronizacaoStatus.Error -> dialogErro(result.message)
                 }
             }
         }
@@ -74,8 +74,8 @@ class SincronizacaoFragment : Fragment() {
 
     private fun bindListeners() {
         binding.btnAtualizarCargas.setOnClickListener {
-//            startSincronizacao()
-            findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_sincronizacaoFragment_to_listarCargasFragment)
+            startSincronizacao()
+//            findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_sincronizacaoFragment_to_listarCargasFragment)
         }
 
         binding.fabMoreOptions.setOnClickListener {

@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface SincronizacaoRepository {
 
-    fun getSincronizacao() : Flow<Resource<SincronizacaoDto>>
+    fun getSincronizacao() : Flow<Int>
 }

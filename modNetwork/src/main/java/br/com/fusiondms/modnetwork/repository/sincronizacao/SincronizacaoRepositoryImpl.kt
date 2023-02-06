@@ -2,6 +2,8 @@ package br.com.fusiondms.modnetwork.repository.sincronizacao
 
 import br.com.fusiondms.moddatabase.AppDatabase
 import br.com.fusiondms.modmodel.Resource
+import br.com.fusiondms.modmodel.exceptions.ErrorApiSincronizacao
+import br.com.fusiondms.modmodel.exceptions.ErrorSincronizacao
 import br.com.fusiondms.modnetwork.api.FusionApi
 import br.com.fusiondms.modnetwork.model.SincronizacaoDto
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,8 +17,8 @@ class SincronizacaoRepositoryImpl @Inject constructor(
     private val appDatabase: AppDatabase,
     private val dispatcher: CoroutineDispatcher
 ) : SincronizacaoRepository {
-    override fun getSincronizacao(): Flow<Resource<SincronizacaoDto>> {
-        return flow<Resource<SincronizacaoDto>> {
+    override fun getSincronizacao(): Flow<Int> {
+        return flow {
             try {
                 val response = fusionApi.getSincronizacao()
                 if (response.isSuccessful) {
@@ -26,13 +28,12 @@ class SincronizacaoRepositoryImpl @Inject constructor(
                         appDatabase.getColaboradorDto().inserirColaboradores(it.listaColaborador)
                         appDatabase.getColaboradorDto().inserirRegistrosPonto(it.listaRegistroPonto)
                     }
-                    emit(Resource.Success(response.message(), response.code()))
-
+                    emit(response.code())
                 } else {
-                    emit(Resource.Error(response.message(), response.code()))
+                    throw ErrorApiSincronizacao(response.message(), response.code())
                 }
             } catch (e: Exception) {
-                emit(Resource.Error(e.message!!, 0))
+                throw ErrorSincronizacao(e.message, )
             }
         }.flowOn(dispatcher)
     }
