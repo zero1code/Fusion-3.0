@@ -1,13 +1,13 @@
-package br.com.fusiondms.modentrega.presentation.viewmodel
+package br.com.fusiondms.feature.entregas.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.fusiondms.moddatastore.DataStoreChaves
-import br.com.fusiondms.moddatastore.repository.DataStoreRepository
-import br.com.fusiondms.modentrega.domain.entregasusecase.EntregasUseCase
-import br.com.fusiondms.modmodel.entrega.Entrega
-import br.com.fusiondms.modmodel.Conteudo
-import br.com.fusiondms.modmodel.Resource
+import br.com.fusiondms.core.datastore.repository.DataStoreChaves
+import br.com.fusiondms.core.datastore.repository.DataStoreRepository
+import br.com.fusiondms.core.model.Conteudo
+import br.com.fusiondms.core.model.Resource
+import br.com.fusiondms.core.model.entrega.Entrega
+import br.com.fusiondms.feature.entregas.domain.entregasusecase.EntregasUseCase
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -42,6 +42,10 @@ class EntregaViewModel @Inject constructor(
 
     private var _bottomSheetState = MutableStateFlow(BottomSheetBehavior.STATE_COLLAPSED)
     val bottomSheetState: StateFlow<Int> get() = _bottomSheetState
+
+    init {
+        getListaEntrega()
+    }
 
     private fun getIdCargaSelecionada(): Int? = runBlocking {
         dataStoreRepository.getInt(DataStoreChaves.ID_CARGA_SELECIONADA)

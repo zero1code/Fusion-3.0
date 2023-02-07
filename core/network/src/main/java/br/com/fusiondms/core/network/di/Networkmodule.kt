@@ -1,13 +1,13 @@
-package br.com.fusiondms.modnetwork.di
+package br.com.fusiondms.core.network.di
 
 import android.app.Application
 import android.content.Context
-import br.com.fusiondms.moddatabase.AppDatabase
-import br.com.fusiondms.modnetwork.api.FusionApi
-import br.com.fusiondms.modnetwork.repository.recusarcarga.RecusarCargaRepositoryImpl
-import br.com.fusiondms.modnetwork.repository.recusarcarga.RecusarCargaRepository
-import br.com.fusiondms.modnetwork.repository.sincronizacao.SincronizacaoRepository
-import br.com.fusiondms.modnetwork.repository.sincronizacao.SincronizacaoRepositoryImpl
+import br.com.fusiondms.core.database.AppDatabase
+import br.com.fusiondms.core.network.api.FusionApi
+import br.com.fusiondms.core.network.repository.recusarcarga.RecusarCargaRepository
+import br.com.fusiondms.core.network.repository.recusarcarga.RecusarCargaRepositoryImpl
+import br.com.fusiondms.core.network.repository.sincronizacao.SincronizacaoRepository
+import br.com.fusiondms.core.network.repository.sincronizacao.SincronizacaoRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

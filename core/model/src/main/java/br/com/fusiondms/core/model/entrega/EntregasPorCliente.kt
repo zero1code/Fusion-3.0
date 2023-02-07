@@ -1,4 +1,4 @@
-package br.com.fusiondms.modmodel.entrega
+package br.com.fusiondms.core.model.entrega
 
 data class EntregasPorCliente(
     var idRomaneio: Int,

@@ -1,13 +1,11 @@
-package br.com.fusiondms.modjornadatrabalho.di
+package br.com.fusiondms.feature.jornadatrabalho.di
 
-import android.content.Context
-import br.com.fusiondms.moddatabase.repository.jornadatrabalho.JornadaTrabalhoRepository
-import br.com.fusiondms.modjornadatrabalho.domain.jornadatrabalhousecase.JornadaTrabalhoUseCase
-import br.com.fusiondms.modjornadatrabalho.domain.jornadatrabalhousecase.JornadaTrabalhoUseCaseimpl
+import br.com.fusiondms.core.database.repository.jornadatrabalho.JornadaTrabalhoRepository
+import br.com.fusiondms.feature.jornadatrabalho.domain.jornadatrabalhousecase.JornadaTrabalhoUseCase
+import br.com.fusiondms.feature.jornadatrabalho.domain.jornadatrabalhousecase.JornadaTrabalhoUseCaseimpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 

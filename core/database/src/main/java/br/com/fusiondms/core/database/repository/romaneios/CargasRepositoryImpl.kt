@@ -1,8 +1,8 @@
-package br.com.fusiondms.moddatabase.repository.romaneios
+package br.com.fusiondms.core.database.repository.romaneios
 
-import br.com.fusiondms.moddatabase.dao.CargaDao
-import br.com.fusiondms.moddatabase.model.romaneio.RomaneioEntity
-import br.com.fusiondms.modmodel.romaneio.Romaneio
+import br.com.fusiondms.core.database.dao.CargaDao
+import br.com.fusiondms.core.database.model.romaneio.RomaneioEntity
+import br.com.fusiondms.core.model.romaneio.Romaneio
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

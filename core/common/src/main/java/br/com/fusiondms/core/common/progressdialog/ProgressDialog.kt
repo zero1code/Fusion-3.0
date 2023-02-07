@@ -1,14 +1,11 @@
-package br.com.fusiondms.modcommon.progressdialog
+package br.com.fusiondms.core.common.progressdialog
 
 import android.app.Activity
-import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
-import android.view.View
 import androidx.appcompat.app.AlertDialog
-import br.com.fusiondms.modcommon.R
-import br.com.fusiondms.modcommon.databinding.ProgressLayoutBinding
+import br.com.fusiondms.core.common.R
+import br.com.fusiondms.core.common.databinding.ProgressLayoutBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 fun Activity.showProgressBar(titulo: String): AlertDialog {

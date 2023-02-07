@@ -1,8 +1,8 @@
-package br.com.fusiondms.modaceitarcarga.domain.recusarcargausecase
+package br.com.fusiondms.feature.cargas.domain.recusarcargausecase
 
-import br.com.fusiondms.modmodel.Resource
-import br.com.fusiondms.modmodel.romaneio.Romaneio
-import br.com.fusiondms.modnetwork.repository.recusarcarga.RecusarCargaRepository
+import br.com.fusiondms.core.model.Resource
+import br.com.fusiondms.core.model.romaneio.Romaneio
+import br.com.fusiondms.core.network.repository.recusarcarga.RecusarCargaRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

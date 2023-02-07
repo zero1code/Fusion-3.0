@@ -1,9 +1,8 @@
-package br.com.fusiondms.moddatabase.di
+package br.com.fusiondms.core.database.di
 
 import android.content.Context
 import androidx.room.Room
-import br.com.fusiondms.moddatabase.AppDatabase
-import br.com.fusiondms.moddatabase.migrations.DatabaseMirgation
+import br.com.fusiondms.core.database.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

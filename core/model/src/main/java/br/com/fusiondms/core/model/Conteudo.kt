@@ -1,7 +1,7 @@
-package br.com.fusiondms.modmodel
+package br.com.fusiondms.core.model
 
-import br.com.fusiondms.modmodel.entrega.EntregasPorCliente
+import br.com.fusiondms.core.model.entrega.EntregasPorCliente
 
 sealed class Conteudo(val id: Int) {
-    class CarouselEntrega(id: Int, val cliente: EntregasPorCliente) : Conteudo(id)
+    data class CarouselEntrega(val idCliente: Int, val cliente: EntregasPorCliente) : Conteudo(idCliente)
 }

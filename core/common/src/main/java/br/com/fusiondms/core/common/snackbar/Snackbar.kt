@@ -1,4 +1,4 @@
-package br.com.fusiondms.modcommon.snackbar
+package br.com.fusiondms.core.common.snackbar
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
@@ -11,11 +11,11 @@ import android.view.animation.AccelerateInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
-import br.com.fusiondms.modcommon.R
-import br.com.fusiondms.modcommon.databinding.SnackLayoutBinding
-import br.com.fusiondms.modcommon.getActionBarSize
-import br.com.fusiondms.modcommon.getColorFromAttr
-import br.com.fusiondms.modcommon.statusBarIconColor
+import br.com.fusiondms.core.common.R
+import br.com.fusiondms.core.common.databinding.SnackLayoutBinding
+import br.com.fusiondms.core.common.getActionBarSize
+import br.com.fusiondms.core.common.getColorFromAttr
+import br.com.fusiondms.core.common.statusBarIconColor
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.internal.managers.FragmentComponentManager
 
@@ -87,8 +87,8 @@ fun Snackbar.tipoMensagem(tipoMensagem: TipoMensagem): Snackbar {
     this.setTextColor(this.context.getColorFromAttr(com.google.android.material.R.attr.colorOnPrimary))
     this.setBackgroundTint(
         when (tipoMensagem) {
-                TipoMensagem.NORMAL-> this.context.getColorFromAttr(com.google.android.material.R.attr.colorOnSurface)
-                TipoMensagem.ERROR-> this.context.getColor(R.color.brand_red)
+                TipoMensagem.NORMAL -> this.context.getColorFromAttr(com.google.android.material.R.attr.colorOnSurface)
+                TipoMensagem.ERROR -> this.context.getColor(R.color.brand_red)
                 TipoMensagem.SUCCESS -> this.context.getColor(R.color.brand_green_success)
         }
     )

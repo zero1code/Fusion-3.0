@@ -7,12 +7,12 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
     android:fitsSystemWindows="true"
-    tools:context="br.com.fusiondms.modentrega.presentation.DetalheEntregaFragment">
+    tools:context=".presentation.DetalheEntregaFragment">
 
 <com.google.android.material.appbar.AppBarLayout
     android:layout_width="match_parent"
     android:layout_height="130dp"
-    android:fitsSystemWindows="true">
+    >
 
     <com.google.android.material.appbar.CollapsingToolbarLayout
         style="@style/Toolbar"
@@ -36,7 +36,7 @@
             android:layout_height="?attr/actionBarSize"
             android:elevation="@dimen/dimen_zero"
             app:layout_collapseMode="pin"
-            app:title="@string/label_detalhe_carga" />
+            app:title="@string/label_detalhe_entrega" />
 
     </com.google.android.material.appbar.CollapsingToolbarLayout>
 

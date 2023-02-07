@@ -1,4 +1,4 @@
-package br.com.fusiondms.modmapa.dialogeventos
+package br.com.fusiondms.feature.mapa.dialogeventos
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -12,15 +12,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.modcommon.R
-import br.com.fusiondms.modmapa.databinding.DialogEventosBinding
-import br.com.fusiondms.modmapa.dialogeventos.adapter.AcoesAdapter
-import br.com.fusiondms.modmapa.dialogeventos.adapter.EventosAdapter
-import br.com.fusiondms.modmapa.dialogeventos.interfaces.IDialogEventos
-import br.com.fusiondms.modmodel.entrega.Acao
-import br.com.fusiondms.modmodel.entrega.Entrega
-import br.com.fusiondms.modmodel.entrega.Evento
+import br.com.fusiondms.core.model.entrega.Acao
+import br.com.fusiondms.core.model.entrega.Entrega
+import br.com.fusiondms.core.model.entrega.Evento
+import br.com.fusiondms.feature.mapa.databinding.DialogEventosBinding
+import br.com.fusiondms.feature.mapa.dialogeventos.adapter.AcoesAdapter
+import br.com.fusiondms.feature.mapa.dialogeventos.adapter.EventosAdapter
+import br.com.fusiondms.feature.mapa.dialogeventos.interfaces.IDialogEventos
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import br.com.fusiondms.core.common.R
 
 class DialogEventos(
     private val entrega: Entrega, context: Context) : BottomSheetDialogFragment() {

@@ -1,8 +1,8 @@
-package br.com.fusiondms.moddatastore.di
+package br.com.fusiondms.core.datastore.di
 
 import android.content.Context
-import br.com.fusiondms.moddatastore.repository.DataStoreRepository
-import br.com.fusiondms.moddatastore.repository.DataStoreRepositoryImpl
+import br.com.fusiondms.core.datastore.repository.DataStoreRepository
+import br.com.fusiondms.core.datastore.repository.DataStoreRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

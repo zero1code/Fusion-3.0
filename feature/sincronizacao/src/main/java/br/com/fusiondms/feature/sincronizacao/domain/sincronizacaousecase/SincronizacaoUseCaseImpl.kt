@@ -1,6 +1,6 @@
-package br.com.fusiondms.modsincronizacao.domain.sincronizacaousecase
+package br.com.fusiondms.feature.sincronizacao.domain.sincronizacaousecase
 
-import br.com.fusiondms.modnetwork.repository.sincronizacao.SincronizacaoRepository
+import br.com.fusiondms.core.network.repository.sincronizacao.SincronizacaoRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

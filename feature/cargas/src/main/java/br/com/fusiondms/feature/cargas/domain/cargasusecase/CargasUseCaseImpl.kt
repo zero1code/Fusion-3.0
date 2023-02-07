@@ -1,13 +1,13 @@
-package br.com.fusiondms.modaceitarcarga.domain.cargasusecase
+package br.com.fusiondms.feature.cargas.domain.cargasusecase
 
-import br.com.fusiondms.moddatabase.repository.romaneios.CargasRepository
-import br.com.fusiondms.modmodel.romaneio.Romaneio
+import br.com.fusiondms.core.database.repository.romaneios.CargasRepository
+import br.com.fusiondms.core.model.romaneio.Romaneio
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CargasUseCaseImpl @Inject constructor(
     private val cargasRepository: CargasRepository
-) : CargasUseCase{
+) : CargasUseCase {
     override suspend fun deleteCarga(romaneio: Romaneio): Flow<Int> {
         return cargasRepository.deleteCarga(romaneio)
     }

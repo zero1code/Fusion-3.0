@@ -1,11 +1,11 @@
-package br.com.fusiondms.modaceitarcarga.di
+package br.com.fusiondms.feature.cargas.di
 
-import br.com.fusiondms.modaceitarcarga.domain.cargasusecase.CargasUseCase
-import br.com.fusiondms.modaceitarcarga.domain.cargasusecase.CargasUseCaseImpl
-import br.com.fusiondms.modaceitarcarga.domain.recusarcargausecase.RecusarCargaUseCase
-import br.com.fusiondms.modaceitarcarga.domain.recusarcargausecase.RecusarCargaUseCaseImpl
-import br.com.fusiondms.moddatabase.repository.romaneios.CargasRepository
-import br.com.fusiondms.modnetwork.repository.recusarcarga.RecusarCargaRepository
+import br.com.fusiondms.core.database.repository.romaneios.CargasRepository
+import br.com.fusiondms.core.network.repository.recusarcarga.RecusarCargaRepository
+import br.com.fusiondms.feature.cargas.domain.cargasusecase.CargasUseCase
+import br.com.fusiondms.feature.cargas.domain.cargasusecase.CargasUseCaseImpl
+import br.com.fusiondms.feature.cargas.domain.recusarcargausecase.RecusarCargaUseCase
+import br.com.fusiondms.feature.cargas.domain.recusarcargausecase.RecusarCargaUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

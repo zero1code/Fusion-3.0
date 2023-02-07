@@ -1,9 +1,9 @@
-package br.com.fusiondms.modentrega.di
+package br.com.fusiondms.feature.entregas.di
 
 import android.content.Context
-import br.com.fusiondms.moddatabase.repository.entregas.EntregasRepository
-import br.com.fusiondms.modentrega.domain.entregasusecase.EntregasUseCase
-import br.com.fusiondms.modentrega.domain.entregasusecase.EntregasUseCaseImpl
+import br.com.fusiondms.core.database.repository.entregas.EntregasRepository
+import br.com.fusiondms.feature.entregas.domain.entregasusecase.EntregasUseCase
+import br.com.fusiondms.feature.entregas.domain.entregasusecase.EntregasUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package br.com.fusiondms.modmodel.romaneio
+package br.com.fusiondms.core.model.romaneio
 
 data class Romaneio(
     var id: Int = 0,

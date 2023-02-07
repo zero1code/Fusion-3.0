@@ -1,4 +1,4 @@
-package br.com.fusiondms.moddatastore.repository
+package br.com.fusiondms.core.datastore.repository
 
 interface DataStoreRepository {
     suspend fun putString(chave: String, valor: String)

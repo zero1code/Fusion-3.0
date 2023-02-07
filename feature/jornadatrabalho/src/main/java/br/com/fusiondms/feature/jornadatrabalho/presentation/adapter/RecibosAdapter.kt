@@ -1,13 +1,13 @@
-package br.com.fusiondms.modjornadatrabalho.presentation.adapter
+package br.com.fusiondms.feature.jornadatrabalho.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.modcommon.converterDataParaDiaMesAnoHoraMinuto
-import br.com.fusiondms.modjornadatrabalho.databinding.ItemJornadaReciboBinding
-import br.com.fusiondms.modmodel.jornadatrabalho.ReciboRegistroPonto
+import br.com.fusiondms.core.common.converterDataParaDiaMesAnoHoraMinuto
+import br.com.fusiondms.core.model.jornadatrabalho.ReciboRegistroPonto
+import br.com.fusiondms.feature.jornadatrabalho.databinding.ItemJornadaReciboBinding
 
 class RecibosAdapter() :
     ListAdapter<ReciboRegistroPonto, RecibosAdapter.RecibosViewHolder>(DiffCallback) {

@@ -1,11 +1,9 @@
-package br.com.fusiondms.modnetwork.api
+package br.com.fusiondms.core.network.api
 
-import br.com.fusiondms.modnetwork.model.RomaneioDto
-import br.com.fusiondms.modnetwork.model.SincronizacaoDto
+import br.com.fusiondms.core.network.model.RomaneioDto
+import br.com.fusiondms.core.network.model.SincronizacaoDto
 import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 

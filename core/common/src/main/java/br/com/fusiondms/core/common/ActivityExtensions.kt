@@ -1,4 +1,4 @@
-package br.com.fusiondms.modcommon
+package br.com.fusiondms.core.common
 
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
@@ -6,7 +6,6 @@ import android.app.Activity
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.core.view.WindowInsetsControllerCompat

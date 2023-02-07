@@ -18,10 +18,16 @@ android {
 }
 
 dependencies {
-    implementation project(':modAceitarCarga')
-    implementation project(':modCommon')
-    implementation project(':modJornadaTrabalho')
-    implementation project(':modMapa')
-    implementation project(':modNavegacao')
-    implementation project(':modSincronizacao')
+    implementation(project(":core:common"))
+    implementation(project(":core:database"))
+    implementation(project(":core:datastore"))
+    implementation(project(":core:model"))
+    implementation(project(":core:navigation"))
+    implementation(project(":core:network"))
+
+    implementation(project(":feature:cargas"))
+    implementation(project(":feature:entregas"))
+    implementation(project(":feature:jornadatrabalho"))
+    implementation(project(":feature:mapa"))
+    implementation(project(":feature:sincronizacao"))
 }

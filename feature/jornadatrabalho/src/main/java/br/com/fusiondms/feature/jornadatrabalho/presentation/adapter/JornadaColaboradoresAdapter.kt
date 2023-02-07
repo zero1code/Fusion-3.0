@@ -1,4 +1,4 @@
-package br.com.fusiondms.modjornadatrabalho.presentation.adapter
+package br.com.fusiondms.feature.jornadatrabalho.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.modcommon.converterDataParaHorasMinutos
-import br.com.fusiondms.modcommon.getColorFromAttr
-import br.com.fusiondms.modjornadatrabalho.databinding.ItemJornadaColaboradorBinding
-import br.com.fusiondms.modjornadatrabalho.databinding.ItemJornadaHorarioRegistroBinding
-import br.com.fusiondms.modmodel.jornadatrabalho.Colaborador
-import br.com.fusiondms.modmodel.jornadatrabalho.JornadaTrabalho
-import br.com.fusiondms.modmodel.jornadatrabalho.RegistroPonto
+import br.com.fusiondms.core.common.converterDataParaHorasMinutos
+import br.com.fusiondms.core.common.getColorFromAttr
+import br.com.fusiondms.core.model.jornadatrabalho.Colaborador
+import br.com.fusiondms.core.model.jornadatrabalho.JornadaTrabalho
+import br.com.fusiondms.core.model.jornadatrabalho.RegistroPonto
+import br.com.fusiondms.feature.jornadatrabalho.databinding.ItemJornadaColaboradorBinding
+import br.com.fusiondms.feature.jornadatrabalho.databinding.ItemJornadaHorarioRegistroBinding
+import br.com.fusiondms.core.common.R
 
 class JornadaColaboradoresAdapter() :
     ListAdapter<JornadaTrabalho, JornadaColaboradoresAdapter.JornadaColaboradoresViewHolder>(
@@ -76,10 +77,9 @@ class JornadaColaboradoresAdapter() :
                 registroPontoBinding.tvHorarioBatida.text = converterDataParaHorasMinutos(registro.dataRegistro)
                 if (position == 3) {
                     with(registroPontoBinding) {
-                        tvHorarioBatida.setTextColor(context.getColor(
-                            br.com.fusiondms.modcommon.R.color.brand_color_on_surface_riple))
+                        tvHorarioBatida.setTextColor(context.getColor(R.color.brand_color_on_surface_riple))
                         cvHorario.setCardBackgroundColor(context.getColorFromAttr(com.google.android.material.R.attr.colorSurface))
-                        cvHorario.strokeColor = context.getColor(br.com.fusiondms.modcommon.R.color.brand_color_on_surface_riple)
+                        cvHorario.strokeColor = context.getColor(R.color.brand_color_on_surface_riple)
                     }
                 }
                 binding.gridLayoutRegistrosPonto.addView(registroPontoBinding.root)

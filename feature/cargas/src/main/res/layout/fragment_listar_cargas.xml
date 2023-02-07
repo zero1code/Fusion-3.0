@@ -80,7 +80,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/detail_container"
-        android:name="br.com.fusiondms.modaceitarcarga.presentation.DetalhesCargaFragment"
+        android:name="br.com.fusiondms.feature.cargas.presentation.DetalhesCargaFragment"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />

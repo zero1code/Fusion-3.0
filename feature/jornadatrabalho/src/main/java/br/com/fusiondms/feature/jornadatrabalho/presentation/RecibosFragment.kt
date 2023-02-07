@@ -1,4 +1,4 @@
-package br.com.fusiondms.modjornadatrabalho.presentation
+package br.com.fusiondms.feature.jornadatrabalho.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import br.com.fusiondms.modjornadatrabalho.databinding.FragmentRecibosBinding
-import br.com.fusiondms.modjornadatrabalho.presentation.adapter.RecibosAdapter
-import br.com.fusiondms.modjornadatrabalho.presentation.viewmodel.JornadaTrabalhoViewModel
+import br.com.fusiondms.feature.jornadatrabalho.databinding.FragmentRecibosBinding
+import br.com.fusiondms.feature.jornadatrabalho.presentation.adapter.RecibosAdapter
+import br.com.fusiondms.feature.jornadatrabalho.presentation.viewmodel.JornadaTrabalhoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

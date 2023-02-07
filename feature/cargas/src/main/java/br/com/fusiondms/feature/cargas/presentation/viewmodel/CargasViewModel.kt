@@ -1,13 +1,13 @@
-package br.com.fusiondms.modaceitarcarga.presentation.viewmodel
+package br.com.fusiondms.feature.cargas.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.fusiondms.modaceitarcarga.domain.cargasusecase.CargasUseCase
-import br.com.fusiondms.modaceitarcarga.domain.recusarcargausecase.RecusarCargaUseCase
-import br.com.fusiondms.moddatastore.DataStoreChaves
-import br.com.fusiondms.moddatastore.repository.DataStoreRepository
-import br.com.fusiondms.modmodel.Resource
-import br.com.fusiondms.modmodel.romaneio.Romaneio
+import br.com.fusiondms.core.datastore.repository.DataStoreChaves
+import br.com.fusiondms.core.datastore.repository.DataStoreRepository
+import br.com.fusiondms.core.model.Resource
+import br.com.fusiondms.core.model.romaneio.Romaneio
+import br.com.fusiondms.feature.cargas.domain.cargasusecase.CargasUseCase
+import br.com.fusiondms.feature.cargas.domain.recusarcargausecase.RecusarCargaUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*

@@ -88,7 +88,8 @@
     <string name="label_buscando_carga">Procurando cargas</string>
     <string name="label_erro_recusar_carga">Erro ao recusar carga</string>
     <string name="label_nenhuma_carga_encontrada">nenhuma carga encontrada</string>
-    <string name="label_detalhe_carga">Detalhe da carga</string>
+    <string name="label_detalhe_carga">Detalhes da carga</string>
+    <string name="label_detalhe_entrega">Detalhes da entrega</string>
     <string name="label_selecionar_carga">Selecione uma carga</string>
     <string name="label_jornada_trabalho">Jornada de Trabalho</string>
     <string name="label_ordem_entrega">Ordem de entrega: %1$d</string>

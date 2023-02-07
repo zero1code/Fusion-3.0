@@ -1,6 +1,6 @@
-package br.com.fusiondms.modaceitarcarga.domain.cargasusecase
+package br.com.fusiondms.feature.cargas.domain.cargasusecase
 
-import br.com.fusiondms.modmodel.romaneio.Romaneio
+import br.com.fusiondms.core.model.romaneio.Romaneio
 import kotlinx.coroutines.flow.Flow
 
 interface CargasUseCase {

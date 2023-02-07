@@ -1,4 +1,4 @@
-package br.com.fusiondms.moddatastore.repository
+package br.com.fusiondms.core.datastore.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore

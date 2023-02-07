@@ -1,4 +1,4 @@
-package br.com.fusiondms.modentrega.presentation
+package br.com.fusiondms.feature.entregas.presentation
 
 import android.os.Bundle
 import android.text.Html
@@ -11,12 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import br.com.fusiondms.modcommon.R.*
-import br.com.fusiondms.modcommon.getColorFromAttr
-import br.com.fusiondms.modentrega.databinding.FragmentDetalheEntregaBinding
-import br.com.fusiondms.modentrega.databinding.LayoutStatusEntregaBinding
-import br.com.fusiondms.modentrega.presentation.viewmodel.EntregaViewModel
-import br.com.fusiondms.modmodel.entrega.Entrega
+import br.com.fusiondms.core.common.R
+import br.com.fusiondms.core.common.getColorFromAttr
+import br.com.fusiondms.core.model.entrega.Entrega
+import br.com.fusiondms.feature.entregas.databinding.FragmentDetalheEntregaBinding
+import br.com.fusiondms.feature.entregas.databinding.LayoutStatusEntregaBinding
+import br.com.fusiondms.feature.entregas.presentation.viewmodel.EntregaViewModel
+import java.util.concurrent.TimeUnit
 
 class DetalheEntregaFragment : Fragment() {
 
@@ -33,6 +34,7 @@ class DetalheEntregaFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        postponeEnterTransition(250, TimeUnit.MILLISECONDS)
     }
 
     override fun onCreateView(
@@ -50,8 +52,8 @@ class DetalheEntregaFragment : Fragment() {
             _bindingStatus = layoutStatusEntrega
         }
 
-        ViewCompat.setTransitionName(bindingStatus.tvStatus, "status_${args.entregaId}")
-        ViewCompat.setTransitionName(bindingStatus.tvOrdemEntrega, "ordem_entrega_${args.entregaId}")
+//        ViewCompat.setTransitionName(bindingStatus.tvStatus, "status_${args.entregaId}")
+//        ViewCompat.setTransitionName(bindingStatus.tvOrdemEntrega, "ordem_entrega_${args.entregaId}")
         ViewCompat.setTransitionName(bindingStatus.root, "card_${args.entregaId}")
 
         bindObservers()
@@ -69,7 +71,7 @@ class DetalheEntregaFragment : Fragment() {
     }
 
     private fun bindEntrega(entrega: Entrega) {
-        bindingStatus.tvOrdemEntrega.text = getString(string.label_ordem_entrega, 1)
+        bindingStatus.tvOrdemEntrega.text = getString(R.string.label_ordem_entrega, 1)
         bindStatus(entrega.statusEntrega.toInt())
     }
 
@@ -77,37 +79,37 @@ class DetalheEntregaFragment : Fragment() {
         when(statusEntrega) {
             0 -> {
                 bindingStatus.root.setCardBackgroundColor(requireContext().getColorFromAttr(com.google.android.material.R.attr.colorOnPrimary))
-                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(string.label_pendente)}</b>", 0)
+                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(R.string.label_pendente)}</b>", 0)
                 bindingStatus.tvStatus.setTextColor(requireContext().getColorFromAttr(com.google.android.material.R.attr.colorOnSurface))
             }
             1 -> {
-                bindingStatus.root.setCardBackgroundColor(requireContext().getColor(color.brand_gomboje_orange_ripple))
-                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(string.label_aguardando)}</b>", 0)
-                bindingStatus.tvStatus.setTextColor(requireContext().getColor(color.brand_gomboje_orange))
+                bindingStatus.root.setCardBackgroundColor(requireContext().getColor(R.color.brand_gomboje_orange_ripple))
+                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(R.string.label_aguardando)}</b>", 0)
+                bindingStatus.tvStatus.setTextColor(requireContext().getColor(R.color.brand_gomboje_orange))
             }
             2 -> {
-                bindingStatus.root.setCardBackgroundColor(requireContext().getColor(color.brand_celtic_blue_ripple))
-                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(string.label_em_andamento)}</b>", 0)
-                bindingStatus.tvStatus.setTextColor(requireContext().getColor(color.brand_celtic_blue))
+                bindingStatus.root.setCardBackgroundColor(requireContext().getColor(R.color.brand_celtic_blue_ripple))
+                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(R.string.label_em_andamento)}</b>", 0)
+                bindingStatus.tvStatus.setTextColor(requireContext().getColor(R.color.brand_celtic_blue))
             }
             3 -> {
-                bindingStatus.root.setCardBackgroundColor(requireContext().getColor(color.brand_green_success_ripple))
-                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(string.label_entregue)}</b>", 0)
-                bindingStatus.tvStatus.setTextColor(requireContext().getColor(color.brand_green_success))
+                bindingStatus.root.setCardBackgroundColor(requireContext().getColor(R.color.brand_green_success_ripple))
+                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(R.string.label_entregue)}</b>", 0)
+                bindingStatus.tvStatus.setTextColor(requireContext().getColor(R.color.brand_green_success))
             }
             4 -> {
-                bindingStatus.root.setCardBackgroundColor(requireContext().getColor(color.brand_red_ripple))
-                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(string.label_devolvida)}</b>", 0)
-                bindingStatus.tvStatus.setTextColor(requireContext().getColor(color.brand_red))
+                bindingStatus.root.setCardBackgroundColor(requireContext().getColor(R.color.brand_red_ripple))
+                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(R.string.label_devolvida)}</b>", 0)
+                bindingStatus.tvStatus.setTextColor(requireContext().getColor(R.color.brand_red))
             }
             5 -> {
-                bindingStatus.root.setCardBackgroundColor(requireContext().getColor(color.brand_selective_yellow_ripple))
-                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(string.label_adiada)}</b>", 0)
-                bindingStatus.tvStatus.setTextColor(requireContext().getColor(color.brand_selective_yellow))
+                bindingStatus.root.setCardBackgroundColor(requireContext().getColor(R.color.brand_selective_yellow_ripple))
+                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(R.string.label_adiada)}</b>", 0)
+                bindingStatus.tvStatus.setTextColor(requireContext().getColor(R.color.brand_selective_yellow))
             }
             else -> {
                 bindingStatus.root.setCardBackgroundColor(requireContext().getColorFromAttr(com.google.android.material.R.attr.colorOnPrimary))
-                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(string.label_pendente)}</b>", 0)
+                bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(R.string.label_pendente)}</b>", 0)
                 bindingStatus.tvStatus.setTextColor(requireContext().getColorFromAttr(com.google.android.material.R.attr.colorOnSurface))
             }
         }

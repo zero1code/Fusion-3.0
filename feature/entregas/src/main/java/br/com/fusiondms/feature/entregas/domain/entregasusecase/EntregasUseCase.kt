@@ -1,8 +1,8 @@
-package br.com.fusiondms.modentrega.domain.entregasusecase
+package br.com.fusiondms.feature.entregas.domain.entregasusecase
 
-import br.com.fusiondms.modmodel.Conteudo
-import br.com.fusiondms.modmodel.entrega.Entrega
-import br.com.fusiondms.modmodel.Resource
+import br.com.fusiondms.core.model.Conteudo
+import br.com.fusiondms.core.model.Resource
+import br.com.fusiondms.core.model.entrega.Entrega
 import kotlinx.coroutines.flow.Flow
 
 interface EntregasUseCase {

@@ -1,15 +1,15 @@
-package br.com.fusiondms.moddatabase.di
+package br.com.fusiondms.core.database.di
 
 import android.content.Context
-import br.com.fusiondms.moddatabase.dao.CargaDao
-import br.com.fusiondms.moddatabase.dao.ColaboradorDao
-import br.com.fusiondms.moddatabase.dao.EntregaDao
-import br.com.fusiondms.moddatabase.repository.entregas.EntregasRepository
-import br.com.fusiondms.moddatabase.repository.entregas.EntregasRepositoryImpl
-import br.com.fusiondms.moddatabase.repository.jornadatrabalho.JornadaTrabalhoRepository
-import br.com.fusiondms.moddatabase.repository.jornadatrabalho.JornadaTrabalhoRepositoryImpl
-import br.com.fusiondms.moddatabase.repository.romaneios.CargasRepository
-import br.com.fusiondms.moddatabase.repository.romaneios.CargasRepositoryImpl
+import br.com.fusiondms.core.database.dao.CargaDao
+import br.com.fusiondms.core.database.dao.ColaboradorDao
+import br.com.fusiondms.core.database.dao.EntregaDao
+import br.com.fusiondms.core.database.repository.entregas.EntregasRepository
+import br.com.fusiondms.core.database.repository.entregas.EntregasRepositoryImpl
+import br.com.fusiondms.core.database.repository.jornadatrabalho.JornadaTrabalhoRepository
+import br.com.fusiondms.core.database.repository.jornadatrabalho.JornadaTrabalhoRepositoryImpl
+import br.com.fusiondms.core.database.repository.romaneios.CargasRepository
+import br.com.fusiondms.core.database.repository.romaneios.CargasRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

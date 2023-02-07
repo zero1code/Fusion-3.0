@@ -89,6 +89,7 @@
     <string name="label_erro_recusar_carga">Error refusing carriage</string>
     <string name="label_nenhuma_carga_encontrada">No carriages found</string>
     <string name="label_detalhe_carga">Carriage details</string>
+    <string name="label_detalhe_entrega">Order details</string>
     <string name="label_selecionar_carga">Select a carriage</string>
     <string name="label_jornada_trabalho">Working day</string>
     <string name="label_ordem_entrega">Delivery order: %1$d</string>

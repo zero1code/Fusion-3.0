@@ -1,4 +1,4 @@
-package br.com.fusiondms.modmapa.presentation
+package br.com.fusiondms.feature.mapa.presentation
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -10,6 +10,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import android.transition.Fade
+import android.transition.Transition
+import android.transition.TransitionInflater
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,21 +28,20 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import br.com.fusiondms.modcommon.*
-import br.com.fusiondms.modcommon.R.*
-import br.com.fusiondms.modcommon.permissiondiaolog.PermissionRequestDialog
-import br.com.fusiondms.modcommon.snackbar.mensagemCurta
-import br.com.fusiondms.modentrega.adapter.EntregasParentAdapter
-import br.com.fusiondms.modentrega.databinding.ItemEntregaChildBinding
-import br.com.fusiondms.modentrega.presentation.viewmodel.EntregaViewModel
-import br.com.fusiondms.modmapa.R
-import br.com.fusiondms.modmapa.databinding.EntregasBottomSheetBinding
-import br.com.fusiondms.modmapa.databinding.EntregasInfoGeraisBinding
-import br.com.fusiondms.modmapa.databinding.FragmentMapaBinding
-import br.com.fusiondms.modmapa.dialogeventos.DialogEventos
-import br.com.fusiondms.modmapa.dialogeventos.interfaces.IDialogEventos
-import br.com.fusiondms.modmodel.entrega.Entrega
-import br.com.fusiondms.modnavegacao.R.id.*
+import br.com.fusiondms.core.common.*
+import br.com.fusiondms.core.common.permissiondiaolog.PermissionRequestDialog
+import br.com.fusiondms.core.common.snackbar.mensagemCurta
+import br.com.fusiondms.core.model.Conteudo
+import br.com.fusiondms.core.model.entrega.Entrega
+import br.com.fusiondms.feature.entregas.adapter.EntregasParentAdapter
+import br.com.fusiondms.feature.entregas.databinding.ItemEntregaChildBinding
+import br.com.fusiondms.feature.entregas.presentation.viewmodel.EntregaViewModel
+import br.com.fusiondms.feature.mapa.R.*
+import br.com.fusiondms.feature.mapa.databinding.EntregasBottomSheetBinding
+import br.com.fusiondms.feature.mapa.databinding.EntregasInfoGeraisBinding
+import br.com.fusiondms.feature.mapa.databinding.FragmentMapaBinding
+import br.com.fusiondms.feature.mapa.dialogeventos.DialogEventos
+import br.com.fusiondms.feature.mapa.dialogeventos.interfaces.IDialogEventos
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -52,7 +53,7 @@ import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
-
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MapaFragment : Fragment(), OnMapReadyCallback {
@@ -84,7 +85,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         when {
             permission.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
                 //Localização precisa aceita
-                binding.root.mensagemCurta(getString(string.label_permissao_localizacao_aceita), false)
+                binding.root.mensagemCurta(getString(R.string.label_permissao_localizacao_aceita), false)
                 setupMap()
                 permissionRequestDialog?.dismiss()
             }
@@ -126,7 +127,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         postponeEnterTransition()
 
         binding.apply {
-            entregaViewModel.getListaEntrega()
+//            entregaViewModel.getListaEntrega()
             _bindingSheet = bottomSheet
             _bindingSheetInfoGerais = bindingSheet.ltEntregasInfoGerais
 
@@ -148,7 +149,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 
         lifecycleScope.launchWhenCreated {
             entregaViewModel.cargaId.collect { cargaId ->
-                bindingSheet.tvRomaneio.text = Html.fromHtml(getString(string.label_carga_id, cargaId), 0)
+                bindingSheet.tvRomaneio.text = Html.fromHtml(getString(R.string.label_carga_id, cargaId), 0)
             }
         }
 
@@ -203,8 +204,8 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     private fun bindNavView() {
         binding.navView.setNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
-                R.id.menu_jornada_trabalho -> {
-                    findNavController().navigate(action_mapaFragment_to_jornadaTrabalhoActivity)
+                br.com.fusiondms.feature.mapa.R.id.menu_jornada_trabalho -> {
+                    findNavController().navigate(br.com.fusiondms.core.navigation.R.id.action_mapaFragment_to_jornadaTrabalhoActivity)
                 }
             }
             binding.drawerLayout.close()
@@ -244,7 +245,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
          bottomSheetBehavior.apply {
             isFitToContents = false
             expandedOffset = requireContext().getActionBarSize()
-            peekHeight = resources.getDimension(dimen.bottom_sheet_peek_height).toInt()
+            peekHeight = resources.getDimension(R.dimen.bottom_sheet_peek_height).toInt()
             halfExpandedRatio = 0.5F
             state = bottomSheetLastState
             addBottomSheetCallback(bottomSheetCallback)
@@ -316,14 +317,14 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     private fun setupMap() {
         val mapFragment =
-            childFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
+            childFragmentManager.findFragmentById(br.com.fusiondms.feature.mapa.R.id.map_fragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
             location?.let {
                 val loc = LatLng(it.latitude, it.longitude)
-                mMap.addMarker(MarkerOptions().position(loc).title(getString(string.label_voce_esta_aqui)))
+                mMap.addMarker(MarkerOptions().position(loc).title(getString(R.string.label_voce_esta_aqui)))
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 18.0f))
             }
         }
@@ -339,7 +340,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             val success = map.setMapStyle(
                 MapStyleOptions.loadRawResourceStyle(
                     requireContext(),
-                    R.raw.map_style
+                    raw.map_style
                 )
             )
 
@@ -354,11 +355,11 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     private fun permissionRequestDialog() {
         if (permissionRequestDialog == null) {
             permissionRequestDialog = PermissionRequestDialog(
-                drawable.ic_location,
-                getString(string.label_permissao_localizacao),
-                getString(string.label_permissao_localizacao_mensagem),
-                getString(string.label_aceitar_permissao),
-                getString(string.label_ir_para_configuracoes),
+                R.drawable.ic_location,
+                getString(R.string.label_permissao_localizacao),
+                getString(R.string.label_permissao_localizacao_mensagem),
+                getString(R.string.label_aceitar_permissao),
+                getString(R.string.label_ir_para_configuracoes),
                 acaoAceitarPermissao = { solicitarPermissao() },
                 acaoConfiguracoes = { actionConfiguracoes() }
             )
@@ -384,8 +385,8 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         entregaViewModel.resetStatusEntrega()
         val directions = MapaFragmentDirections.actionMapaFragmentToDetalheEntregaFragment(entrega.idEntrega)
         val extras = FragmentNavigatorExtras(
-            binding.tvStatus to "status_${entrega.idEntrega}",
-            binding.tvOrdemEntrega to "ordem_entrega_${entrega.idEntrega}",
+//            binding.tvStatus to "status_${entrega.idEntrega}",
+//            binding.tvOrdemEntrega to "ordem_entrega_${entrega.idEntrega}",
             binding.root to "card_${entrega.idEntrega}"
         )
 

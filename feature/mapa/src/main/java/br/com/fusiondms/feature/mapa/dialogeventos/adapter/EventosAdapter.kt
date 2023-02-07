@@ -1,13 +1,14 @@
-package br.com.fusiondms.modmapa.dialogeventos.adapter
+package br.com.fusiondms.feature.mapa.dialogeventos.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.modcommon.getColorFromAttr
-import br.com.fusiondms.modmapa.databinding.ItemDialogEventoBinding
-import br.com.fusiondms.modmodel.entrega.Evento
+import br.com.fusiondms.core.common.getColorFromAttr
+import br.com.fusiondms.core.model.entrega.Evento
+import br.com.fusiondms.feature.mapa.databinding.ItemDialogEventoBinding
+import br.com.fusiondms.core.common.R
 
 class EventosAdapter : ListAdapter<Evento, EventosAdapter.EventosViewHolder>(DiffCallback) {
 
@@ -40,9 +41,9 @@ class EventosAdapter : ListAdapter<Evento, EventosAdapter.EventosViewHolder>(Dif
                     tvTitulo.setTextColor(context.getColorFromAttr(com.google.android.material.R.attr.colorSurface))
                     ivIcone.setColorFilter(context.getColorFromAttr(com.google.android.material.R.attr.colorSurface))
                     when(evento.idEvento) {
-                        4 -> binding.root.setCardBackgroundColor(context.getColor(br.com.fusiondms.modcommon.R.color.brand_red))
-                        5 -> binding.root.setCardBackgroundColor(context.getColor(br.com.fusiondms.modcommon.R.color.brand_selective_yellow))
-                        else -> binding.root.setCardBackgroundColor(context.getColor(br.com.fusiondms.modcommon.R.color.brand_green_success))
+                        4 -> binding.root.setCardBackgroundColor(context.getColor(R.color.brand_red))
+                        5 -> binding.root.setCardBackgroundColor(context.getColor(R.color.brand_selective_yellow))
+                        else -> binding.root.setCardBackgroundColor(context.getColor(R.color.brand_green_success))
                     }
 
                 } else {

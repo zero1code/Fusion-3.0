@@ -1,11 +1,10 @@
-package br.com.fusiondms.modcommon
+package br.com.fusiondms.core.common
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
-import android.widget.ProgressBar
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import com.google.android.material.progressindicator.LinearProgressIndicator

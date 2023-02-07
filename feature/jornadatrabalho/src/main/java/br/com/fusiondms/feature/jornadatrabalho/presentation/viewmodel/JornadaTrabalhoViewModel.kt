@@ -1,12 +1,12 @@
-package br.com.fusiondms.modjornadatrabalho.presentation.viewmodel
+package br.com.fusiondms.feature.jornadatrabalho.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.fusiondms.modjornadatrabalho.domain.jornadatrabalhousecase.JornadaTrabalhoUseCase
-import br.com.fusiondms.modmodel.jornadatrabalho.Colaborador
-import br.com.fusiondms.modmodel.jornadatrabalho.JornadaTrabalho
-import br.com.fusiondms.modmodel.jornadatrabalho.ReciboRegistroPonto
-import br.com.fusiondms.modmodel.jornadatrabalho.RegistroPonto
+import br.com.fusiondms.core.model.jornadatrabalho.Colaborador
+import br.com.fusiondms.core.model.jornadatrabalho.JornadaTrabalho
+import br.com.fusiondms.core.model.jornadatrabalho.ReciboRegistroPonto
+import br.com.fusiondms.core.model.jornadatrabalho.RegistroPonto
+import br.com.fusiondms.feature.jornadatrabalho.domain.jornadatrabalhousecase.JornadaTrabalhoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

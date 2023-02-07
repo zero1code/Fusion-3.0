@@ -1,4 +1,4 @@
-package br.com.fusiondms.modcommon.bottomdialog
+package br.com.fusiondms.core.common.bottomdialog
 
 import android.content.DialogInterface
 import android.content.res.ColorStateList
@@ -9,7 +9,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import br.com.fusiondms.modcommon.databinding.DialogBinding
+import br.com.fusiondms.core.common.databinding.DialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 

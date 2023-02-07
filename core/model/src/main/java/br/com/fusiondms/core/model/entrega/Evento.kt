@@ -1,5 +1,3 @@
-package br.com.fusiondms.modmodel.entrega
+package br.com.fusiondms.core.model.entrega
 
-import androidx.annotation.DrawableRes
-
-data class Evento(val name: String, @DrawableRes val drawable: Int, val idEvento: Int, var isCliked: Boolean = false)
+data class Evento(val name: String, val drawable: Int, val idEvento: Int, var isCliked: Boolean = false)

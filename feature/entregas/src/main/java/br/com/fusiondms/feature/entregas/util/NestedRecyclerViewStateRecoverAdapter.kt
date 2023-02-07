@@ -1,11 +1,11 @@
-package br.com.fusiondms.modentrega.util
+package br.com.fusiondms.feature.entregas.util
 
 import android.os.Parcelable
 import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.modentrega.interfaces.NestedRecyclerViewViewHolder
+import br.com.fusiondms.feature.entregas.interfaces.NestedRecyclerViewViewHolder
 import java.lang.ref.WeakReference
 
 abstract class NestedRecyclerViewStateRecoverAdapter<T, VH : RecyclerView.ViewHolder>(

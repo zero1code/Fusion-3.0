@@ -1,10 +1,9 @@
-package br.com.fusiondms.moddatabase.model.jornadatrabalho
+package br.com.fusiondms.core.database.model.jornadatrabalho
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import br.com.fusiondms.moddatabase.mapper.EntityMapper
-import br.com.fusiondms.modmodel.jornadatrabalho.Colaborador
+import br.com.fusiondms.core.database.mapper.EntityMapper
+import br.com.fusiondms.core.model.jornadatrabalho.Colaborador
 import com.google.gson.Gson
 
 @Entity(tableName = "tb_colaboradores")

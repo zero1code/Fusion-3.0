@@ -1,4 +1,4 @@
-package br.com.fusiondms.modmapa.di
+package br.com.fusiondms.feature.mapa.di
 
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -1,17 +1,17 @@
-package br.com.fusiondms.modjornadatrabalho.presentation
+package br.com.fusiondms.feature.jornadatrabalho.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import br.com.fusiondms.modcommon.converterDataParatextoLegivel
-import br.com.fusiondms.modjornadatrabalho.databinding.FragmentRegistrarPontoBinding
-import br.com.fusiondms.modjornadatrabalho.presentation.adapter.JornadaColaboradoresAdapter
-import br.com.fusiondms.modjornadatrabalho.presentation.viewmodel.JornadaTrabalhoViewModel
+import br.com.fusiondms.core.common.converterDataParatextoLegivel
+import br.com.fusiondms.feature.jornadatrabalho.databinding.FragmentRegistrarPontoBinding
+import br.com.fusiondms.feature.jornadatrabalho.presentation.adapter.JornadaColaboradoresAdapter
+import br.com.fusiondms.feature.jornadatrabalho.presentation.viewmodel.JornadaTrabalhoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -59,11 +59,11 @@ class RegistrarPontoFragment : Fragment() {
     private fun bindListeners() {
         adapter.onColaboradorClickListener = { colaborador ->
             jornadaViewModel.setColaboradorSelecionado(colaborador)
-            findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_registrarPontoFragment_to_confirmarRegistroPontoFragment)
+            findNavController().navigate(br.com.fusiondms.core.navigation.R.id.action_registrarPontoFragment_to_confirmarRegistroPontoFragment)
         }
 
         binding.btnAdicionarColaborador.setOnClickListener {
-            findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_registrarPontoFragment_to_adicionarColaboradorFragment)
+            findNavController().navigate(br.com.fusiondms.core.navigation.R.id.action_registrarPontoFragment_to_adicionarColaboradorFragment)
         }
     }
 

@@ -1,12 +1,12 @@
-package br.com.fusiondms.modcommon.permissiondiaolog
+package br.com.fusiondms.core.common.permissiondiaolog
 
 import  android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import br.com.fusiondms.modcommon.R
-import br.com.fusiondms.modcommon.databinding.PermissionRequestDialogBinding
+import br.com.fusiondms.core.common.R
+import br.com.fusiondms.core.common.databinding.PermissionRequestDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

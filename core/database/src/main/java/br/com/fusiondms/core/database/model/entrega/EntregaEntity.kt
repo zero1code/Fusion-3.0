@@ -1,9 +1,9 @@
-package br.com.fusiondms.moddatabase.model.entrega
+package br.com.fusiondms.core.database.model.entrega
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import br.com.fusiondms.moddatabase.mapper.EntityMapper
-import br.com.fusiondms.modmodel.entrega.Entrega
+import br.com.fusiondms.core.database.mapper.EntityMapper
+import br.com.fusiondms.core.model.entrega.Entrega
 import com.google.gson.Gson
 
 @Entity(tableName = "tb_entregas")

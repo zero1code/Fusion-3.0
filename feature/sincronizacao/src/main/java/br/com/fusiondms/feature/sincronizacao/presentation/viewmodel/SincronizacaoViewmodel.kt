@@ -1,12 +1,11 @@
-package br.com.fusiondms.modsincronizacao.presentation.viewmodel
+package br.com.fusiondms.feature.sincronizacao.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.fusiondms.modcommon.di.DispatcherProvider
-import br.com.fusiondms.modsincronizacao.domain.sincronizacaousecase.SincroniozacaoUseCase
-import br.com.fusiondms.modsincronizacao.presentation.SincronizacaoFragment.Companion.MANHA
-import br.com.fusiondms.modsincronizacao.presentation.SincronizacaoFragment.Companion.NOITE
-import br.com.fusiondms.modsincronizacao.presentation.SincronizacaoFragment.Companion.TARDE
+import br.com.fusiondms.feature.sincronizacao.domain.sincronizacaousecase.SincroniozacaoUseCase
+import br.com.fusiondms.feature.sincronizacao.presentation.SincronizacaoFragment.Companion.MANHA
+import br.com.fusiondms.feature.sincronizacao.presentation.SincronizacaoFragment.Companion.NOITE
+import br.com.fusiondms.feature.sincronizacao.presentation.SincronizacaoFragment.Companion.TARDE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -15,8 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SincronizacaoViewmodel @Inject constructor(
-    private val sincroniozacaoUseCase: SincroniozacaoUseCase,
-    private val dispatcher: DispatcherProvider
+    private val sincroniozacaoUseCase: SincroniozacaoUseCase
 ) : ViewModel() {
 
     sealed class SincronizacaoStatus() {

@@ -1,4 +1,4 @@
-package br.com.fusiondms.modentrega.adapter
+package br.com.fusiondms.feature.entregas.adapter
 
 import android.text.Html
 import android.view.LayoutInflater
@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.modentrega.databinding.ItemEntregaChildBinding
-import br.com.fusiondms.modentrega.databinding.ItemEntregaParentBinding
-import br.com.fusiondms.modentrega.interfaces.NestedRecyclerViewViewHolder
-import br.com.fusiondms.modentrega.util.CustomHorizontalLayoutManager
-import br.com.fusiondms.modentrega.util.NestedRecyclerViewStateRecoverAdapter
-import br.com.fusiondms.modmodel.entrega.Entrega
-import br.com.fusiondms.modmodel.Conteudo
+import br.com.fusiondms.core.model.Conteudo
+import br.com.fusiondms.feature.entregas.interfaces.NestedRecyclerViewViewHolder
+import br.com.fusiondms.feature.entregas.util.CustomHorizontalLayoutManager
+import br.com.fusiondms.feature.entregas.util.NestedRecyclerViewStateRecoverAdapter
+import br.com.fusiondms.core.model.entrega.Entrega
+import br.com.fusiondms.feature.entregas.databinding.ItemEntregaChildBinding
+import br.com.fusiondms.feature.entregas.databinding.ItemEntregaParentBinding
 
 private enum class ViewType {
     CAROUSEL_ENTREGA,
@@ -99,7 +99,7 @@ class EntregasParentAdapter : NestedRecyclerViewStateRecoverAdapter<Conteudo, En
                 }
             }
 
-            override fun getId() = content.id
+            override fun getId() = content.idCliente
 
             override fun getLayoutManager() = binding.rvEntregasChild.layoutManager
         }

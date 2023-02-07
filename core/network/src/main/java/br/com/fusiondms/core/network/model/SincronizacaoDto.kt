@@ -1,9 +1,9 @@
-package br.com.fusiondms.modnetwork.model
+package br.com.fusiondms.core.network.model
 
-import br.com.fusiondms.moddatabase.model.jornadatrabalho.ColaboradorEntity
-import br.com.fusiondms.moddatabase.model.entrega.EntregaEntity
-import br.com.fusiondms.moddatabase.model.jornadatrabalho.RegistroPontoEntity
-import br.com.fusiondms.moddatabase.model.romaneio.RomaneioEntity
+import br.com.fusiondms.core.database.model.entrega.EntregaEntity
+import br.com.fusiondms.core.database.model.jornadatrabalho.ColaboradorEntity
+import br.com.fusiondms.core.database.model.jornadatrabalho.RegistroPontoEntity
+import br.com.fusiondms.core.database.model.romaneio.RomaneioEntity
 import com.google.gson.annotations.SerializedName
 
 data class SincronizacaoDto(

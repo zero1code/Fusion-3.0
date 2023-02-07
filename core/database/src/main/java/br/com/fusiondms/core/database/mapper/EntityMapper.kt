@@ -1,4 +1,4 @@
-package br.com.fusiondms.moddatabase.mapper
+package br.com.fusiondms.core.database.mapper
 
 interface EntityMapper<Model, Entity> {
     fun mapEntityToModel(entity: Entity): Model

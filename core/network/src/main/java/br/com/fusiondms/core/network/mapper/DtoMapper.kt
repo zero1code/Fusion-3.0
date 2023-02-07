@@ -1,4 +1,4 @@
-package br.com.fusiondms.modnetwork.mapper
+package br.com.fusiondms.core.network.mapper
 
 interface DtoMapper<Model, Dto> {
     fun mapDtoToModel(dto: Dto): Model

@@ -1,4 +1,4 @@
-package br.com.fusiondms.modentrega.util
+package br.com.fusiondms.feature.entregas.util
 
 import android.content.Context
 import android.util.AttributeSet

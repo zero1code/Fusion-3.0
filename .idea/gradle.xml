@@ -13,19 +13,19 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/modAceitarCarga" />
-            <option value="$PROJECT_DIR$/modBanco" />
-            <option value="$PROJECT_DIR$/modCommon" />
-            <option value="$PROJECT_DIR$/modDatabase" />
-            <option value="$PROJECT_DIR$/modDatastore" />
-            <option value="$PROJECT_DIR$/modEntrega" />
-            <option value="$PROJECT_DIR$/modInternet" />
-            <option value="$PROJECT_DIR$/modJornadaTrabalho" />
-            <option value="$PROJECT_DIR$/modMapa" />
-            <option value="$PROJECT_DIR$/modModel" />
-            <option value="$PROJECT_DIR$/modNavegacao" />
-            <option value="$PROJECT_DIR$/modNetwork" />
-            <option value="$PROJECT_DIR$/modSincronizacao" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/common" />
+            <option value="$PROJECT_DIR$/core/database" />
+            <option value="$PROJECT_DIR$/core/datastore" />
+            <option value="$PROJECT_DIR$/core/model" />
+            <option value="$PROJECT_DIR$/core/navigation" />
+            <option value="$PROJECT_DIR$/core/network" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/cargas" />
+            <option value="$PROJECT_DIR$/feature/entregas" />
+            <option value="$PROJECT_DIR$/feature/jornadatrabalho" />
+            <option value="$PROJECT_DIR$/feature/mapa" />
+            <option value="$PROJECT_DIR$/feature/sincronizacao" />
           </set>
         </option>
       </GradleProjectSettings>

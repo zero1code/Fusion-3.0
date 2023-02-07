@@ -1,7 +1,7 @@
-package br.com.fusiondms.moddatabase.repository.entregas
+package br.com.fusiondms.core.database.repository.entregas
 
-import br.com.fusiondms.modmodel.entrega.Entrega
-import br.com.fusiondms.modmodel.Resource
+import br.com.fusiondms.core.model.Resource
+import br.com.fusiondms.core.model.entrega.Entrega
 import kotlinx.coroutines.flow.Flow
 
 interface EntregasRepository {

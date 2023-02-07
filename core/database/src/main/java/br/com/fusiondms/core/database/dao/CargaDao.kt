@@ -1,11 +1,11 @@
-package br.com.fusiondms.moddatabase.dao
+package br.com.fusiondms.core.database.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import br.com.fusiondms.moddatabase.model.romaneio.RomaneioEntity
+import br.com.fusiondms.core.database.model.romaneio.RomaneioEntity
 
 @Dao
 interface CargaDao {

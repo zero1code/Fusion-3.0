@@ -1,8 +1,8 @@
-package br.com.fusiondms.modsincronizacao.di
+package br.com.fusiondms.feature.sincronizacao.di
 
-import br.com.fusiondms.modnetwork.repository.sincronizacao.SincronizacaoRepository
-import br.com.fusiondms.modsincronizacao.domain.sincronizacaousecase.SincroniozacaoUseCase
-import br.com.fusiondms.modsincronizacao.domain.sincronizacaousecase.SincronizacaoUseCaseImpl
+import br.com.fusiondms.core.network.repository.sincronizacao.SincronizacaoRepository
+import br.com.fusiondms.feature.sincronizacao.domain.sincronizacaousecase.SincroniozacaoUseCase
+import br.com.fusiondms.feature.sincronizacao.domain.sincronizacaousecase.SincronizacaoUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

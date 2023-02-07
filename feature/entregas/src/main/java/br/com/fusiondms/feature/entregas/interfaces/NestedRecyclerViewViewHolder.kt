@@ -1,4 +1,4 @@
-package br.com.fusiondms.modentrega.interfaces
+package br.com.fusiondms.feature.entregas.interfaces
 
 import androidx.recyclerview.widget.RecyclerView
 

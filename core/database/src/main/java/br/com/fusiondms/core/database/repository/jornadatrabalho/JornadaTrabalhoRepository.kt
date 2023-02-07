@@ -1,8 +1,8 @@
-package br.com.fusiondms.moddatabase.repository.jornadatrabalho
+package br.com.fusiondms.core.database.repository.jornadatrabalho
 
-import br.com.fusiondms.modmodel.jornadatrabalho.Colaborador
-import br.com.fusiondms.modmodel.jornadatrabalho.ReciboRegistroPonto
-import br.com.fusiondms.modmodel.jornadatrabalho.RegistroPonto
+import br.com.fusiondms.core.model.jornadatrabalho.Colaborador
+import br.com.fusiondms.core.model.jornadatrabalho.ReciboRegistroPonto
+import br.com.fusiondms.core.model.jornadatrabalho.RegistroPonto
 import kotlinx.coroutines.flow.Flow
 
 interface JornadaTrabalhoRepository {

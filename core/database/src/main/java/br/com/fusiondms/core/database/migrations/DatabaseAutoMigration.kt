@@ -1,4 +1,4 @@
-package br.com.fusiondms.moddatabase.migrations
+package br.com.fusiondms.core.database.migrations
 
 import androidx.room.RoomDatabase
 

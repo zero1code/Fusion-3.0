@@ -1,20 +1,4 @@
-/*
- * Copyright (c) 2021 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package br.com.fusiondms.modaceitarcarga.presentation.adapter
+package br.com.fusiondms.feature.cargas.presentation.adapter
 
 import android.graphics.Color
 import android.text.Html
@@ -23,9 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.modaceitarcarga.databinding.ItemCargaListBinding
-import br.com.fusiondms.modcommon.R.*
-import br.com.fusiondms.modmodel.romaneio.Romaneio
+import br.com.fusiondms.core.common.R
+import br.com.fusiondms.core.model.romaneio.Romaneio
+import br.com.fusiondms.feature.cargas.databinding.ItemCargaListBinding
 import java.util.*
 
 class CargasAdapter() :
@@ -54,11 +38,11 @@ class CargasAdapter() :
         fun bind(carga: Romaneio) {
             val context = binding.root.context
             binding.tvRomaneioId.text =
-                Html.fromHtml(context.getString(string.label_romaneio_id, carga.idRomaneio), 0)
+                Html.fromHtml(context.getString(R.string.label_romaneio_id, carga.idRomaneio), 0)
             binding.tvDestino.text =
-                Html.fromHtml(context.getString(string.label_destino, carga.destino), 0)
+                Html.fromHtml(context.getString(R.string.label_destino, carga.destino), 0)
             binding.tvKm.text =
-                Html.fromHtml(context.getString(string.label_km, carga.kmTotal), 0)
+                Html.fromHtml(context.getString(R.string.label_km, carga.kmTotal), 0)
 
             val random = Random()
             val color = Color.rgb(

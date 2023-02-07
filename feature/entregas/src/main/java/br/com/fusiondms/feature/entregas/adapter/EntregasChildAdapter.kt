@@ -1,4 +1,4 @@
-package br.com.fusiondms.modentrega.adapter
+package br.com.fusiondms.feature.entregas.adapter
 
 import android.text.Html
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.modcommon.R.*
-import br.com.fusiondms.modcommon.getColorFromAttr
-import br.com.fusiondms.modentrega.databinding.ItemEntregaChildBinding
-import br.com.fusiondms.modmodel.entrega.Entrega
+import br.com.fusiondms.core.common.getColorFromAttr
+import br.com.fusiondms.core.common.R
+import br.com.fusiondms.core.model.entrega.Entrega
+import br.com.fusiondms.feature.entregas.databinding.ItemEntregaChildBinding
 
 class EntregasChildAdapter()
     : ListAdapter<Entrega, EntregasChildAdapter.EntregasViewHolder>(DiffCallback) {
@@ -39,41 +39,41 @@ class EntregasChildAdapter()
         fun bind(entrega: Entrega) {
             val context = binding.root.context
             //Transition
-            ViewCompat.setTransitionName(binding.tvStatus, "status_${entrega.idEntrega}")
-            ViewCompat.setTransitionName(binding.tvOrdemEntrega, "ordem_entrega_${entrega.idEntrega}")
+//            ViewCompat.setTransitionName(binding.tvStatus, "status_${entrega.idEntrega}")
+//            ViewCompat.setTransitionName(binding.tvOrdemEntrega, "ordem_entrega_${entrega.idEntrega}")
             ViewCompat.setTransitionName(binding.root, "card_${entrega.idEntrega}")
             //Transition
 
             when(entrega.statusEntrega.toInt()) {
                 0 -> {
                     binding.root.setCardBackgroundColor(context.getColorFromAttr(com.google.android.material.R.attr.colorSurface))
-                    binding.tvStatus.text = Html.fromHtml("<b>${context.getString(string.label_pendente)}</b>", 0)
+                    binding.tvStatus.text = Html.fromHtml("<b>${context.getString(R.string.label_pendente)}</b>", 0)
                     binding.tvStatus.setTextColor(context.getColorFromAttr(com.google.android.material.R.attr.colorOnSurface))
                 }
                 1 -> {
-                    binding.root.setCardBackgroundColor(context.getColor(color.brand_gomboje_orange_ripple))
-                    binding.tvStatus.text = Html.fromHtml("<b>${context.getString(string.label_aguardando)}</b>", 0)
-                    binding.tvStatus.setTextColor(context.getColor(color.brand_gomboje_orange))
+                    binding.root.setCardBackgroundColor(context.getColor(R.color.brand_gomboje_orange_ripple))
+                    binding.tvStatus.text = Html.fromHtml("<b>${context.getString(R.string.label_aguardando)}</b>", 0)
+                    binding.tvStatus.setTextColor(context.getColor(R.color.brand_gomboje_orange))
                 }
                 2 -> {
-                    binding.root.setCardBackgroundColor(context.getColor(color.brand_celtic_blue_ripple))
-                    binding.tvStatus.text = Html.fromHtml("<b>${context.getString(string.label_em_andamento)}</b>", 0)
-                    binding.tvStatus.setTextColor(context.getColor(color.brand_celtic_blue))
+                    binding.root.setCardBackgroundColor(context.getColor(R.color.brand_celtic_blue_ripple))
+                    binding.tvStatus.text = Html.fromHtml("<b>${context.getString(R.string.label_em_andamento)}</b>", 0)
+                    binding.tvStatus.setTextColor(context.getColor(R.color.brand_celtic_blue))
                 }
                 3 -> {
-                    binding.root.setCardBackgroundColor(context.getColor(color.brand_green_success_ripple))
-                    binding.tvStatus.text = Html.fromHtml("<b>${context.getString(string.label_entregue)}</b>", 0)
-                    binding.tvStatus.setTextColor(context.getColor(color.brand_green_success))
+                    binding.root.setCardBackgroundColor(context.getColor(R.color.brand_green_success_ripple))
+                    binding.tvStatus.text = Html.fromHtml("<b>${context.getString(R.string.label_entregue)}</b>", 0)
+                    binding.tvStatus.setTextColor(context.getColor(R.color.brand_green_success))
                 }
                 4 -> {
-                    binding.root.setCardBackgroundColor(context.getColor(color.brand_red_ripple))
-                    binding.tvStatus.text = Html.fromHtml("<b>${context.getString(string.label_devolvida)}</b>", 0)
-                    binding.tvStatus.setTextColor(context.getColor(color.brand_red))
+                    binding.root.setCardBackgroundColor(context.getColor(R.color.brand_red_ripple))
+                    binding.tvStatus.text = Html.fromHtml("<b>${context.getString(R.string.label_devolvida)}</b>", 0)
+                    binding.tvStatus.setTextColor(context.getColor(R.color.brand_red))
                 }
                 5 -> {
-                    binding.root.setCardBackgroundColor(context.getColor(color.brand_selective_yellow_ripple))
-                    binding.tvStatus.text = Html.fromHtml("<b>${context.getString(string.label_adiada)}</b>", 0)
-                    binding.tvStatus.setTextColor(context.getColor(color.brand_selective_yellow))
+                    binding.root.setCardBackgroundColor(context.getColor(R.color.brand_selective_yellow_ripple))
+                    binding.tvStatus.text = Html.fromHtml("<b>${context.getString(R.string.label_adiada)}</b>", 0)
+                    binding.tvStatus.setTextColor(context.getColor(R.color.brand_selective_yellow))
                 }
                 else -> {
                     binding.root.setCardBackgroundColor(context.getColorFromAttr(com.google.android.material.R.attr.colorSurface))
@@ -82,8 +82,8 @@ class EntregasChildAdapter()
             }
 
             binding.tvOrdemEntrega.text = Html.fromHtml("<b>${entrega.idEntrega}</b>", 0)
-            binding.tvNotaFiscal.text = Html.fromHtml(context.getString(string.label_nf_pernota, entrega.numeroNotaFiscal), 0)
-            binding.tvValor.text = Html.fromHtml(context.getString(string.label_valor, entrega.valor), 0)
+            binding.tvNotaFiscal.text = Html.fromHtml(context.getString(R.string.label_nf_pernota, entrega.numeroNotaFiscal), 0)
+            binding.tvValor.text = Html.fromHtml(context.getString(R.string.label_valor, entrega.valor), 0)
 
             itemView.setOnClickListener {
                 onEntregaClickListener(binding, entrega)

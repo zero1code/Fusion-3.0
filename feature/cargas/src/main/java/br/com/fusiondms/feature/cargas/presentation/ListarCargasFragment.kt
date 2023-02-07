@@ -1,28 +1,28 @@
-package br.com.fusiondms.modaceitarcarga.presentation
+package br.com.fusiondms.feature.cargas.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
-import br.com.fusiondms.modaceitarcarga.presentation.adapter.CargasAdapter
-import br.com.fusiondms.modaceitarcarga.databinding.FragmentListarCargasBinding
-import br.com.fusiondms.modaceitarcarga.databinding.ListaCargaVaziaBinding
-import br.com.fusiondms.modaceitarcarga.presentation.viewmodel.CargasViewModel
-import br.com.fusiondms.modcommon.R.*
-import br.com.fusiondms.modcommon.bottomdialog.Dialog
-import br.com.fusiondms.modcommon.progressdialog.showProgressBar
-import br.com.fusiondms.modcommon.setDefaultStatusBarColor
-import br.com.fusiondms.modcommon.setStatusBarColor
-import br.com.fusiondms.modmodel.romaneio.Romaneio
+import br.com.fusiondms.core.common.bottomdialog.Dialog
+import br.com.fusiondms.core.common.progressdialog.showProgressBar
+import br.com.fusiondms.core.common.setDefaultStatusBarColor
+import br.com.fusiondms.core.common.setStatusBarColor
+import br.com.fusiondms.core.model.romaneio.Romaneio
+import br.com.fusiondms.feature.cargas.databinding.FragmentListarCargasBinding
+import br.com.fusiondms.feature.cargas.databinding.ListaCargaVaziaBinding
+import br.com.fusiondms.feature.cargas.presentation.adapter.CargasAdapter
+import br.com.fusiondms.feature.cargas.presentation.viewmodel.CargasViewModel
+import br.com.fusiondms.core.common.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,7 +58,7 @@ class ListarCargasFragment : Fragment() {
         )
 
         binding.apply {
-            progressDialog = requireActivity().showProgressBar(getString(string.label_buscando_carga))
+            progressDialog = requireActivity().showProgressBar(getString(R.string.label_buscando_carga))
             rvRomaneios.adapter = adapter
             _listaVaziaBinding = ltListaVazia
             cargasViewModel.getListaCarga()
@@ -96,7 +96,7 @@ class ListarCargasFragment : Fragment() {
 
         listaVaziaBinding.apply {
             btnJornadaTrabalho.setOnClickListener {
-                findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_listarCargasFragment_to_jornadaTrabalhoActivity)
+                findNavController().navigate(br.com.fusiondms.core.navigation.R.id.action_listarCargasFragment_to_jornadaTrabalhoActivity)
             }
         }
     }
@@ -127,7 +127,7 @@ class ListarCargasFragment : Fragment() {
             },
             acaoNegativa = {
                 cargasViewModel.salvarIdCargaSelecionada(carga.idRomaneio)
-                findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_listarCargasFragment_to_mapaFragment)
+                findNavController().navigate(br.com.fusiondms.core.navigation.R.id.action_listarCargasFragment_to_mapaFragment)
             }
         ).show(requireActivity().supportFragmentManager, Dialog.TAG)
     }

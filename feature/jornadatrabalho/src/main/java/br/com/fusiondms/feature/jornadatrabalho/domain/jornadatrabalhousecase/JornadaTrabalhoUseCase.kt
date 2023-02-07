@@ -1,9 +1,9 @@
-package br.com.fusiondms.modjornadatrabalho.domain.jornadatrabalhousecase
+package br.com.fusiondms.feature.jornadatrabalho.domain.jornadatrabalhousecase
 
-import br.com.fusiondms.modmodel.jornadatrabalho.Colaborador
-import br.com.fusiondms.modmodel.jornadatrabalho.JornadaTrabalho
-import br.com.fusiondms.modmodel.jornadatrabalho.ReciboRegistroPonto
-import br.com.fusiondms.modmodel.jornadatrabalho.RegistroPonto
+import br.com.fusiondms.core.model.jornadatrabalho.Colaborador
+import br.com.fusiondms.core.model.jornadatrabalho.JornadaTrabalho
+import br.com.fusiondms.core.model.jornadatrabalho.ReciboRegistroPonto
+import br.com.fusiondms.core.model.jornadatrabalho.RegistroPonto
 import kotlinx.coroutines.flow.Flow
 
 interface JornadaTrabalhoUseCase {

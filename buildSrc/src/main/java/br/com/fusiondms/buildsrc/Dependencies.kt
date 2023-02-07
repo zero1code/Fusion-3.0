@@ -13,7 +13,7 @@ object Config {
 }
 
 object Versions {
-    const val ktx = "1.7.20"
+    const val ktx = "1.9.0"
     const val support = "1.3.1"
     const val material = "1.4.0"
     const val constraint_layout = "2.1.1"

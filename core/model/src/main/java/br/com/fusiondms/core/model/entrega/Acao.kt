@@ -1,5 +1,3 @@
-package br.com.fusiondms.modmodel.entrega
+package br.com.fusiondms.core.model.entrega
 
-import androidx.annotation.DrawableRes
-
-data class Acao(val name: String, @DrawableRes val drawable: Int, val idAcao: Int)
+data class Acao(val name: String, val drawable: Int, val idAcao: Int)

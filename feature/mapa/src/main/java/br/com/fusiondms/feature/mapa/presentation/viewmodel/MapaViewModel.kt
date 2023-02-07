@@ -1,4 +1,4 @@
-package br.com.fusiondms.modmapa.presentation.viewmodel
+package br.com.fusiondms.feature.mapa.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,13 +1,13 @@
-package br.com.fusiondms.moddatabase.repository.jornadatrabalho
+package br.com.fusiondms.core.database.repository.jornadatrabalho
 
 import android.content.Context
-import br.com.fusiondms.moddatabase.dao.ColaboradorDao
-import br.com.fusiondms.moddatabase.model.jornadatrabalho.ColaboradorEntity
-import br.com.fusiondms.moddatabase.model.jornadatrabalho.ReciboRegistroPontoEntity
-import br.com.fusiondms.moddatabase.model.jornadatrabalho.RegistroPontoEntity
-import br.com.fusiondms.modmodel.jornadatrabalho.Colaborador
-import br.com.fusiondms.modmodel.jornadatrabalho.ReciboRegistroPonto
-import br.com.fusiondms.modmodel.jornadatrabalho.RegistroPonto
+import br.com.fusiondms.core.database.dao.ColaboradorDao
+import br.com.fusiondms.core.database.model.jornadatrabalho.ColaboradorEntity
+import br.com.fusiondms.core.database.model.jornadatrabalho.ReciboRegistroPontoEntity
+import br.com.fusiondms.core.database.model.jornadatrabalho.RegistroPontoEntity
+import br.com.fusiondms.core.model.jornadatrabalho.Colaborador
+import br.com.fusiondms.core.model.jornadatrabalho.ReciboRegistroPonto
+import br.com.fusiondms.core.model.jornadatrabalho.RegistroPonto
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

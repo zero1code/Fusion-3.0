@@ -1,7 +1,6 @@
-package br.com.fusiondms.modcommon
+package br.com.fusiondms.core.common
 
 import android.content.Context
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -9,7 +8,6 @@ import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DimenRes
 import java.text.SimpleDateFormat
-import java.time.Instant
 import java.util.*
 
 fun Context.getActionBarSize(): Int {

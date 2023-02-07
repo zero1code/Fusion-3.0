@@ -1,12 +1,12 @@
-package br.com.fusiondms.modmapa.dialogeventos.adapter
+package br.com.fusiondms.feature.mapa.dialogeventos.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.modmapa.databinding.ItemDialogEventoBinding
-import br.com.fusiondms.modmodel.entrega.Acao
+import br.com.fusiondms.core.model.entrega.Acao
+import br.com.fusiondms.feature.mapa.databinding.ItemDialogEventoBinding
 
 class AcoesAdapter : ListAdapter<Acao, AcoesAdapter.AcoesViewHolder>(DiffCallback) {
 

@@ -1,7 +1,7 @@
-package br.com.fusiondms.modnetwork.model
+package br.com.fusiondms.core.network.model
 
-import br.com.fusiondms.modmodel.romaneio.Romaneio
-import br.com.fusiondms.modnetwork.mapper.DtoMapper
+import br.com.fusiondms.core.model.romaneio.Romaneio
+import br.com.fusiondms.core.network.mapper.DtoMapper
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 

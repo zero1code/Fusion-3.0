@@ -1,5 +1,4 @@
-package br.com.fusiondms.modsincronizacao.presentation
-
+package br.com.fusiondms.feature.sincronizacao.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,15 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import br.com.fusiondms.modcommon.R.array.*
-import br.com.fusiondms.modcommon.R.string.*
-import br.com.fusiondms.modcommon.bottomdialog.Dialog
-import br.com.fusiondms.modcommon.fadeInMoveAnimation
-import br.com.fusiondms.modcommon.fadeOutMoveAnimation
-import br.com.fusiondms.modsincronizacao.R
-import br.com.fusiondms.modsincronizacao.R.menu
-import br.com.fusiondms.modsincronizacao.databinding.FragmentSincronizacaoBinding
-import br.com.fusiondms.modsincronizacao.presentation.viewmodel.SincronizacaoViewmodel
+import br.com.fusiondms.core.common.R
+import br.com.fusiondms.core.common.bottomdialog.Dialog
+import br.com.fusiondms.core.common.fadeInMoveAnimation
+import br.com.fusiondms.core.common.fadeOutMoveAnimation
+import br.com.fusiondms.feature.sincronizacao.databinding.FragmentSincronizacaoBinding
+import br.com.fusiondms.feature.sincronizacao.presentation.viewmodel.SincronizacaoViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -47,7 +43,7 @@ class SincronizacaoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        frasesSincronizacao = resources.getStringArray(frases_sincronizacao).toMutableList()
+        frasesSincronizacao = resources.getStringArray(R.array.frases_sincronizacao).toMutableList()
         bindListeners()
         bindObservers()
     }
@@ -74,12 +70,12 @@ class SincronizacaoFragment : Fragment() {
 
     private fun bindListeners() {
         binding.btnAtualizarCargas.setOnClickListener {
-            startSincronizacao()
-//            findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_sincronizacaoFragment_to_listarCargasFragment)
+//            startSincronizacao()
+            findNavController().navigate(br.com.fusiondms.core.navigation.R.id.action_sincronizacaoFragment_to_listarCargasFragment)
         }
 
         binding.fabMoreOptions.setOnClickListener {
-            showMenu(it, menu.menu_sincronizacao_fragment)
+            showMenu(it, R.menu.menu_sincronizacao_fragment)
         }
     }
 
@@ -95,10 +91,10 @@ class SincronizacaoFragment : Fragment() {
             sincronizacaoViewmodel.resetSincronizacaoState()
             delay(3500)
             binding.linearProgressIndicator.visibility = View.GONE
-            binding.txtAcao.text = getString(label_vamos_comecar)
+            binding.txtAcao.text = getString(R.string.label_vamos_comecar)
             binding.txtAcao.fadeInMoveAnimation()
             delay(3000)
-            findNavController().navigate(br.com.fusiondms.modnavegacao.R.id.action_sincronizacaoFragment_to_listarCargasFragment)
+            findNavController().navigate(br.com.fusiondms.core.navigation.R.id.action_sincronizacaoFragment_to_listarCargasFragment)
         }
     }
 
@@ -107,15 +103,15 @@ class SincronizacaoFragment : Fragment() {
             liberarClique(true)
             binding.linearProgressIndicator.visibility = View.GONE
             Dialog(
-                getString(label_erro_ao_sincronizar),
+                getString(R.string.label_erro_ao_sincronizar),
                 message ?: "",
-                getString(label_tentar_novamente),
-                getString(label_cancelar),
+                getString(R.string.label_tentar_novamente),
+                getString(R.string.label_cancelar),
                 acaoPositiva = { startSincronizacao() },
                 acaoNegativa = {}
             ).show(requireActivity().supportFragmentManager, Dialog.TAG)
             delay(500)
-            binding.txtAcao.text = getString(label_algo_deu_errado)
+            binding.txtAcao.text = getString(R.string.label_algo_deu_errado)
         }
     }
 
@@ -136,7 +132,7 @@ class SincronizacaoFragment : Fragment() {
                 binding.txtAcao.fadeInMoveAnimation()
                 delay(3000)
                 if (frasesSincronizacao.size == 0) {
-                    frasesSincronizacao.addAll(resources.getStringArray(frases_sincronizacao).toMutableList())
+                    frasesSincronizacao.addAll(resources.getStringArray(R.array.frases_sincronizacao).toMutableList())
                 }
             }
         }
@@ -145,12 +141,12 @@ class SincronizacaoFragment : Fragment() {
     private fun horarioDoDia(horario: String) {
         var lista = listOf<String>()
         when (horario) {
-            MANHA -> { lista = resources.getStringArray(bom_dia).toList() }
-            TARDE -> { lista = resources.getStringArray(boa_tarde).toList() }
-            NOITE -> { lista = resources.getStringArray(boa_noite).toList() }
+            MANHA -> { lista = resources.getStringArray(R.array.bom_dia).toList() }
+            TARDE -> { lista = resources.getStringArray(R.array.boa_tarde).toList() }
+            NOITE -> { lista = resources.getStringArray(R.array.boa_noite).toList() }
         }
         val mensagem = lista[Random.nextInt(lista.size - 1)]
-        binding.txtOla.text = getString(label_horario_do_dia, mensagem, "Airton")
+        binding.txtOla.text = getString(R.string.label_horario_do_dia, mensagem, "Airton")
     }
 
     private fun showMenu(view: View, @MenuRes menu: Int) {
@@ -160,7 +156,7 @@ class SincronizacaoFragment : Fragment() {
 
         popup.setOnMenuItemClickListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
-                R.id.menu_configuracao_registrar_GCM -> {
+                br.com.fusiondms.feature.sincronizacao.R.id.menu_configuracao_registrar_GCM -> {
                     Toast.makeText(requireContext(), "Ola", Toast.LENGTH_SHORT).show()
                 }
                 else -> Unit
