@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="label_sucesso_atualizar_entrega">Delivery status updated</string>
-    <string name="label_erro_atualizar_entrega">Unable to update delivery</string>
-</resources>
