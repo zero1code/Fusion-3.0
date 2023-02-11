@@ -1,10 +1,10 @@
-package br.com.fusiondms.core.database.repository.jornadatrabalho
+package br.com.fusiondms.core.databasejornadatrabalho.repository.jornadatrabalho
 
 import android.content.Context
-import br.com.fusiondms.core.database.dao.ColaboradorDao
-import br.com.fusiondms.core.database.model.jornadatrabalho.ColaboradorEntity
-import br.com.fusiondms.core.database.model.jornadatrabalho.ReciboRegistroPontoEntity
-import br.com.fusiondms.core.database.model.jornadatrabalho.RegistroPontoEntity
+import br.com.fusiondms.core.databasejornadatrabalho.dao.ColaboradorDao
+import br.com.fusiondms.core.databasejornadatrabalho.model.jornadatrabalho.ColaboradorEntity
+import br.com.fusiondms.core.databasejornadatrabalho.model.jornadatrabalho.ReciboRegistroPontoEntity
+import br.com.fusiondms.core.databasejornadatrabalho.model.jornadatrabalho.RegistroPontoEntity
 import br.com.fusiondms.core.model.jornadatrabalho.Colaborador
 import br.com.fusiondms.core.model.jornadatrabalho.ReciboRegistroPonto
 import br.com.fusiondms.core.model.jornadatrabalho.RegistroPonto

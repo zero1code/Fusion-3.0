@@ -1,12 +1,12 @@
-package br.com.fusiondms.core.database.dao
+package br.com.fusiondms.core.databasejornadatrabalho.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import br.com.fusiondms.core.database.model.jornadatrabalho.ColaboradorEntity
-import br.com.fusiondms.core.database.model.jornadatrabalho.ReciboRegistroPontoEntity
-import br.com.fusiondms.core.database.model.jornadatrabalho.RegistroPontoEntity
+import br.com.fusiondms.core.databasejornadatrabalho.model.jornadatrabalho.ColaboradorEntity
+import br.com.fusiondms.core.databasejornadatrabalho.model.jornadatrabalho.ReciboRegistroPontoEntity
+import br.com.fusiondms.core.databasejornadatrabalho.model.jornadatrabalho.RegistroPontoEntity
 
 @Dao
 interface ColaboradorDao {

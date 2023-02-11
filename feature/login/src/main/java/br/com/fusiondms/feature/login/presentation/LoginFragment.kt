@@ -1,30 +1,58 @@
 package br.com.fusiondms.feature.login.presentation
 
-import android.graphics.Color
-import android.os.Build
+import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import br.com.fusiondms.core.common.statusBarIconColor
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import br.com.fusiondms.core.model.jornadatrabalho.JornadaTrabalho
 import br.com.fusiondms.feature.login.R
+import br.com.fusiondms.feature.login.databinding.FragmentLoginBinding
 
-class LoginActivity : AppCompatActivity() {
+class LoginFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            installSplashScreen()
-        } else {
-            theme.applyStyle(br.com.fusiondms.core.common.R.style.Theme_Fusion30, true)
-        }
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
-//        window.apply {
-//            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//            statusBarColor = Color.TRANSPARENT
-//        }
-        statusBarIconColor(this, Color.WHITE)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentLoginBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        bindListeners()
+    }
+
+    private fun bindListeners() {
+        binding.apply {
+            btnLogin.setOnClickListener {
+                findNavController().navigate(br.com.fusiondms.core.navigation.R.id.action_loginFragment_to_jornadaTrabalhoActivity)
+                activity?.finish()
+            }
+            btnEsqueciSenha.setOnClickListener {
+                findNavController().navigate(br.com.fusiondms.core.navigation.R.id.action_loginFragment_to_esqueciSenhaFragment)
+            }
+            btnPrimeiroAcesso.setOnClickListener {
+                findNavController().navigate(br.com.fusiondms.core.navigation.R.id.action_loginFragment_to_primeiroAcessoFragment)
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

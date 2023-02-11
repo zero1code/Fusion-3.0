@@ -19,10 +19,6 @@ object DatabaseModule {
 
     @Provides
     fun provideEntregaDao(appDatabase: AppDatabase) = appDatabase.getEntregaDao()
-
-    @Provides
-    fun provideColaboradorDao(appDatabase: AppDatabase) = appDatabase.getColaboradorDto()
-
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext appcontext: Context): AppDatabase {

@@ -1,8 +1,8 @@
-package br.com.fusiondms.core.database.model.jornadatrabalho
+package br.com.fusiondms.core.databasejornadatrabalho.model.jornadatrabalho
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import br.com.fusiondms.core.database.mapper.EntityMapper
+import br.com.fusiondms.core.databasejornadatrabalho.mapper.EntityMapper
 import br.com.fusiondms.core.model.jornadatrabalho.RegistroPonto
 import com.google.gson.Gson
 

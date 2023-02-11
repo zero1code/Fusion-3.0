@@ -1,4 +1,4 @@
-import br.com.fusiondms.buildsrc.Config
+import br.com.fusiondms.buildsrc.MobilecastConfig
 
 apply plugin: 'com.android.application'
 apply from: "$rootDir/config/android-settings.gradle"
@@ -6,7 +6,7 @@ apply from: "$rootDir/config/android-settings.gradle"
 android {
 
     defaultConfig {
-        applicationId Config.applicationId
+        applicationId MobilecastConfig.applicationId
     }
 
     defaultConfig {
@@ -27,7 +27,7 @@ dependencies {
 
     implementation(project(":feature:cargas"))
     implementation(project(":feature:entregas"))
-    implementation(project(":feature:jornadatrabalho"))
+
     implementation(project(":feature:mapa"))
     implementation(project(":feature:sincronizacao"))
 }

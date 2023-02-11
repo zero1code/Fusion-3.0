@@ -1,7 +1,7 @@
 package br.com.fusiondms.core.database.repository.entregas
 
 import android.content.Context
-import br.com.fusiondms.core.database.R
+import br.com.fusiondms.core.common.R
 import br.com.fusiondms.core.database.dao.EntregaDao
 import br.com.fusiondms.core.database.model.entrega.EntregaEntity
 import br.com.fusiondms.core.model.Resource

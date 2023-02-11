@@ -3,15 +3,12 @@ package br.com.fusiondms.core.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import br.com.fusiondms.core.database.dao.CargaDao
-import br.com.fusiondms.core.database.dao.ColaboradorDao
 import br.com.fusiondms.core.database.dao.EntregaDao
 import br.com.fusiondms.core.database.model.entrega.EntregaEntity
-import br.com.fusiondms.core.database.model.jornadatrabalho.ColaboradorEntity
-import br.com.fusiondms.core.database.model.jornadatrabalho.RegistroPontoEntity
 import br.com.fusiondms.core.database.model.romaneio.RomaneioEntity
 
 @Database(
-    entities = [RomaneioEntity::class, EntregaEntity::class, ColaboradorEntity::class, RegistroPontoEntity::class],
+    entities = [RomaneioEntity::class, EntregaEntity::class],
     version = 1,
     autoMigrations = [
 //        AutoMigration(from = 1, to = 2),
@@ -21,5 +18,4 @@ import br.com.fusiondms.core.database.model.romaneio.RomaneioEntity
 abstract class AppDatabase: RoomDatabase() {
     abstract fun getRomaneioDao() : CargaDao
     abstract fun getEntregaDao() : EntregaDao
-    abstract fun getColaboradorDto() : ColaboradorDao
 }

@@ -10,8 +10,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import android.transition.Fade
-import android.transition.Transition
-import android.transition.TransitionInflater
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +29,6 @@ import androidx.navigation.fragment.findNavController
 import br.com.fusiondms.core.common.*
 import br.com.fusiondms.core.common.permissiondiaolog.PermissionRequestDialog
 import br.com.fusiondms.core.common.snackbar.mensagemCurta
-import br.com.fusiondms.core.model.Conteudo
 import br.com.fusiondms.core.model.entrega.Entrega
 import br.com.fusiondms.feature.entregas.adapter.EntregasParentAdapter
 import br.com.fusiondms.feature.entregas.databinding.ItemEntregaChildBinding
@@ -53,7 +50,6 @@ import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MapaFragment : Fragment(), OnMapReadyCallback {
@@ -205,7 +201,19 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         binding.navView.setNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
                 br.com.fusiondms.feature.mapa.R.id.menu_jornada_trabalho -> {
-                    findNavController().navigate(br.com.fusiondms.core.navigation.R.id.action_mapaFragment_to_jornadaTrabalhoActivity)
+                    var launchIntent: Intent? = null
+                    try {
+                        launchIntent =
+                            requireContext().packageManager.getLaunchIntentForPackage("br.com.fusiondms.jornadatrabalho")
+                    } catch (ignored: Exception) {
+                    }
+
+                    if (launchIntent == null) {
+                        startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://play.google.com/store/apps/details?id=" + "br.com.fusiondms.jornadatrabalho")))
+                    } else {
+                        startActivity(launchIntent)
+                    }
+//                    findNavController().navigate(br.com.fusiondms.core.navigation.R.id.action_mapaFragment_to_jornadaTrabalhoActivity)
                 }
             }
             binding.drawerLayout.close()

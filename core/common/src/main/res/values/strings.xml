@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fusion 3.0</string>
+<!--    <string name="app_name">Fusion 3.0</string>-->
 
     <!--    Descricoes-->
     <string name="label_status_entrega_description">Delivery status</string>
@@ -56,6 +56,7 @@
     <string name="label_atualizar_carga">Sync\ncarriage</string>
     <string name="label_aceitar_carga">Accept carriage</string>
     <string name="label_recusar_carga">Refuse carriage</string>
+    <string name="label_entrar">Enter</string>
     <!--    label de botoes-->
 
     <!--    label de uma palavra apenas-->
@@ -81,6 +82,9 @@
     <string name="label_ajudante">Assistant</string>
     <string name="label_nome">Name</string>
     <string name="label_funcao">Role</string>
+    <string name="label_login">Login</string>
+    <string name="label_empresa">Company</string>
+    <string name="label_senha">Password</string>
     <!--    label de uma palavra apenas-->
 
     <!--    label de 2 ou 3 palavras-->
@@ -107,6 +111,9 @@
     <string name="label_digite_matricula">Enter registration</string>
     <string name="label_digite_nome">Enter full name</string>
     <string name="label_confirmar_dados">Confirm data</string>
+    <string name="label_esqueci_senha">Forgot password</string>
+    <string name="label_sucesso_atualizar_entrega">Delivery updated</string>
+    <string name="label_erro_atualizar_entrega">Unable to update delivery</string>
     <!--    label de 2 ou 3 palavras-->
 
     <!--    label de frases-->
@@ -117,6 +124,7 @@
     <string name="label_atencao_digitar_matricula_info">Be careful when entering the license plate, it must be valid in order for the time records to be saved.</string>
     <string name="label_digitar_nome_info">Now, enter the employee\'s full name</string>
     <string name="label_qual_funcao_colaborador_info">What is the employee\'s role?</string>
+    <string name="label_primeiro_acesso_info">First access? Click here!</string>
     <!--    label de frases-->
 
     <array name="bom_dia">

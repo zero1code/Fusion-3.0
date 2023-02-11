@@ -1,4 +1,4 @@
-import br.com.fusiondms.buildsrc.Config
+import br.com.fusiondms.buildsrc.MobilecastConfig
 import br.com.fusiondms.buildsrc.Deps
 
 apply plugin: 'org.jetbrains.kotlin.android'
@@ -16,14 +16,14 @@ android {
         exclude 'META-INF/gradle/incremental.annotation.processors'
     }
 
-    compileSdk Config.compileSdk
+    compileSdk MobilecastConfig.compileSdk
 
     defaultConfig {
 //        applicationId Config.applicationId
-        minSdk Config.minSdk
-        targetSdk Config.targetSdk
-        versionCode Config.versionCode
-        versionName = Config.versionName
+        minSdk MobilecastConfig.minSdk
+        targetSdk MobilecastConfig.targetSdk
+        versionCode MobilecastConfig.versionCode
+        versionName = MobilecastConfig.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

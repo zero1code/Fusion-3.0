@@ -12,10 +12,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/app-jornada-trabalho" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/common" />
             <option value="$PROJECT_DIR$/core/database" />
+            <option value="$PROJECT_DIR$/core/database-jornada-trabalho" />
             <option value="$PROJECT_DIR$/core/datastore" />
             <option value="$PROJECT_DIR$/core/model" />
             <option value="$PROJECT_DIR$/core/navigation" />
@@ -24,6 +26,7 @@
             <option value="$PROJECT_DIR$/feature/cargas" />
             <option value="$PROJECT_DIR$/feature/entregas" />
             <option value="$PROJECT_DIR$/feature/jornadatrabalho" />
+            <option value="$PROJECT_DIR$/feature/login" />
             <option value="$PROJECT_DIR$/feature/mapa" />
             <option value="$PROJECT_DIR$/feature/sincronizacao" />
           </set>

@@ -2,12 +2,22 @@ package br.com.fusiondms.buildsrc
 
 import org.gradle.api.JavaVersion
 
-object Config {
+object MobilecastConfig {
     val javaVersion = JavaVersion.VERSION_1_8
     const val minSdk = 26
     const val compileSdk = 33
     const val targetSdk = 33
     const val applicationId = "br.com.fusiondms.mobilecast"
+    const val versionCode = 1
+    const val versionName = "1.0.0"
+}
+
+object JornadaTrabalhoConfig {
+    val javaVersion = JavaVersion.VERSION_1_8
+    const val minSdk = 26
+    const val compileSdk = 33
+    const val targetSdk = 33
+    const val applicationId = "br.com.fusiondms.jornadatrabalho"
     const val versionCode = 1
     const val versionName = "1.0.0"
 }

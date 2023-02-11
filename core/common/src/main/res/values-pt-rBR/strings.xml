@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fusion 3.0</string>
+<!--    <string name="app_name">Fusion 3.0</string>-->
 
     <!--    Descricoes-->
     <string name="label_status_entrega_description">Status Entrega</string>
@@ -56,6 +56,7 @@
     <string name="label_atualizar_carga">Sincronizar cargas</string>
     <string name="label_aceitar_carga">Aceitar carga</string>
     <string name="label_recusar_carga">Recusar carga</string>
+    <string name="label_entrar">Entrar</string>
     <!--    label de botoes-->
 
     <!--    label de uma palavra apenas-->
@@ -76,11 +77,14 @@
     <string name="label_ou">ou</string>
     <string name="menu_inicio">Início</string>
     <string name="menu_recibo">Recibos</string>
-    <string name="label_matricula">matrícula</string>
+    <string name="label_matricula">Matrícula</string>
     <string name="label_motorista">Motorista</string>
     <string name="label_ajudante">Ajudante</string>
     <string name="label_nome">Nome</string>
     <string name="label_funcao">Função</string>
+    <string name="label_login">Login</string>
+    <string name="label_empresa">Empresa</string>
+    <string name="label_senha">Senha</string>
     <!--    label de uma palavra apenas-->
 
     <!--    label de 2 ou 3 palavras-->
@@ -107,6 +111,9 @@
     <string name="label_digite_matricula">Digite a matrícula</string>
     <string name="label_digite_nome">Digite o nome completo</string>
     <string name="label_confirmar_dados">Confirmar dados</string>
+    <string name="label_esqueci_senha">Esqueci a senha</string>
+    <string name="label_sucesso_atualizar_entrega">Entrega atualizada</string>
+    <string name="label_erro_atualizar_entrega">Falha ao atualizar entrega</string>
     <!--    label de 2 ou 3 palavras-->
 
     <!--    label de frases-->
@@ -117,6 +124,7 @@
     <string name="label_atencao_digitar_matricula_info">Atenção ao digitar a matrícula, ela precisa ser válida para que os registros de ponto sejam salvos.</string>
     <string name="label_digitar_nome_info">Agora, digite o nome completo do colaborador</string>
     <string name="label_qual_funcao_colaborador_info">Qual é a função do colaborador?</string>
+    <string name="label_primeiro_acesso_info">Primeiro acesso? Clique aqui!</string>
     <!--    label de frases-->
 
     <array name="bom_dia">

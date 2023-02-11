@@ -1,4 +1,4 @@
-package br.com.fusiondms.core.database.repository.jornadatrabalho
+package br.com.fusiondms.core.databasejornadatrabalho.repository.jornadatrabalho
 
 import br.com.fusiondms.core.model.jornadatrabalho.Colaborador
 import br.com.fusiondms.core.model.jornadatrabalho.ReciboRegistroPonto

@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/nav_graph_login">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_login"
+    app:startDestination="@+id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="br.com.fusiondms.feature.login.presentation.LoginFragment"
+        android:label="login_fragment" >
+
+        <action
+            android:id="@+id/action_loginFragment_to_jornadaTrabalhoActivity"
+            app:destination="@id/jornadaTrabalhoActivity"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/no_animation"
+            app:popEnterAnim="@anim/no_animation"
+            app:popExitAnim="@anim/slide_out_down"/>
+
+        <action
+            android:id="@+id/action_loginFragment_to_esqueciSenhaFragment"
+            app:destination="@id/esqueciSenhaFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/no_animation"
+            app:popEnterAnim="@anim/no_animation"
+            app:popExitAnim="@anim/slide_out_down"/>
+
+        <action
+            android:id="@+id/action_loginFragment_to_primeiroAcessoFragment"
+            app:destination="@id/primeiroAcessoFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/no_animation"
+            app:popEnterAnim="@anim/no_animation"
+            app:popExitAnim="@anim/slide_out_down"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/esqueciSenhaFragment"
+        android:name="br.com.fusiondms.feature.login.presentation.EsqueciSenhaFragment"
+        android:label="esqueci_senha_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/primeiroAcessoFragment"
+        android:name="br.com.fusiondms.feature.login.presentation.PrimeiroAcessoFragment"
+        android:label="primeiro_acesso_fragment">
+    </fragment>
+
+    <activity
+        android:id="@+id/jornadaTrabalhoActivity"
+        android:name="br.com.fusiondms.jornadatrabalho.JornadaTrabalhoActivity"
+        tools:layout="@layout/activity_jornada_trabalho">
+    </activity>
 
 </navigation>
