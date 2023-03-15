@@ -21,7 +21,7 @@
             app:srcCompat="@drawable/ic_caminhao"/>
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
+            style="@style/TextAppearance.App.Subtitle2"
             android:id="@+id/tv_titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

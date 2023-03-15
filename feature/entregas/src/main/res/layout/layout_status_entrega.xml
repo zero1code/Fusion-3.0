@@ -40,7 +40,7 @@
 
         <TextView
             android:id="@+id/tv_id_entrega"
-            style="@style/TextAppearance.App.Subtitle1"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
 
         <TextView
             android:id="@+id/tv_ordem_entrega"
-            style="@style/TextAppearance.App.Subtitle1"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_small"
@@ -59,7 +59,7 @@
 
         <TextView
             android:id="@+id/tv_chegada"
-            style="@style/TextAppearance.App.Subtitle1"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="@dimen/dimen_super"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -80,7 +80,7 @@
 
         <TextView
             android:id="@+id/tv_data_chegada"
-            style="@style/TextAppearance.App.Subtitle1"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="@dimen/dimen_super"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_normal"
@@ -103,7 +103,7 @@
 
         <TextView
             android:id="@+id/tv_inicio"
-            style="@style/TextAppearance.App.Subtitle1"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="@dimen/dimen_super"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -126,7 +126,7 @@
 
         <TextView
             android:id="@+id/tv_data_inicio"
-            style="@style/TextAppearance.App.Subtitle1"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="@dimen/dimen_super"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_normal"
@@ -148,7 +148,7 @@
 
         <TextView
             android:id="@+id/tv_fim"
-            style="@style/TextAppearance.App.Subtitle1"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="@dimen/dimen_super"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -170,7 +170,7 @@
 
         <TextView
             android:id="@+id/tv_data_fim"
-            style="@style/TextAppearance.App.Subtitle1"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="@dimen/dimen_super"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_normal"
