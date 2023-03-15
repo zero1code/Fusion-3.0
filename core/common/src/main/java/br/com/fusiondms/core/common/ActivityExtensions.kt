@@ -40,7 +40,7 @@ fun Activity.setDefaultStatusBar() {
     statusBarIconColor(this, Color.WHITE)
 }
 
-fun Activity.removerNotchInLandscape() {
+fun Activity.removerNotch() {
     window.apply {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             attributes.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER
@@ -51,8 +51,20 @@ fun Activity.removerNotchInLandscape() {
 fun Activity.getOrientacaoTela() {
     resources.apply {
         if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            removerNotchInLandscape()
+            removerNotch()
         }
+    }
+}
+
+fun Activity.manterTelaLigada() {
+    window.apply {
+        addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    }
+}
+
+fun Activity.desativarTelaLigada() {
+    window.apply {
+        clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 }
 

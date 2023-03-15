@@ -12,16 +12,6 @@ object MobilecastConfig {
     const val versionName = "1.0.0"
 }
 
-object JornadaTrabalhoConfig {
-    val javaVersion = JavaVersion.VERSION_1_8
-    const val minSdk = 26
-    const val compileSdk = 33
-    const val targetSdk = 33
-    const val applicationId = "br.com.fusiondms.jornadatrabalho"
-    const val versionCode = 1
-    const val versionName = "1.0.0"
-}
-
 object Versions {
     const val ktx = "1.9.0"
     const val support = "1.3.1"
@@ -44,14 +34,18 @@ object Versions {
     const val coil = "2.2.1"
     const val play_services_maps = "18.1.0"
     const val play_services_location = "19.0.0"
-    const val room_runtime = "2.4.3"
-    const val room_ktx = "2.4.3"
-    const val room_kapt_compiler = "2.4.3"
+    const val room_runtime = "2.5.0"
+    const val room_ktx = "2.5.0"
+    const val room_kapt_compiler = "2.5.0"
     const val gson = "2.9.1"
     const val retrofit = "2.9.0"
     const val retrofit_converter = "2.9.0"
     const val okhttp = "4.10.0"
     const val datastore = "1.0.0"
+    const val work_version = "2.8.0"
+    const val work_ktx_version = "2.8.0"
+    const val work_gcm_version = "2.8.0"
+    const val dagger_version = "2.41.1"
 }
 
 object Deps {
@@ -84,6 +78,11 @@ object Deps {
     const val retrofit_converter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_converter}"
     const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
     const val datastore = "androidx.datastore:datastore-preferences:${Versions.datastore}"
+    const val workmanager = "androidx.work:work-runtime:${Versions.work_version}"
+    const val workktxmanager = "androidx.work:work-runtime-ktx:${Versions.work_ktx_version}"
+    const val workgcmmanager = "androidx.work:work-gcm:${Versions.work_gcm_version}"
+    const val dagger = "com.google.dagger:dagger:${Versions.dagger_version}"
+    const val kapt_dagger = "com.google.dagger:dagger-compiler:${Versions.dagger_version}"
 }
 
 object LocalLibs {

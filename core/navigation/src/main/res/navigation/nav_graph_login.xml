@@ -4,6 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_login"
     app:startDestination="@+id/loginFragment">
+    <fragment
+        android:id="@+id/faceDetectorFragment"
+        android:name="br.com.fusiondms.feature.facedetection.presentation.FaceDetectorFragment"
+        android:label="fece_detector_fragment">
+
+        <argument
+            android:name="tipoDeteccao"
+            app:argType="integer"
+            android:defaultValue="0"/>
+
+    </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
@@ -45,6 +56,15 @@
         android:id="@+id/primeiroAcessoFragment"
         android:name="br.com.fusiondms.feature.login.presentation.PrimeiroAcessoFragment"
         android:label="primeiro_acesso_fragment">
+
+        <action
+            android:id="@+id/action_primeiroAcessoFragment_to_faceDetectorFragment"
+            app:destination="@id/faceDetectorFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/no_animation"
+            app:popEnterAnim="@anim/no_animation"
+            app:popExitAnim="@anim/slide_out_down"
+            />
     </fragment>
 
     <activity

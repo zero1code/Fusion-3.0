@@ -63,6 +63,14 @@ fun View.moveInAnimation() {
     mover.start()
 }
 
+fun View.moveOutAnimation() {
+    if (this.isVisible) this.visibility = View.INVISIBLE
+    val mover = ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, 0f, this.height.toFloat())
+    mover.interpolator = AccelerateInterpolator(1f)
+    mover.duration = 500L
+    mover.start()
+}
+
 fun View.hideFabAnimation(value: Float) {
     this.animate().scaleX(value).scaleY(value).setDuration(300).start()
 }

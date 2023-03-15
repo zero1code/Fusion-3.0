@@ -9,6 +9,9 @@ ext.addDaggerHilt = {
     implementation Deps.dagger_hilt
     kapt Deps.kapt_dagger_hilt_compiler
     kapt Deps.kapt_hilt_compiler
+
+    implementation Deps.dagger
+    kapt Deps.kapt_dagger
 }
 
 ext.addFragmentNavigation = {
@@ -36,4 +39,10 @@ ext.addRetrofit = {
     implementation Deps.retrofit
     implementation Deps.retrofit_converter
     implementation Deps.okhttp
+}
+
+ext.addWorkManager = {
+    implementation Deps.workmanager
+    implementation Deps.workktxmanager
+    implementation Deps.workgcmmanager
 }

@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
+            style="@style/TextAppearance.App.Subtitle2"
             android:id="@+id/snack_mensagem"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

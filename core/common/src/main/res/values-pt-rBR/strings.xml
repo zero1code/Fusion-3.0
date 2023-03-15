@@ -6,9 +6,6 @@
     <string name="label_direcao_description">Status Direção</string>
     <string name="label_espera_description">Status Aguardando</string>
     <string name="label_mais_opcoes_description">Mais opções</string>
-    <string name="menu_inicio_description">Menu Jornada de trabalho</string>
-    <string name="menu_recibo_description">Menu Recibos Registro de ponto</string>
-    <string name="label_adicionar_colaborador_description">Adicionar colaborador</string>
     <string name="label_proximo_description">Próximo</string>
     <!--    Descricoes-->
 
@@ -26,12 +23,15 @@
     <!--    Labels com formatacao HTML-->
 
     <!--    label de permissoes-->
-    <string name="label_aceitar_permissao">Aceitar permissão</string>
+    <string name="label_aceitar_permissao">Conceder permissão</string>
     <string name="label_ir_para_configuracoes">Ir para configurações</string>
 
     <string name="label_permissao_localizacao">Permissão de localização</string>
     <string name="label_permissao_localizacao_mensagem">Para continuar, nós precisamos que você precisa permitir que o Fusion acesse a localização do dispositivo.</string>
     <string name="label_permissao_localizacao_aceita">Permissão de localização concedida</string>
+
+    <string name="label_permissao_localizacao_background">Localização em segundo plano</string>
+    <string name="label_permissao_localizacao_background_mensagem">Você precisa permitir que o serviço de localização do aplicativo funcione em segundo plano.</string>
     <!--    label de permissoes-->
 
     <!--    label de botoes-->
@@ -49,9 +49,7 @@
     <string name="label_enviar_foto">Enviar foto</string>
     <string name="label_solicitar_ligacao">Solicitar ligação</string>
     <string name="label_tirar_foto_canhoto">Tirar foto do canhoto</string>
-    <string name="label_cadastrar_colaborador">Cadastrar colaborador</string>
     <string name="label_finalizar_transmitir">Finalizar e transmitir</string>
-    <string name="label_confirmar_registro_ponto">Confirmar registro de ponto</string>
     <string name="label_solicitar_carga">Solcitar cargas</string>
     <string name="label_atualizar_carga">Sincronizar cargas</string>
     <string name="label_aceitar_carga">Aceitar carga</string>
@@ -104,14 +102,7 @@
     <string name="label_vamos_comecar">Vamos começar</string>
     <string name="label_erro_ao_sincronizar">Erro ao sincronizar</string>
     <string name="label_algo_deu_errado">Alguma coisa deu errado</string>
-    <string name="label_registrar_ponto">Registrar ponto</string>
-    <string name="label_nome_completo">Nome completo</string>
     <string name="label_horario_do_dia">%1$s, %2$s</string>
-    <string name="label_adicionar_colaborador">Adicionar colaborador</string>
-    <string name="label_digite_matricula">Digite a matrícula</string>
-    <string name="label_digite_nome">Digite o nome completo</string>
-    <string name="label_confirmar_dados">Confirmar dados</string>
-    <string name="label_esqueci_senha">Esqueci a senha</string>
     <string name="label_sucesso_atualizar_entrega">Entrega atualizada</string>
     <string name="label_erro_atualizar_entrega">Falha ao atualizar entrega</string>
     <!--    label de 2 ou 3 palavras-->
@@ -120,11 +111,6 @@
     <string name="label_nenhuma_carga_encontrada_info">Se você quer usar somente a jornada de trabalho, clique no botão abaixo.</string>
     <string name="label_entrega_mesmo_status_info">A entrega já está com esse status</string>
     <string name="label_voce_deseja_fazer_info">O que você gostaria de fazer?</string>
-    <string name="label_digitar_matricula_info">Digite a matrícula do colaborador</string>
-    <string name="label_atencao_digitar_matricula_info">Atenção ao digitar a matrícula, ela precisa ser válida para que os registros de ponto sejam salvos.</string>
-    <string name="label_digitar_nome_info">Agora, digite o nome completo do colaborador</string>
-    <string name="label_qual_funcao_colaborador_info">Qual é a função do colaborador?</string>
-    <string name="label_primeiro_acesso_info">Primeiro acesso? Clique aqui!</string>
     <!--    label de frases-->
 
     <array name="bom_dia">

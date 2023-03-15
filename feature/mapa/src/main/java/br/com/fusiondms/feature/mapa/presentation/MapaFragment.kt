@@ -2,12 +2,17 @@ package br.com.fusiondms.feature.mapa.presentation
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.location.Location
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.IBinder
 import android.text.Html
 import android.transition.Fade
 import android.util.Log
@@ -16,6 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -30,6 +36,7 @@ import br.com.fusiondms.core.common.*
 import br.com.fusiondms.core.common.permissiondiaolog.PermissionRequestDialog
 import br.com.fusiondms.core.common.snackbar.mensagemCurta
 import br.com.fusiondms.core.model.entrega.Entrega
+import br.com.fusiondms.core.servives.location.ForegroundLocationService
 import br.com.fusiondms.feature.entregas.adapter.EntregasParentAdapter
 import br.com.fusiondms.feature.entregas.databinding.ItemEntregaChildBinding
 import br.com.fusiondms.feature.entregas.presentation.viewmodel.EntregaViewModel
@@ -75,15 +82,38 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 
     private var clientePosicao = -1
 
+    private var foregroundLocationServiceBound = false
+    // Fornece a atualizações de localização para while-in-use recurso.
+    private var foregroundLocationService: ForegroundLocationService? = null
+
+    // Monitora a conexão com o while-in-use service.
+    private val foregroundOnlyServiceConnection = object : ServiceConnection {
+
+        override fun onServiceConnected(name: ComponentName, service: IBinder) {
+            val binder = service as ForegroundLocationService.LocalBinder
+            foregroundLocationService = binder.service
+            foregroundLocationServiceBound = true
+            startLocationService()
+        }
+
+        override fun onServiceDisconnected(name: ComponentName) {
+            foregroundLocationService = null
+            foregroundLocationServiceBound = false
+        }
+    }
+
     private val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permission ->
         when {
             permission.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
                 //Localização precisa aceita
-                binding.root.mensagemCurta(getString(R.string.label_permissao_localizacao_aceita), false)
                 setupMap()
                 permissionRequestDialog?.dismiss()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    permissionRequestDialog = null
+                    verificarPermissaoBackground()
+                }
             }
             permission.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
                 //Localização aproximada acieta
@@ -91,6 +121,24 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             else -> {
                 //Permissão de localização negada
                 permissionRequestDialog()
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private val locationBackgroundPermissionRequest = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permission ->
+        when {
+            permission.getOrDefault(Manifest.permission.ACCESS_BACKGROUND_LOCATION, false) -> {
+                //Localização background aceita
+                binding.root.mensagemCurta(getString(R.string.label_permissao_localizacao_aceita), false)
+                permissionRequestDialog?.dismiss()
+                foregroundLocationService?.subscribeToLocationUpdates()
+            }
+            else -> {
+                //Localização background negada
+                permissionBackgroundRequestDialog()
             }
         }
     }
@@ -268,44 +316,27 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             else View.VISIBLE
     }
 
-    private fun verificarPermissao() {
-        when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED &&
-                    ContextCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    ) == PackageManager.PERMISSION_GRANTED -> {
-                permissionRequestDialog?.dismiss()
-                setupMap()
-            }
+    private fun actionDetalheEntrega(binding: ItemEntregaChildBinding, entrega: Entrega) {
+        entregaViewModel.saveBottomSheetEntregasState(bottomSheetBehavior.state)
+        entregaViewModel.setEntregaSelecionada(entrega)
+        entregaViewModel.resetStatusEntrega()
+        val directions = MapaFragmentDirections.actionMapaFragmentToDetalheEntregaFragment(entrega.idEntrega)
+        val extras = FragmentNavigatorExtras(
+//            binding.tvStatus to "status_${entrega.idEntrega}",
+//            binding.tvOrdemEntrega to "ordem_entrega_${entrega.idEntrega}",
+            binding.root to "card_${entrega.idEntrega}"
+        )
 
-            ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) || ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) -> {
-                //Permissao negada mais de uma vez ir para as configurações
-                permissionRequestDialog()
-            }
-
-            else -> {
-                permissionRequestDialog()
-            }
+        findNavController().navigate(directions, extras).apply {
+            exitTransition = Fade(Fade.MODE_OUT)
         }
     }
 
-    private fun solicitarPermissao() {
-        locationPermissionRequest.launch(
-            arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-        )
+    private fun checarStatusEntregaFiltro(cvIndicador: View) : Boolean {
+        val isVisible = cvIndicador.isVisible
+        cvIndicador.visibility = if (isVisible) View.INVISIBLE else View.VISIBLE
+
+        return isVisible
     }
 
     private fun setupDialogEvento(entrega: Entrega) {
@@ -320,6 +351,126 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         dialogEventos = DialogEventos(entrega, requireContext())
         dialogEventos.initListener(iDialogEvento)
         dialogEventos.show(requireActivity().supportFragmentManager, DialogEventos.TAG)
+    }
+
+    private fun verificarPermissao(): Boolean {
+        return when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+                    ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED -> {
+                permissionRequestDialog?.dismiss()
+                setupMap()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    permissionRequestDialog = null
+                    verificarPermissaoBackground()
+                } else {
+                    true
+                }
+            }
+
+            ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) || ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) -> {
+                //Permissao negada mais de uma vez ir para as configurações
+                permissionRequestDialog()
+                false
+            }
+
+            else -> {
+                permissionRequestDialog()
+                false
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun verificarPermissaoBackground(): Boolean {
+        return when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                permissionRequestDialog?.dismiss()
+                true
+            }
+
+            ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(),
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            ) -> {
+                //Permissao negada mais de uma vez ir para as configurações
+                permissionBackgroundRequestDialog()
+                false
+            }
+            else -> {
+                permissionBackgroundRequestDialog()
+                false
+            }
+        }
+    }
+
+    private fun solicitarPermissao() {
+        locationPermissionRequest.launch(LOCATION_PERMISSIONS)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun solicitarPermissaoBackground() {
+        locationBackgroundPermissionRequest.launch(BACKGROUND_LOCATION_PERMISSION)
+    }
+
+    private fun permissionRequestDialog() {
+        if (permissionRequestDialog == null) {
+            permissionRequestDialog = PermissionRequestDialog(
+                R.drawable.ic_location,
+                getString(R.string.label_permissao_localizacao),
+                getString(R.string.label_permissao_localizacao_mensagem),
+                getString(R.string.label_aceitar_permissao),
+                getString(R.string.label_ir_para_configuracoes),
+                acaoAceitarPermissao = { solicitarPermissao() },
+                acaoConfiguracoes = { actionConfiguracoes() }
+            )
+            permissionRequestDialog?.show(
+                requireActivity().supportFragmentManager,
+                PermissionRequestDialog.TAG
+            )
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun permissionBackgroundRequestDialog() {
+        if (permissionRequestDialog == null) {
+            permissionRequestDialog = PermissionRequestDialog(
+                R.drawable.ic_location_all_time,
+                getString(R.string.label_permissao_localizacao_background),
+                getString(R.string.label_permissao_localizacao_background_mensagem),
+                getString(br.com.fusiondms.core.common.R.string.label_aceitar_permissao),
+                getString(br.com.fusiondms.core.common.R.string.label_ir_para_configuracoes),
+                acaoAceitarPermissao = { solicitarPermissaoBackground() },
+                acaoConfiguracoes = { actionConfiguracoes() }
+            )
+            permissionRequestDialog?.show(
+                requireActivity().supportFragmentManager,
+                PermissionRequestDialog.TAG
+            )
+        }
+    }
+
+    private fun actionConfiguracoes() {
+        val uri = Uri.fromParts("package", requireActivity().packageName, null)
+        requireActivity().startActivity(
+            Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+            ).apply {
+                data = uri
+            })
     }
 
     @SuppressLint("MissingPermission")
@@ -360,54 +511,13 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun permissionRequestDialog() {
-        if (permissionRequestDialog == null) {
-            permissionRequestDialog = PermissionRequestDialog(
-                R.drawable.ic_location,
-                getString(R.string.label_permissao_localizacao),
-                getString(R.string.label_permissao_localizacao_mensagem),
-                getString(R.string.label_aceitar_permissao),
-                getString(R.string.label_ir_para_configuracoes),
-                acaoAceitarPermissao = { solicitarPermissao() },
-                acaoConfiguracoes = { actionConfiguracoes() }
-            )
-            permissionRequestDialog?.show(
-                requireActivity().supportFragmentManager,
-                PermissionRequestDialog.TAG
-            )
+    private fun startLocationService() {
+        if (verificarPermissao()) {
+            foregroundLocationService?.subscribeToLocationUpdates()
+                ?: Log.d("ForegroundLocationService", "Service Not Bound")
+        } else {
+            solicitarPermissao()
         }
-    }
-
-    private fun actionConfiguracoes() {
-        val uri = Uri.fromParts("package", requireActivity().packageName, null)
-        requireActivity().startActivity(
-            Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-            ).apply {
-            data = uri
-        })
-    }
-
-    private fun actionDetalheEntrega(binding: ItemEntregaChildBinding, entrega: Entrega) {
-        entregaViewModel.saveBottomSheetEntregasState(bottomSheetBehavior.state)
-        entregaViewModel.setEntregaSelecionada(entrega)
-        entregaViewModel.resetStatusEntrega()
-        val directions = MapaFragmentDirections.actionMapaFragmentToDetalheEntregaFragment(entrega.idEntrega)
-        val extras = FragmentNavigatorExtras(
-//            binding.tvStatus to "status_${entrega.idEntrega}",
-//            binding.tvOrdemEntrega to "ordem_entrega_${entrega.idEntrega}",
-            binding.root to "card_${entrega.idEntrega}"
-        )
-
-        findNavController().navigate(directions, extras).apply {
-            exitTransition = Fade(Fade.MODE_OUT)
-        }
-    }
-
-    private fun checarStatusEntregaFiltro(cvIndicador: View) : Boolean {
-        val isVisible = cvIndicador.isVisible
-        cvIndicador.visibility = if (isVisible) View.INVISIBLE else View.VISIBLE
-
-        return isVisible
     }
 
     override fun onResume() {
@@ -415,11 +525,42 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         verificarPermissao()
     }
 
+    override fun onStart() {
+        super.onStart()
+        if (verificarPermissao()) {
+            val serviceIntent = Intent(requireActivity(), ForegroundLocationService::class.java)
+            requireActivity().bindService(
+                serviceIntent,
+                foregroundOnlyServiceConnection,
+                Context.BIND_AUTO_CREATE
+            )
+        }
+    }
+
+    override fun onStop() {
+        if (foregroundLocationServiceBound) {
+            requireActivity().unbindService(foregroundOnlyServiceConnection)
+            foregroundLocationServiceBound = false
+        }
+        super.onStop()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        foregroundLocationService?.unsubscribeToLocationUpdates()
         entregaViewModel.resetViewModel()
         _binding = null
         _bindingSheet = null
         _bindingSheetInfoGerais = null
+    }
+
+    companion object {
+        val LOCATION_PERMISSIONS = arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+
+        @RequiresApi(Build.VERSION_CODES.Q)
+        val BACKGROUND_LOCATION_PERMISSION = arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
     }
 }

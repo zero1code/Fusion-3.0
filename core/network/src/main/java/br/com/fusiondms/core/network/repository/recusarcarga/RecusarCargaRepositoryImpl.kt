@@ -1,7 +1,9 @@
 package br.com.fusiondms.core.network.repository.recusarcarga
 
 import android.content.Context
+import androidx.room.Dao
 import br.com.fusiondms.core.database.AppDatabase
+import br.com.fusiondms.core.database.dao.CargaDao
 import br.com.fusiondms.core.database.model.romaneio.RomaneioEntity
 import br.com.fusiondms.core.model.Resource
 import br.com.fusiondms.core.model.romaneio.Romaneio
@@ -15,7 +17,7 @@ import javax.inject.Inject
 
 class RecusarCargaRepositoryImpl @Inject constructor(
     private val fusionApi: FusionApi,
-    private val appDatabase: AppDatabase,
+    private val cargaDao: CargaDao,
     private val dispatcher: CoroutineDispatcher,
     private val context: Context
 ) : RecusarCargaRepository {
@@ -24,8 +26,7 @@ class RecusarCargaRepositoryImpl @Inject constructor(
             try {
                 val result = fusionApi.postRecusarCarga(RomaneioDto().mapModelToDto(romaneio))
                 if (result.isSuccessful) {
-                    appDatabase.getRomaneioDao()
-                        .deleteCarga(RomaneioEntity().mapModelToEntity(romaneio))
+                    cargaDao.deleteCarga(RomaneioEntity().mapModelToEntity(romaneio))
 
                     emit(Resource.Success(result.message(), result.code()))
                 } else {

@@ -6,9 +6,6 @@
     <string name="label_direcao_description">Direction status</string>
     <string name="label_espera_description">Waiting status</string>
     <string name="label_mais_opcoes_description">More options</string>
-    <string name="menu_inicio_description">Working day menu</string>
-    <string name="menu_recibo_description">Receipts menu</string>
-    <string name="label_adicionar_colaborador_description">Add employee</string>
     <string name="label_proximo_description">Go next</string>
     <!--    Descricoes-->
 
@@ -32,6 +29,9 @@
     <string name="label_permissao_localizacao">Location permission</string>
     <string name="label_permissao_localizacao_mensagem">To continue, we need you allow Fusion to access the device\'s location.</string>
     <string name="label_permissao_localizacao_aceita">Location permission granted</string>
+
+    <string name="label_permissao_localizacao_background">Background location</string>
+    <string name="label_permissao_localizacao_background_mensagem">You need to allow the app\'s location service to run in the background.</string>
     <!--    label de permissoes-->
 
     <!--    label de botoes-->
@@ -49,9 +49,7 @@
     <string name="label_enviar_foto">Send photo</string>
     <string name="label_solicitar_ligacao">Request call</string>
     <string name="label_tirar_foto_canhoto">Take a carriage photo</string>
-    <string name="label_cadastrar_colaborador">Register employee</string>
     <string name="label_finalizar_transmitir">Finalize and transmit</string>
-    <string name="label_confirmar_registro_ponto">Confirm Clock in</string>
     <string name="label_solicitar_carga">Request carriage</string>
     <string name="label_atualizar_carga">Sync\ncarriage</string>
     <string name="label_aceitar_carga">Accept carriage</string>
@@ -104,14 +102,7 @@
     <string name="label_vamos_comecar">Let\'s start</string>
     <string name="label_erro_ao_sincronizar">Could not sync</string>
     <string name="label_algo_deu_errado">Something went wrong</string>
-    <string name="label_registrar_ponto">Clock in</string>
-    <string name="label_nome_completo">Full name</string>
     <string name="label_horario_do_dia">%1$s, %2$s</string>
-    <string name="label_adicionar_colaborador">Add employee</string>
-    <string name="label_digite_matricula">Enter registration</string>
-    <string name="label_digite_nome">Enter full name</string>
-    <string name="label_confirmar_dados">Confirm data</string>
-    <string name="label_esqueci_senha">Forgot password</string>
     <string name="label_sucesso_atualizar_entrega">Delivery updated</string>
     <string name="label_erro_atualizar_entrega">Unable to update delivery</string>
     <!--    label de 2 ou 3 palavras-->
@@ -120,11 +111,6 @@
     <string name="label_nenhuma_carga_encontrada_info">If you only want to use the working day, click in the button below.</string>
     <string name="label_entrega_mesmo_status_info">Delivery is already with this status</string>
     <string name="label_voce_deseja_fazer_info">What do you wish to do?</string>
-    <string name="label_digitar_matricula_info">Enter employee registration</string>
-    <string name="label_atencao_digitar_matricula_info">Be careful when entering the license plate, it must be valid in order for the time records to be saved.</string>
-    <string name="label_digitar_nome_info">Now, enter the employee\'s full name</string>
-    <string name="label_qual_funcao_colaborador_info">What is the employee\'s role?</string>
-    <string name="label_primeiro_acesso_info">First access? Click here!</string>
     <!--    label de frases-->
 
     <array name="bom_dia">
