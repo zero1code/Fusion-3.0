@@ -7,6 +7,8 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DimenRes
+import java.math.BigDecimal
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,6 +36,12 @@ fun Context.dp(@DimenRes dimen: Int): Float = px(dimen) / resources.displayMetri
 fun Context.hideKeyboard(view: View) {
     val inputManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     inputManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun BigDecimal.toLocalCurrency(): String {
+    return NumberFormat
+        .getCurrencyInstance(Locale.getDefault())
+        .format(this)
 }
 
 fun converterDataParaDiaMesAnoHoraMinuto(data: Long) : String {

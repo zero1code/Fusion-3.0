@@ -55,6 +55,7 @@
     <string name="label_aceitar_carga">Accept carriage</string>
     <string name="label_recusar_carga">Refuse carriage</string>
     <string name="label_entrar">Enter</string>
+    <string name="label_novo_recebimento">New Receipt</string>
     <!--    label de botoes-->
 
     <!--    label de uma palavra apenas-->
@@ -83,6 +84,22 @@
     <string name="label_login">Login</string>
     <string name="label_empresa">Company</string>
     <string name="label_senha">Password</string>
+    <string name="label_unidade">Unit</string>
+    <string name="label_peso">Weight</string>
+    <string name="label_total">Total</string>
+    <string name="label_bairro">Neighborhood</string>
+    <string name="label_cidade">City</string>
+    <string name="label_cnpj">EIN</string>
+    <string name="label_pallets">Pallets</string>
+    <string name="label_valores">Values</string>
+    <string name="label_itens">Items</string>
+    <string name="label_recebimentos">Receipts</string>
+    <string name="label_recebido">Received</string>
+    <string name="label_transacoes">Transactions</string>
+    <string name="label_a_receber">Payable</string>
+    <string name="label_vendedor">Seller</string>
+    <string name="label_observacao">Observation</string>
+    <string name="label_quantidade">Quantity</string>
     <!--    label de uma palavra apenas-->
 
     <!--    label de 2 ou 3 palavras-->
@@ -105,6 +122,22 @@
     <string name="label_horario_do_dia">%1$s, %2$s</string>
     <string name="label_sucesso_atualizar_entrega">Delivery updated</string>
     <string name="label_erro_atualizar_entrega">Unable to update delivery</string>
+    <string name="label_preco_unitario">Unit price</string>
+    <string name="label_sub_total">Sub total</string>
+    <string name="label_detalhes_cliente">Customer Details</string>
+    <string name="label_endereco_entrega">Delivery address</string>
+    <string name="label_referencia_entrega">Delivery reference</string>
+    <string name="label_detalhe_fiscais">Invoice details</string>
+    <string name="label_valor_nota_fiscal">Invoice Value</string>
+    <string name="label_filial_fatura">Billing subsidiary</string>
+    <string name="label_itens_entregues">Delivered items</string>
+    <string name="label_total_itens">Total items</string>
+    <string name="label_recebimento_preferencial">Preferential receipt</string>
+    <string name="label_valor_entrega">Delivery value</string>
+    <string name="label_detalhes_venda">Sale details</string>
+    <string name="label_numero_pedido">Order number</string>
+    <string name="label_carga_erp">Carriage ERP</string>
+    <string name="label_romaneio_erp">Carriage ERP</string>
     <!--    label de 2 ou 3 palavras-->
 
     <!--    label de frases-->
@@ -112,6 +145,29 @@
     <string name="label_entrega_mesmo_status_info">Delivery is already with this status</string>
     <string name="label_voce_deseja_fazer_info">What do you wish to do?</string>
     <!--    label de frases-->
+
+<!--    Label com plural-->
+    <plurals name="label_email">
+        <item quantity="one">E-mail</item>
+        <item quantity="other">E-mails</item>
+    </plurals>
+    <plurals name="label_telefone_contato">
+        <item quantity="one">Contact phone</item>
+        <item quantity="other">Phone for contact</item>
+    </plurals>
+    <plurals name="label_quantidade">
+        <item quantity="one">Quantity</item>
+        <item quantity="other">Quantities</item>
+    </plurals>
+    <plurals name="label_item">
+        <item quantity="one">Item</item>
+        <item quantity="other">Items</item>
+    </plurals>
+    <plurals name="label_volume">
+        <item quantity="one">Amount</item>
+        <item quantity="other">Amounts</item>
+    </plurals>
+<!--    Label com plural-->
 
     <array name="bom_dia">
         <item>Good morning</item>

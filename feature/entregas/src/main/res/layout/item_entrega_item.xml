@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:layout_marginVertical="@dimen/dimen_normal"
+    android:layout_marginEnd="@dimen/dimen_medium"
+    app:cardCornerRadius="@dimen/card_border_radius"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/brand_background_color"
+    app:cardElevation="@dimen/dimen_zero">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dimen_medium">
+
+        <TextView
+            android:id="@+id/tv_codigo_descricao"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="1234 - Macarrão parafuso"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_preco_unitario"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            tools:text="Preço unitário: R$ 3,99"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_codigo_descricao" />
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle2"
+            android:id="@+id/tv_quantidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_preco_unitario"
+            tools:text="Quantidade: 10"/>
+
+        <TextView
+            android:id="@+id/tv_unidade"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Unidade: 100"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_quantidade" />
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle2"
+            android:id="@+id/tv_peso"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_unidade"
+            tools:text="Peso: 30.0 kg"/>
+
+        <TextView
+            android:id="@+id/tv_st"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="ST: R$ 39,99"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_peso" />
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle2"
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_st"
+            android:textStyle="bold"
+            tools:text="Total: R$ 39,99"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

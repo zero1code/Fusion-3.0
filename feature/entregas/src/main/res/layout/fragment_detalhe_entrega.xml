@@ -57,6 +57,21 @@
             android:id="@+id/layout_status_entrega"
             layout="@layout/layout_status_entrega" />
 
+        <include android:id="@+id/layout_detalhes_fiscais"
+            layout="@layout/layout_detalhes_fiscais" />
+
+        <include android:id="@+id/layout_detalhes_recebimentos"
+            layout="@layout/layout_detalhes_recebimentos" />
+
+        <include android:id="@+id/layout_detalhes_itens"
+            layout="@layout/layout_detalhes_itens" />
+
+        <include android:id="@+id/layout_detalhes_cliente"
+            layout="@layout/layout_detalhes_cliente" />
+
+        <include android:id="@+id/layout_detalhes_venda"
+            layout="@layout/layout_detalhes_venda" />
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

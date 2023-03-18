@@ -24,7 +24,6 @@
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/cargas" />
             <option value="$PROJECT_DIR$/feature/entregas" />
-            <option value="$PROJECT_DIR$/feature/login" />
             <option value="$PROJECT_DIR$/feature/mapa" />
             <option value="$PROJECT_DIR$/feature/sincronizacao" />
           </set>

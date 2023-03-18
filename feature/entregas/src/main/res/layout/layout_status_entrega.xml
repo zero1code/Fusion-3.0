@@ -95,9 +95,10 @@
             android:id="@+id/progress_inicio"
             android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
-            android:progress="50"
+            android:progress="25"
             app:layout_constraintBottom_toBottomOf="@+id/fab_chegada"
-            app:layout_constraintEnd_toStartOf="@+id/fab_inicio"
+
+            app:layout_constraintEnd_toStartOf="@+id/fab_fim"
             app:layout_constraintStart_toEndOf="@+id/fab_chegada"
             app:layout_constraintTop_toBottomOf="@+id/tv_chegada" />
 
@@ -137,14 +138,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fab_inicio" />
 
-        <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/progress_fim"
-            android:layout_width="@dimen/dimen_zero"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/fab_inicio"
-            app:layout_constraintEnd_toStartOf="@+id/fab_fim"
-            app:layout_constraintStart_toEndOf="@+id/fab_inicio"
-            app:layout_constraintTop_toBottomOf="@+id/tv_chegada" />
+
 
         <TextView
             android:id="@+id/tv_fim"

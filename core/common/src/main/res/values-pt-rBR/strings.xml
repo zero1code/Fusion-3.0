@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 <!--    <string name="app_name">Fusion 3.0</string>-->
 
     <!--    Descricoes-->
@@ -55,6 +55,7 @@
     <string name="label_aceitar_carga">Aceitar carga</string>
     <string name="label_recusar_carga">Recusar carga</string>
     <string name="label_entrar">Entrar</string>
+    <string name="label_novo_recebimento">Novo Recebimento</string>
     <!--    label de botoes-->
 
     <!--    label de uma palavra apenas-->
@@ -83,6 +84,22 @@
     <string name="label_login">Login</string>
     <string name="label_empresa">Empresa</string>
     <string name="label_senha">Senha</string>
+    <string name="label_unidade">Unidade</string>
+    <string name="label_peso">Peso</string>
+    <string name="label_total">Total</string>
+    <string name="label_bairro">bairro</string>
+    <string name="label_cidade">Cidade</string>
+    <string name="label_cnpj">CNPJ</string>
+    <string name="label_pallets">Pallets</string>
+    <string name="label_valores">Valores</string>
+    <string name="label_itens">Itens</string>
+    <string name="label_recebimentos">Recebimentos</string>
+    <string name="label_recebido">Recebido</string>
+    <string name="label_transacoes">Transações</string>
+    <string name="label_a_receber">A receber</string>
+    <string name="label_vendedor">Vendedor</string>
+    <string name="label_observacao">Observação</string>
+    <string name="label_quantidade">Quantidade</string>
     <!--    label de uma palavra apenas-->
 
     <!--    label de 2 ou 3 palavras-->
@@ -105,6 +122,22 @@
     <string name="label_horario_do_dia">%1$s, %2$s</string>
     <string name="label_sucesso_atualizar_entrega">Entrega atualizada</string>
     <string name="label_erro_atualizar_entrega">Falha ao atualizar entrega</string>
+    <string name="label_preco_unitario">Preço Unitário</string>
+    <string name="label_sub_total">Subtotal</string>
+    <string name="label_detalhes_cliente">Detalhes do cliente</string>
+    <string name="label_endereco_entrega">Endereço de entrega</string>
+    <string name="label_referencia_entrega">Referência de entrega</string>
+    <string name="label_detalhe_fiscais">Detalhes fiscais</string>
+    <string name="label_valor_nota_fiscal">Valor da nota fiscal</string>
+    <string name="label_filial_fatura">Filial de fatura</string>
+    <string name="label_itens_entregues">Itens entregues</string>
+    <string name="label_total_itens">Total dos itens</string>
+    <string name="label_recebimento_preferencial">Recebimento preferencial</string>
+    <string name="label_valor_entrega">Valor da entrega</string>
+    <string name="label_detalhes_venda">Detalhes da venda</string>
+    <string name="label_numero_pedido">Número do pedido</string>
+    <string name="label_carga_erp">Carga ERP</string>
+    <string name="label_romaneio_erp">Romaneio ERP</string>
     <!--    label de 2 ou 3 palavras-->
 
     <!--    label de frases-->
@@ -112,6 +145,29 @@
     <string name="label_entrega_mesmo_status_info">A entrega já está com esse status</string>
     <string name="label_voce_deseja_fazer_info">O que você gostaria de fazer?</string>
     <!--    label de frases-->
+
+    <!--    Label com plural-->
+    <plurals name="label_email">
+        <item quantity="one">E-mail</item>
+        <item quantity="other">E-mails</item>
+    </plurals>
+    <plurals name="label_telefone_contato">
+        <item quantity="one">Telefone para contato</item>
+        <item quantity="other">Telefones para contato</item>
+    </plurals>
+    <plurals name="label_quantidade">
+        <item quantity="one">Quantidade</item>
+        <item quantity="other">Quantidades</item>
+    </plurals>
+    <plurals name="label_item">
+        <item quantity="one">Item</item>
+        <item quantity="other">Itens</item>
+    </plurals>
+    <plurals name="label_volume">
+        <item quantity="one">Volume</item>
+        <item quantity="other">Volumes</item>
+    </plurals>
+    <!--    Label com plural-->
 
     <array name="bom_dia">
         <item>Bom dia</item>

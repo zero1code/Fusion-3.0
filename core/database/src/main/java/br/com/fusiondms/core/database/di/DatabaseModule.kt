@@ -16,9 +16,10 @@ object DatabaseModule {
 
     @Provides
     fun provideRomaneioDao(appDatabase: AppDatabase) = appDatabase.getRomaneioDao()
-
     @Provides
     fun provideEntregaDao(appDatabase: AppDatabase) = appDatabase.getEntregaDao()
+    @Provides
+    fun provideDetalheEntregaDao(appDatabase: AppDatabase) = appDatabase.getDetalheEntregaDao()
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext appcontext: Context): AppDatabase {

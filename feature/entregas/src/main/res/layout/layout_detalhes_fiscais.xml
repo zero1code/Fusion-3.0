@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dimen_medium"
+    android:layout_marginVertical="@dimen/dimen_normal"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    app:cardCornerRadius="@dimen/card_border_radius"
+    app:cardElevation="@dimen/dimen_zero">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dimen_medium">
+
+        <TextView
+            android:id="@+id/tv_titulo_detalhes_cliente"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_detalhe_fiscais"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_nota_fiscal"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nota fiscal:\n123456"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_detalhes_cliente" />
+
+        <TextView
+            android:id="@+id/tv_valor_nota"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valor da nota:\nR$ 1.549,55"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_titulo_detalhes_cliente" />
+
+        <TextView
+            android:id="@+id/tv_cnpj_cliente"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CNPJ:\n12.345.567/0001-89"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nota_fiscal" />
+
+        <TextView
+            android:id="@+id/tv_filial_fatura"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filial de fatura:\n123456"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_cnpj_cliente" />
+
+        <TextView
+            android:id="@+id/tv_titulo_quantidades"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quantidades"
+            android:textStyle="bold"
+            android:layout_marginVertical="@dimen/dimen_normal"
+            app:layout_constraintTop_toBottomOf="@id/tv_filial_fatura" />
+
+        <TextView
+            android:id="@+id/tv_qtd_itens"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Itens\n34"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_qtd_volumes"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_quantidades" />
+
+        <TextView
+            android:id="@+id/tv_qtd_volumes"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Volumes\n20"
+            app:layout_constraintEnd_toStartOf="@+id/tv_qtd_pallets"
+            app:layout_constraintStart_toEndOf="@id/tv_qtd_itens"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_quantidades" />
+
+        <TextView
+            android:id="@+id/tv_qtd_pallets"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Pallets\n4"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_qtd_volumes"
+            app:layout_constraintEnd_toStartOf="@id/tv_qtd_peso"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_quantidades" />
+
+        <TextView
+            android:id="@+id/tv_qtd_peso"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Peso\n400.00 kg"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_qtd_pallets"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_quantidades" />
+
+        <TextView
+            android:id="@+id/tv_titulo_valores"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Valores"
+            android:textStyle="bold"
+            android:layout_marginVertical="@dimen/dimen_normal"
+            app:layout_constraintTop_toBottomOf="@id/tv_qtd_itens" />
+
+        <TextView
+            android:id="@+id/tv_valor_itens_entregues"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Itens entregues: R$ 549,55"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_valores" />
+
+        <TextView
+            android:id="@+id/tv_valor_total_itens"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total dos itens: R$ 1.549,55"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_valor_itens_entregues" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

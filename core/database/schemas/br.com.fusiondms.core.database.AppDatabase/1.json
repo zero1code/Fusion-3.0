@@ -2,10 +2,10 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "9de94b93650f2e45b52931e83e47b0af",
+    "identityHash": "ba9165c8d6f9684fdf9a5e95d2505c9c",
     "entities": [
       {
-        "tableName": "tb_romaneios",
+        "tableName": "tb_romaneio",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `idRomaneio` INTEGER NOT NULL, `destino` TEXT NOT NULL, `qtdEntregas` INTEGER NOT NULL, `status` TEXT NOT NULL, `kmTotal` INTEGER NOT NULL, PRIMARY KEY(`idRomaneio`))",
         "fields": [
           {
@@ -46,10 +46,10 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "idRomaneio"
-          ],
-          "autoGenerate": false
+          ]
         },
         "indices": [],
         "foreignKeys": []
@@ -120,10 +120,108 @@
           }
         ],
         "primaryKey": {
+          "autoGenerate": false,
           "columnNames": [
             "idEntrega"
-          ],
-          "autoGenerate": false
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "tb_entrega_item",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idRomaneio` INTEGER NOT NULL, `idEntrega` INTEGER NOT NULL, `idEntregaItem` INTEGER NOT NULL, `codigoMercadoria` TEXT NOT NULL, `descricao` TEXT NOT NULL, `quantidade` REAL NOT NULL, `preco` TEXT NOT NULL, `unidade` TEXT NOT NULL, `valorST` TEXT NOT NULL, `subTotal` TEXT NOT NULL, `peso` REAL NOT NULL, `motivoDevolucao` TEXT NOT NULL, `quantidadeDevolucao` REAL NOT NULL, `entregue` INTEGER NOT NULL, PRIMARY KEY(`idEntregaItem`))",
+        "fields": [
+          {
+            "fieldPath": "idRomaneio",
+            "columnName": "idRomaneio",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idEntrega",
+            "columnName": "idEntrega",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idEntregaItem",
+            "columnName": "idEntregaItem",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "codigoMercadoria",
+            "columnName": "codigoMercadoria",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descricao",
+            "columnName": "descricao",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "quantidade",
+            "columnName": "quantidade",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "preco",
+            "columnName": "preco",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unidade",
+            "columnName": "unidade",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valorST",
+            "columnName": "valorST",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subTotal",
+            "columnName": "subTotal",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "peso",
+            "columnName": "peso",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "motivoDevolucao",
+            "columnName": "motivoDevolucao",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "quantidadeDevolucao",
+            "columnName": "quantidadeDevolucao",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "entregue",
+            "columnName": "entregue",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "idEntregaItem"
+          ]
         },
         "indices": [],
         "foreignKeys": []
@@ -132,7 +230,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9de94b93650f2e45b52931e83e47b0af')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ba9165c8d6f9684fdf9a5e95d2505c9c')"
     ]
   }
 }

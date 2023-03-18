@@ -3,11 +3,11 @@ package br.com.fusiondms.feature.entregas.domain.entregasusecase
 import android.content.Context
 import br.com.fusiondms.core.database.repository.entregas.EntregasRepository
 import br.com.fusiondms.core.model.Conteudo
-import br.com.fusiondms.core.model.Resource
 import br.com.fusiondms.core.model.entrega.Entrega
 import br.com.fusiondms.core.model.entrega.EntregasPorCliente
-import br.com.fusiondms.core.common.R
-import kotlinx.coroutines.flow.*
+import br.com.fusiondms.core.model.exceptions.ErrorAtualizarStatusEntrega
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class EntregasUseCaseImpl @Inject constructor(
@@ -40,15 +40,12 @@ class EntregasUseCaseImpl @Inject constructor(
         }
     }
 
-    override suspend fun updateStatusEntrega(entrega: Entrega, idEvento: Int): Flow<Resource<Int>> {
-        return flow {
-            if (entrega.statusEntrega != idEvento.toString()) {
-                val newEntrega = entrega.copy(statusEntrega = idEvento.toString())
-                entregasRepository.updateStatusEntrega(newEntrega).collect { result ->
-                    emit(result)
-                }
-
-            } else emit(Resource.Error(context.getString(R.string.label_entrega_mesmo_status_info), -2))
+    override suspend fun updateStatusEntrega(entrega: Entrega, idEvento: Int): Flow<Int> {
+        return if (entrega.statusEntrega != idEvento.toString()) {
+            val newEntrega = entrega.copy(statusEntrega = idEvento.toString())
+            entregasRepository.updateStatusEntrega(newEntrega)
+        } else {
+            throw ErrorAtualizarStatusEntrega("A entrega já está com esse status.")
         }
     }
 }

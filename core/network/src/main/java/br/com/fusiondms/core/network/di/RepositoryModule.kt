@@ -2,10 +2,10 @@ package br.com.fusiondms.core.network.di
 
 import android.content.Context
 import br.com.fusiondms.core.database.AppDatabase
-import br.com.fusiondms.core.database.dao.CargaDao
+import br.com.fusiondms.core.database.dao.RomaneioDao
 import br.com.fusiondms.core.network.api.FusionApi
-import br.com.fusiondms.core.network.repository.recusarcarga.RecusarCargaRepository
-import br.com.fusiondms.core.network.repository.recusarcarga.RecusarCargaRepositoryImpl
+import br.com.fusiondms.core.network.repository.recusarromaneio.RecusarRomaneioRepository
+import br.com.fusiondms.core.network.repository.recusarromaneio.RecusarRomaneioRepositoryImpl
 import br.com.fusiondms.core.network.repository.sincronizacao.SincronizacaoRepository
 import br.com.fusiondms.core.network.repository.sincronizacao.SincronizacaoRepositoryImpl
 import dagger.Module
@@ -31,7 +31,7 @@ object RepositoryModule {
     @Provides
     fun provideRecusarCarga(
         fusionApi: FusionApi,
-        cargaDao: CargaDao,
+        romaneioDao: RomaneioDao,
         @ApplicationContext context: Context
-    ) : RecusarCargaRepository = RecusarCargaRepositoryImpl(fusionApi, cargaDao, Dispatchers.IO, context)
+    ) : RecusarRomaneioRepository = RecusarRomaneioRepositoryImpl(fusionApi, romaneioDao, Dispatchers.IO, context)
 }

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dimen_medium"
+    android:layout_marginVertical="@dimen/dimen_normal"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    app:cardCornerRadius="@dimen/card_border_radius"
+    app:cardElevation="@dimen/dimen_zero">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dimen_medium">
+
+        <TextView
+            android:id="@+id/tv_titulo_itens"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_recebimentos"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_forma_pagamento_preferencial"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recebimento preferencial:\nDineheiro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_itens" />
+
+        <TextView
+            android:id="@+id/tv_valor_entrega"
+            style="@style/TextAppearance.App.Headline5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="R$ 1.000,00"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dimen_medium"
+            app:layout_constraintEnd_toStartOf="@+id/tv_valor_recebido"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_forma_pagamento_preferencial" />
+
+        <TextView
+            android:id="@+id/tv_titulo_valor_entrega"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Valor da entrega"
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="@+id/tv_valor_recebido"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_valor_entrega" />
+
+        <TextView
+            android:id="@+id/tv_valor_recebido"
+            style="@style/TextAppearance.App.Headline5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/dimen_medium"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="R$ 500,00"
+            android:textColor="@color/brand_green_success"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_valor_entrega"
+            app:layout_constraintTop_toBottomOf="@id/tv_forma_pagamento_preferencial" />
+
+        <TextView
+            android:id="@+id/tv_titulo_valor_recebido"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/brand_green_success"
+            android:text="Recebido"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_valor_entrega"
+            app:layout_constraintTop_toBottomOf="@id/tv_valor_recebido" />
+
+        <TextView
+            android:id="@+id/tv_titulo_transacoes"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_medium"
+            android:text="@string/label_transacoes"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_valor_entrega" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_transacoes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_transacoes"/>
+
+        <TextView
+            android:id="@+id/tv_valor_restante"
+            style="@style/TextAppearance.App.Subtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_medium"
+            android:text="A receber: R$ 500,00"
+            android:textColor="@color/brand_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_transacoes" />
+
+        <Button
+            android:id="@+id/btn_novo_recebimento"
+            style="@style/Theme.Button.Normal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/label_novo_recebimento"
+            android:layout_marginVertical="@dimen/dimen_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_valor_restante"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

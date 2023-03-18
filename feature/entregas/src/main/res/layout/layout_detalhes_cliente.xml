@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dimen_medium"
+    android:layout_marginVertical="@dimen/dimen_normal"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    app:cardCornerRadius="@dimen/card_border_radius"
+    app:cardElevation="@dimen/dimen_zero">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dimen_medium">
+
+        <TextView
+            android:id="@+id/tv_titulo_detalhes_cliente"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_detalhes_cliente"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle1"
+            android:id="@+id/tv_endereco_entrega"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Endereço de entrega:\nRua Maria Luiza Reis Monteiro dos Santos, n 105."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_detalhes_cliente"/>
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle1"
+            android:id="@+id/tv_bairro_entrega"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bairro:\nRecreio São Jorge."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_endereco_entrega"/>
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle1"
+            android:id="@+id/tv_cidade_entrega"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cidade:\nGuarulhos - SP."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_bairro_entrega"/>
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle1"
+            android:id="@+id/tv_referencia_entrega"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Referência de entrega:\nPróximo a padaria Fernandes."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_cidade_entrega"/>
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle1"
+            android:id="@+id/tv_emails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Emails:\nemail1@gmail.com\nemail2@gmail.com\nemail3@gmail.com"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_referencia_entrega"/>
+
+        <TextView
+            style="@style/TextAppearance.App.Subtitle1"
+            android:id="@+id/tv_telefones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telefones para Contato:\n11-91234-3456\n11-2456-6789\n11-98765-4321"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_emails"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

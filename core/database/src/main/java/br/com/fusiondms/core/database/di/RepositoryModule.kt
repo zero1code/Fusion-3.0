@@ -1,12 +1,15 @@
 package br.com.fusiondms.core.database.di
 
 import android.content.Context
-import br.com.fusiondms.core.database.dao.CargaDao
+import br.com.fusiondms.core.database.dao.RomaneioDao
+import br.com.fusiondms.core.database.dao.DetalheEntregaDao
 import br.com.fusiondms.core.database.dao.EntregaDao
 import br.com.fusiondms.core.database.repository.entregas.EntregasRepository
 import br.com.fusiondms.core.database.repository.entregas.EntregasRepositoryImpl
-import br.com.fusiondms.core.database.repository.romaneios.CargasRepository
-import br.com.fusiondms.core.database.repository.romaneios.CargasRepositoryImpl
+import br.com.fusiondms.core.database.repository.entregas.detalheentrega.DetalheEntregaRepository
+import br.com.fusiondms.core.database.repository.entregas.detalheentrega.DetalheEntregaRepositoryImpl
+import br.com.fusiondms.core.database.repository.romaneios.RomaneiosRepository
+import br.com.fusiondms.core.database.repository.romaneios.RomaneiosRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +31,14 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideCargasRepository(
-        cargaDao: CargaDao
-    ) : CargasRepository = CargasRepositoryImpl(cargaDao, Dispatchers.IO)
+    fun provideDetalheEntregasRepository(
+        detalheEntregaDao: DetalheEntregaDao,
+        @ApplicationContext appcontext: Context
+    ) : DetalheEntregaRepository = DetalheEntregaRepositoryImpl(detalheEntregaDao, Dispatchers.IO, appcontext)
+
+    @Provides
+    @Singleton
+    fun provideRomaneiosRepository(
+        romaneioDao: RomaneioDao
+    ) : RomaneiosRepository = RomaneiosRepositoryImpl(romaneioDao, Dispatchers.IO)
 }

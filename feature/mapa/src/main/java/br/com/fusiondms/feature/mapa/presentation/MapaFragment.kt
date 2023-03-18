@@ -37,7 +37,7 @@ import br.com.fusiondms.core.common.permissiondiaolog.PermissionRequestDialog
 import br.com.fusiondms.core.common.snackbar.mensagemCurta
 import br.com.fusiondms.core.model.entrega.Entrega
 import br.com.fusiondms.core.servives.location.ForegroundLocationService
-import br.com.fusiondms.feature.entregas.adapter.EntregasParentAdapter
+import br.com.fusiondms.feature.entregas.presentation.adapter.EntregasParentAdapter
 import br.com.fusiondms.feature.entregas.databinding.ItemEntregaChildBinding
 import br.com.fusiondms.feature.entregas.presentation.viewmodel.EntregaViewModel
 import br.com.fusiondms.feature.mapa.R.*
@@ -175,6 +175,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             _bindingSheet = bottomSheet
             _bindingSheetInfoGerais = bindingSheet.ltEntregasInfoGerais
 
+            entregaViewModel.getListaEntrega()
             setupRecyclerViewEntregas()
             setupBottomSheetEntregas()
         }
@@ -202,7 +203,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                 when(result) {
                     is EntregaViewModel.EntregaResult.ErrorUpdate -> binding.root.mensagemCurta(result.message)
                     is EntregaViewModel.EntregaResult.SuccessUpdate -> {
-                        binding.root.mensagemCurta(result.message)
+                        binding.root.mensagemCurta("Entrega atualizada.")
                     }
                     else -> Unit
                 }

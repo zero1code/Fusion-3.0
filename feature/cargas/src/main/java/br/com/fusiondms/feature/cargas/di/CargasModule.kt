@@ -1,7 +1,7 @@
 package br.com.fusiondms.feature.cargas.di
 
-import br.com.fusiondms.core.database.repository.romaneios.CargasRepository
-import br.com.fusiondms.core.network.repository.recusarcarga.RecusarCargaRepository
+import br.com.fusiondms.core.database.repository.romaneios.RomaneiosRepository
+import br.com.fusiondms.core.network.repository.recusarromaneio.RecusarRomaneioRepository
 import br.com.fusiondms.feature.cargas.domain.cargasusecase.CargasUseCase
 import br.com.fusiondms.feature.cargas.domain.cargasusecase.CargasUseCaseImpl
 import br.com.fusiondms.feature.cargas.domain.recusarcargausecase.RecusarCargaUseCase
@@ -19,12 +19,12 @@ object CargasModule {
     @Singleton
     @Provides
     fun provideCargasUseCase(
-        cargasRepository: CargasRepository
-    ) : CargasUseCase = CargasUseCaseImpl(cargasRepository)
+        romaneiosRepository: RomaneiosRepository
+    ) : CargasUseCase = CargasUseCaseImpl(romaneiosRepository)
 
     @Singleton
     @Provides
     fun provideRecusarCargaUseCase(
-        recusarCargaRepository: RecusarCargaRepository
-    ) : RecusarCargaUseCase = RecusarCargaUseCaseImpl(recusarCargaRepository)
+        recusarRomaneioRepository: RecusarRomaneioRepository
+    ) : RecusarCargaUseCase = RecusarCargaUseCaseImpl(recusarRomaneioRepository)
 }

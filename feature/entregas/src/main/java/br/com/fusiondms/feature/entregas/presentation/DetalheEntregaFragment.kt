@@ -9,16 +9,27 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import br.com.fusiondms.core.common.R
 import br.com.fusiondms.core.common.getColorFromAttr
 import br.com.fusiondms.core.model.entrega.Entrega
+import br.com.fusiondms.core.model.entrega.EntregaItem
 import br.com.fusiondms.feature.entregas.databinding.FragmentDetalheEntregaBinding
+import br.com.fusiondms.feature.entregas.databinding.LayoutDetalhesItensBinding
 import br.com.fusiondms.feature.entregas.databinding.LayoutStatusEntregaBinding
+import br.com.fusiondms.feature.entregas.presentation.adapter.EntregasItensAdapter
+import br.com.fusiondms.feature.entregas.presentation.viewmodel.DetalheEntregaViewModel
 import br.com.fusiondms.feature.entregas.presentation.viewmodel.EntregaViewModel
+import br.com.fusiondms.feature.entregas.util.CustomHorizontalGridLayoutManager
+import br.com.fusiondms.feature.entregas.util.CustomHorizontalLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
 
+@AndroidEntryPoint
 class DetalheEntregaFragment : Fragment() {
 
     private var _binding: FragmentDetalheEntregaBinding? = null
@@ -27,9 +38,15 @@ class DetalheEntregaFragment : Fragment() {
     private var _bindingStatus: LayoutStatusEntregaBinding? = null
     private val bindingStatus get() = _bindingStatus!!
 
+    private var _bindingItens: LayoutDetalhesItensBinding? = null
+    private val bindingItens get() = _bindingItens!!
+
+    private val entregaItensAdapter by lazy { EntregasItensAdapter() }
+
     private val args: DetalheEntregaFragmentArgs by navArgs()
 
     private val entregaViewModel: EntregaViewModel by activityViewModels()
+    private val detalheEntregaViewModel: DetalheEntregaViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +67,7 @@ class DetalheEntregaFragment : Fragment() {
 
         binding.apply {
             _bindingStatus = layoutStatusEntrega
+            _bindingItens = layoutDetalhesItens
         }
 
 //        ViewCompat.setTransitionName(bindingStatus.tvStatus, "status_${args.entregaId}")
@@ -63,16 +81,36 @@ class DetalheEntregaFragment : Fragment() {
         lifecycleScope.launchWhenCreated {
             entregaViewModel.entregaSelecionada.collect { result ->
                 when(result) {
-                    is EntregaViewModel.EntregaResult.Selected -> bindEntrega(result.entrega)
+                    is EntregaViewModel.EntregaResult.Selected -> bindDetalheEntrega(result.entrega)
+                    else -> Unit
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            detalheEntregaViewModel.detalheEntrega.collect { result ->
+                when (result) {
+                    is DetalheEntregaViewModel.Status.Success -> bindDetalheItens(result.detalheEntrega.listaEntregaItem)
                     else -> Unit
                 }
             }
         }
     }
 
-    private fun bindEntrega(entrega: Entrega) {
+    private fun bindDetalheEntrega(entrega: Entrega) {
+        detalheEntregaViewModel.getDetalheEntrega(entrega)
         bindingStatus.tvOrdemEntrega.text = getString(R.string.label_ordem_entrega, 1)
         bindStatus(entrega.statusEntrega.toInt())
+    }
+
+    private fun bindDetalheItens(listaItem: List<EntregaItem>) {
+        entregaItensAdapter.submitList(listaItem)
+        bindingItens.apply {
+            rvItens.adapter = entregaItensAdapter
+            rvItens.layoutManager =
+                if (listaItem.size > 2) CustomHorizontalGridLayoutManager(requireContext())
+                else GridLayoutManager(context, 2, RecyclerView.HORIZONTAL, false)
+        }
     }
 
     private fun bindStatus(statusEntrega: Int) {

@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.fusiondms.core.datastore.repository.DataStoreChaves
 import br.com.fusiondms.core.datastore.repository.DataStoreRepository
-import br.com.fusiondms.core.model.Resource
 import br.com.fusiondms.core.model.romaneio.Romaneio
 import br.com.fusiondms.feature.cargas.domain.cargasusecase.CargasUseCase
 import br.com.fusiondms.feature.cargas.domain.recusarcargausecase.RecusarCargaUseCase
@@ -78,31 +77,26 @@ class CargasViewModel @Inject constructor(
                     _cargaSelecionada.emit(CargaStatus.Error(it.message))
                 }
                 .collect { result ->
-                    when (result) {
-                        is Resource.Error -> _cargaSelecionada.emit(CargaStatus.Error(result.message))
-                        is Resource.Success -> {
-                            _listaCarga.remove(romaneio)
-                            _cargaSelecionada.emit(CargaStatus.Deleted(_posicao))
-                            _listaCargaStatus.emit(CargaStatus.Deleted(_posicao))
+                    _listaCarga.remove(romaneio)
+                    _cargaSelecionada.emit(CargaStatus.Deleted(_posicao))
+                    _listaCargaStatus.emit(CargaStatus.Deleted(_posicao))
 
-                            if (_listaCarga.size == 0) {
-                                _listaCargaStatus.emit(CargaStatus.Empty)
-                            }
-                        }
+                    if (_listaCarga.size == 0) {
+                        _listaCargaStatus.emit(CargaStatus.Empty)
                     }
                 }
         }
 
     fun setCargaSelecionada(romaneio: Romaneio, posicao: Int) =
         viewModelScope.launch {
-            _cargaSelecionada.emit(CargaStatus.Selected(romaneio))
+            _cargaSelecionada.emit(CargasViewModel.CargaStatus.Selected(romaneio))
             _posicao = posicao
         }
 
     fun resetCargaState() =
         viewModelScope.launch {
-            _cargaSelecionada.emit(CargaStatus.Nothing)
-            _listaCargaStatus.emit(CargaStatus.Nothing)
+            _cargaSelecionada.emit(CargasViewModel.CargaStatus.Nothing)
+            _listaCargaStatus.emit(CargasViewModel.CargaStatus.Nothing)
             _listaCarga = mutableListOf()
         }
 

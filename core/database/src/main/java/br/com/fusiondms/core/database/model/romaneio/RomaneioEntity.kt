@@ -6,7 +6,7 @@ import br.com.fusiondms.core.database.mapper.EntityMapper
 import br.com.fusiondms.core.model.romaneio.Romaneio
 import com.google.gson.Gson
 
-@Entity(tableName = "tb_romaneios")
+@Entity(tableName = "tb_romaneio")
 data class RomaneioEntity(
     var id: Int = 0,
     @PrimaryKey()
