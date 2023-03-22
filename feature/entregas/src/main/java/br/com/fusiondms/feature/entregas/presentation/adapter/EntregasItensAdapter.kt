@@ -8,9 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fusiondms.core.common.R.*
-import br.com.fusiondms.core.common.toLocalCurrency
+import br.com.fusiondms.core.common.toMoedaLocal
 import br.com.fusiondms.core.model.entrega.EntregaItem
-import br.com.fusiondms.feature.entregas.R
 import br.com.fusiondms.feature.entregas.databinding.ItemEntregaItemBinding
 
 class EntregasItensAdapter() : ListAdapter<EntregaItem, EntregasItensAdapter.EntregaItemViewHolder>(DiffCallback) {
@@ -35,25 +34,25 @@ class EntregasItensAdapter() : ListAdapter<EntregaItem, EntregasItensAdapter.Ent
                 tvCodigoDescricao.text =
                     Html.fromHtml("${entregaItem.codigoMercadoria} - ${entregaItem.descricao}", 0)
                 tvPrecoUnitario.text = Html.fromHtml(
-                    "${context.getString(string.label_preco_unitario)}: ${entregaItem.preco.toLocalCurrency()}",
+                    "<b>${context.getString(string.label_preco_unitario)}:</b><br>${entregaItem.preco.toMoedaLocal()}",
                     0
                 )
                 tvQuantidade.text = Html.fromHtml(
-                    "${context.getString(string.label_quantidade)}: ${entregaItem.quantidade}",
+                    "<b>${context.getString(string.label_quantidade)}:</b><br>${entregaItem.quantidade}",
                     0
                 )
                 tvUnidade.text = Html.fromHtml(
-                    "${context.getString(string.label_unidade)}: ${entregaItem.unidade}",
+                    "<b>${context.getString(string.label_unidade)}:</b><br>${entregaItem.unidade}",
                     0
                 )
                 tvPeso.text =
-                    Html.fromHtml("${context.getString(string.label_peso)}: ${entregaItem.peso}", 0)
+                    Html.fromHtml("<b>${context.getString(string.label_peso)}:</b><br>${entregaItem.peso}", 0)
                 tvSt.text = Html.fromHtml(
-                    "${context.getString(string.label_sub_total)}: ${entregaItem.valorST.toLocalCurrency()}",
+                    "<b>${context.getString(string.label_sub_total)}:</b><br>${entregaItem.valorST.toMoedaLocal()}",
                     0
                 )
                 tvTotal.text = Html.fromHtml(
-                    "${context.getString(string.label_total)}: ${entregaItem.subTotal.toLocalCurrency()}",
+                    "${context.getString(string.label_total)}:<br>${entregaItem.subTotal.toMoedaLocal()}",
                     0
                 )
             }

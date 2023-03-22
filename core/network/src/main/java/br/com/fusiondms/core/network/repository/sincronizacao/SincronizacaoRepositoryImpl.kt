@@ -1,6 +1,5 @@
 package br.com.fusiondms.core.network.repository.sincronizacao
 
-import android.util.Log
 import br.com.fusiondms.core.database.AppDatabase
 import br.com.fusiondms.core.model.exceptions.ErrorApiSincronizacao
 import br.com.fusiondms.core.network.api.FusionApi
@@ -8,7 +7,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class SincronizacaoRepositoryImpl @Inject constructor(
@@ -25,6 +23,8 @@ class SincronizacaoRepositoryImpl @Inject constructor(
                            appDatabase.getRomaneioDao().inserirRomaneios(it.listaRomaneio)
                            appDatabase.getEntregaDao().inserirEntregas(it.listaEntrega)
                            appDatabase.getEntregaDao().inserirEntregasItens(it.listaEntregaItem)
+                           appDatabase.getRecebimentoDao().inserirAllRecebimentos(it.listaRecebimento)
+                           appDatabase.getRecebimentoDao().inserirAllFormasPagamento(it.listaTipoPagamento)
                        }
                        emit(code())
                    } else {

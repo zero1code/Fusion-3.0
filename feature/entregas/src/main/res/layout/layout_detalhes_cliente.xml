@@ -19,8 +19,8 @@
         android:layout_margin="@dimen/dimen_medium">
 
         <TextView
-            android:id="@+id/tv_titulo_detalhes_cliente"
-            style="@style/TextAppearance.App.Subtitle2"
+            android:id="@+id/tv_titulo_detalhes_fidcais"
+            style="@style/TextAppearance.App.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_detalhes_cliente"
@@ -29,58 +29,63 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
             android:id="@+id/tv_endereco_entrega"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Endereço de entrega:\nRua Maria Luiza Reis Monteiro dos Santos, n 105."
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_titulo_detalhes_cliente"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_detalhes_fidcais"
+            tools:text="Endereço de entrega:\nRua Maria Luiza Reis Monteiro dos Santos, n 105." />
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
             android:id="@+id/tv_bairro_entrega"
-            android:layout_width="wrap_content"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Bairro:\nRecreio São Jorge."
+            app:layout_constraintEnd_toStartOf="@+id/tv_cidade_entrega"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_endereco_entrega"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_endereco_entrega"
+            tools:text="Bairro:\nRecreio São Jorge." />
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
             android:id="@+id/tv_cidade_entrega"
-            android:layout_width="wrap_content"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Cidade:\nGuarulhos - SP."
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_bairro_entrega"/>
+            android:ellipsize="end"
+            android:gravity="end"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_bairro_entrega"
+            app:layout_constraintTop_toBottomOf="@id/tv_endereco_entrega"
+            tools:text="Cidade:\nGuarulhos - SP." />
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
             android:id="@+id/tv_referencia_entrega"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Referência de entrega:\nPróximo a padaria Fernandes."
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_cidade_entrega"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_bairro_entrega"
+            tools:text="Referência de entrega:\nPróximo a padaria Fernandes." />
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
             android:id="@+id/tv_emails"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Emails:\nemail1@gmail.com\nemail2@gmail.com\nemail3@gmail.com"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_referencia_entrega"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_referencia_entrega"
+            tools:text="Emails:\nemail1@gmail.com\nemail2@gmail.com\nemail3@gmail.com" />
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
             android:id="@+id/tv_telefones"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Telefones para Contato:\n11-91234-3456\n11-2456-6789\n11-98765-4321"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_emails"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_emails"
+            tools:text="Telefones para Contato:\n11-91234-3456\n11-2456-6789\n11-98765-4321" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

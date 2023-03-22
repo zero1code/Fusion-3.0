@@ -4,6 +4,7 @@ import android.content.Context
 import br.com.fusiondms.core.database.dao.RomaneioDao
 import br.com.fusiondms.core.database.dao.DetalheEntregaDao
 import br.com.fusiondms.core.database.dao.EntregaDao
+import br.com.fusiondms.core.database.dao.RecebimentoDao
 import br.com.fusiondms.core.database.repository.entregas.EntregasRepository
 import br.com.fusiondms.core.database.repository.entregas.EntregasRepositoryImpl
 import br.com.fusiondms.core.database.repository.entregas.detalheentrega.DetalheEntregaRepository
@@ -33,8 +34,9 @@ object RepositoryModule {
     @Singleton
     fun provideDetalheEntregasRepository(
         detalheEntregaDao: DetalheEntregaDao,
+        recebimentoDao: RecebimentoDao,
         @ApplicationContext appcontext: Context
-    ) : DetalheEntregaRepository = DetalheEntregaRepositoryImpl(detalheEntregaDao, Dispatchers.IO, appcontext)
+    ) : DetalheEntregaRepository = DetalheEntregaRepositoryImpl(detalheEntregaDao, recebimentoDao, Dispatchers.IO, appcontext)
 
     @Provides
     @Singleton

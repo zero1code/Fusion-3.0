@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/tv_titulo_detalhes_venda"
-            style="@style/TextAppearance.App.Subtitle2"
+            style="@style/TextAppearance.App.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_detalhes_venda"
@@ -29,67 +29,73 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
             android:id="@+id/tv_numero_pedido"
-            android:layout_width="wrap_content"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
-            android:text="Número do pedido: 123456"
+            app:layout_constraintEnd_toStartOf="@+id/tv_numero_carga_erp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_titulo_detalhes_venda"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_detalhes_venda"
+            tools:text="Número do pedido:\n123456" />
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
             android:id="@+id/tv_numero_carga_erp"
-            android:layout_width="wrap_content"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
-            android:text="Carga ERP: 98765"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_numero_pedido"/>
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_numero_pedido"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_detalhes_venda"
+            tools:text="Carga ERP:\n98765" />
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
             android:id="@+id/tv_numero_romaneio_erp"
-            android:layout_width="wrap_content"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
-            android:text="Romaneio ERP: 54321"
+            app:layout_constraintEnd_toStartOf="@+id/tv_telefone_vendedor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_numero_carga_erp"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_numero_pedido"
+            tools:text="Romaneio ERP:\n54321" />
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
+            android:id="@+id/tv_telefone_vendedor"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="@dimen/dimen_zero"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_numero_romaneio_erp"
+            app:layout_constraintTop_toBottomOf="@id/tv_numero_carga_erp"
+            tools:text="Telefone:\n11-912345678" />
+
+        <TextView
             android:id="@+id/tv_vendedor"
-            android:layout_width="wrap_content"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Vendedor: Airton de Sousa Oliveira"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_numero_romaneio_erp"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_numero_romaneio_erp"
+            tools:text="Vendedor: Airton de Sousa Oliveira" />
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
-            android:id="@+id/tv_numero_vendedor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Telefone: 11-912345678"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_vendedor"/>
-
-        <TextView
-            style="@style/TextAppearance.App.Subtitle1"
             android:id="@+id/tv_email_vendedor"
-            android:layout_width="wrap_content"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email: vendedor@gmail.com"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_numero_vendedor"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_vendedor"
+            tools:text="Email: vendedor@gmail.com" />
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle1"
             android:id="@+id/tv_observacao"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Observação:\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_email_vendedor"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_email_vendedor"
+            tools:text="Observação:\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

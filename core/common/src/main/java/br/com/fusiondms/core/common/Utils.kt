@@ -38,7 +38,7 @@ fun Context.hideKeyboard(view: View) {
     inputManager.hideSoftInputFromWindow(view.windowToken, 0)
 }
 
-fun BigDecimal.toLocalCurrency(): String {
+fun BigDecimal.toMoedaLocal(): String {
     return NumberFormat
         .getCurrencyInstance(Locale.getDefault())
         .format(this)
@@ -75,7 +75,7 @@ fun converterDataParaHorasMinutos(dataAtual: Long): String {
 
 fun converterDataParatextoLegivel(dataAtual: Long): String {
     val timestamp = Math.multiplyExact(dataAtual, 1000)
-    val sdf = SimpleDateFormat("E, dd MMM yyyy", Locale.getDefault())
+    val sdf = SimpleDateFormat("E, dd MMM HH:mm", Locale.getDefault())
 //    sdf.timeZone = TimeZone.getTimeZone("UTC")
     val netDate = Date(timestamp)
     val date = sdf.format(netDate).replace(".", "")

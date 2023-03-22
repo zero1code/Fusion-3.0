@@ -2,8 +2,11 @@ package br.com.fusiondms.core.database.repository.entregas.detalheentrega
 
 import android.content.Context
 import br.com.fusiondms.core.database.dao.DetalheEntregaDao
+import br.com.fusiondms.core.database.dao.RecebimentoDao
 import br.com.fusiondms.core.database.model.entrega.EntregaItemEntity
+import br.com.fusiondms.core.database.model.recebimento.RecebimentoEntity
 import br.com.fusiondms.core.model.entrega.DetalheEntrega
+import br.com.fusiondms.core.model.recebimento.Recebimento
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -12,6 +15,7 @@ import javax.inject.Inject
 
 class DetalheEntregaRepositoryImpl @Inject constructor(
     private val detalheEntregaDao: DetalheEntregaDao,
+    private val recebimentoDao: RecebimentoDao,
     private val dispatcher: CoroutineDispatcher,
     private val context: Context
 ) : DetalheEntregaRepository {
@@ -21,6 +25,21 @@ class DetalheEntregaRepositoryImpl @Inject constructor(
                 val entityList = detalheEntregaDao.getEntregaItem(idRomaneio, idEntrega)
                 val listaEntregaItem = EntregaItemEntity().entityListToModel(entityList)
                 emit(DetalheEntrega(listaEntregaItem = listaEntregaItem))
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }.flowOn(dispatcher)
+    }
+
+    override suspend fun getListaRecebimento(
+        idRomaneio: Int,
+        idEntrega: Int
+    ): Flow<List<Recebimento>> {
+        return flow {
+            try {
+                val entityList = recebimentoDao.getAllRecebimento(idRomaneio, idEntrega)
+                val listaRecebimento = RecebimentoEntity().entityListToModel(entityList)
+                emit(listaRecebimento)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

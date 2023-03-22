@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginVertical="@dimen/dimen_normal">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_cartao"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="25dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/brand_background_color"
+        app:cardElevation="@dimen/dimen_zero">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="@dimen/dimen_normal">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_icone_cartao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_dinheiro"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tv_forma_pagamento"
+        style="@style/TextAppearance.App.Subtitle2"
+        android:layout_width="@dimen/dimen_zero"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_normal"
+        app:layout_constraintEnd_toStartOf="@+id/tv_valor"
+        app:layout_constraintStart_toEndOf="@+id/cv_cartao"
+        app:layout_constraintTop_toTopOf="@+id/cv_cartao"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="Débito" />
+
+    <TextView
+        android:id="@+id/tv_data_pagamento"
+        style="@style/TextAppearance.App.Subtitle3"
+        android:layout_width="@dimen/dimen_zero"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_normal"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_cartao"
+        app:layout_constraintEnd_toStartOf="@+id/tv_valor"
+        app:layout_constraintStart_toEndOf="@+id/cv_cartao"
+        app:layout_constraintTop_toBottomOf="@id/tv_forma_pagamento"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="20:03:2023 20:00" />
+
+    <TextView
+        android:id="@+id/tv_valor"
+        style="@style/TextAppearance.App.Subtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_cartao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cv_cartao"
+        android:text="R$ 999.999.99" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

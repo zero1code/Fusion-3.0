@@ -10,8 +10,8 @@
     <!--    Descricoes-->
 
     <!--    Labels com formatacao HTML-->
-    <string name="label_romaneio_id"><![CDATA[<b>Carriage ID:<br/></b>%1$d]]></string>
-    <string name="label_destino"><![CDATA[<b>Whither:<br/></b>%1$s]]></string>
+    <string name="label_romaneio_id"><![CDATA[<b>Carriage ID: </b>%1$d]]></string>
+    <string name="label_destino"><![CDATA[<b>Whither: </b>%1$s]]></string>
     <string name="label_peso_carga"><![CDATA[<b>Weight:<br/></b>%1$s kg]]></string>
     <string name="label_km_total"><![CDATA[<b>Total Km:<br/></b>%1$d km]]></string>
     <string name="label_valor_carga"><![CDATA[<b>Carriage value:<br/></b>%1$s]]></string>
@@ -100,6 +100,7 @@
     <string name="label_vendedor">Seller</string>
     <string name="label_observacao">Observation</string>
     <string name="label_quantidade">Quantity</string>
+    <string name="label_quantidades">Quantities</string>
     <!--    label de uma palavra apenas-->
 
     <!--    label de 2 ou 3 palavras-->

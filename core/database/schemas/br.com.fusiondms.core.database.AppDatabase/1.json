@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "ba9165c8d6f9684fdf9a5e95d2505c9c",
+    "identityHash": "670d4cd0e8af7d62ab6bd97403aa4f57",
     "entities": [
       {
         "tableName": "tb_romaneio",
@@ -55,7 +55,7 @@
         "foreignKeys": []
       },
       {
-        "tableName": "tb_entregas",
+        "tableName": "tb_entrega",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `idEntrega` INTEGER NOT NULL, `idRomaneio` INTEGER NOT NULL, `idCliente` INTEGER NOT NULL, `ordermEntrega` INTEGER NOT NULL, `dadosCliente` TEXT NOT NULL, `localCliente` TEXT NOT NULL, `numeroNotaFiscal` INTEGER NOT NULL, `valor` TEXT NOT NULL, `statusEntrega` TEXT NOT NULL, PRIMARY KEY(`idEntrega`))",
         "fields": [
           {
@@ -225,12 +225,226 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "tb_recebimento",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `idRomaneio` INTEGER NOT NULL, `idEntrega` INTEGER NOT NULL, `valor` TEXT NOT NULL, `tipo` TEXT NOT NULL, `banco` TEXT NOT NULL, `agencia` TEXT NOT NULL, `conta` TEXT NOT NULL, `numCh` TEXT NOT NULL, `dataCh` TEXT NOT NULL, `codigoTransacao` TEXT NOT NULL, `formaPagamento` TEXT NOT NULL, `parcelas` INTEGER NOT NULL, `bandeira` TEXT NOT NULL, `nsu` TEXT NOT NULL, `txid` TEXT NOT NULL, `dataRecebimento` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idRomaneio",
+            "columnName": "idRomaneio",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idEntrega",
+            "columnName": "idEntrega",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "valor",
+            "columnName": "valor",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "banco",
+            "columnName": "banco",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "agencia",
+            "columnName": "agencia",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "conta",
+            "columnName": "conta",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "numCh",
+            "columnName": "numCh",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataCh",
+            "columnName": "dataCh",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "codigoTransacao",
+            "columnName": "codigoTransacao",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "formaPagamento",
+            "columnName": "formaPagamento",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "parcelas",
+            "columnName": "parcelas",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bandeira",
+            "columnName": "bandeira",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nsu",
+            "columnName": "nsu",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "txid",
+            "columnName": "txid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataRecebimento",
+            "columnName": "dataRecebimento",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "tb_tipo_pagamento",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `descricao` TEXT NOT NULL, `tipoFusion` TEXT NOT NULL, `tipoErp` TEXT NOT NULL, `solicitaPagamento` INTEGER NOT NULL, `obrigatorioErp` INTEGER NOT NULL, `permitirMudarTipoPagamento` INTEGER NOT NULL, `formasPagamento` TEXT NOT NULL, `bandeiraCartao` TEXT NOT NULL, `qtdParcelaCartao` INTEGER NOT NULL, `pixKey` TEXT NOT NULL, `pixNome` TEXT NOT NULL, `pixDescricao` TEXT NOT NULL, `pixCidade` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "descricao",
+            "columnName": "descricao",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tipoFusion",
+            "columnName": "tipoFusion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tipoErp",
+            "columnName": "tipoErp",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "solicitaPagamento",
+            "columnName": "solicitaPagamento",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "obrigatorioErp",
+            "columnName": "obrigatorioErp",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "permitirMudarTipoPagamento",
+            "columnName": "permitirMudarTipoPagamento",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "formasPagamento",
+            "columnName": "formasPagamento",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bandeiraCartao",
+            "columnName": "bandeiraCartao",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "qtdParcelaCartao",
+            "columnName": "qtdParcelaCartao",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pixKey",
+            "columnName": "pixKey",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pixNome",
+            "columnName": "pixNome",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pixDescricao",
+            "columnName": "pixDescricao",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pixCidade",
+            "columnName": "pixCidade",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ba9165c8d6f9684fdf9a5e95d2505c9c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '670d4cd0e8af7d62ab6bd97403aa4f57')"
     ]
   }
 }

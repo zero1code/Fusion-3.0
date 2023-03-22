@@ -134,6 +134,11 @@
         <item name="fontFamily">@font/my_poppins_font</item>
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
+    <style name="TextAppearance.App.Subtitle3" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/my_poppins_font</item>
+        <item name="android:textSize">@dimen/small_text</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
     <!-- ESTILO TEXTO -->
 
     <!-- ESTILO NAVIGATIONVIEW -->

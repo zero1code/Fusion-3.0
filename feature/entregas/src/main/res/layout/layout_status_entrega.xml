@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/tv_titulo_status"
-            style="@style/TextAppearance.App.Subtitle2"
+            style="@style/TextAppearance.App.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_status"
@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/tv_status"
-            style="@style/TextAppearance.App.Headline6"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/dimen_medium"
@@ -43,18 +43,18 @@
             style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="ID: 1342545"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_titulo_status"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="ID: 1342545" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_ordem_entrega"
             style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_small"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_id_entrega"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_status"
             tools:text="Ordem da entrega: 01" />
 
         <TextView
@@ -86,7 +86,6 @@
             android:layout_marginTop="@dimen/dimen_normal"
             android:gravity="center"
             android:text="18-11-22 14:45:06"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/tv_chegada"
             app:layout_constraintStart_toStartOf="@+id/tv_chegada"
             app:layout_constraintTop_toBottomOf="@id/fab_chegada" />
@@ -133,11 +132,9 @@
             android:layout_marginTop="@dimen/dimen_normal"
             android:gravity="center"
             android:text="18-11-22 15:15:06"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fab_inicio" />
-
 
 
         <TextView
@@ -170,7 +167,6 @@
             android:layout_marginTop="@dimen/dimen_normal"
             android:gravity="center"
             android:text="18-11-22 16:00:01"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/tv_fim"
             app:layout_constraintStart_toStartOf="@+id/tv_fim"
             app:layout_constraintTop_toBottomOf="@id/fab_fim" />

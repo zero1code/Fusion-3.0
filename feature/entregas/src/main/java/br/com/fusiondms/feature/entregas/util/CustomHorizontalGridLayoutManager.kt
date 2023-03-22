@@ -35,5 +35,5 @@ class CustomHorizontalGridLayoutManager @JvmOverloads constructor(
 
     private val verticalSpace get() = height - paddingTop - paddingBottom
 
-    private val ratio = 0.9f // change to 0.7f for 70%
+    private val ratio = 0.8f // change to 0.7f for 70%
 }

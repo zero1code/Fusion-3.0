@@ -19,8 +19,8 @@
         android:layout_margin="@dimen/dimen_medium">
 
         <TextView
-            android:id="@+id/tv_titulo_detalhes_cliente"
-            style="@style/TextAppearance.App.Subtitle2"
+            android:id="@+id/tv_titulo_detalhes_fidcais"
+            style="@style/TextAppearance.App.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_detalhe_fiscais"
@@ -29,62 +29,68 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_nota_fiscal"
-            style="@style/TextAppearance.App.Subtitle1"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_cnpj_cliente"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
-            android:text="Nota fiscal:\n123456"
+            app:layout_constraintEnd_toStartOf="@+id/tv_nota_fiscal"
+            app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_titulo_detalhes_cliente" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_titulo_detalhes_fidcais"
+            tools:text="CNPJ:\n12.345.567/0001-89" />
 
         <TextView
-            android:id="@+id/tv_valor_nota"
-            style="@style/TextAppearance.App.Subtitle1"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_nota_fiscal"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
-            android:text="Valor da nota:\nR$ 1.549,55"
             android:gravity="end"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_titulo_detalhes_cliente" />
-
-        <TextView
-            android:id="@+id/tv_cnpj_cliente"
-            style="@style/TextAppearance.App.Subtitle1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CNPJ:\n12.345.567/0001-89"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nota_fiscal" />
+            app:layout_constraintStart_toEndOf="@id/tv_cnpj_cliente"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_detalhes_fidcais"
+            tools:text="Nota fiscal:\n123456" />
 
         <TextView
             android:id="@+id/tv_filial_fatura"
-            style="@style/TextAppearance.App.Subtitle1"
-            android:layout_width="wrap_content"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
-            android:text="Filial de fatura:\n123456"
+            app:layout_constraintEnd_toStartOf="@+id/tv_valor_nota"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_cnpj_cliente" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_cnpj_cliente"
+            tools:text="Filial de fatura:\n123456" />
+
+        <TextView
+            android:id="@+id/tv_valor_nota"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="@dimen/dimen_zero"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_filial_fatura"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nota_fiscal"
+            tools:text="Valor da nota:\nR$ 1.549,55" />
 
         <TextView
             android:id="@+id/tv_titulo_quantidades"
             style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quantidades"
-            android:textStyle="bold"
             android:layout_marginVertical="@dimen/dimen_normal"
-            app:layout_constraintTop_toBottomOf="@id/tv_filial_fatura" />
+            android:text="@string/label_quantidades"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_valor_nota" />
 
         <TextView
             android:id="@+id/tv_qtd_itens"
             style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Itens\n34"
             android:gravity="center"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_qtd_volumes"
-            app:layout_constraintTop_toBottomOf="@id/tv_titulo_quantidades" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_quantidades"
+            tools:text="Itens\n34" />
 
         <TextView
             android:id="@+id/tv_qtd_volumes"
@@ -92,61 +98,61 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Volumes\n20"
             app:layout_constraintEnd_toStartOf="@+id/tv_qtd_pallets"
             app:layout_constraintStart_toEndOf="@id/tv_qtd_itens"
-            app:layout_constraintTop_toBottomOf="@id/tv_titulo_quantidades" />
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_quantidades"
+            tools:text="Volumes\n20" />
 
         <TextView
             android:id="@+id/tv_qtd_pallets"
             style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Pallets\n4"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_qtd_volumes"
             app:layout_constraintEnd_toStartOf="@id/tv_qtd_peso"
-            app:layout_constraintTop_toBottomOf="@id/tv_titulo_quantidades" />
+            app:layout_constraintStart_toEndOf="@+id/tv_qtd_volumes"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_quantidades"
+            tools:text="Pallets\n4" />
 
         <TextView
             android:id="@+id/tv_qtd_peso"
             style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Peso\n400.00 kg"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_qtd_pallets"
-            app:layout_constraintTop_toBottomOf="@id/tv_titulo_quantidades" />
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_quantidades"
+            tools:text="Peso\n400.00 kg" />
 
         <TextView
             android:id="@+id/tv_titulo_valores"
             style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Valores"
-            android:textStyle="bold"
             android:layout_marginVertical="@dimen/dimen_normal"
+            android:text="@string/label_valores"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/tv_qtd_itens" />
 
         <TextView
             android:id="@+id/tv_valor_itens_entregues"
-            style="@style/TextAppearance.App.Subtitle1"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Itens entregues: R$ 549,55"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_titulo_valores" />
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_valores"
+            tools:text="Itens entregues: R$ 549,55" />
 
         <TextView
             android:id="@+id/tv_valor_total_itens"
-            style="@style/TextAppearance.App.Subtitle1"
+            style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total dos itens: R$ 1.549,55"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_valor_itens_entregues" />
+            app:layout_constraintTop_toBottomOf="@id/tv_valor_itens_entregues"
+            tools:text="Total dos itens: R$ 1.549,55" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

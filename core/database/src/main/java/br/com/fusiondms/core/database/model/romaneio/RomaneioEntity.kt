@@ -8,13 +8,13 @@ import com.google.gson.Gson
 
 @Entity(tableName = "tb_romaneio")
 data class RomaneioEntity(
-    var id: Int = 0,
+    val id: Int = 0,
     @PrimaryKey()
-    var idRomaneio: Int = 0,
-    var destino: String = "",
-    var qtdEntregas: Int = 0,
-    var status: String = "",
-    var kmTotal: Int = 0,
+    val idRomaneio: Int = 0,
+    val destino: String = "",
+    val qtdEntregas: Int = 0,
+    val status: String = "",
+    val kmTotal: Int = 0,
 ) : EntityMapper<Romaneio, RomaneioEntity> {
 
     override fun mapEntityToModel(entity: RomaneioEntity): Romaneio {

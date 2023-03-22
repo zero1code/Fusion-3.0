@@ -9,18 +9,18 @@ import java.math.BigDecimal
 
 @Entity(tableName = "tb_entrega_item")
 data class EntregaItemEntity(
-    var idRomaneio: Int = 0,
-    var idEntrega: Int = 0,
+    val idRomaneio: Int = 0,
+    val idEntrega: Int = 0,
     @PrimaryKey
-    var idEntregaItem: Long = 0,
-    var codigoMercadoria: String = "",
-    var descricao: String = "",
-    var quantidade: Double = 0.0,
-    var preco: String = "",
-    var unidade: String = "",
-    var valorST: String = "",
-    var subTotal: String = "",
-    var peso: Double = 0.0,
+    val idEntregaItem: Long = 0,
+    val codigoMercadoria: String = "",
+    val descricao: String = "",
+    val quantidade: Double = 0.0,
+    val preco: String = "",
+    val unidade: String = "",
+    val valorST: String = "",
+    val subTotal: String = "",
+    val peso: Double = 0.0,
     val motivoDevolucao: String = "",
     val quantidadeDevolucao: Double = 0.0,
     val entregue: Boolean = false

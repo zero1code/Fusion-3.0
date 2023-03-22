@@ -21,6 +21,9 @@ object DatabaseModule {
     @Provides
     fun provideDetalheEntregaDao(appDatabase: AppDatabase) = appDatabase.getDetalheEntregaDao()
     @Provides
+    fun provideRecebimentoDao(appDatabase: AppDatabase) = appDatabase.getRecebimentoDao()
+
+    @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext appcontext: Context): AppDatabase {
         return Room.databaseBuilder(
@@ -28,7 +31,7 @@ object DatabaseModule {
             AppDatabase::class.java,
             "db.fusion"
         ).addMigrations(
-//            DatabaseMirgation.MIGRATION_3_TO_4
+//            DatabaseMirgation.MIGRATION_1_TO_2
         ).build()
     }
 }

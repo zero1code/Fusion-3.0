@@ -1,15 +1,15 @@
 package br.com.fusiondms.core.model.entrega
 
-data class Entrega(
-    var id: Int = 0,
-    var idEntrega: Int = 0,
-    var idRomaneio: Int = 0,
-    var idCliente: Int = 0,
-    var dadosCliente: String = "",
-    var localCliente: String = "",
-    var numeroNotaFiscal: Int = 0,
-    var valor: String = "",
-    var statusEntrega: String = ""
-) {
+import java.math.BigDecimal
 
-}
+data class Entrega(
+    val id: Int,
+    val idEntrega: Int,
+    val idRomaneio: Int,
+    val idCliente: Int,
+    val dadosCliente: String,
+    val localCliente: String,
+    val numeroNotaFiscal: Int,
+    val valor: BigDecimal,
+    val statusEntrega: String
+)

@@ -33,58 +33,66 @@
         <TextView
             android:id="@+id/tv_preco_unitario"
             style="@style/TextAppearance.App.Subtitle2"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            tools:text="Preço unitário: R$ 3,99"
+            app:layout_constraintEnd_toStartOf="@+id/tv_quantidade"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_codigo_descricao" />
+            app:layout_constraintTop_toBottomOf="@id/tv_codigo_descricao"
+            tools:text="Preço unitário:\nR$ 3,99" />
 
         <TextView
-            style="@style/TextAppearance.App.Subtitle2"
             android:id="@+id/tv_quantidade"
-            android:layout_width="wrap_content"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_preco_unitario"
-            tools:text="Quantidade: 10"/>
+            android:gravity="end"
+            app:layout_constraintStart_toEndOf="@id/tv_preco_unitario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_codigo_descricao"
+            tools:text="Quantidade:\n10" />
 
         <TextView
             android:id="@+id/tv_unidade"
             style="@style/TextAppearance.App.Subtitle2"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
-            tools:text="Unidade: 100"
+            app:layout_constraintEnd_toStartOf="@+id/tv_peso"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_quantidade" />
+            app:layout_constraintTop_toBottomOf="@id/tv_preco_unitario"
+            tools:text="Unidade:\n100" />
 
         <TextView
             style="@style/TextAppearance.App.Subtitle2"
             android:id="@+id/tv_peso"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_unidade"
-            tools:text="Peso: 30.0 kg"/>
+            android:gravity="end"
+            app:layout_constraintStart_toEndOf="@id/tv_unidade"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_quantidade"
+            tools:text="Peso:\n30.0 kg"/>
 
         <TextView
             android:id="@+id/tv_st"
             style="@style/TextAppearance.App.Subtitle2"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
-            tools:text="ST: R$ 39,99"
+            app:layout_constraintEnd_toStartOf="@+id/tv_total"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_peso" />
+            app:layout_constraintTop_toBottomOf="@id/tv_unidade"
+            tools:text="ST:\nR$ 39,99" />
 
         <TextView
             style="@style/TextAppearance.App.Subtitle2"
             android:id="@+id/tv_total"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dimen_zero"
             android:layout_height="wrap_content"
+            android:gravity="end"
+            app:layout_constraintStart_toEndOf="@id/tv_st"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_st"
+            app:layout_constraintTop_toBottomOf="@id/tv_peso"
             android:textStyle="bold"
-            tools:text="Total: R$ 39,99"/>
+            tools:text="Total:\nR$ 39,99"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

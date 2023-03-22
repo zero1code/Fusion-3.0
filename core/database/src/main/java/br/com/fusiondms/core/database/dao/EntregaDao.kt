@@ -17,7 +17,7 @@ interface EntregaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun inserirEntregasItens(listaEntregaItem: List<EntregaItemEntity>)
 
-    @Query("SELECT * FROM tb_entregas WHERE idRomaneio = :idRomaneio")
+    @Query("SELECT * FROM tb_entrega WHERE idRomaneio = :idRomaneio")
     suspend fun getListaEntrega(idRomaneio: Int) : List<EntregaEntity>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
