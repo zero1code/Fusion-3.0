@@ -163,4 +163,9 @@
     </style>
     <!-- ESTILO BOTTOMSHEETDIALOG PERMISSAO -->
 
+    <style name="roundedCornersImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">60dp</item>
+    </style>
+
 </resources>

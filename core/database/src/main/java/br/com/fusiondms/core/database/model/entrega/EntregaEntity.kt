@@ -20,7 +20,8 @@ data class EntregaEntity(
     val localCliente: String = "",
     val numeroNotaFiscal: Int = 0,
     val valor: String = "",
-    val statusEntrega: String = "0"
+    val statusEntrega: String = "0",
+    val formaPagamento: String = ""
 ) : EntityMapper<Entrega, EntregaEntity> {
 
     override fun mapEntityToModel(entity: EntregaEntity): Entrega {

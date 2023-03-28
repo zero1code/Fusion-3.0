@@ -1,5 +1,6 @@
 package br.com.fusiondms.core.network.repository.sincronizacao
 
+import android.util.Log
 import br.com.fusiondms.core.database.AppDatabase
 import br.com.fusiondms.core.model.exceptions.ErrorApiSincronizacao
 import br.com.fusiondms.core.network.api.FusionApi
@@ -33,6 +34,7 @@ class SincronizacaoRepositoryImpl @Inject constructor(
                }
             } catch (e: Exception) {
                 e.printStackTrace()
+                Log.d("TAG", "getSincronizacao: ${e.printStackTrace()}")
             }
         }.flowOn(dispatcher)
     }

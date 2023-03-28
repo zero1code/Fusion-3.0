@@ -11,8 +11,8 @@ import android.view.WindowManager
 import androidx.core.view.WindowInsetsControllerCompat
 
 
-fun Activity.setStatusBarColor(color:Int){
-    statusBarIconColor(this, color)
+fun Activity.setStatusBarColor(color: Int, iconeBranco: Boolean = false){
+    statusBarIconColor(this, if (iconeBranco) Color.BLACK else color)
     val colorFrom = window.statusBarColor
     val colorAnimator = ValueAnimator.ofObject(ArgbEvaluator(), colorFrom, color)
     colorAnimator.duration = 250

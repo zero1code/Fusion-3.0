@@ -5,8 +5,11 @@ import br.com.fusiondms.core.database.dao.DetalheEntregaDao
 import br.com.fusiondms.core.database.dao.RecebimentoDao
 import br.com.fusiondms.core.database.model.entrega.EntregaItemEntity
 import br.com.fusiondms.core.database.model.recebimento.RecebimentoEntity
+import br.com.fusiondms.core.database.model.recebimento.TipoPagamentoEntity
 import br.com.fusiondms.core.model.entrega.DetalheEntrega
+import br.com.fusiondms.core.model.exceptions.ErrorInserirRecebimento
 import br.com.fusiondms.core.model.recebimento.Recebimento
+import br.com.fusiondms.core.model.recebimento.TipoPagamento
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -46,4 +49,31 @@ class DetalheEntregaRepositoryImpl @Inject constructor(
         }.flowOn(dispatcher)
     }
 
+    override suspend fun inserirRecebimento(recebimento: Recebimento): Flow<Long> {
+        return flow {
+            try {
+                val entity = RecebimentoEntity().mapModelToEntity(recebimento)
+                val result = recebimentoDao.inserirRecebimento(entity)
+                if (result > 0) {
+                    emit(result)
+                } else {
+                    throw ErrorInserirRecebimento("Não foi possível adicionar o recebimento.")
+                }
+            }catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }.flowOn(dispatcher)
+    }
+
+    override suspend fun getFormaPagamento(formaPagamento: String): Flow<TipoPagamento> {
+        return flow {
+            try {
+                val entity = recebimentoDao.getFormaPagamento(formaPagamento)
+                val tipoPagamento = TipoPagamentoEntity().mapEntityToModel(entity)
+                emit(tipoPagamento)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }.flowOn(dispatcher)
+    }
 }

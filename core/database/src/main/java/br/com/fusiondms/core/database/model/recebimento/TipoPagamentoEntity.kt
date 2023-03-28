@@ -8,7 +8,7 @@ import com.google.gson.Gson
 
 @Entity(tableName = "tb_tipo_pagamento")
 data class TipoPagamentoEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val descricao: String = "",
     val tipoFusion: String = "",

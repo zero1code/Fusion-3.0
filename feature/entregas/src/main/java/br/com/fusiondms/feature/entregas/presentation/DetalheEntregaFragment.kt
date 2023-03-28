@@ -1,11 +1,15 @@
 package br.com.fusiondms.feature.entregas.presentation
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.transition.TransitionInflater
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,10 +22,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fusiondms.core.common.R
 import br.com.fusiondms.core.common.getColorFromAttr
+import br.com.fusiondms.core.common.getSerializable
+import br.com.fusiondms.core.common.snackbar.TipoMensagem
+import br.com.fusiondms.core.common.snackbar.mensagemCurta
+import br.com.fusiondms.core.common.snackbar.showMessage
 import br.com.fusiondms.core.common.toMoedaLocal
 import br.com.fusiondms.core.model.entrega.Entrega
 import br.com.fusiondms.core.model.entrega.EntregaItem
 import br.com.fusiondms.core.model.recebimento.Recebimento
+import br.com.fusiondms.core.model.recebimento.TipoPagamento
 import br.com.fusiondms.feature.entregas.databinding.FragmentDetalheEntregaBinding
 import br.com.fusiondms.feature.entregas.databinding.LayoutDetalhesClienteBinding
 import br.com.fusiondms.feature.entregas.databinding.LayoutDetalhesFiscaisBinding
@@ -34,6 +43,7 @@ import br.com.fusiondms.feature.entregas.presentation.adapter.RecebimentosAdapte
 import br.com.fusiondms.feature.entregas.presentation.viewmodel.DetalheEntregaViewModel
 import br.com.fusiondms.feature.entregas.presentation.viewmodel.EntregaViewModel
 import br.com.fusiondms.feature.entregas.util.CustomHorizontalGridLayoutManager
+import br.com.fusiondms.feature.pagamentos.presentation.PagamentoMainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.math.BigDecimal
 import java.util.concurrent.TimeUnit
@@ -72,6 +82,19 @@ class DetalheEntregaFragment : Fragment() {
     private val detalheEntregaViewModel: DetalheEntregaViewModel by viewModels()
     
     private lateinit var entregaSelecionada: Entrega
+    private lateinit var tipoPagamento: TipoPagamento
+    private var valorRestante = BigDecimal.ZERO
+
+    private val pagamentoLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        result ->
+        if (result.resultCode == RESULT_OK) {
+            val data = result.data
+            val recebimento = getSerializable(data, PagamentoMainActivity.RECEBIMENTO_KEY, Recebimento::class.java)
+            if (recebimento != null) {
+                novoRecebimento(recebimento)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,6 +127,7 @@ class DetalheEntregaFragment : Fragment() {
         ViewCompat.setTransitionName(bindingStatus.root, "card_${args.entregaId}")
 
         bindObservers()
+        bindListeners()
     }
 
     private fun bindObservers() {
@@ -126,9 +150,58 @@ class DetalheEntregaFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenCreated {
-            detalheEntregaViewModel.listaRecebimento.collect { lista ->
-                recebimentosAdapter.submitList(lista)
-                bindDetalhesRecebimentos(lista)
+            detalheEntregaViewModel.listaRecebimento.collect { result ->
+                when (result) {
+                    is DetalheEntregaViewModel.Status.SuccessListaRecebimento -> {
+                        recebimentosAdapter.submitList(result.listaRecebimento)
+                        bindDetalhesRecebimentos(result.listaRecebimento)
+                    }
+                    else -> Unit
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            detalheEntregaViewModel.recebimento.collect { result ->
+                when (result) {
+                    is DetalheEntregaViewModel.Status.SuccessRecebimento -> recebimentoAdicionado()
+                    is DetalheEntregaViewModel.Status.Error -> result.message?.let {
+                        binding.root.showMessage(it, TipoMensagem.ERROR)
+                    }
+                    else -> Unit
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            detalheEntregaViewModel.tipoPagamento.collect { result ->
+                when (result) {
+                    is DetalheEntregaViewModel.Status.SuccessTipoPagamento ->
+                        tipoPagamento = result.tipoPagamento
+                    else -> Unit
+                }
+            }
+        }
+    }
+
+    private fun bindListeners () {
+        bindingRecebimentos.btnNovoRecebimento.setOnClickListener {
+            if (valorRestante <= BigDecimal.ZERO) {
+                binding.root.showMessage(requireContext().getString(R.string.label_pagamento_entrega_efetuado), TipoMensagem.NORMAL)
+            } else {
+                if (::tipoPagamento.isInitialized) {
+                    val intent =
+                        Intent(requireActivity(), PagamentoMainActivity::class.java).apply {
+                            putExtra(PagamentoMainActivity.TIPO_PAGAMENTO_KEY, tipoPagamento)
+                            putExtra(PagamentoMainActivity.VALOR_PAGAMENTO_KEY, valorRestante)
+                        }
+                    pagamentoLauncher.launch(intent)
+                } else {
+                    binding.root.showMessage(
+                        requireContext().getString(R.string.label_forma_pagamento_nao_encontrada),
+                        TipoMensagem.ERROR
+                    )
+                }
             }
         }
     }
@@ -137,6 +210,7 @@ class DetalheEntregaFragment : Fragment() {
         entregaSelecionada = entrega
         detalheEntregaViewModel.getDetalheEntrega(entrega)
         detalheEntregaViewModel.getListaRecebimento(entrega)
+        detalheEntregaViewModel.getFormaPagamento(entrega.formaPagamento)
         bindDetalhesCliente()
         bindDetalhesFiscais()
         bindDetalhesVenda()
@@ -195,17 +269,43 @@ class DetalheEntregaFragment : Fragment() {
     private fun bindDetalhesRecebimentos(listaRecebimento: List<Recebimento>) {
         bindingRecebimentos.apply {
             var valorRecebido = BigDecimal.ZERO
-            listaRecebimento.forEach { recebimento -> valorRecebido = valorRecebido.add(recebimento.valor) }
-            val  valorRestante = entregaSelecionada.valor.subtract(valorRecebido)
-
+            listaRecebimento.forEach { recebimento ->
+                valorRecebido = valorRecebido.add(recebimento.valor)
+            }
+            valorRestante = entregaSelecionada.valor.subtract(valorRecebido)
+            tvSemRecebimentos.visibility = if (listaRecebimento.isEmpty()) View.VISIBLE else View.GONE
             tvValorEntrega.text = entregaSelecionada.valor.toMoedaLocal()
             tvValorRecebido.text = valorRecebido.toMoedaLocal()
-            tvValorRestante.text = valorRestante.toMoedaLocal()
+            tvValorRestante.setTextColor(
+                if (valorRestante <= BigDecimal.ZERO)
+                    requireContext().getColorFromAttr(com.google.android.material.R.attr.colorOnSurface)
+                else requireContext().getColor(R.color.brand_red)
+            )
+            tvValorRestante.text = requireActivity().getString(R.string.label_valor_a_receber, valorRestante.toMoedaLocal())
 
-            tvFormaPagamentoPreferencial.text = Html.fromHtml("<b>Recebimento preferencial:</b><br>Dineheiro", 0)
+            tvFormaPagamentoPreferencial.text = Html.fromHtml(
+                requireContext().getString(R.string.label_recebimento_preferencial, entregaSelecionada.formaPagamento),
+                0
+            )
             rvTransacoes.adapter = recebimentosAdapter
-            rvTransacoes.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
+            rvTransacoes.addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(),
+                    LinearLayoutManager.VERTICAL
+                )
+            )
         }
+    }
+
+    private fun novoRecebimento(recebimento: Recebimento) {
+        recebimento.idRomaneio = entregaSelecionada.idRomaneio
+        recebimento.idEntrega = entregaSelecionada.idEntrega
+        detalheEntregaViewModel.inserirRecebimento(recebimento)
+    }
+
+    private fun recebimentoAdicionado() {
+        detalheEntregaViewModel.getListaRecebimento(entregaSelecionada)
+        binding.root.showMessage(requireContext().getString(R.string.label_pagamento_efetuado), TipoMensagem.SUCCESS)
     }
 
     private fun bindStatus(statusEntrega: Int) {

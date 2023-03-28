@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vf_pagamento"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/brand_background_color"
+    tools:context=".presentation.PagamentoMainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_titulo"
+            style="@style/TextAppearance.App.Headline4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_medium"
+            android:layout_marginVertical="@dimen/dimen_normal"
+            android:text="@string/label_escolher_forma_pagamento" />
+
+
+        <RadioGroup
+            android:id="@+id/rg_forma_pagamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_titulo"
+            android:layout_marginTop="@dimen/dimen_medium"
+            android:checkedButton="@+id/radio_button_1"
+            android:paddingHorizontal="@dimen/dimen_medium">
+
+        </RadioGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_proximo"
+            style="@style/Theme.Button.Normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/dimen_medium"
+            android:text="@string/label_avancar" />
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="@color/brand_green_success"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_compartilhar"
+            android:layout_width="@dimen/dimen_big2"
+            android:layout_height="@dimen/dimen_big2"
+            android:layout_margin="@dimen/dimen_medium"
+            android:background="@drawable/ripple_background"
+            android:clickable="true"
+            android:padding="@dimen/dimen_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_compartilhar"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_pagemento_retorno"
+            style="@style/TextAppearance.App.Headline5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/label_pagamento_sucesso"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/cv_confirmacao"
+            app:layout_constraintTop_toBottomOf="@+id/iv_compartilhar" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_confirmacao"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginVertical="@dimen/dimen_big2"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_confirmacao"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:tint="@color/brand_green_success"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+                    app:srcCompat="@drawable/ic_check" />
+            </FrameLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/dimen_medium"
+            app:cardCornerRadius="@dimen/card_border_radius"
+            app:cardElevation="@dimen/dimen_zero"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_titulo_detalhes"
+                    style="@style/TextAppearance.App.Headline5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_medium"
+                    android:layout_marginTop="@dimen/dimen_medium"
+                    android:text="@string/label_detalhes_pagamento"
+                    app:layout_constraintTop_toBottomOf="@id/gl_cv_confirmacao_bottom" />
+
+                <TextView
+                    android:id="@+id/tv_forma_pagamento"
+                    style="@style/TextAppearance.App.Subtitle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_medium"
+                    android:layout_marginTop="@dimen/dimen_big"
+                    tools:text="Forma de pagamento\nPix"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_titulo_detalhes" />
+
+                <TextView
+                    android:id="@+id/tv_data_pagamento"
+                    style="@style/TextAppearance.App.Subtitle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_medium"
+                    android:layout_marginTop="@dimen/dimen_medium"
+                    tools:text="Data\nter, 25 de out, 2023"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_forma_pagamento" />
+
+                <TextView
+                    android:id="@+id/tv_valor"
+                    style="@style/TextAppearance.App.Subtitle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_medium"
+                    android:layout_marginTop="@dimen/dimen_medium"
+                    tools:text="Valor\nR$ 1459,00"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_data_pagamento" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_cv_confirmacao_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.05" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ViewFlipper>

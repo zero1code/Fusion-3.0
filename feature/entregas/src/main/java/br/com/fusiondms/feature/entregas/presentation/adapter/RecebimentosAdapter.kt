@@ -1,11 +1,8 @@
 package br.com.fusiondms.feature.entregas.presentation.adapter
 
 
-import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +11,7 @@ import br.com.fusiondms.core.common.toMoedaLocal
 import br.com.fusiondms.core.model.recebimento.Recebimento
 import br.com.fusiondms.feature.entregas.R
 import br.com.fusiondms.feature.entregas.databinding.ItemRecebimentoBinding
+import br.com.fusiondms.feature.pagamentos.utils.ETipoPagamento
 
 class RecebimentosAdapter() : ListAdapter<Recebimento, RecebimentosAdapter.RecebimentoViewHolder>(DiffCallback) {
 
@@ -37,19 +35,24 @@ class RecebimentosAdapter() : ListAdapter<Recebimento, RecebimentosAdapter.Receb
                 tvFormaPagamento.text = recebimento.formaPagamento
                 tvDataPagamento.text = converterDataParatextoLegivel(recebimento.dataRecebimento)
                 tvValor.text = recebimento.valor.toMoedaLocal()
-                ivIconeCartao.setImageDrawable(iconeBandeira(context, recebimento.bandeira))
+                ivIconeCartao.setImageResource(iconeBandeira(recebimento.tipo, recebimento.bandeira))
             }
         }
 
-        private fun iconeBandeira(context: Context, tipo: String): Drawable? {
-            return when(tipo) {
-                "DINHEIRO" -> AppCompatResources.getDrawable(context, br.com.fusiondms.core.common.R.drawable.ic_dinheiro)
-                "VISA" -> AppCompatResources.getDrawable(context, br.com.fusiondms.core.common.R.drawable.ic_cartao_visa)
-                "MASTERCARD" -> AppCompatResources.getDrawable(context, br.com.fusiondms.core.common.R.drawable.ic_cartao_mastercard)
-                "ELO" -> AppCompatResources.getDrawable(context, br.com.fusiondms.core.common.R.drawable.ic_cartao_elo)
-                "PIX" -> AppCompatResources.getDrawable(context, br.com.fusiondms.core.common.R.drawable.ic_pix)
-                else -> AppCompatResources.getDrawable(context, br.com.fusiondms.core.common.R.drawable.ic_dinheiro)
+        private fun iconeBandeira(tipo: String, bandeira: String): Int {
+            var iconeSelecionado = br.com.fusiondms.core.common.R.drawable.ic_dinheiro
+            for (tipoErp in ETipoPagamento.values()) {
+                if (tipoErp.toString() == tipo) {
+                    iconeSelecionado = when (bandeira) {
+                        "VISA" -> br.com.fusiondms.core.common.R.drawable.ic_cartao_visa
+                        "MASTERCARD" -> br.com.fusiondms.core.common.R.drawable.ic_cartao_mastercard
+                        "ELO" -> br.com.fusiondms.core.common.R.drawable.ic_cartao_elo
+                        else -> tipoErp.icone
+                    }
+                    break
+                }
             }
+            return iconeSelecionado
         }
     }
 

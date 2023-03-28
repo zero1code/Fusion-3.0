@@ -95,10 +95,11 @@ fun Snackbar.tipoMensagem(tipoMensagem: TipoMensagem): Snackbar {
     return this
 }
 
-fun View.showMessage(message: String, tipoMensagem: TipoMensagem) {
+fun View.showMessage(message: String, tipoMensagem: TipoMensagem, possuiAncora: Boolean = false) {
     Snackbar
         .make(this, message, Snackbar.LENGTH_LONG)
         .tipoMensagem(tipoMensagem)
+        .setAnchorView(if (possuiAncora) this else null)
         .show()
 
 }

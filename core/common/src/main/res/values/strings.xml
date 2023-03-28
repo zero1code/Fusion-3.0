@@ -17,6 +17,11 @@
     <string name="label_valor_carga"><![CDATA[<b>Carriage value:<br/></b>%1$s]]></string>
     <string name="label_nf_pernota"><![CDATA[<b>Invoice:<br/></b>%1$d]]></string>
     <string name="label_valor"><![CDATA[<b>Value:<br/></b>%1$s]]></string>
+    <string name="label_recebimento_preferencial"><![CDATA[<b>Preferential receipt:<br/></b>%1$s]]></string>
+    <string name="label_forma_pagamento"><![CDATA[<b>Form of payment:<br/></b>%1$s]]></string>
+    <string name="label_data_pagamento"><![CDATA[<b>Pay day:<br/></b>%1$s]]></string>
+    <string name="label_valor_pagamento"><![CDATA[<b>Payment amount:<br/></b>%1$s]]></string>
+    <string name="label_pagamento_efetuado_obrigado"><![CDATA[Payment made<br/>Thank you!]]></string>
     <!--    <string name="label_dados_cliente"><![CDATA[<b>Customer: </b>%1$s<br/><b>Corporate name: </b>%2$s]]></string>-->
     <!--    <string name="label_localizacao_cliente"><![CDATA[<b>District: </b>%1$s<br/><b>City: </b>%2$s<br/><b>Delivery reference: </b> %3$s]]></string>-->
 
@@ -56,6 +61,10 @@
     <string name="label_recusar_carga">Refuse carriage</string>
     <string name="label_entrar">Enter</string>
     <string name="label_novo_recebimento">New Receipt</string>
+    <string name="label_pagar">Pay</string>
+    <string name="label_confirmar_pagamento">Confirm payment</string>
+    <string name="label_avancar">Next</string>
+    <string name="label_alterar_forma_pagamento">Change payment method</string>
     <!--    label de botoes-->
 
     <!--    label de uma palavra apenas-->
@@ -96,11 +105,12 @@
     <string name="label_recebimentos">Receipts</string>
     <string name="label_recebido">Received</string>
     <string name="label_transacoes">Transactions</string>
-    <string name="label_a_receber">Payable</string>
     <string name="label_vendedor">Seller</string>
     <string name="label_observacao">Observation</string>
     <string name="label_quantidade">Quantity</string>
     <string name="label_quantidades">Quantities</string>
+    <string name="label_sim">Yes</string>
+    <string name="label_nao">No</string>
     <!--    label de uma palavra apenas-->
 
     <!--    label de 2 ou 3 palavras-->
@@ -133,18 +143,31 @@
     <string name="label_filial_fatura">Billing subsidiary</string>
     <string name="label_itens_entregues">Delivered items</string>
     <string name="label_total_itens">Total items</string>
-    <string name="label_recebimento_preferencial">Preferential receipt</string>
     <string name="label_valor_entrega">Delivery value</string>
     <string name="label_detalhes_venda">Sale details</string>
     <string name="label_numero_pedido">Order number</string>
     <string name="label_carga_erp">Carriage ERP</string>
     <string name="label_romaneio_erp">Carriage ERP</string>
+    <string name="label_valor_a_receber">To receive: %1$s</string>
+    <string name="label_pagamento_efetuado">Payment made!</string>
+    <string name="label_pagamento_com">Payment with %1$s</string>
+    <string name="label_maquina_pagamento">Payment Terminal</string>
+    <string name="label_detalhes_pagamento">Payment details</string>
+    <string name="label_pagamento_sucesso">Payment made successfully!</string>
     <!--    label de 2 ou 3 palavras-->
 
     <!--    label de frases-->
     <string name="label_nenhuma_carga_encontrada_info">If you only want to use the working day, click in the button below.</string>
     <string name="label_entrega_mesmo_status_info">Delivery is already with this status</string>
     <string name="label_voce_deseja_fazer_info">What do you wish to do?</string>
+    <string name="label_pagamento_entrega_efetuado">Delivery payment has already been made!</string>
+    <string name="label_forma_pagamento_nao_encontrada">Payment method not found!</string>
+    <string name="label_conectar_maquina_pagamento">Would you like to connect the payment terminal with your device?</string>
+    <string name="label_ler_qrcode">Scan the QR Code to make the payment.</string>
+    <string name="label_aguarde_qrcode">Please wait while we generate the QR Code…</string>
+    <string name="label_alterar_valor_pagamento">If you want, you can change the payment amount.</string>
+    <string name="label_escolher_forma_pagamento">Choose the form of payment</string>
+
     <!--    label de frases-->
 
 <!--    Label com plural-->

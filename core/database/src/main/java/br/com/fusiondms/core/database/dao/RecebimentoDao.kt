@@ -14,7 +14,7 @@ interface RecebimentoDao {
     suspend fun inserirAllRecebimentos(listaRecebimento: List<RecebimentoEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun inserirRecebimento(recebimento: RecebimentoEntity)
+    suspend fun inserirRecebimento(recebimento: RecebimentoEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun inserirAllFormasPagamento(listaTipoPagamento: List<TipoPagamentoEntity>)
@@ -22,7 +22,8 @@ interface RecebimentoDao {
     @Query("SELECT * FROM tb_recebimento WHERE idRomaneio = :idRomaneio AND idEntrega = :idEntrega")
     suspend fun getAllRecebimento(idRomaneio: Int, idEntrega: Int) : List<RecebimentoEntity>
 
-//    suspend fun getAllFormasPagamento()
+    @Query("SELECT * FROM tb_tipo_pagamento WHERE tipoErp = :formaPagamento")
+    suspend fun getFormaPagamento(formaPagamento: String) : TipoPagamentoEntity
 
     @Query("DELETE FROM tb_recebimento WHERE idRomaneio = :idRomaneio AND idEntrega = :idEntrega")
     suspend fun deleteRecebimento(idRomaneio: Int, idEntrega: Int) : Int

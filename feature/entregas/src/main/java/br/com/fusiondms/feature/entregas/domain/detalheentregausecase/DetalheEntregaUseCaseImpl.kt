@@ -4,6 +4,7 @@ import br.com.fusiondms.core.database.repository.entregas.detalheentrega.Detalhe
 import br.com.fusiondms.core.model.Conteudo
 import br.com.fusiondms.core.model.entrega.DetalheEntrega
 import br.com.fusiondms.core.model.recebimento.Recebimento
+import br.com.fusiondms.core.model.recebimento.TipoPagamento
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
@@ -19,6 +20,14 @@ class DetalheEntregaUseCaseImpl @Inject constructor(
         idEntrega: Int
     ): Flow<List<Recebimento>> {
         return detalheEntregaRepository.getListaRecebimento(idRomaneio, idEntrega)
+    }
+
+    override suspend fun inserirRecebimento(recebimento: Recebimento): Flow<Long> {
+        return detalheEntregaRepository.inserirRecebimento(recebimento)
+    }
+
+    override suspend fun getFormaPagamento(formaPagamento: String): Flow<TipoPagamento> {
+        return detalheEntregaRepository.getFormaPagamento(formaPagamento)
     }
 
 }

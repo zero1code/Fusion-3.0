@@ -15,4 +15,4 @@ data class TipoPagamento(
     val pixNome: String,
     val pixDescricao: String,
     val pixCidade: String,
-)
+) : java.io.Serializable

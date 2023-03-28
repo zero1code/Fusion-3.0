@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/brand_background_color"
+    tools:context=".presentation.PagamentoCartaoActivity">
+
+    <TextView
+        android:id="@+id/tv_titulo"
+        style="@style/TextAppearance.App.Headline4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_medium"
+        android:layout_marginVertical="@dimen/dimen_normal"
+        tools:text="Pagamento com Cartão de Débito"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress_circular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        app:indicatorColor="@color/brand_celtic_blue"
+        app:indicatorSize="@dimen/progress_bar_indicator_size"
+        app:layout_constraintBottom_toBottomOf="@+id/cv_qrcode"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@+id/cv_qrcode"
+        app:layout_constraintStart_toStartOf="@+id/cv_qrcode"
+        app:layout_constraintTop_toTopOf="@id/cv_qrcode"
+        app:trackCornerRadius="@dimen/progress_bar_track_radius"
+        app:trackThickness="@dimen/progress_bar_track_thickness" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_qrcode"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginVertical="@dimen/dimen_big2"
+        app:cardCornerRadius="100dp"
+        app:layout_constraintBottom_toBottomOf="@id/gl_cv_qrcode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/gl_cv_qrcode">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_cartao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="@dimen/dimen_medium"
+                app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+                app:srcCompat="@drawable/ic_cartao_credito_debito" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/dimen_medium"
+        app:cardCornerRadius="@dimen/card_border_radius"
+        app:cardElevation="@dimen/dimen_zero"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_titulo">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimen_medium">
+
+            <EditText
+                android:id="@+id/et_valor"
+                style="@style/TextAppearance.App.Headline4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_medium"
+                android:gravity="center"
+                tools:hint="R$ 0,00"
+                android:inputType="numberDecimal"
+                android:maxLength="13"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gl_cv_qrcode_bottom" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                style="@style/TextAppearance.App.Headline6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_medium"
+                android:layout_marginVertical="@dimen/dimen_big"
+                android:gravity="center"
+                android:text="@string/label_alterar_valor_pagamento"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_valor" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_cv_qrcode_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.45" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_cv_qrcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_pagar"
+        style="@style/Theme.Button.Normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_medium"
+        android:text="@string/label_pagar"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

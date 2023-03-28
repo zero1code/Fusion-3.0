@@ -10,7 +10,7 @@ import com.google.gson.Gson
 
 @Entity(tableName = "tb_recebimento")
 data class RecebimentoEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val idRomaneio: Int = 0,
     val idEntrega: Int = 0,

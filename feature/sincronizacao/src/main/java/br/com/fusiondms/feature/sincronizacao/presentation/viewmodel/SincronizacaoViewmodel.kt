@@ -41,6 +41,9 @@ class SincronizacaoViewmodel @Inject constructor(
                 _sincronizacaoCompleta.emit(SincronizacaoStatus.Loading(true))
             }
             .onCompletion {
+                it?.let {
+                    _sincronizacaoCompleta.emit(SincronizacaoStatus.Error(it.message))
+                }
                 _sincronizacaoCompleta.emit(SincronizacaoStatus.Loading(false))
             }
             .catch { error ->

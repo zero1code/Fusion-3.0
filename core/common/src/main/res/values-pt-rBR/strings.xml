@@ -17,6 +17,11 @@
     <string name="label_valor_carga"><![CDATA[<b>Valor da carga:<br/></b>%1$s]]></string>
     <string name="label_nf_pernota"><![CDATA[<b>Nota fiscal:<br/></b>%1$d]]></string>
     <string name="label_valor"><![CDATA[<b>Valor:<br/></b>%1$s]]></string>
+    <string name="label_recebimento_preferencial"><![CDATA[<b>Recebimento preferencial:<br/></b>%1$s]]></string>
+    <string name="label_forma_pagamento"><![CDATA[<b>Forma de pagamento:<br/></b>%1$s]]></string>
+    <string name="label_data_pagamento"><![CDATA[<b>Data do pagamento:<br/></b>%1$s]]></string>
+    <string name="label_valor_pagamento"><![CDATA[<b>Valor do pagamento:<br/></b>%1$s]]></string>
+    <string name="label_pagamento_efetuado_obrigado"><![CDATA[Pagamento efetuado<br/>Obrigado!]]></string>
     <!--    <string name="label_dados_cliente"><![CDATA[<b>Customer: </b>%1$s<br/><b>Corporate name: </b>%2$s]]></string>-->
     <!--    <string name="label_localizacao_cliente"><![CDATA[<b>District: </b>%1$s<br/><b>City: </b>%2$s<br/><b>Delivery reference: </b> %3$s]]></string>-->
 
@@ -56,6 +61,10 @@
     <string name="label_recusar_carga">Recusar carga</string>
     <string name="label_entrar">Entrar</string>
     <string name="label_novo_recebimento">Novo Recebimento</string>
+    <string name="label_pagar">Pagar</string>
+    <string name="label_confirmar_pagamento">Confirmar pagamento</string>
+    <string name="label_avancar">Avançar</string>
+    <string name="label_alterar_forma_pagamento">Alterar forma de pagamento</string>
     <!--    label de botoes-->
 
     <!--    label de uma palavra apenas-->
@@ -96,11 +105,12 @@
     <string name="label_recebimentos">Recebimentos</string>
     <string name="label_recebido">Recebido</string>
     <string name="label_transacoes">Transações</string>
-    <string name="label_a_receber">A receber</string>
     <string name="label_vendedor">Vendedor</string>
     <string name="label_observacao">Observação</string>
     <string name="label_quantidade">Quantidade</string>
     <string name="label_quantidades">Quantidades</string>
+    <string name="label_sim">Sim</string>
+    <string name="label_nao">Não</string>
     <!--    label de uma palavra apenas-->
 
     <!--    label de 2 ou 3 palavras-->
@@ -133,18 +143,30 @@
     <string name="label_filial_fatura">Filial de fatura</string>
     <string name="label_itens_entregues">Itens entregues</string>
     <string name="label_total_itens">Total dos itens</string>
-    <string name="label_recebimento_preferencial">Recebimento preferencial</string>
     <string name="label_valor_entrega">Valor da entrega</string>
     <string name="label_detalhes_venda">Detalhes da venda</string>
     <string name="label_numero_pedido">Número do pedido</string>
     <string name="label_carga_erp">Carga ERP</string>
     <string name="label_romaneio_erp">Romaneio ERP</string>
+    <string name="label_valor_a_receber">A receber: %1$s</string>
+    <string name="label_pagamento_efetuado">Pagamento efetuado!</string>
+    <string name="label_pagamento_com">Pagamento com %1$s</string>
+    <string name="label_maquina_pagamento">Maquina de pagamento</string>
+    <string name="label_detalhes_pagamento">Detalhes do pagamento</string>
+    <string name="label_pagamento_sucesso">Pagamento realizado com sucesso!</string>
     <!--    label de 2 ou 3 palavras-->
 
     <!--    label de frases-->
     <string name="label_nenhuma_carga_encontrada_info">Se você quer usar somente a jornada de trabalho, clique no botão abaixo.</string>
     <string name="label_entrega_mesmo_status_info">A entrega já está com esse status</string>
     <string name="label_voce_deseja_fazer_info">O que você gostaria de fazer?</string>
+    <string name="label_pagamento_entrega_efetuado">O pagamento da entrega ja foi efetuado!</string>
+    <string name="label_forma_pagamento_nao_encontrada">Forma de pagamento não foi encontrada!</string>
+    <string name="label_conectar_maquina_pagamento">Gostaria de conectar a máquina de pagamento com o seu aparelho?</string>
+    <string name="label_ler_qrcode">Faça a leitura do QR Code para realizar o pagamento.</string>
+    <string name="label_aguarde_qrcode">Aguarde enquanto geramos o QR Code…</string>
+    <string name="label_alterar_valor_pagamento">Se quiser, você pode alterar o valor do pagamento.</string>
+    <string name="label_escolher_forma_pagamento">Escolha a forma de pagamento</string>
     <!--    label de frases-->
 
     <!--    Label com plural-->

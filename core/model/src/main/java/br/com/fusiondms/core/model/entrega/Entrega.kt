@@ -11,5 +11,6 @@ data class Entrega(
     val localCliente: String,
     val numeroNotaFiscal: Int,
     val valor: BigDecimal,
-    val statusEntrega: String
+    val statusEntrega: String,
+    val formaPagamento: String
 )

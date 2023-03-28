@@ -1,12 +1,22 @@
 package br.com.fusiondms.core.common
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DimenRes
+import androidx.core.content.ContextCompat
+import java.io.Serializable
 import java.math.BigDecimal
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -36,6 +46,14 @@ fun Context.dp(@DimenRes dimen: Int): Float = px(dimen) / resources.displayMetri
 fun Context.hideKeyboard(view: View) {
     val inputManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     inputManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun ImageView.mudarCorIcone(context: Context, color: Int) {
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        this.colorFilter = BlendModeColorFilter(ContextCompat.getColor(context, color), BlendMode.SRC_ATOP)
+    } else {
+        this.setColorFilter(ContextCompat.getColor(context, color), PorterDuff.Mode.SRC_IN)
+    }
 }
 
 fun BigDecimal.toMoedaLocal(): String {
@@ -80,4 +98,18 @@ fun converterDataParatextoLegivel(dataAtual: Long): String {
     val netDate = Date(timestamp)
     val date = sdf.format(netDate).replace(".", "")
     return date.toString()
+}
+
+fun <T : Serializable?> getSerializable(activity: Activity, name: String, clazz: Class<T>): T? {
+    return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+        activity.intent.getSerializableExtra(name, clazz)
+    else
+        activity.intent.getSerializableExtra(name) as T
+}
+
+fun <T : Serializable?> getSerializable(intent: Intent?, name: String, clazz: Class<T>): T? {
+    return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+        intent?.getSerializableExtra(name, clazz)
+    else
+        intent?.getSerializableExtra(name) as T
 }

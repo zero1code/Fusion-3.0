@@ -97,10 +97,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_titulo_valor_entrega" />
 
+        <TextView
+            android:id="@+id/tv_sem_recebimentos"
+            style="@style/TextAppearance.App.Subtitle2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Entrega sem recebimentos."
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/tv_valor_restante"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_titulo_transacoes" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_transacoes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="@dimen/dimen_large"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_titulo_transacoes"

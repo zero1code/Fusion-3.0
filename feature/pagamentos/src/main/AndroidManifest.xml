@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.com.fusiondms.feature.pagamentos">
+
+    <application>
+        <activity
+            android:name=".presentation.PagamentoCartaoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.PagamentoPixActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.PagamentoDinheiroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.PagamentoMainActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>
