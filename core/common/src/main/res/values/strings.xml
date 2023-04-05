@@ -15,7 +15,7 @@
     <string name="label_peso_carga"><![CDATA[<b>Weight:<br/></b>%1$s kg]]></string>
     <string name="label_km_total"><![CDATA[<b>Total Km:<br/></b>%1$d km]]></string>
     <string name="label_valor_carga"><![CDATA[<b>Carriage value:<br/></b>%1$s]]></string>
-    <string name="label_nf_pernota"><![CDATA[<b>Invoice:<br/></b>%1$d]]></string>
+    <string name="label_nf_pernota"><![CDATA[<b>Invoice:<br/></b>%1$s]]></string>
     <string name="label_valor"><![CDATA[<b>Value:<br/></b>%1$s]]></string>
     <string name="label_recebimento_preferencial"><![CDATA[<b>Preferential receipt:<br/></b>%1$s]]></string>
     <string name="label_forma_pagamento"><![CDATA[<b>Form of payment:<br/></b>%1$s]]></string>
@@ -65,6 +65,8 @@
     <string name="label_confirmar_pagamento">Confirm payment</string>
     <string name="label_avancar">Next</string>
     <string name="label_alterar_forma_pagamento">Change payment method</string>
+    <string name="label_devolucao_parcial">Partial return</string>
+    <string name="label_devolucao_total">Total return</string>
     <!--    label de botoes-->
 
     <!--    label de uma palavra apenas-->
@@ -111,6 +113,8 @@
     <string name="label_quantidades">Quantities</string>
     <string name="label_sim">Yes</string>
     <string name="label_nao">No</string>
+    <string name="label_nota_fiscal">Invoice</string>
+    <string name="label_cpf">SSN</string>
     <!--    label de uma palavra apenas-->
 
     <!--    label de 2 ou 3 palavras-->
@@ -154,6 +158,12 @@
     <string name="label_maquina_pagamento">Payment Terminal</string>
     <string name="label_detalhes_pagamento">Payment details</string>
     <string name="label_pagamento_sucesso">Payment made successfully!</string>
+    <string name="label_pesquisar_entregas">Search deliveries</string>
+    <string name="label_escolha_filtro_abaixo">Choose filter below</string>
+    <string name="label_codigo_cliente">Customer ID</string>
+    <string name="label_nome_fantasia">Fantasy name</string>
+    <string name="label_razao_social">Corporate reason</string>
+    <string name="label_devolucao_mercadoria">Products return</string>
     <!--    label de 2 ou 3 palavras-->
 
     <!--    label de frases-->
@@ -167,6 +177,8 @@
     <string name="label_aguarde_qrcode">Please wait while we generate the QR Code…</string>
     <string name="label_alterar_valor_pagamento">If you want, you can change the payment amount.</string>
     <string name="label_escolher_forma_pagamento">Choose the form of payment</string>
+    <string name="label_escolher_filtro_busca">Choose the filter to perform the search</string>
+    <string name="label_qual_tipo_devolucao">What type of returns will be made?</string>
 
     <!--    label de frases-->
 

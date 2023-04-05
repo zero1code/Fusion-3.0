@@ -168,4 +168,44 @@
         <item name="cornerSize">60dp</item>
     </style>
 
+    <!-- ESTILO TEXTINPUTLAYOUT -->
+    <style name="TextInputLayoutRoundedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MyApp.TextInputLayout.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/card_border_radius</item>
+    </style>
+    <!-- ESTILO TEXTINPUTLAYOUT -->
+
+    <!--    Chip-->
+    <style name="Widget.App.ChipChoice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_background_color</item>
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">@color/chip_stroke_color</item>
+        <item name="checkedIconVisible">true</item>
+        <item name="checkedIconTint">?attr/colorOnPrimary</item>
+        <item name="android:textAppearance">@style/chipText</item>
+        <item name="shapeAppearanceOverlay">@style/chipSahpe</item>
+    </style>
+
+    <style name="chipText" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textSize">@dimen/normal_text</item>
+        <item name="android:fontFamily">@font/my_poppins_font</item>
+    </style>
+
+    <style name="chipSahpe">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/card_border_radius</item>
+    </style>
+    <!--    Chip-->
+
+    <!--    Snackbar-->
+    <style name="SnackBarStyle" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:layout_margin">@dimen/dimen_medium</item>
+    </style>
+    <!--    Snackbar-->
+
 </resources>

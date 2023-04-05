@@ -3,6 +3,7 @@ package br.com.fusiondms.core.common
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.view.View
+import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.AnticipateInterpolator
 import android.view.animation.DecelerateInterpolator
@@ -124,4 +125,28 @@ fun LinearProgressIndicator.progressAnimation(progress: Int) {
 
 fun View.fabAnimation(value: Float) {
     this.animate().scaleX(value).scaleY(value).setDuration(0).start()
+}
+
+fun View.circularRevealAnimation(viewToReveal: View) {
+    val viewInicioAnim = this
+    val cx = (viewInicioAnim.left + viewInicioAnim.right)  / 2
+    val cy = (viewInicioAnim.top + viewInicioAnim.bottom) / 2
+
+    val anim = ViewAnimationUtils.createCircularReveal(viewToReveal, cx, cy, 0f, viewToReveal.width.toFloat())
+    anim.duration = 300
+    viewToReveal.visibility = View.VISIBLE
+    anim.start()
+}
+
+fun View.circularConcealAnimation(viewToConceal: View) {
+    val viewFimAnim = this
+    val cx = (viewFimAnim.right + viewFimAnim.left) / 2
+    val cy = (viewFimAnim.top + viewFimAnim.bottom) / 2
+
+    val anim = ViewAnimationUtils.createCircularReveal(viewToConceal, cx, cy, viewToConceal.width.toFloat(), 0f)
+    anim.duration = 300
+    anim.doOnEnd {
+        viewToConceal.visibility = View.INVISIBLE
+    }
+    anim.start()
 }

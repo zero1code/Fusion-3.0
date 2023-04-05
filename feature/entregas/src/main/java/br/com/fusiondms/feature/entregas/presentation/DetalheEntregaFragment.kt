@@ -43,6 +43,14 @@ import br.com.fusiondms.feature.entregas.presentation.adapter.RecebimentosAdapte
 import br.com.fusiondms.feature.entregas.presentation.viewmodel.DetalheEntregaViewModel
 import br.com.fusiondms.feature.entregas.presentation.viewmodel.EntregaViewModel
 import br.com.fusiondms.feature.entregas.util.CustomHorizontalGridLayoutManager
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_ADIADA
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_CHEGADA_CLIENTE
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA_PARCIAL
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA_TOTAL
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_INICIADA
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_PENDENTE
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_REALIZADA
 import br.com.fusiondms.feature.pagamentos.presentation.PagamentoMainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.math.BigDecimal
@@ -310,32 +318,32 @@ class DetalheEntregaFragment : Fragment() {
 
     private fun bindStatus(statusEntrega: Int) {
         when(statusEntrega) {
-            0 -> {
+            ENTREGA_PENDENTE -> {
                 bindingStatus.root.setCardBackgroundColor(requireContext().getColorFromAttr(com.google.android.material.R.attr.colorOnPrimary))
                 bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(R.string.label_pendente)}</b>", 0)
                 bindingStatus.tvStatus.setTextColor(requireContext().getColorFromAttr(com.google.android.material.R.attr.colorOnSurface))
             }
-            1 -> {
+            ENTREGA_CHEGADA_CLIENTE -> {
                 bindingStatus.root.setCardBackgroundColor(requireContext().getColor(R.color.brand_gomboje_orange_ripple))
                 bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(R.string.label_aguardando)}</b>", 0)
                 bindingStatus.tvStatus.setTextColor(requireContext().getColor(R.color.brand_gomboje_orange))
             }
-            2 -> {
+            ENTREGA_INICIADA -> {
                 bindingStatus.root.setCardBackgroundColor(requireContext().getColor(R.color.brand_celtic_blue_ripple))
                 bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(R.string.label_em_andamento)}</b>", 0)
                 bindingStatus.tvStatus.setTextColor(requireContext().getColor(R.color.brand_celtic_blue))
             }
-            3 -> {
+            ENTREGA_REALIZADA -> {
                 bindingStatus.root.setCardBackgroundColor(requireContext().getColor(R.color.brand_green_success_ripple))
                 bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(R.string.label_entregue)}</b>", 0)
                 bindingStatus.tvStatus.setTextColor(requireContext().getColor(R.color.brand_green_success))
             }
-            4 -> {
+            ENTREGA_DEVOLVIDA_PARCIAL, ENTREGA_DEVOLVIDA_TOTAL -> {
                 bindingStatus.root.setCardBackgroundColor(requireContext().getColor(R.color.brand_red_ripple))
                 bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(R.string.label_devolvida)}</b>", 0)
                 bindingStatus.tvStatus.setTextColor(requireContext().getColor(R.color.brand_red))
             }
-            5 -> {
+            ENTREGA_ADIADA -> {
                 bindingStatus.root.setCardBackgroundColor(requireContext().getColor(R.color.brand_selective_yellow_ripple))
                 bindingStatus.tvStatus.text = Html.fromHtml("<b>${getString(R.string.label_adiada)}</b>", 0)
                 bindingStatus.tvStatus.setTextColor(requireContext().getColor(R.color.brand_selective_yellow))

@@ -15,7 +15,7 @@
     <string name="label_peso_carga"><![CDATA[<b>Peso:</b>%1$s kg]]></string>
     <string name="label_km_total"><![CDATA[<b>Total Km:<br/></b>%1$d km]]></string>
     <string name="label_valor_carga"><![CDATA[<b>Valor da carga:<br/></b>%1$s]]></string>
-    <string name="label_nf_pernota"><![CDATA[<b>Nota fiscal:<br/></b>%1$d]]></string>
+    <string name="label_nf_pernota"><![CDATA[<b>Nota fiscal:<br/></b>%1$s]]></string>
     <string name="label_valor"><![CDATA[<b>Valor:<br/></b>%1$s]]></string>
     <string name="label_recebimento_preferencial"><![CDATA[<b>Recebimento preferencial:<br/></b>%1$s]]></string>
     <string name="label_forma_pagamento"><![CDATA[<b>Forma de pagamento:<br/></b>%1$s]]></string>
@@ -65,6 +65,8 @@
     <string name="label_confirmar_pagamento">Confirmar pagamento</string>
     <string name="label_avancar">Avançar</string>
     <string name="label_alterar_forma_pagamento">Alterar forma de pagamento</string>
+    <string name="label_devolucao_parcial">Devolução parcial</string>
+    <string name="label_devolucao_total">Devolução total</string>
     <!--    label de botoes-->
 
     <!--    label de uma palavra apenas-->
@@ -111,6 +113,7 @@
     <string name="label_quantidades">Quantidades</string>
     <string name="label_sim">Sim</string>
     <string name="label_nao">Não</string>
+    <string name="label_cpf">CPF</string>
     <!--    label de uma palavra apenas-->
 
     <!--    label de 2 ou 3 palavras-->
@@ -154,6 +157,13 @@
     <string name="label_maquina_pagamento">Maquina de pagamento</string>
     <string name="label_detalhes_pagamento">Detalhes do pagamento</string>
     <string name="label_pagamento_sucesso">Pagamento realizado com sucesso!</string>
+    <string name="label_pesquisar_entregas">Pesquisar entregas</string>
+    <string name="label_escolha_filtro_abaixo">Escolha o filtro abaixo</string>
+    <string name="label_nota_fiscal">Nota fiscal</string>
+    <string name="label_codigo_cliente">Código cliente</string>
+    <string name="label_nome_fantasia">Nome fantasia</string>
+    <string name="label_razao_social">Razão social</string>
+    <string name="label_devolucao_mercadoria">Devolução de mercadoria</string>
     <!--    label de 2 ou 3 palavras-->
 
     <!--    label de frases-->
@@ -167,6 +177,8 @@
     <string name="label_aguarde_qrcode">Aguarde enquanto geramos o QR Code…</string>
     <string name="label_alterar_valor_pagamento">Se quiser, você pode alterar o valor do pagamento.</string>
     <string name="label_escolher_forma_pagamento">Escolha a forma de pagamento</string>
+    <string name="label_escolher_filtro_busca">Escolha o filtro para realizar a busca</string>
+    <string name="label_qual_tipo_devolucao">Que tipo de devolução será realizada?</string>
     <!--    label de frases-->
 
     <!--    Label com plural-->

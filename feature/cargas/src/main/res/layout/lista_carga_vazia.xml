@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tv_title"
-        app:srcCompat="@drawable/ic_cancel_rounded"/>
+        app:srcCompat="@drawable/ic_cancelar_rounded"/>
 
     <TextView
         android:id="@+id/tv_title"

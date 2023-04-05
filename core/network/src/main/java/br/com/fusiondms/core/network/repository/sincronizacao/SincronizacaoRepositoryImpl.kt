@@ -8,6 +8,8 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class SincronizacaoRepositoryImpl @Inject constructor(
@@ -32,9 +34,15 @@ class SincronizacaoRepositoryImpl @Inject constructor(
                        throw ErrorApiSincronizacao(message(), code())
                    }
                }
+            } catch (ste: SocketTimeoutException) {
+                throw Exception("Não houve resposta do servidor:\n${ste.message}")
+            } catch (ce: ConnectException) {
+                throw Exception(ce.message)
+            } catch (ise: IllegalStateException) {
+                throw Exception("Erro no banco de dados local:\n${ise.message}")
             } catch (e: Exception) {
                 e.printStackTrace()
-                Log.d("TAG", "getSincronizacao: ${e.printStackTrace()}")
+                throw Exception(e.message)
             }
         }.flowOn(dispatcher)
     }

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardElevation="@dimen/card_elevation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_medium"
     app:cardCornerRadius="@dimen/card_border_radius"
-    android:layout_margin="@dimen/dimen_medium">
+    app:cardElevation="@dimen/card_elevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/dimen_normal"
-        android:paddingHorizontal="@dimen/dimen_medium">
+        android:paddingTop="@dimen/dimen_medium">
 
         <TextView
             android:id="@+id/tv_cliente"
             style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:paddingHorizontal="@dimen/dimen_medium"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Cliente: 5535\nRazão Social:SUPERMERCADO CAZAJEIRAS LTDA" />
 
         <TextView
@@ -28,16 +28,19 @@
             style="@style/TextAppearance.App.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_cliente"
+            android:paddingHorizontal="@dimen/dimen_medium"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_cliente"
             tools:text="Bairro: Centro\nCidade: CAJZEIRAS/PB\nReferência de entrega: Próx. ao Armazém paraíba" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_entregas_child"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingEnd="@dimen/dimen_medium"
+            android:paddingVertical="@dimen/dimen_medium"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tv_local"
             tools:listitem="@layout/item_entrega_child" />

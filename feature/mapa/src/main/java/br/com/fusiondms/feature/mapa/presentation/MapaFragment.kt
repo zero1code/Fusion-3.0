@@ -13,7 +13,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import android.text.Editable
 import android.text.Html
+import android.text.InputType
+import android.text.TextWatcher
 import android.transition.Fade
 import android.util.Log
 import android.view.LayoutInflater
@@ -33,17 +36,29 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import br.com.fusiondms.core.common.*
+import br.com.fusiondms.core.common.bottomdialog.Dialog
 import br.com.fusiondms.core.common.permissiondiaolog.PermissionRequestDialog
+import br.com.fusiondms.core.common.snackbar.TipoMensagem
 import br.com.fusiondms.core.common.snackbar.mensagemCurta
+import br.com.fusiondms.core.common.snackbar.showMessage
 import br.com.fusiondms.core.model.entrega.Entrega
 import br.com.fusiondms.core.servives.location.ForegroundLocationService
 import br.com.fusiondms.feature.entregas.presentation.adapter.EntregasParentAdapter
 import br.com.fusiondms.feature.entregas.databinding.ItemEntregaChildBinding
 import br.com.fusiondms.feature.entregas.presentation.viewmodel.EntregaViewModel
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_ADIADA
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_CHEGADA_CLIENTE
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA_PARCIAL
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA_TOTAL
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_INICIADA
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_PENDENTE
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_REALIZADA
 import br.com.fusiondms.feature.mapa.R.*
 import br.com.fusiondms.feature.mapa.databinding.EntregasBottomSheetBinding
 import br.com.fusiondms.feature.mapa.databinding.EntregasInfoGeraisBinding
 import br.com.fusiondms.feature.mapa.databinding.FragmentMapaBinding
+import br.com.fusiondms.feature.mapa.databinding.LayoutPesquisarBinding
 import br.com.fusiondms.feature.mapa.dialogeventos.DialogEventos
 import br.com.fusiondms.feature.mapa.dialogeventos.interfaces.IDialogEventos
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -56,6 +71,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -63,10 +79,12 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentMapaBinding? = null
     private var _bindingSheet: EntregasBottomSheetBinding? = null
     private var _bindingSheetInfoGerais: EntregasInfoGeraisBinding? = null
+    private var _bindingPesquisarEntregas: LayoutPesquisarBinding? = null
 
     private val binding get() = _binding!!
     private val bindingSheet get() = _bindingSheet!!
     private val bindingSheetInfoGerais get() = _bindingSheetInfoGerais!!
+    private val bindingPesquisarEntregas get() = _bindingPesquisarEntregas!!
 
     private val entregaViewModel: EntregaViewModel by activityViewModels()
 
@@ -81,6 +99,8 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     private lateinit var dialogEventos: DialogEventos
 
     private var clientePosicao = -1
+    private var chipSelecionadoId = -1
+    private var chipSelecionado: Chip? = null
 
     private var foregroundLocationServiceBound = false
     // Fornece a atualizações de localização para while-in-use recurso.
@@ -174,10 +194,12 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 //            entregaViewModel.getListaEntrega()
             _bindingSheet = bottomSheet
             _bindingSheetInfoGerais = bindingSheet.ltEntregasInfoGerais
+            _bindingPesquisarEntregas = bindingSheet.ltPesquisarEntregas
 
             entregaViewModel.getListaEntrega()
             setupRecyclerViewEntregas()
             setupBottomSheetEntregas()
+            setupPesquisaAvancada()
         }
 
         bindObservers()
@@ -188,7 +210,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     private fun bindObservers() {
         lifecycleScope.launchWhenCreated {
             entregaViewModel.listaEntrega.collect { listaCliente ->
-                adapterEntregas.submitList(listaCliente)
+                adapterEntregas.atualizarLista(listaCliente)
             }
         }
 
@@ -230,18 +252,45 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         bindingSheetInfoGerais.apply {
             cvPendente.setOnClickListener {
                 val ativo = checarStatusEntregaFiltro(cvPendenteIndicador)
+                adapterEntregas.filtroPorStatus(
+                    ENTREGA_PENDENTE, ENTREGA_CHEGADA_CLIENTE, ENTREGA_INICIADA,
+                    adicionarFiltro = ativo
+                )
             }
 
             cvRealizada.setOnClickListener {
                 val ativo = checarStatusEntregaFiltro(cvRealizadaIndicador)
+                adapterEntregas.filtroPorStatus(ENTREGA_REALIZADA, adicionarFiltro = ativo)
             }
 
             cvAdiada.setOnClickListener {
                 val ativo = checarStatusEntregaFiltro(cvAdiadaIndicador)
+                adapterEntregas.filtroPorStatus(ENTREGA_ADIADA, adicionarFiltro = ativo)
             }
 
             cvDevolvida.setOnClickListener {
                 val ativo = checarStatusEntregaFiltro(cvDevolvidaIndicador)
+                adapterEntregas.filtroPorStatus(
+                    ENTREGA_DEVOLVIDA_PARCIAL,
+                    adicionarFiltro = ativo
+                )
+            }
+        }
+
+        bindingSheet.apply {
+            ivPesquisar.setOnClickListener { abrirLayoutPesquisa() }
+        }
+
+        bindingPesquisarEntregas.apply {
+            ivFechar.setOnClickListener { fecharLayoutPesquisa() }
+            etPesquisar.setOnFocusChangeListener { v, hasFocus ->
+                if (hasFocus) bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+
+            etPesquisar.setOnClickListener {
+                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED ||
+                    bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED
+                ) bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
         }
     }
@@ -275,9 +324,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             startPostponedEnterTransition()
         }
         bindingSheet.rvEntregas.apply {
-            if (!adapterEntregas.hasObservers()) {
-                adapterEntregas.setHasStableIds(true)
-            }
+            if (!adapterEntregas.hasObservers()) adapterEntregas.setHasStableIds(true)
             adapter = adapterEntregas
         }
     }
@@ -337,14 +384,101 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         val isVisible = cvIndicador.isVisible
         cvIndicador.visibility = if (isVisible) View.INVISIBLE else View.VISIBLE
 
-        return isVisible
+        return !isVisible
+    }
+
+    private fun setupPesquisaAvancada() {
+        val pesquisarListener = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val textoParaPesquisar = s.toString().trim()
+                if (chipSelecionadoId == -1 && textoParaPesquisar.isNotBlank()) {
+                    binding.root.showMessage(requireContext().getString(R.string.label_escolher_filtro_busca), TipoMensagem.ERROR)
+                    bindingPesquisarEntregas.etPesquisar.setText("")
+                } else {
+                    val filtrarPor = chipSelecionado?.text.toString()
+                    adapterEntregas.filtroAvancado(requireContext(),textoParaPesquisar, filtrarPor)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        }
+
+        bindingPesquisarEntregas.apply {
+            chipGroupFiltros.setOnCheckedChangeListener { group, checkedId ->
+                if (checkedId == chipSelecionadoId) return@setOnCheckedChangeListener
+                chipSelecionadoId = checkedId
+                if (chipSelecionadoId != -1) {
+                    val chip = group.findViewById<Chip>(chipSelecionadoId)
+                    chip.isChecked = true
+                    tilPesquisar.hint = chip.text.toString()
+                    etPesquisar.setText("")
+                    setupTipoTeclado(chip.text.toString())
+
+                    chipSelecionado = chip
+                }
+            }
+            etPesquisar.addTextChangedListener(pesquisarListener)
+        }
+    }
+
+    private fun setupTipoTeclado(tipoFiltro: String) {
+        val etPesquisar = bindingPesquisarEntregas.etPesquisar
+        when (tipoFiltro) {
+            requireContext().getString(R.string.label_nota_fiscal),
+            requireContext().getString(R.string.label_codigo_cliente),
+            requireContext().getString(R.string.label_cpf),
+            requireContext().getString(R.string.label_cnpj) -> {
+                etPesquisar.inputType = InputType.TYPE_CLASS_NUMBER
+            }
+            else -> {
+                etPesquisar.inputType = InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
+            }
+        }
+    }
+
+    private fun abrirLayoutPesquisa() {
+        limparFiltroPesquisa()
+        bindingSheetInfoGerais.root.visibility = View.INVISIBLE
+        bindingSheet.ivPesquisar.circularRevealAnimation(bindingPesquisarEntregas.root)
+    }
+
+    private fun fecharLayoutPesquisa() {
+        bindingSheetInfoGerais.root.visibility = View.VISIBLE
+        bindingSheet.ivPesquisar.circularConcealAnimation(bindingPesquisarEntregas.root)
+        bindingPesquisarEntregas.apply {
+            requireContext().hideKeyboard(etPesquisar)
+            etPesquisar.setText("")
+            tilPesquisar.hint = requireContext().getString(R.string.label_escolha_filtro_abaixo)
+            chipGroupFiltros.clearCheck()
+            chipSelecionadoId = -1
+        }
+    }
+
+    private fun limparFiltroPesquisa() {
+        bindingSheetInfoGerais.apply {
+            cvPendenteIndicador.visibility = View.INVISIBLE
+            cvRealizadaIndicador.visibility = View.INVISIBLE
+            cvAdiadaIndicador.visibility = View.INVISIBLE
+            cvDevolvidaIndicador.visibility = View.INVISIBLE
+            entregaViewModel.getListaEntrega()
+        }
     }
 
     private fun setupDialogEvento(entrega: Entrega) {
         val iDialogEvento = object : IDialogEventos {
             override fun onEventoClick(idEvento: Int) {
-                if (idEvento < 6) {
-                    entregaViewModel.updateStatusEntrega(entrega, idEvento)
+                if (idEvento < 9) {
+                    if (idEvento == ENTREGA_DEVOLVIDA) {
+                        setupDialogEntregaDevolvida(entrega)
+                    } else {
+                        entregaViewModel.updateStatusEntrega(entrega, idEvento)
+                    }
                 }
                 binding.root.mensagemCurta(idEvento.toString())
             }
@@ -352,6 +486,21 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         dialogEventos = DialogEventos(entrega, requireContext())
         dialogEventos.initListener(iDialogEvento)
         dialogEventos.show(requireActivity().supportFragmentManager, DialogEventos.TAG)
+    }
+
+    private fun setupDialogEntregaDevolvida(entrega: Entrega) {
+        Dialog(
+            requireContext().getString(R.string.label_devolucao_mercadoria),
+            requireContext().getString(R.string.label_qual_tipo_devolucao),
+            requireContext().getString(R.string.label_devolucao_parcial),
+            requireContext().getString(R.string.label_devolucao_total),
+            acaoPositiva = {
+                entregaViewModel.updateStatusEntrega(entrega, ENTREGA_DEVOLVIDA_PARCIAL)
+            },
+            acaoNegativa = {
+                entregaViewModel.updateStatusEntrega(entrega, ENTREGA_DEVOLVIDA_TOTAL)
+            }
+        ).show(requireActivity().supportFragmentManager, Dialog.TAG)
     }
 
     private fun verificarPermissao(): Boolean {
@@ -453,8 +602,8 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                 R.drawable.ic_location_all_time,
                 getString(R.string.label_permissao_localizacao_background),
                 getString(R.string.label_permissao_localizacao_background_mensagem),
-                getString(br.com.fusiondms.core.common.R.string.label_aceitar_permissao),
-                getString(br.com.fusiondms.core.common.R.string.label_ir_para_configuracoes),
+                getString(R.string.label_aceitar_permissao),
+                getString(R.string.label_ir_para_configuracoes),
                 acaoAceitarPermissao = { solicitarPermissaoBackground() },
                 acaoConfiguracoes = { actionConfiguracoes() }
             )

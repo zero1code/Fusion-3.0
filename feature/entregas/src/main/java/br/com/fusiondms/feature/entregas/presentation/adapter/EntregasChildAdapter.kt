@@ -11,6 +11,13 @@ import br.com.fusiondms.core.common.getColorFromAttr
 import br.com.fusiondms.core.common.R
 import br.com.fusiondms.core.model.entrega.Entrega
 import br.com.fusiondms.feature.entregas.databinding.ItemEntregaChildBinding
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_ADIADA
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_CHEGADA_CLIENTE
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA_PARCIAL
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA_TOTAL
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_INICIADA
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_PENDENTE
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_REALIZADA
 
 class EntregasChildAdapter()
     : ListAdapter<Entrega, EntregasChildAdapter.EntregasViewHolder>(DiffCallback) {
@@ -45,32 +52,32 @@ class EntregasChildAdapter()
             //Transition
 
             when(entrega.statusEntrega.toInt()) {
-                0 -> {
+                ENTREGA_PENDENTE -> {
                     binding.root.setCardBackgroundColor(context.getColorFromAttr(com.google.android.material.R.attr.colorSurface))
                     binding.tvStatus.text = Html.fromHtml("<b>${context.getString(R.string.label_pendente)}</b>", 0)
                     binding.tvStatus.setTextColor(context.getColorFromAttr(com.google.android.material.R.attr.colorOnSurface))
                 }
-                1 -> {
+                ENTREGA_CHEGADA_CLIENTE -> {
                     binding.root.setCardBackgroundColor(context.getColor(R.color.brand_gomboje_orange_ripple))
                     binding.tvStatus.text = Html.fromHtml("<b>${context.getString(R.string.label_aguardando)}</b>", 0)
                     binding.tvStatus.setTextColor(context.getColor(R.color.brand_gomboje_orange))
                 }
-                2 -> {
+                ENTREGA_INICIADA -> {
                     binding.root.setCardBackgroundColor(context.getColor(R.color.brand_celtic_blue_ripple))
                     binding.tvStatus.text = Html.fromHtml("<b>${context.getString(R.string.label_em_andamento)}</b>", 0)
                     binding.tvStatus.setTextColor(context.getColor(R.color.brand_celtic_blue))
                 }
-                3 -> {
+                ENTREGA_REALIZADA -> {
                     binding.root.setCardBackgroundColor(context.getColor(R.color.brand_green_success_ripple))
                     binding.tvStatus.text = Html.fromHtml("<b>${context.getString(R.string.label_entregue)}</b>", 0)
                     binding.tvStatus.setTextColor(context.getColor(R.color.brand_green_success))
                 }
-                4 -> {
+                ENTREGA_DEVOLVIDA_PARCIAL, ENTREGA_DEVOLVIDA_TOTAL -> {
                     binding.root.setCardBackgroundColor(context.getColor(R.color.brand_red_ripple))
                     binding.tvStatus.text = Html.fromHtml("<b>${context.getString(R.string.label_devolvida)}</b>", 0)
                     binding.tvStatus.setTextColor(context.getColor(R.color.brand_red))
                 }
-                5 -> {
+                ENTREGA_ADIADA -> {
                     binding.root.setCardBackgroundColor(context.getColor(R.color.brand_selective_yellow_ripple))
                     binding.tvStatus.text = Html.fromHtml("<b>${context.getString(R.string.label_adiada)}</b>", 0)
                     binding.tvStatus.setTextColor(context.getColor(R.color.brand_selective_yellow))

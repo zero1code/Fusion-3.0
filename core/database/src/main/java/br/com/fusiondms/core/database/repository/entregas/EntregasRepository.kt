@@ -1,5 +1,6 @@
 package br.com.fusiondms.core.database.repository.entregas
 
+import androidx.sqlite.db.SimpleSQLiteQuery
 import br.com.fusiondms.core.model.entrega.Entrega
 import kotlinx.coroutines.flow.Flow
 

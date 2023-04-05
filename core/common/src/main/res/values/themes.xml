@@ -31,6 +31,7 @@
         <item name="popupMenuBackground">@drawable/custom_popup_background</item>
         <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
         <item name="navigationViewStyle">@style/Widget.App.NavigationView</item>
+        <item name="snackbarStyle">@style/SnackBarStyle</item>
     </style>
 
     <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">

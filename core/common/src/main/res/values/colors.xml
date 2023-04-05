@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <color name="brand_green">#8ec952</color>
     <color name="brand_green_dark">#3d8400</color>
@@ -10,6 +10,7 @@
     <color name="brand_green_success_ripple">#E5F5EB</color>
 
     <color name="brand_background_color">#F5F5F5</color>
+    <color name="brand_divider_color">#e0e0e0</color>
 
     <color name="brand_cyan">#3ea3be</color>
     <color name="brand_cyan_dark">#00748e</color>

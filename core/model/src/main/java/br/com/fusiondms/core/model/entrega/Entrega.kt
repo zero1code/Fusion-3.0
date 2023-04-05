@@ -9,7 +9,7 @@ data class Entrega(
     val idCliente: Int,
     val dadosCliente: String,
     val localCliente: String,
-    val numeroNotaFiscal: Int,
+    var numeroNotaFiscal: String,
     val valor: BigDecimal,
     val statusEntrega: String,
     val formaPagamento: String

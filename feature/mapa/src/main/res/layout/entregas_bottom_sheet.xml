@@ -49,6 +49,30 @@
         android:layout_marginTop="@dimen/dimen_medium"
         app:layout_constraintTop_toBottomOf="@+id/tv_romaneio" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_pesquisar"
+        android:layout_width="@dimen/dimen_big2"
+        android:layout_height="@dimen/dimen_big2"
+        android:padding="@dimen/dimen_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/dimen_medium"
+        app:layout_constraintTop_toTopOf="@id/tv_titulo"
+        app:layout_constraintTop_toBottomOf="@id/tv_titulo"
+        app:srcCompat="@drawable/ic_pesquisar"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackgroundBorderless"/>
+
+    <include
+        android:id="@+id/lt_pesquisar_entregas"
+        layout="@layout/layout_pesquisar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/dvider"/>
+
     
     <View
         android:id="@+id/dvider"

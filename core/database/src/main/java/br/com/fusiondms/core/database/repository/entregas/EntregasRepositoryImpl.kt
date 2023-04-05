@@ -1,7 +1,6 @@
 package br.com.fusiondms.core.database.repository.entregas
 
 import android.content.Context
-import br.com.fusiondms.core.common.R
 import br.com.fusiondms.core.database.dao.EntregaDao
 import br.com.fusiondms.core.database.model.entrega.EntregaEntity
 import br.com.fusiondms.core.model.entrega.Entrega
@@ -20,8 +19,8 @@ class EntregasRepositoryImpl @Inject constructor(
     override suspend fun getListaEntrega(idRomaneio: Int): Flow<List<Entrega>> {
         return flow {
             try {
-                val lista = entregaDao.getListaEntrega(idRomaneio)
-                emit(EntregaEntity().entityListToModel(lista))
+                val entityList = entregaDao.getListaEntrega(idRomaneio)
+                emit(EntregaEntity().entityListToModel(entityList))
             } catch (e: Exception) {
                 e.printStackTrace()
             }

@@ -1,6 +1,7 @@
 package br.com.fusiondms.feature.entregas.domain.entregasusecase
 
 import android.content.Context
+import androidx.sqlite.db.SimpleSQLiteQuery
 import br.com.fusiondms.core.database.repository.entregas.EntregasRepository
 import br.com.fusiondms.core.model.Conteudo
 import br.com.fusiondms.core.model.entrega.Entrega
@@ -16,22 +17,10 @@ class EntregasUseCaseImpl @Inject constructor(
 ) : EntregasUseCase {
 
     override suspend fun getListaEntrega(idRomaneio: Int): Flow<List<Conteudo>> {
-        return flow {
+        return flow { //Buscar todas as entregas
             try {
                 entregasRepository.getListaEntrega(idRomaneio).collect { listaEntrega ->
-                    val entregasPorCliente: ArrayList<Conteudo> = arrayListOf()
-                    listaEntrega
-                        .groupBy { it.idCliente }
-                        .forEach { cliente ->
-                            val dadosCliente = EntregasPorCliente(
-                                idRomaneio = cliente.value[0].idRomaneio,
-                                idCliente = cliente.key,
-                                cliente = cliente.value[0].dadosCliente,
-                                local = cliente.value[0].localCliente,
-                                entregas = cliente.value
-                            )
-                            entregasPorCliente.add(Conteudo.CarouselEntrega(cliente.key, dadosCliente))
-                        }
+                    val entregasPorCliente = montarListaEntrega(listaEntrega)
                     emit(entregasPorCliente)
                 }
             } catch (e: Exception) {
@@ -47,5 +36,27 @@ class EntregasUseCaseImpl @Inject constructor(
         } else {
             throw ErrorAtualizarStatusEntrega("A entrega já está com esse status.")
         }
+    }
+
+    private fun montarListaEntrega(listaEntrega: List<Entrega>) : ArrayList<Conteudo> {
+        val entregasPorCliente: ArrayList<Conteudo> = arrayListOf()
+        listaEntrega
+            .groupBy { it.idCliente }
+            .forEach { cliente ->
+                val dadosCliente = EntregasPorCliente(
+                    idRomaneio = cliente.value[0].idRomaneio,
+                    idCliente = cliente.key,
+                    cliente = cliente.value[0].dadosCliente,
+                    local = cliente.value[0].localCliente,
+                    entregas = cliente.value
+                )
+                entregasPorCliente.add(
+                    Conteudo.CarouselEntrega(
+                        cliente.key,
+                        dadosCliente
+                    )
+                )
+            }
+        return entregasPorCliente
     }
 }

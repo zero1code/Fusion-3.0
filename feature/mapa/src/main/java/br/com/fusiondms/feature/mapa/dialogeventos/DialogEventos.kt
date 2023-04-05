@@ -12,15 +12,23 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import br.com.fusiondms.core.common.R
 import br.com.fusiondms.core.model.entrega.Acao
 import br.com.fusiondms.core.model.entrega.Entrega
 import br.com.fusiondms.core.model.entrega.Evento
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_ADIADA
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_CHEGADA_CLIENTE
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA_PARCIAL
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA_TOTAL
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_INICIADA
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_PENDENTE
+import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_REALIZADA
 import br.com.fusiondms.feature.mapa.databinding.DialogEventosBinding
 import br.com.fusiondms.feature.mapa.dialogeventos.adapter.AcoesAdapter
 import br.com.fusiondms.feature.mapa.dialogeventos.adapter.EventosAdapter
 import br.com.fusiondms.feature.mapa.dialogeventos.interfaces.IDialogEventos
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import br.com.fusiondms.core.common.R
 
 class DialogEventos(
     private val entrega: Entrega, context: Context) : BottomSheetDialogFragment() {
@@ -33,27 +41,27 @@ class DialogEventos(
         Evento(
             context.getString(R.string.label_cheguei_no_cliente),
             R.drawable.ic_local_cliente,
-            1
+            ENTREGA_CHEGADA_CLIENTE
         ),
         Evento(
             context.getString(R.string.label_entrega_iniciada),
             R.drawable.ic_caminhao,
-            2
+            ENTREGA_INICIADA
         ),
         Evento(
             context.getString(R.string.label_entrega_realizada),
             R.drawable.ic_check_circle,
-            3
+            ENTREGA_REALIZADA
         ),
         Evento(
             context.getString(R.string.label_cliente_devolveu),
             R.drawable.ic_devolution,
-            4
+            ENTREGA_DEVOLVIDA
         ),
         Evento(
             context.getString(R.string.label_adiar_entrega),
             R.drawable.ic_more_time,
-            5
+            ENTREGA_ADIADA
         )
     )
 
@@ -61,32 +69,32 @@ class DialogEventos(
         Acao(
             context.getString(R.string.label_volumes),
             R.drawable.ic_volume,
-            1
+            9
         ),
         Acao(
             context.getString(R.string.label_enviar_nf_email),
             R.drawable.ic_email,
-            2
+            10
         ),
         Acao(
             context.getString(R.string.label_alarme_chegada),
             R.drawable.ic_notificacao_ativa,
-            3
+            11
         ),
         Acao(
             context.getString(R.string.label_enviar_foto),
             R.drawable.ic_camera,
-            4
+            12
         ),
         Acao(
             context.getString(R.string.label_solicitar_ligacao),
             R.drawable.ic_ligacao,
-            5
+            13
         ),
         Acao(
             context.getString(R.string.label_tirar_foto_canhoto),
             R.drawable.ic_canhoto,
-            6
+            14
         )
     )
 
@@ -119,49 +127,48 @@ class DialogEventos(
             rvAcoes.layoutManager = GridLayoutManager(context, 2, RecyclerView.HORIZONTAL, false)
         }
 
-        checarStatusEntrega(entrega.statusEntrega)
+        checarStatusEntrega(entrega.statusEntrega.toInt())
         bindListeners()
     }
 
-    private fun checarStatusEntrega(statusEntrega: String) {
-        when(statusEntrega.toInt()) {
-            0 -> {
+    private fun checarStatusEntrega(statusEntrega: Int) {
+        when(statusEntrega) {
+            ENTREGA_PENDENTE -> {
                 listaEvento.removeAll {
-                    it.idEvento > 1
+                    it.idEvento > ENTREGA_CHEGADA_CLIENTE
                 }
             }
-            1 -> {
+            ENTREGA_CHEGADA_CLIENTE -> {
                 listaEvento[0].isCliked = true
                 listaEvento.removeAll {
-                    it.idEvento in 3..4
+                    it.idEvento in ENTREGA_REALIZADA..ENTREGA_ADIADA
                 }
             }
-            2 -> {
+            ENTREGA_INICIADA -> {
                 listaEvento[0].isCliked = true
                 listaEvento[1].isCliked = true
             }
-            3 -> {
+            ENTREGA_REALIZADA -> {
                 listaEvento[0].isCliked = true
                 listaEvento[1].isCliked = true
                 listaEvento[2].isCliked = true
                 listaEvento.removeAll {
-                    it.idEvento > 3
+                    it.idEvento > ENTREGA_REALIZADA
                 }
             }
-            4 -> {
+            ENTREGA_DEVOLVIDA_PARCIAL, ENTREGA_DEVOLVIDA_TOTAL -> {
                 listaEvento[0].isCliked = true
                 listaEvento[1].isCliked = true
                 listaEvento[3].isCliked = true
                 listaEvento.removeAll {
-                    it.idEvento == 3 || it.idEvento == 5
+                    it.idEvento == ENTREGA_REALIZADA || it.idEvento == ENTREGA_ADIADA
                 }
             }
-            5 -> {
-                listaEvento[0].isCliked = true
-                listaEvento[1].isCliked = true
+            ENTREGA_ADIADA -> {
+                listaEvento[0].isCliked = false
                 listaEvento[4].isCliked = true
                 listaEvento.removeAll {
-                    it.idEvento == 3 || it.idEvento == 4
+                    it.idEvento in ENTREGA_INICIADA..ENTREGA_DEVOLVIDA
                 }
             }
         }
