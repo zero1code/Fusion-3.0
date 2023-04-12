@@ -115,6 +115,7 @@
     <string name="label_nao">No</string>
     <string name="label_nota_fiscal">Invoice</string>
     <string name="label_cpf">SSN</string>
+    <string name="label_configuracoes">Settings</string>
     <!--    label de uma palavra apenas-->
 
     <!--    label de 2 ou 3 palavras-->
@@ -181,6 +182,43 @@
     <string name="label_qual_tipo_devolucao">What type of returns will be made?</string>
 
     <!--    label de frases-->
+
+    <!--    Label das preferencias-->
+    <string name="label_canhoto_categoria">Receipt photo</string>
+    <string name="label_canhoto_obrigatorio">Mandatory photo</string>
+    <string name="label_canhoto_obrigatorio_resumo">It is mandatory to take a photo of the receipt when delivering.</string>
+    <string name="label_canhoto_aprovacao">Receipt approval</string>
+    <string name="label_canhoto_aprovacao_resumo">Use receipt approval.</string>
+    <string name="label_canhoto_qualidade">Receipt quality</string>
+    <string name="label_canhoto_qualidade_resumo">View photo of receipt before sending.</string>
+    <string name="label_canhoto_recorte">Cut receipt</string>
+    <string name="label_canhoto_recorte_resumo">Allow cropping of receipt photo.</string>
+    <string name="label_canhoto_em_coleta">Photo of receipt in collections</string>
+    <string name="label_canhoto_em_coleta_resumo">Take a photo of the receipt in case of deliveries that are of the collection type.</string>
+    <string name="label_canhoto_excluir">Delete receipt</string>
+    <string name="label_canhoto_excluir_resumo">Delete receipt photo from that device after submission.</string>
+
+    <string name="label_entregas_categoria">Deliveries</string>
+    <string name="label_entregas_eventos_nota">Delivery Events by customer</string>
+    <string name="label_entregas_eventos_nota_resumo">Delivery events will be marked for all customer deliveries.</string>
+    <string name="label_entregas_adiar">Postpone deliveries</string>
+    <string name="label_entregas_adiar_resumo">All customer deliveries will be postponed.</string>
+    <string name="label_entregas_indicar_coleta">Indicate collection</string>
+    <string name="label_entregas_indicar_coleta_resumo">Indicate collection when making a delivery.</string>
+    <string name="label_entregas_solicitar_coleta">Request collection</string>
+    <string name="label_entregas_solicitar_coleta_resumo">Request collection when making a delivery.</string>
+    <string name="label_entregas_eventos_clientes">Events on customers</string>
+    <string name="label_entregas_eventos_clientes_resumo">Mark events on more than one client at the same time.</string>
+    <string name="label_entregas_tempo_espera">End of waiting time</string>
+    <string name="label_entregas_tempo_espera_resumo">The cooldown will end at the event: %1$s</string>
+    <string name="label_entregas_tempo_espera_resumo2">End timeout in event</string>
+
+    <string name="label_localizacao_categoria">Location</string>
+    <string name="label_localizacao_tempo_envio">Time to send GPS position</string>
+    <string name="label_localizacao_tempo_envio_resumo">%1$d seconds</string>
+
+    <string name="label_erro_salvar_preferencia">Unsupported data type: %1$s</string>
+    <!--    Label das preferencias-->
 
 <!--    Label com plural-->
     <plurals name="label_email">

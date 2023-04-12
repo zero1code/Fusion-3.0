@@ -1,5 +1,7 @@
 package br.com.fusiondms.core.datastore.repository
 
+import br.com.fusiondms.core.model.parametros.Parametros
+
 interface DataStoreRepository {
     suspend fun putString(chave: String, valor: String)
     suspend fun putInt(chave: String, valor: Int)
@@ -9,4 +11,6 @@ interface DataStoreRepository {
     suspend fun getInt(chave: String): Int?
     suspend fun getBoolean(chave: String): Boolean?
     suspend fun getCurrentLocation(chave: String) : String?
+
+    suspend fun getParametros() : Parametros?
 }

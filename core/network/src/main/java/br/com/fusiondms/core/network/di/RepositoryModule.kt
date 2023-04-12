@@ -3,6 +3,7 @@ package br.com.fusiondms.core.network.di
 import android.content.Context
 import br.com.fusiondms.core.database.AppDatabase
 import br.com.fusiondms.core.database.dao.RomaneioDao
+import br.com.fusiondms.core.datastore.repository.DataStoreRepository
 import br.com.fusiondms.core.network.api.FusionApi
 import br.com.fusiondms.core.network.repository.recusarromaneio.RecusarRomaneioRepository
 import br.com.fusiondms.core.network.repository.recusarromaneio.RecusarRomaneioRepositoryImpl
@@ -24,8 +25,9 @@ object RepositoryModule {
     @Provides
     fun provideSincronizacaoRepository(
         fusionApi: FusionApi,
-        appDatabase: AppDatabase
-    ): SincronizacaoRepository = SincronizacaoRepositoryImpl(fusionApi, appDatabase, Dispatchers.IO)
+        appDatabase: AppDatabase,
+        datastoreRepository: DataStoreRepository
+    ): SincronizacaoRepository = SincronizacaoRepositoryImpl(fusionApi, appDatabase, datastoreRepository, Dispatchers.IO)
 
     @Singleton
     @Provides

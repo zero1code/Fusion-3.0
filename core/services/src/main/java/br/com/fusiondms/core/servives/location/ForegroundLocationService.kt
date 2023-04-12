@@ -13,7 +13,7 @@ import android.os.Looper
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import br.com.fusiondms.core.datastore.repository.DataStoreChaves
+import br.com.fusiondms.core.datastore.chaves.DataStoreChaves
 import br.com.fusiondms.core.datastore.repository.DataStoreRepository
 import br.com.fusiondms.core.datastore.repository.DataStoreRepositoryImpl
 import com.google.android.gms.location.*

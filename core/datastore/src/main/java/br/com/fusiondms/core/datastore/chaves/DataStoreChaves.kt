@@ -1,7 +1,7 @@
-package br.com.fusiondms.core.datastore.repository
+package br.com.fusiondms.core.datastore.chaves
 
 object DataStoreChaves {
-    const val ID_CARGA_SELECIONADA = "id_carga_selecionada"
+    const val ID_ROMANEIO_SELECIONADO = "id_romaneio_selecionado"
 
     const val KEY_FOREGROUND_ATIVADO = "tracking_foreground_location"
     const val KEY_CURRENT_LOCATION = "current_location"

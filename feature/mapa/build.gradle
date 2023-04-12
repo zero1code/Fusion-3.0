@@ -13,4 +13,5 @@ dependencies {
     implementation project(":core:datastore")
     implementation project(":core:services")
     implementation project(':feature:entregas')
+    implementation project(':feature:preferences')
 }

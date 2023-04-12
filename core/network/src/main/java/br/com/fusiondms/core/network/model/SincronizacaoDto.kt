@@ -17,5 +17,7 @@ data class SincronizacaoDto(
     @SerializedName("recebimentos")
     val listaRecebimento: List<RecebimentoEntity>,
     @SerializedName("tipos_pagamentos")
-    val listaTipoPagamento: List<TipoPagamentoEntity>
+    val listaTipoPagamento: List<TipoPagamentoEntity>,
+    @SerializedName("parametros")
+    val parametrosDao: ParametrosDao
 )

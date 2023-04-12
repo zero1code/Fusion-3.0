@@ -2,7 +2,7 @@ package br.com.fusiondms.feature.cargas.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.fusiondms.core.datastore.repository.DataStoreChaves
+import br.com.fusiondms.core.datastore.chaves.DataStoreChaves
 import br.com.fusiondms.core.datastore.repository.DataStoreRepository
 import br.com.fusiondms.core.model.romaneio.Romaneio
 import br.com.fusiondms.feature.cargas.domain.cargasusecase.CargasUseCase
@@ -101,6 +101,6 @@ class CargasViewModel @Inject constructor(
         }
 
     fun salvarIdCargaSelecionada(cargaId: Int) = runBlocking {
-            dataStoreRepository.putInt(DataStoreChaves.ID_CARGA_SELECIONADA, cargaId)
+            dataStoreRepository.putInt(DataStoreChaves.ID_ROMANEIO_SELECIONADO, cargaId)
         }
 }

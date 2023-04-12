@@ -1,0 +1,14 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply from: "$rootDir/config/android-settings.gradle"
+
+android {
+}
+
+dependencies {
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+
+    implementation project(':core:common')
+    implementation project(':core:datastore')
+    implementation project(':core:model')
+}

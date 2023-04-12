@@ -4,11 +4,23 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
+import br.com.fusiondms.core.datastore.chaves.DataStoreChaves
+import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_CANHOTO_APROVACAO
+import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_CANHOTO_CORTE
+import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_CANHOTO_EXCLUIR
+import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_CANHOTO_EXIGIR_EM_COLETA
+import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_CANHOTO_OBRIGATORIO
+import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_CANHOTO_QUALIDADE
+import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_ENTREGAS_ADIAR_TODAS
+import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_ENTREGAS_EVENTO_CLIENTES
+import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_ENTREGAS_INDICAR_COLETA
+import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_ENTREGAS_POR_CLIENTE
+import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_ENTREGAS_SOLICITAR_COLETA
+import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_ENTREGAS_TEMPO_ESPERA
+import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_LOCALIZACAO_TEMPO_ENVIO
+import br.com.fusiondms.core.model.parametros.Parametros
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import java.io.IOException
 import javax.inject.Inject
 
 private const val PREFERENCES_NAME = "fusion_preferences"
@@ -92,6 +104,29 @@ class DataStoreRepositoryImpl @Inject constructor(
             context.dataStore.data.map { preferences ->
                 preferences[preferencesKey]
             }.first()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    override suspend fun getParametros(): Parametros? {
+        return try {
+            Parametros(
+                canhotoObrigatorio = getBoolean(KEY_CANHOTO_OBRIGATORIO) ?: false,
+                canhotoAprovacao = getBoolean(KEY_CANHOTO_APROVACAO) ?: false,
+                canhotoQualidade = getBoolean(KEY_CANHOTO_QUALIDADE) ?: false,
+                canhotoCorte = getBoolean(KEY_CANHOTO_CORTE) ?: false,
+                canhotoExigirEmColeta = getBoolean(KEY_CANHOTO_EXIGIR_EM_COLETA) ?: false,
+                canhotoExcluir = getBoolean(KEY_CANHOTO_EXCLUIR) ?: false,
+                entregasPorCliente = getBoolean(KEY_ENTREGAS_POR_CLIENTE) ?: false,
+                entregasAdiarTodas = getBoolean(KEY_ENTREGAS_ADIAR_TODAS) ?: false,
+                entregasIndicarColeta = getBoolean(KEY_ENTREGAS_INDICAR_COLETA) ?: false,
+                entregasSolicitarColeta = getBoolean(KEY_ENTREGAS_SOLICITAR_COLETA) ?: false,
+                entregasEventoClientes = getBoolean(KEY_ENTREGAS_EVENTO_CLIENTES) ?: false,
+                entregasTempoEspera = getString(KEY_ENTREGAS_TEMPO_ESPERA) ?: "4",
+                localizacaoTempoEnvio = getInt(KEY_LOCALIZACAO_TEMPO_ENVIO) ?: 20
+            )
         } catch (e: Exception) {
             e.printStackTrace()
             null

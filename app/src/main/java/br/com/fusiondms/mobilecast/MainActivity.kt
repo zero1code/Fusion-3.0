@@ -2,9 +2,12 @@ package br.com.fusiondms.mobilecast
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.ViewTreeObserver
@@ -23,20 +26,42 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var splashScreen: SplashScreen
+    private var primeiroAcesso = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        setTheme(R.style.Theme_Fusion30)
         splashScreen = installSplashScreen()
 
         super.onCreate(savedInstanceState)
         setContentView(br.com.fusiondms.mobilecast.R.layout.activity_main)
 
+        if (savedInstanceState != null) {
+            primeiroAcesso = savedInstanceState.getBoolean("primeiro_acesso", false)
+        }
+
         window.apply {
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
             statusBarColor = Color.TRANSPARENT
         }
-        usarAnimacaoDeSaidaCustomizada()
+
         statusBarIconColor(this, Color.WHITE)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (primeiroAcesso) usarAnimacaoDeSaidaCustomizada()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        primeiroAcesso = false
+        Log.d("TAG", "onPause: ")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("TAG", "onDestroy: ")
     }
 
     private fun usarAnimacaoDeSaidaCustomizada() {
@@ -56,14 +81,11 @@ class MainActivity : AppCompatActivity() {
             set.duration = 700L
             set.playTogether(reveal, mover)
             set.doOnEnd {
+                primeiroAcesso = false
                 splashScreenViewProvider.remove()
             }
             set.start()
         }
-    }
-
-    private fun manterSplashScreenIndefinitamente() {
-        splashScreen.setKeepOnScreenCondition { true }
     }
 
     private fun manterSplashScreenPor5Segundos() {
@@ -74,6 +96,11 @@ class MainActivity : AppCompatActivity() {
 //                return true
 //            }
 //        })
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        outState.putBoolean("primeiro_acesso", primeiroAcesso)
     }
 
     override fun onSupportNavigateUp(): Boolean {

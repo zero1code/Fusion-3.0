@@ -42,6 +42,7 @@ import br.com.fusiondms.core.common.snackbar.TipoMensagem
 import br.com.fusiondms.core.common.snackbar.mensagemCurta
 import br.com.fusiondms.core.common.snackbar.showMessage
 import br.com.fusiondms.core.model.entrega.Entrega
+import br.com.fusiondms.core.model.parametros.Parametros
 import br.com.fusiondms.core.servives.location.ForegroundLocationService
 import br.com.fusiondms.feature.entregas.presentation.adapter.EntregasParentAdapter
 import br.com.fusiondms.feature.entregas.databinding.ItemEntregaChildBinding
@@ -61,6 +62,7 @@ import br.com.fusiondms.feature.mapa.databinding.FragmentMapaBinding
 import br.com.fusiondms.feature.mapa.databinding.LayoutPesquisarBinding
 import br.com.fusiondms.feature.mapa.dialogeventos.DialogEventos
 import br.com.fusiondms.feature.mapa.dialogeventos.interfaces.IDialogEventos
+import br.com.fusiondms.feature.preferences.presentation.ConfiguracoesActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -101,6 +103,8 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     private var clientePosicao = -1
     private var chipSelecionadoId = -1
     private var chipSelecionado: Chip? = null
+
+    private lateinit var parametros: Parametros
 
     private var foregroundLocationServiceBound = false
     // Fornece a atualizações de localização para while-in-use recurso.
@@ -196,7 +200,6 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             _bindingSheetInfoGerais = bindingSheet.ltEntregasInfoGerais
             _bindingPesquisarEntregas = bindingSheet.ltPesquisarEntregas
 
-            entregaViewModel.getListaEntrega()
             setupRecyclerViewEntregas()
             setupBottomSheetEntregas()
             setupPesquisaAvancada()
@@ -208,6 +211,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun bindObservers() {
+        entregaViewModel.getListaEntrega()
         lifecycleScope.launchWhenCreated {
             entregaViewModel.listaEntrega.collect { listaCliente ->
                 adapterEntregas.atualizarLista(listaCliente)
@@ -215,7 +219,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         }
 
         lifecycleScope.launchWhenCreated {
-            entregaViewModel.cargaId.collect { cargaId ->
+            entregaViewModel.romaneioId.collect { cargaId ->
                 bindingSheet.tvRomaneio.text = Html.fromHtml(getString(R.string.label_carga_id, cargaId), 0)
             }
         }
@@ -229,6 +233,12 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                     }
                     else -> Unit
                 }
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            entregaViewModel.parametros.collect {
+                parametros = it
             }
         }
     }
@@ -312,6 +322,9 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                         startActivity(launchIntent)
                     }
 //                    findNavController().navigate(br.com.fusiondms.core.navigation.R.id.action_mapaFragment_to_jornadaTrabalhoActivity)
+                }
+                br.com.fusiondms.feature.mapa.R.id.menu_configuracoes -> {
+                    startActivity(Intent(requireActivity(), ConfiguracoesActivity::class.java))
                 }
             }
             binding.drawerLayout.close()

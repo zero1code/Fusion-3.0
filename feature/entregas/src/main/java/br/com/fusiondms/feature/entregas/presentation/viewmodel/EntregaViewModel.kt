@@ -2,10 +2,11 @@ package br.com.fusiondms.feature.entregas.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.fusiondms.core.datastore.repository.DataStoreChaves
+import br.com.fusiondms.core.datastore.chaves.DataStoreChaves
 import br.com.fusiondms.core.datastore.repository.DataStoreRepository
 import br.com.fusiondms.core.model.Conteudo
 import br.com.fusiondms.core.model.entrega.Entrega
+import br.com.fusiondms.core.model.parametros.Parametros
 import br.com.fusiondms.feature.entregas.domain.entregasusecase.EntregasUseCase
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,8 +34,8 @@ class EntregaViewModel @Inject constructor(
     private var _entregaSelecionada = MutableStateFlow<EntregaResult>(EntregaResult.Nothing)
     val entregaSelecionada: StateFlow<EntregaResult> get() = _entregaSelecionada
 
-    private var _cargaId = MutableStateFlow(0)
-    val cargaId: StateFlow<Int> get() = _cargaId
+    private var _romaneioId = MutableStateFlow(0)
+    val romaneioId: StateFlow<Int> get() = _romaneioId
 
     private var _statusEntrega = MutableStateFlow<EntregaResult>(EntregaResult.Nothing)
     val statusEntrega: StateFlow<EntregaResult> get() = _statusEntrega
@@ -42,14 +43,21 @@ class EntregaViewModel @Inject constructor(
     private var _bottomSheetState = MutableStateFlow(BottomSheetBehavior.STATE_COLLAPSED)
     val bottomSheetState: StateFlow<Int> get() = _bottomSheetState
 
-    private fun getIdCargaSelecionada(): Int? = runBlocking {
-        dataStoreRepository.getInt(DataStoreChaves.ID_CARGA_SELECIONADA)
+    private var _parametros = MutableStateFlow(Parametros())
+    val parametros: StateFlow<Parametros> get() = _parametros
+
+    private fun getIdRomaneioSelecionado(): Int = runBlocking {
+        dataStoreRepository.getInt(DataStoreChaves.ID_ROMANEIO_SELECIONADO) ?: 0
+    }
+
+    init {
+        getParametros()
     }
 
     fun getListaEntrega() {
         viewModelScope.launch {
-            val cargaId = getIdCargaSelecionada() ?: 0
-            entregasUseCase.getListaEntrega(cargaId)
+            val romaneioId = getIdRomaneioSelecionado()
+            entregasUseCase.getListaEntrega(romaneioId)
                 .onStart {
                 }
                 .onCompletion {
@@ -59,7 +67,7 @@ class EntregaViewModel @Inject constructor(
                     println(it)
                 }
                 .collect { lista ->
-                    _cargaId.emit(cargaId)
+                    _romaneioId.emit(romaneioId)
                     _listaEntrega.emit(ArrayList(lista))
                 }
         }
@@ -87,13 +95,18 @@ class EntregaViewModel @Inject constructor(
         }
     }
 
+    private fun getParametros() = viewModelScope.launch {
+        val params = dataStoreRepository.getParametros() ?: Parametros()
+        _parametros.emit(params)
+    }
+
     fun resetViewModel() =
         viewModelScope.launch {
             _statusEntrega.emit(EntregaViewModel.EntregaResult.Nothing)
             _bottomSheetState.emit(BottomSheetBehavior.STATE_COLLAPSED)
             _listaEntrega.emit(arrayListOf())
             _entregaSelecionada.emit(EntregaResult.Nothing)
-            _cargaId.emit(0)
+            _romaneioId.emit(0)
         }
 
     fun resetStatusEntrega() =

@@ -9,6 +9,30 @@
 
     </style>
 
+    <style name="Theme.Preferences" parent="Theme.MaterialComponents.DayNight">
+        <!-- Primary brand color. -->
+        <item name="colorSurface">@color/brand_background_color</item>
+        <item name="colorOnSurface">@color/brand_color_on_surface</item>
+        <item name="colorPrimary">@color/brand_green</item>
+        <item name="colorPrimaryVariant">@color/brand_green_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/brand_celtic_blue</item>
+        <item name="colorSecondaryVariant">@color/brand_celtic_blue_dark</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <!-- Customize your theme here. -->
+
+        <item name="fontFamily">@font/my_poppins_font</item>
+        <item name="popupMenuBackground">@drawable/custom_popup_background</item>
+        <item name="materialCardViewStyle">@style/Widget.App.CardView</item>
+        <item name="navigationViewStyle">@style/Widget.App.NavigationView</item>
+        <item name="snackbarStyle">@style/SnackBarStyle</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="Theme.Fusion30" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->

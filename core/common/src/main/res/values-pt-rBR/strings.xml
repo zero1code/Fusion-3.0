@@ -114,6 +114,7 @@
     <string name="label_sim">Sim</string>
     <string name="label_nao">Não</string>
     <string name="label_cpf">CPF</string>
+    <string name="label_configuracoes">Configurações</string>
     <!--    label de uma palavra apenas-->
 
     <!--    label de 2 ou 3 palavras-->
@@ -180,6 +181,45 @@
     <string name="label_escolher_filtro_busca">Escolha o filtro para realizar a busca</string>
     <string name="label_qual_tipo_devolucao">Que tipo de devolução será realizada?</string>
     <!--    label de frases-->
+
+    <!--    Label das preferencias-->
+
+    <!--    Label das preferencias-->
+    <string name="label_canhoto_categoria">Foto do canhoto</string>
+    <string name="label_canhoto_obrigatorio">Foto obrigatória</string>
+    <string name="label_canhoto_obrigatorio_resumo">Obrigatório tirar foto do canhoto ao realizar entrega.</string>
+    <string name="label_canhoto_aprovacao">Aprovação de canhoto</string>
+    <string name="label_canhoto_aprovacao_resumo">Utiliza aprovação de canhoto.</string>
+    <string name="label_canhoto_qualidade">Qualidade do canhoto</string>
+    <string name="label_canhoto_qualidade_resumo">Visualizar foto do canhoto antes de realizar o envio.</string>
+    <string name="label_canhoto_recorte">Recortar canhoto</string>
+    <string name="label_canhoto_recorte_resumo">Permitir recorte da foto do canhoto.</string>
+    <string name="label_canhoto_em_coleta">Foto do canhoto em coletas</string>
+    <string name="label_canhoto_em_coleta_resumo">Tirar foto do canhoto em caso de entregas que são do tipo coleta.</string>
+    <string name="label_canhoto_excluir">Excluir canhoto</string>
+    <string name="label_canhoto_excluir_resumo">Excluir foto do canhoto desse dispositivo após o envio.</string>
+
+    <string name="label_entregas_categoria">Entregas</string>
+    <string name="label_entregas_eventos_nota">Eventos de Entrega por cliente</string>
+    <string name="label_entregas_eventos_nota_resumo">Os eventos de Entrega serão marcadas para todas as entregas do cliente.</string>
+    <string name="label_entregas_adiar">Adiar entregas</string>
+    <string name="label_entregas_adiar_resumo">Todas as entregas do cliente serão adiadas.</string>
+    <string name="label_entregas_indicar_coleta">Indicar coleta</string>
+    <string name="label_entregas_indicar_coleta_resumo">Indicar coleta quando realizar uma entrega.</string>
+    <string name="label_entregas_solicitar_coleta">Solicitar coleta</string>
+    <string name="label_entregas_solicitar_coleta_resumo">Solicitar coleta quando realizar uma entrega.</string>
+    <string name="label_entregas_eventos_clientes">Eventos em clientes</string>
+    <string name="label_entregas_eventos_clientes_resumo">Marcar eventos em mais de um cliente ao mesmo tempo.</string>
+    <string name="label_entregas_tempo_espera">Fim do tempo de espera</string>
+    <string name="label_entregas_tempo_espera_resumo">O tempo de espera será finalizado no evento: %1$s</string>
+    <string name="label_entregas_tempo_espera_resumo2">Finalizar tempo de espera no evento</string>
+
+    <string name="label_localizacao_categoria">Localização</string>
+    <string name="label_localizacao_tempo_envio">Tempo para enviar posicão GPS</string>
+    <string name="label_localizacao_tempo_envio_resumo">%1$d segundos</string>
+
+    <string name="label_erro_salvar_preferencia">Tipo de dado não suportado: %1$s</string>
+    <!--    Label das preferencias-->
 
     <!--    Label com plural-->
     <plurals name="label_email">
