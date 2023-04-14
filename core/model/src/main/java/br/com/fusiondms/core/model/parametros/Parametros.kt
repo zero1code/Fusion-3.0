@@ -14,4 +14,6 @@ data class Parametros(
     val entregasEventoClientes: Boolean = false,
     val entregasTempoEspera: String = "4",
     val localizacaoTempoEnvio: Int = 20
-)
+) {
+    fun isEntregasPorCliente() = entregasPorCliente
+}

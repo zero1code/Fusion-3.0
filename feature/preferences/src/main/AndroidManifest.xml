@@ -7,7 +7,7 @@
             android:name=".presentation.ConfiguracoesActivity"
             android:exported="false"
             android:theme="@style/Theme.Preferences"
-            android:label="Configurações"/>
+            android:label="@string/label_configuracoes"/>
     </application>
 
 </manifest>

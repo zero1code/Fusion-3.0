@@ -57,6 +57,7 @@ dependencies {
     implementation Deps.coil
     implementation Deps.gson
     implementation Deps.datastore
+    implementation Deps.lottie
     with addFragmentNavigation
     with addCoroutines
     with addDaggerHilt

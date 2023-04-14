@@ -32,13 +32,27 @@ class EntregasRepositoryImpl @Inject constructor(
             try {
                 val result = entregaDao.updateStatusEntrega(EntregaEntity().mapModelToEntity(entrega))
                 if (result <= 0) {
-                    throw ErrorAtualizarStatusEntrega("Não foi possível atualizar status da entrega.")
+                    throw ErrorAtualizarStatusEntrega("Não foi possível atualizar o status da entrega.")
                 }
                 emit(result)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
 
+        }.flowOn(dispatcher)
+    }
+
+    override suspend fun updateAllStatusEntrega(idCliente: Int, idEvento: Int): Flow<Int> {
+        return flow {
+            try {
+                val result = entregaDao.updateAllStatusEntrega(idCliente, idEvento)
+                if (result <= 0) {
+                    throw ErrorAtualizarStatusEntrega("Não foi possível atualizar os status das entregas.")
+                }
+                emit(result)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }.flowOn(dispatcher)
     }
 }

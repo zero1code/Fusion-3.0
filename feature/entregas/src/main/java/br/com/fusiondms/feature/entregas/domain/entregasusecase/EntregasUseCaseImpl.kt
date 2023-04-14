@@ -7,6 +7,7 @@ import br.com.fusiondms.core.model.Conteudo
 import br.com.fusiondms.core.model.entrega.Entrega
 import br.com.fusiondms.core.model.entrega.EntregasPorCliente
 import br.com.fusiondms.core.model.exceptions.ErrorAtualizarStatusEntrega
+import br.com.fusiondms.core.model.parametros.Parametros
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -29,10 +30,14 @@ class EntregasUseCaseImpl @Inject constructor(
         }
     }
 
-    override suspend fun updateStatusEntrega(entrega: Entrega, idEvento: Int): Flow<Int> {
+    override suspend fun updateStatusEntrega(entrega: Entrega, idEvento: Int, parametros: Parametros): Flow<Int> {
         return if (entrega.statusEntrega != idEvento.toString()) {
-            val newEntrega = entrega.copy(statusEntrega = idEvento.toString())
-            entregasRepository.updateStatusEntrega(newEntrega)
+            if (parametros.isEntregasPorCliente())
+                entregasRepository.updateAllStatusEntrega(entrega.idCliente, idEvento)
+            else {
+                val newEntrega = entrega.copy(statusEntrega = idEvento.toString())
+                entregasRepository.updateStatusEntrega(newEntrega)
+            }
         } else {
             throw ErrorAtualizarStatusEntrega("A entrega já está com esse status.")
         }

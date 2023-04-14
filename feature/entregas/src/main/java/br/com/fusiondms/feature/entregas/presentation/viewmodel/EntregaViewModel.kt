@@ -23,7 +23,7 @@ class EntregaViewModel @Inject constructor(
 
     sealed class EntregaResult() {
         object Nothing : EntregaResult()
-        class SuccessUpdate(responseCode: Int?) : EntregaResult()
+        class SuccessUpdate(val responseCode: Int?, val idEvento: Int) : EntregaResult()
         class ErrorUpdate(val message: String) : EntregaResult()
         class Selected(val entrega: Entrega): EntregaResult()
     }
@@ -46,12 +46,11 @@ class EntregaViewModel @Inject constructor(
     private var _parametros = MutableStateFlow(Parametros())
     val parametros: StateFlow<Parametros> get() = _parametros
 
+    private var _tempo = MutableStateFlow("")
+    val tempo: StateFlow<String> get() = _tempo
+
     private fun getIdRomaneioSelecionado(): Int = runBlocking {
         dataStoreRepository.getInt(DataStoreChaves.ID_ROMANEIO_SELECIONADO) ?: 0
-    }
-
-    init {
-        getParametros()
     }
 
     fun getListaEntrega() {
@@ -84,21 +83,28 @@ class EntregaViewModel @Inject constructor(
 
     fun updateStatusEntrega(entrega: Entrega, idEvento: Int) {
         viewModelScope.launch {
-            entregasUseCase.updateStatusEntrega(entrega, idEvento)
+            entregasUseCase.updateStatusEntrega(entrega, idEvento, _parametros.value)
                 .catch { result ->
                     _statusEntrega.emit(EntregaResult.ErrorUpdate(result.message ?: ""))
                 }
                 .collect { result ->
                     getListaEntrega()
-                    _statusEntrega.emit(EntregaResult.SuccessUpdate(result))
+                    _statusEntrega.emit(EntregaResult.SuccessUpdate(result, idEvento))
                 }
         }
     }
 
-    private fun getParametros() = viewModelScope.launch {
+    fun getParametros() = viewModelScope.launch {
         val params = dataStoreRepository.getParametros() ?: Parametros()
         _parametros.emit(params)
     }
+
+    fun atualizarTempo(currentTime: String, isTempoEspera: Boolean) =
+        viewModelScope.launch {
+            val texto = if (isTempoEspera) "Esperando: $currentTime"
+            else "Dirigindo: $currentTime"
+            _tempo.emit(texto)
+        }
 
     fun resetViewModel() =
         viewModelScope.launch {

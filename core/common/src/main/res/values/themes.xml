@@ -4,8 +4,8 @@
 
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.Fusion30</item>
-        <item name="windowSplashScreenBackground">@color/brand_green</item>
-        <item name="windowSplashScreenIconBackgroundColor">@color/white</item>
+        <item name="windowSplashScreenBackground">?attr/colorOnPrimary</item>
+        <item name="windowSplashScreenIconBackgroundColor">?attr/colorOnPrimary</item>
 
     </style>
 

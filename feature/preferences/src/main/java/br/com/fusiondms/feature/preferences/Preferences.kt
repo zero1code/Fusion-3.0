@@ -62,63 +62,22 @@ class Preferences : PreferenceFragmentCompat(), Preference.OnPreferenceChangeLis
         }
         screen.addPreference(categoriaCanhotoExpansivel)
 
-        val prefObrigatorioCanhoto = SwitchPreference(context).apply {
-            key = KEY_CANHOTO_OBRIGATORIO
-            title = context.getString(string.label_canhoto_obrigatorio)
-            summary = context.getString(string.label_canhoto_obrigatorio_resumo)
-            setDefaultValue(parametros.canhotoObrigatorio)
-            icon = ContextCompat.getDrawable(context, drawable.ic_camera)
-            isSingleLineTitle = true
-        }
+        val prefObrigatorioCanhoto = SwitchPreference(context)
         prefObrigatorioCanhoto.onPreferenceChangeListener = this@Preferences
 
-        val prefAprovacaoCanhoto = SwitchPreference(context).apply {
-            key = KEY_CANHOTO_APROVACAO
-            title = context.getString(string.label_canhoto_aprovacao)
-            summary = context.getString(string.label_canhoto_aprovacao_resumo)
-            setDefaultValue(parametros.canhotoAprovacao)
-            icon = ContextCompat.getDrawable(context, drawable.ic_check)
-            isSingleLineTitle = true
-        }
+        val prefAprovacaoCanhoto = SwitchPreference(context)
         prefAprovacaoCanhoto.onPreferenceChangeListener = this@Preferences
 
-        val prefQualidadeCanhoto = SwitchPreference(context).apply {
-            key = KEY_CANHOTO_QUALIDADE
-            title = context.getString(string.label_canhoto_qualidade)
-            summary = context.getString(string.label_canhoto_qualidade_resumo)
-            setDefaultValue(parametros.canhotoQualidade)
-            icon = ContextCompat.getDrawable(context, drawable.ic_qualidade_imagem)
-            isSingleLineTitle = true
-        }
+        val prefQualidadeCanhoto = SwitchPreference(context)
         prefQualidadeCanhoto.onPreferenceChangeListener = this@Preferences
 
-        val prefCorteCanhoto = SwitchPreference(context).apply {
-            key = KEY_CANHOTO_CORTE
-            title = context.getString(string.label_canhoto_recorte)
-            summary = context.getString(string.label_canhoto_recorte_resumo)
-            setDefaultValue(parametros.canhotoCorte)
-            icon = ContextCompat.getDrawable(context, drawable.ic_ajustar_imagem)
-            isSingleLineTitle = true
-        }
+        val prefCorteCanhoto = SwitchPreference(context)
         prefCorteCanhoto.onPreferenceChangeListener = this@Preferences
 
-        val prefExigirCanhotoColeta = SwitchPreference(context).apply {
-            key = KEY_CANHOTO_EXIGIR_EM_COLETA
-            title = context.getString(string.label_canhoto_em_coleta)
-            summary = context.getString(string.label_canhoto_em_coleta_resumo)
-            setDefaultValue(parametros.canhotoExigirEmColeta)
-            isSingleLineTitle = true
-        }
+        val prefExigirCanhotoColeta = SwitchPreference(context)
         prefExigirCanhotoColeta.onPreferenceChangeListener = this@Preferences
 
-        val prefExcluirCanhoto = SwitchPreference(context).apply {
-            key = KEY_CANHOTO_EXCLUIR
-            title = context.getString(string.label_canhoto_excluir)
-            summary = context.getString(string.label_canhoto_excluir_resumo)
-            setDefaultValue(parametros.canhotoExcluir)
-            icon = ContextCompat.getDrawable(context, drawable.ic_lixeira)
-            isSingleLineTitle = true
-        }
+        val prefExcluirCanhoto = SwitchPreference(context)
         prefExcluirCanhoto.onPreferenceChangeListener = this@Preferences
 
         categoriaCanhotoExpansivel.apply {
@@ -128,6 +87,59 @@ class Preferences : PreferenceFragmentCompat(), Preference.OnPreferenceChangeLis
             addPreference(prefCorteCanhoto)
             addPreference(prefExigirCanhotoColeta)
             addPreference(prefExcluirCanhoto)
+        }
+
+        prefObrigatorioCanhoto.apply {
+            key = KEY_CANHOTO_OBRIGATORIO
+            title = context.getString(string.label_canhoto_obrigatorio)
+            summary = context.getString(string.label_canhoto_obrigatorio_resumo)
+            isChecked = parametros.canhotoObrigatorio
+            icon = ContextCompat.getDrawable(context, drawable.ic_camera)
+            isSingleLineTitle = true
+        }
+
+        prefAprovacaoCanhoto.apply {
+            key = KEY_CANHOTO_APROVACAO
+            title = context.getString(string.label_canhoto_aprovacao)
+            summary = context.getString(string.label_canhoto_aprovacao_resumo)
+            isChecked = parametros.canhotoAprovacao
+            icon = ContextCompat.getDrawable(context, drawable.ic_check)
+            isSingleLineTitle = true
+        }
+
+        prefQualidadeCanhoto.apply {
+            key = KEY_CANHOTO_QUALIDADE
+            title = context.getString(string.label_canhoto_qualidade)
+            summary = context.getString(string.label_canhoto_qualidade_resumo)
+            isChecked = parametros.canhotoQualidade
+            icon = ContextCompat.getDrawable(context, drawable.ic_qualidade_imagem)
+            isSingleLineTitle = true
+        }
+
+        prefCorteCanhoto.apply {
+            key = KEY_CANHOTO_CORTE
+            title = context.getString(string.label_canhoto_recorte)
+            summary = context.getString(string.label_canhoto_recorte_resumo)
+            isChecked = parametros.canhotoCorte
+            icon = ContextCompat.getDrawable(context, drawable.ic_ajustar_imagem)
+            isSingleLineTitle = true
+        }
+
+        prefExigirCanhotoColeta.apply {
+            key = KEY_CANHOTO_EXIGIR_EM_COLETA
+            title = context.getString(string.label_canhoto_em_coleta)
+            summary = context.getString(string.label_canhoto_em_coleta_resumo)
+            isChecked = parametros.canhotoExigirEmColeta
+            isSingleLineTitle = true
+        }
+
+        prefExcluirCanhoto.apply {
+            key = KEY_CANHOTO_EXCLUIR
+            title = context.getString(string.label_canhoto_excluir)
+            summary = context.getString(string.label_canhoto_excluir_resumo)
+            isChecked = parametros.canhotoExcluir
+            icon = ContextCompat.getDrawable(context, drawable.ic_lixeira)
+            isSingleLineTitle = true
         }
     }
 
@@ -140,58 +152,65 @@ class Preferences : PreferenceFragmentCompat(), Preference.OnPreferenceChangeLis
         }
         screen.addPreference(categoriaEntregasExpansivel)
 
-        val prefEntregasPorCliente = SwitchPreference(context).apply {
+        val prefEntregasPorCliente = SwitchPreference(context)
+        prefEntregasPorCliente.onPreferenceChangeListener = this@Preferences
+        screen.addPreference(prefEntregasPorCliente)
+        prefEntregasPorCliente.apply {
             key = KEY_ENTREGAS_POR_CLIENTE
             title = context.getString(string.label_entregas_eventos_nota)
             summary = context.getString(string.label_entregas_eventos_nota_resumo)
-            setDefaultValue(parametros.entregasPorCliente)
+            isChecked = parametros.entregasPorCliente
             isSingleLineTitle = true
         }
-        prefEntregasPorCliente.onPreferenceChangeListener = this@Preferences
-        screen.addPreference(prefEntregasPorCliente)
 
-        val prefEntregasAdiarTodas = SwitchPreference(context).apply {
+        val prefEntregasAdiarTodas = SwitchPreference(context)
+        prefEntregasAdiarTodas.onPreferenceChangeListener = this@Preferences
+        screen.addPreference(prefEntregasAdiarTodas)
+        prefEntregasAdiarTodas.apply {
             key = KEY_ENTREGAS_ADIAR_TODAS
             title = context.getString(string.label_entregas_adiar)
             summary = context.getString(string.label_entregas_adiar_resumo)
-            setDefaultValue(parametros.entregasAdiarTodas)
+            isChecked = parametros.entregasAdiarTodas
             isSingleLineTitle = true
         }
-        prefEntregasAdiarTodas.onPreferenceChangeListener = this@Preferences
-        screen.addPreference(prefEntregasAdiarTodas)
 
-        val prefEntregasIndicarColeta = SwitchPreference(context).apply {
+        val prefEntregasIndicarColeta = SwitchPreference(context)
+        prefEntregasIndicarColeta.onPreferenceChangeListener = this@Preferences
+        screen.addPreference(prefEntregasIndicarColeta)
+        prefEntregasIndicarColeta.apply {
             key = KEY_ENTREGAS_INDICAR_COLETA
             title = context.getString(string.label_entregas_indicar_coleta)
             summary = context.getString(string.label_entregas_indicar_coleta_resumo)
-            setDefaultValue(parametros.entregasIndicarColeta)
+            isChecked = parametros.entregasIndicarColeta
             isSingleLineTitle = true
         }
-        prefEntregasIndicarColeta.onPreferenceChangeListener = this@Preferences
-        screen.addPreference(prefEntregasIndicarColeta)
 
-        val prefEntregasSolicitarColeta = SwitchPreference(context).apply {
+        val prefEntregasSolicitarColeta = SwitchPreference(context)
+        prefEntregasSolicitarColeta.onPreferenceChangeListener = this@Preferences
+        screen.addPreference(prefEntregasSolicitarColeta)
+        prefEntregasSolicitarColeta.apply {
             key = KEY_ENTREGAS_SOLICITAR_COLETA
             title = context.getString(string.label_entregas_solicitar_coleta)
             summary = context.getString(string.label_entregas_solicitar_coleta_resumo)
-            setDefaultValue(parametros.entregasSolicitarColeta)
+            isChecked = parametros.entregasSolicitarColeta
             isSingleLineTitle = true
         }
-        prefEntregasSolicitarColeta.onPreferenceChangeListener = this@Preferences
-        screen.addPreference(prefEntregasSolicitarColeta)
 
-        val prefEntregasEventoEmClientes = SwitchPreference(context).apply {
+        val prefEntregasEventoEmClientes = SwitchPreference(context)
+        prefEntregasEventoEmClientes.onPreferenceChangeListener = this@Preferences
+        screen.addPreference(prefEntregasEventoEmClientes)
+        prefEntregasEventoEmClientes.apply {
             key = KEY_ENTREGAS_EVENTO_CLIENTES
             title = context.getString(string.label_entregas_eventos_clientes)
             summary = context.getString(string.label_entregas_eventos_clientes_resumo)
-            setDefaultValue(parametros.entregasEventoClientes)
+            isChecked = parametros.entregasEventoClientes
             isSingleLineTitle = true
         }
-        prefEntregasEventoEmClientes.onPreferenceChangeListener = this@Preferences
-        screen.addPreference(prefEntregasEventoEmClientes)
 
         val tipos = arrayOf("3" to "Entrega Iniciada", "4" to "Entrega Realizada")
-        val prefEntregasTempoEspera = ListPreference(context).apply {
+        val prefEntregasTempoEspera = ListPreference(context)
+        screen.addPreference(prefEntregasTempoEspera)
+        prefEntregasTempoEspera.apply {
             val tipoEscolhido = tipos.find { it.first == parametros.entregasTempoEspera }?.second
             key = KEY_ENTREGAS_TEMPO_ESPERA
             title = context.getString(string.label_entregas_tempo_espera)
@@ -208,7 +227,6 @@ class Preferences : PreferenceFragmentCompat(), Preference.OnPreferenceChangeLis
             atualizarPreferencia(preference.key, newValue)
             true
         }
-        screen.addPreference(prefEntregasTempoEspera)
     }
 
     private fun bindPrefencesLocalizacao(context: Context, screen: PreferenceScreen) {

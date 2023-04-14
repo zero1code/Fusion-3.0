@@ -19,6 +19,8 @@ interface EntregaDao {
 
     @Query("SELECT * FROM tb_entrega WHERE idRomaneio = :idRomaneio")
     suspend fun getListaEntrega(idRomaneio: Int) : List<EntregaEntity>
+    @Query("UPDATE tb_entrega SET statusEntrega = :idEvento WHERE idCliente = :idCliente")
+    suspend fun updateAllStatusEntrega(idCliente: Int, idEvento: Int) : Int
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateStatusEntrega(entregaEntity: EntregaEntity): Int

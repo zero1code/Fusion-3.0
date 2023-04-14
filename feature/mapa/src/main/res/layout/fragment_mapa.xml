@@ -21,49 +21,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/fab_left_drawer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimen_medium"
                 android:layout_marginTop="?attr/actionBarSize"
+                android:contentDescription="@string/label_mais_opcoes_description"
                 app:backgroundTint="?attr/colorOnPrimarySurface"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_menu"
-                android:contentDescription="@string/label_mais_opcoes_description" />
+                app:icon="@drawable/ic_menu" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_direcao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_medium"
-            app:layout_anchor="@id/view"
-            app:layout_anchorGravity="start|bottom"
-            app:backgroundTint="?attr/colorOnPrimarySurface"
-            app:srcCompat="@drawable/ic_moving"
-            android:contentDescription="@string/label_direcao_description" />
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="@dimen/dimen_super"
-            android:layout_height="10dp"
-            app:layout_anchor="@+id/fab_espera"
-            android:layout_marginVertical="@dimen/dimen_normal"
-            app:layout_anchorGravity="center_vertical" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <br.com.fusiondms.feature.mapa.views.FabEsperaButton
             android:id="@+id/fab_espera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_anchor="@id/bottom_sheet"
-            app:layout_anchorGravity="end"
-            android:layout_margin="@dimen/dimen_medium"
+            android:layout_margin="@dimen/dimen_normal"
+            android:contentDescription="@string/label_espera_description"
+            android:textAllCaps="false"
             app:backgroundTint="?attr/colorOnPrimarySurface"
-            app:srcCompat="@drawable/ic_timer_off"
-            android:contentDescription="@string/label_espera_description" />
+            app:icon="@drawable/ic_timer_off"
+            app:layout_anchor="@id/bottom_sheet"
+            app:layout_anchorGravity="end" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lav_confetti"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="1dp"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/confetti" />
 
         <include
             android:id="@+id/bottom_sheet"

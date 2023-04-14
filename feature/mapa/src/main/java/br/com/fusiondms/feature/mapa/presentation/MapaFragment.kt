@@ -12,6 +12,7 @@ import android.location.Location
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.IBinder
 import android.text.Editable
 import android.text.Html
@@ -44,8 +45,8 @@ import br.com.fusiondms.core.common.snackbar.showMessage
 import br.com.fusiondms.core.model.entrega.Entrega
 import br.com.fusiondms.core.model.parametros.Parametros
 import br.com.fusiondms.core.servives.location.ForegroundLocationService
-import br.com.fusiondms.feature.entregas.presentation.adapter.EntregasParentAdapter
 import br.com.fusiondms.feature.entregas.databinding.ItemEntregaChildBinding
+import br.com.fusiondms.feature.entregas.presentation.adapter.EntregasParentAdapter
 import br.com.fusiondms.feature.entregas.presentation.viewmodel.EntregaViewModel
 import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_ADIADA
 import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_CHEGADA_CLIENTE
@@ -75,6 +76,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MapaFragment : Fragment(), OnMapReadyCallback {
@@ -106,6 +108,11 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var parametros: Parametros
 
+    private lateinit var contador: Contador
+    private var mostrarTempo = false
+    private var isTempoEspera = true
+    private var alturaMaximaSheetInfo = 229
+
     private var foregroundLocationServiceBound = false
     // Fornece a atualizações de localização para while-in-use recurso.
     private var foregroundLocationService: ForegroundLocationService? = null
@@ -132,7 +139,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         when {
             permission.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
                 //Localização precisa aceita
-                setupMap()
+                bindMap()
                 permissionRequestDialog?.dismiss()
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     permissionRequestDialog = null
@@ -195,14 +202,13 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         postponeEnterTransition()
 
         binding.apply {
-//            entregaViewModel.getListaEntrega()
             _bindingSheet = bottomSheet
             _bindingSheetInfoGerais = bindingSheet.ltEntregasInfoGerais
             _bindingPesquisarEntregas = bindingSheet.ltPesquisarEntregas
 
-            setupRecyclerViewEntregas()
-            setupBottomSheetEntregas()
-            setupPesquisaAvancada()
+            bindRecyclerViewEntregas()
+            bindBottomSheetEntregas()
+            bindPesquisaAvancada()
         }
 
         bindObservers()
@@ -229,7 +235,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                 when(result) {
                     is EntregaViewModel.EntregaResult.ErrorUpdate -> binding.root.mensagemCurta(result.message)
                     is EntregaViewModel.EntregaResult.SuccessUpdate -> {
-                        binding.root.mensagemCurta("Entrega atualizada.")
+                        binding.root.mensagemCurta("Entrega atualizada.", status = result.idEvento)
                     }
                     else -> Unit
                 }
@@ -241,6 +247,15 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                 parametros = it
             }
         }
+
+        lifecycleScope.launchWhenCreated {
+            entregaViewModel.tempo.collect {
+                if (mostrarTempo) {
+                    binding.fabEspera.text = it
+                }
+                else encolherBotaoEspera()
+            }
+        }
     }
 
     private fun bindListeners() {
@@ -250,12 +265,16 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 
         adapterEntregas.onEntregaLongClickListener = { entrega, position ->
             clientePosicao = position
-            setupDialogEvento(entrega)
+            bindDialogEvento(entrega)
         }
 
         binding.apply {
             fabLeftDrawer.setOnClickListener {
                 drawerLayout.openDrawer(GravityCompat.START)
+            }
+
+            fabEspera.setOnClickListener {
+                expandirBotaoEspera()
             }
         }
 
@@ -332,7 +351,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun setupRecyclerViewEntregas() {
+    private fun bindRecyclerViewEntregas() {
         bindingSheet.rvEntregas.doOnPreDraw {
             startPostponedEnterTransition()
         }
@@ -342,19 +361,21 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun setupBottomSheetEntregas() {
+    private fun bindBottomSheetEntregas() {
         val bottomSheetLastState = entregaViewModel.bottomSheetState.value
         bottomSheetBehavior = BottomSheetBehavior.from(bindingSheet.root)
         val bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 binding.fabEspera.visibility = View.VISIBLE
-                binding.fabDirecao.visibility = View.VISIBLE
             }
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
                 if (slideOffset > 0.50) {
                     binding.fabEspera.fabAnimation(2F - slideOffset * 2)
-                    binding.fabDirecao.fabAnimation(2F - slideOffset * 2)
+                    bindingSheetInfoGerais.root.visibility = View.VISIBLE
+                    bindingSheetInfoGerais.root.scaleY(alturaMaximaSheetInfo - (2F - 2F * slideOffset) * alturaMaximaSheetInfo)
+                } else {
+                    bindingSheetInfoGerais.root.visibility = View.GONE
                 }
             }
         }
@@ -372,8 +393,8 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             if (bottomSheetLastState == BottomSheetBehavior.STATE_EXPANDED) View.INVISIBLE
             else View.VISIBLE
 
-        binding.fabDirecao.visibility =
-            if (bottomSheetLastState == BottomSheetBehavior.STATE_EXPANDED) View.INVISIBLE
+        bindingSheetInfoGerais.root.visibility =
+            if (bottomSheetLastState == BottomSheetBehavior.STATE_COLLAPSED) View.GONE
             else View.VISIBLE
     }
 
@@ -400,7 +421,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         return !isVisible
     }
 
-    private fun setupPesquisaAvancada() {
+    private fun bindPesquisaAvancada() {
         val pesquisarListener = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -431,7 +452,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                     chip.isChecked = true
                     tilPesquisar.hint = chip.text.toString()
                     etPesquisar.setText("")
-                    setupTipoTeclado(chip.text.toString())
+                    bindTipoTeclado(chip.text.toString())
 
                     chipSelecionado = chip
                 }
@@ -440,7 +461,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun setupTipoTeclado(tipoFiltro: String) {
+    private fun bindTipoTeclado(tipoFiltro: String) {
         val etPesquisar = bindingPesquisarEntregas.etPesquisar
         when (tipoFiltro) {
             requireContext().getString(R.string.label_nota_fiscal),
@@ -456,13 +477,12 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun abrirLayoutPesquisa() {
-        limparFiltroPesquisa()
-        bindingSheetInfoGerais.root.visibility = View.INVISIBLE
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         bindingSheet.ivPesquisar.circularRevealAnimation(bindingPesquisarEntregas.root)
     }
 
     private fun fecharLayoutPesquisa() {
-        bindingSheetInfoGerais.root.visibility = View.VISIBLE
+        limparFiltroPesquisa()
         bindingSheet.ivPesquisar.circularConcealAnimation(bindingPesquisarEntregas.root)
         bindingPesquisarEntregas.apply {
             requireContext().hideKeyboard(etPesquisar)
@@ -483,17 +503,10 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun setupDialogEvento(entrega: Entrega) {
+    private fun bindDialogEvento(entrega: Entrega) {
         val iDialogEvento = object : IDialogEventos {
             override fun onEventoClick(idEvento: Int) {
-                if (idEvento < 9) {
-                    if (idEvento == ENTREGA_DEVOLVIDA) {
-                        setupDialogEntregaDevolvida(entrega)
-                    } else {
-                        entregaViewModel.updateStatusEntrega(entrega, idEvento)
-                    }
-                }
-                binding.root.mensagemCurta(idEvento.toString())
+                adicionarEventoEntrega(idEvento, entrega)
             }
         }
         dialogEventos = DialogEventos(entrega, requireContext())
@@ -501,19 +514,70 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         dialogEventos.show(requireActivity().supportFragmentManager, DialogEventos.TAG)
     }
 
-    private fun setupDialogEntregaDevolvida(entrega: Entrega) {
+    private fun bindDialogEntregaDevolvida(entrega: Entrega) {
         Dialog(
             requireContext().getString(R.string.label_devolucao_mercadoria),
             requireContext().getString(R.string.label_qual_tipo_devolucao),
             requireContext().getString(R.string.label_devolucao_parcial),
             requireContext().getString(R.string.label_devolucao_total),
             acaoPositiva = {
-                entregaViewModel.updateStatusEntrega(entrega, ENTREGA_DEVOLVIDA_PARCIAL)
+                adicionarEventoEntrega(ENTREGA_DEVOLVIDA_PARCIAL, entrega)
             },
             acaoNegativa = {
-                entregaViewModel.updateStatusEntrega(entrega, ENTREGA_DEVOLVIDA_TOTAL)
+                adicionarEventoEntrega(ENTREGA_DEVOLVIDA_TOTAL, entrega)
             }
         ).show(requireActivity().supportFragmentManager, Dialog.TAG)
+    }
+
+    private fun adicionarEventoEntrega(idEvento: Int, entrega: Entrega) {
+        when (idEvento) {
+            ENTREGA_CHEGADA_CLIENTE -> {
+                iniciarTempoEspera()
+                entregaViewModel.updateStatusEntrega(entrega, idEvento)
+            }
+            ENTREGA_INICIADA -> {
+                entregaViewModel.updateStatusEntrega(entrega, idEvento)
+            }
+            ENTREGA_REALIZADA -> {
+                encolherBotaoEspera()
+                finalizarTempoEspera()
+                binding.lavConfetti.playAnimation()
+                entregaViewModel.updateStatusEntrega(entrega, idEvento)
+            }
+            ENTREGA_DEVOLVIDA -> {
+                bindDialogEntregaDevolvida(entrega)
+            }
+            ENTREGA_DEVOLVIDA_PARCIAL -> {
+                entregaViewModel.updateStatusEntrega(entrega, idEvento)
+            }
+            ENTREGA_DEVOLVIDA_TOTAL -> {
+                entregaViewModel.updateStatusEntrega(entrega, idEvento)
+            }
+        }
+    }
+
+    private fun iniciarTempoEspera() {
+        binding.fabEspera.isActive(true)
+        contador = Contador()
+        contador.start()
+        expandirBotaoEspera()
+    }
+
+    private fun finalizarTempoEspera() {
+        binding.fabEspera.isActive(false)
+        contador.onFinish()
+        contador.cancel()
+        mostrarTempo = false
+    }
+
+    private fun expandirBotaoEspera() {
+        binding.fabEspera.extend()
+        mostrarTempo = true
+    }
+
+    private fun encolherBotaoEspera() {
+        binding.fabEspera.shrink()
+        binding.fabEspera.text = null
     }
 
     private fun verificarPermissao(): Boolean {
@@ -527,7 +591,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                         Manifest.permission.ACCESS_COARSE_LOCATION
                     ) == PackageManager.PERMISSION_GRANTED -> {
                 permissionRequestDialog?.dismiss()
-                setupMap()
+                bindMap()
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     permissionRequestDialog = null
                     verificarPermissaoBackground()
@@ -637,7 +701,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     }
 
     @SuppressLint("MissingPermission")
-    private fun setupMap() {
+    private fun bindMap() {
         val mapFragment =
             childFragmentManager.findFragmentById(br.com.fusiondms.feature.mapa.R.id.map_fragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -674,22 +738,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun startLocationService() {
-        if (verificarPermissao()) {
-            foregroundLocationService?.subscribeToLocationUpdates()
-                ?: Log.d("ForegroundLocationService", "Service Not Bound")
-        } else {
-            solicitarPermissao()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        verificarPermissao()
-    }
-
-    override fun onStart() {
-        super.onStart()
+    private fun bindSericoLocalizacao() {
         if (verificarPermissao()) {
             val serviceIntent = Intent(requireActivity(), ForegroundLocationService::class.java)
             requireActivity().bindService(
@@ -700,11 +749,35 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    override fun onStop() {
+    private fun startLocationService() {
+        if (verificarPermissao()) {
+            foregroundLocationService?.subscribeToLocationUpdates()
+                ?: Log.d("ForegroundLocationService", "Service Not Bound")
+        } else {
+            solicitarPermissao()
+        }
+    }
+
+    private fun stopServicoLocalizacao() {
         if (foregroundLocationServiceBound) {
             requireActivity().unbindService(foregroundOnlyServiceConnection)
             foregroundLocationServiceBound = false
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        verificarPermissao()
+        entregaViewModel.getParametros()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        bindSericoLocalizacao()
+    }
+
+    override fun onStop() {
+        stopServicoLocalizacao()
         super.onStop()
     }
 
@@ -715,6 +788,37 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         _binding = null
         _bindingSheet = null
         _bindingSheetInfoGerais = null
+    }
+
+    inner class Contador(timeToContinue: Long = 3540000L)
+        : CountDownTimer(Long.MAX_VALUE, TimeUnit.SECONDS.toMillis(1)) {
+        private val secondsInMillis = TimeUnit.SECONDS.toMillis(1)
+        private val minutesInmillis = TimeUnit.MINUTES.toMillis(1)
+        private val hoursInMillis = TimeUnit.HOURS.toMillis(1)
+        private var elapsedTime = timeToContinue
+        private var contadorTresSegundos = 0
+        override fun onTick(millisUntilFinished: Long) {
+            elapsedTime += secondsInMillis
+            entregaViewModel.atualizarTempo(currentTime(), isTempoEspera)
+
+            if (mostrarTempo && contadorTresSegundos++ > 3) {
+                mostrarTempo = false
+                contadorTresSegundos = 0
+            }
+        }
+
+        override fun onFinish() {
+            binding.root.showMessage("Tempo de espera finalizado: ${currentTime()}", TipoMensagem.NORMAL)
+        }
+        private fun currentTime() : String {
+            val segundos = ((elapsedTime / secondsInMillis) % 60)
+            val minutos = ((elapsedTime / minutesInmillis) % 60)
+            val horas = ((elapsedTime / hoursInMillis) % 24)
+
+            return if (elapsedTime >= TimeUnit.MINUTES.toMillis(60))
+                String.format("%02d:%02d:%02d", horas, minutos, segundos)
+            else String.format("%02d:%02d", minutos, segundos)
+        }
     }
 
     companion object {
