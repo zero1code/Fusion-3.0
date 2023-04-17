@@ -3,6 +3,14 @@ apply plugin: 'kotlin-android'
 apply from: "$rootDir/config/android-settings.gradle"
 
 android {
+packagingOptions {
+    resources {
+        excludes += ['META-INF/gradle/incremental.annotation.processors']
+        pickFirsts += ['**/META-INFMANIFEST.MF']
+    }
+}
+
+    namespace 'br.com.fusiondms.core.common'
 }
 
 dependencies {

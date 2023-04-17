@@ -1,5 +1,6 @@
 package br.com.fusiondms.feature.entregas.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.fusiondms.core.datastore.chaves.DataStoreChaves
@@ -84,6 +85,12 @@ class EntregaViewModel @Inject constructor(
     fun updateStatusEntrega(entrega: Entrega, idEvento: Int) {
         viewModelScope.launch {
             entregasUseCase.updateStatusEntrega(entrega, idEvento, _parametros.value)
+                .onStart {
+
+                }
+                .onCompletion {
+
+                }
                 .catch { result ->
                     _statusEntrega.emit(EntregaResult.ErrorUpdate(result.message ?: ""))
                 }
