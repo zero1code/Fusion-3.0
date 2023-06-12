@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "5e29f65821acaa611ee56ac33069af28",
+    "identityHash": "af29b952f1775474a82f019d732fb39a",
     "entities": [
       {
         "tableName": "tb_romaneio",
@@ -56,7 +56,7 @@
       },
       {
         "tableName": "tb_entrega",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `idEntrega` INTEGER NOT NULL, `idRomaneio` INTEGER NOT NULL, `idCliente` INTEGER NOT NULL, `ordermEntrega` INTEGER NOT NULL, `dadosCliente` TEXT NOT NULL, `localCliente` TEXT NOT NULL, `numeroNotaFiscal` INTEGER NOT NULL, `valor` TEXT NOT NULL, `statusEntrega` TEXT NOT NULL, `formaPagamento` TEXT NOT NULL, PRIMARY KEY(`idEntrega`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `idEntrega` INTEGER NOT NULL, `idRomaneio` INTEGER NOT NULL, `idCliente` INTEGER NOT NULL, `ordermEntrega` INTEGER NOT NULL, `dadosCliente` TEXT NOT NULL, `localCliente` TEXT NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `numeroNotaFiscal` INTEGER NOT NULL, `valor` TEXT NOT NULL, `statusEntrega` TEXT NOT NULL, `formaPagamento` TEXT NOT NULL, PRIMARY KEY(`idEntrega`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -98,6 +98,18 @@
             "fieldPath": "localCliente",
             "columnName": "localCliente",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
             "notNull": true
           },
           {
@@ -450,7 +462,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5e29f65821acaa611ee56ac33069af28')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'af29b952f1775474a82f019d732fb39a')"
     ]
   }
 }

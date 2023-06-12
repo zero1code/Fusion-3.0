@@ -18,6 +18,8 @@ data class EntregaEntity(
     val ordermEntrega: Int = 0,
     val dadosCliente: String = "",
     val localCliente: String = "",
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
     val numeroNotaFiscal: Int = 0,
     val valor: String = "",
     val statusEntrega: String = "0",

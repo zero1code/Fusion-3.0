@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="@dimen/card_border_radius"
     app:cardElevation="@dimen/dimen_zero">
 
@@ -33,7 +33,7 @@
             app:layout_constraintTop_toBottomOf="@id/progress_circular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            tools:text="Carregando"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

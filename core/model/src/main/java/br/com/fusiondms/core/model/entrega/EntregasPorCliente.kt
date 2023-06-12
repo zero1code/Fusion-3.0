@@ -5,6 +5,8 @@ data class EntregasPorCliente(
     var idCliente: Int,
     var cliente: String,
     var local: String,
+    val latitude: Double,
+    val longitude: Double,
     var entregas: List<Entrega>
 ) {
 }

@@ -33,6 +33,7 @@ import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -40,11 +41,12 @@ import br.com.fusiondms.core.common.*
 import br.com.fusiondms.core.common.bottomdialog.Dialog
 import br.com.fusiondms.core.common.permissiondiaolog.PermissionRequestDialog
 import br.com.fusiondms.core.common.snackbar.TipoMensagem
+import br.com.fusiondms.core.common.snackbar.exibirMensagemSnack
 import br.com.fusiondms.core.common.snackbar.mensagemCurta
-import br.com.fusiondms.core.common.snackbar.showMessage
+import br.com.fusiondms.core.model.Conteudo
 import br.com.fusiondms.core.model.entrega.Entrega
 import br.com.fusiondms.core.model.parametros.Parametros
-import br.com.fusiondms.core.servives.location.ForegroundLocationService
+import br.com.fusiondms.core.services.location.ForegroundLocationService
 import br.com.fusiondms.feature.entregas.databinding.ItemEntregaChildBinding
 import br.com.fusiondms.feature.entregas.presentation.adapter.EntregasParentAdapter
 import br.com.fusiondms.feature.entregas.presentation.viewmodel.EntregaViewModel
@@ -57,12 +59,14 @@ import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_INICIADA
 import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_PENDENTE
 import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_REALIZADA
 import br.com.fusiondms.feature.mapa.R.*
+import br.com.fusiondms.feature.mapa.bottomdialog.DialogRaioCliente
 import br.com.fusiondms.feature.mapa.databinding.EntregasBottomSheetBinding
 import br.com.fusiondms.feature.mapa.databinding.EntregasInfoGeraisBinding
 import br.com.fusiondms.feature.mapa.databinding.FragmentMapaBinding
 import br.com.fusiondms.feature.mapa.databinding.LayoutPesquisarBinding
 import br.com.fusiondms.feature.mapa.dialogeventos.DialogEventos
 import br.com.fusiondms.feature.mapa.dialogeventos.interfaces.IDialogEventos
+import br.com.fusiondms.feature.mapa.presentation.viewmodel.MapaViewModel
 import br.com.fusiondms.feature.preferences.presentation.ConfiguracoesActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -70,12 +74,15 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
@@ -91,10 +98,13 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     private val bindingPesquisarEntregas get() = _bindingPesquisarEntregas!!
 
     private val entregaViewModel: EntregaViewModel by activityViewModels()
+    private val mapaViewModel: MapaViewModel by viewModels()
+    private var listaCliente: List<Conteudo> = listOf()
+    private var isNoRaioCliente = false
 
     private val adapterEntregas by lazy { EntregasParentAdapter() }
 
-    private lateinit var mMap: GoogleMap
+    private lateinit var mapaGoogle: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
@@ -112,6 +122,9 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     private var mostrarTempo = false
     private var isTempoEspera = true
     private var alturaMaximaSheetInfo = 229
+
+    private var isMapaCarregado = false
+    private val raioMarkerMap: MutableMap<Circle, Marker> = mutableMapOf()
 
     private var foregroundLocationServiceBound = false
     // Fornece a atualizações de localização para while-in-use recurso.
@@ -139,7 +152,9 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         when {
             permission.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
                 //Localização precisa aceita
-                bindMap()
+                if (!isMapaCarregado) {
+                    bindMap()
+                }
                 permissionRequestDialog?.dismiss()
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     permissionRequestDialog = null
@@ -219,8 +234,9 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
     private fun bindObservers() {
         entregaViewModel.getListaEntrega()
         lifecycleScope.launchWhenCreated {
-            entregaViewModel.listaEntrega.collect { listaCliente ->
-                adapterEntregas.atualizarLista(listaCliente)
+            entregaViewModel.listaEntrega.collect { result ->
+                listaCliente = result
+                adapterEntregas.atualizarLista(result)
             }
         }
 
@@ -254,6 +270,22 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                     binding.fabEspera.text = it
                 }
                 else encolherBotaoEspera()
+            }
+        }
+
+
+        lifecycleScope.launch {
+            mapaViewModel.localizacaoAtual.collect { localizacaoAtual ->
+                if (!isNoRaioCliente) {
+                    localizacaoAtual?.let {
+                        checarSeEstaDentroRaioCliente(localizacaoAtual, raioMarkerMap)?.let { marker ->
+                            isNoRaioCliente = true
+                            dialogEstaNoRaioCliente(
+                                listaCliente[marker.tag.toString().toInt()] as Conteudo.CarouselEntrega
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -321,6 +353,22 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                     bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED
                 ) bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
+        }
+    }
+
+    @SuppressLint("PotentialBehaviorOverride")
+    private fun bindMarkerListener() {
+        mapaGoogle.setOnMarkerClickListener { marker ->
+            mapaGoogle.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.position, 18.0f))
+            marker.showInfoWindow()
+            true
+        }
+
+        mapaGoogle.setOnInfoWindowClickListener { marker ->
+            val position = marker.tag.toString().toInt()
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            bindingSheet.rvEntregas.smoothScrollToPosition(position + 1)
+            adapterEntregas.destacarPosicao(position)
         }
     }
 
@@ -430,7 +478,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val textoParaPesquisar = s.toString().trim()
                 if (chipSelecionadoId == -1 && textoParaPesquisar.isNotBlank()) {
-                    binding.root.showMessage(requireContext().getString(R.string.label_escolher_filtro_busca), TipoMensagem.ERROR)
+                    binding.root.exibirMensagemSnack(requireContext().getString(R.string.label_escolher_filtro_busca), TipoMensagem.ERROR)
                     bindingPesquisarEntregas.etPesquisar.setText("")
                 } else {
                     val filtrarPor = chipSelecionado?.text.toString()
@@ -529,6 +577,30 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         ).show(requireActivity().supportFragmentManager, Dialog.TAG)
     }
 
+    private fun dialogEstaNoRaioCliente(cliente: Conteudo.CarouselEntrega) {
+        val nomeCliente = cliente.entregasPorCliente.cliente
+        val localCliente = cliente.entregasPorCliente.local
+        val qtdEntregas = requireContext().resources.getQuantityString(
+            R.plurals.label_quantidade_entregas,
+            cliente.entregasPorCliente.entregas.size,
+            cliente.entregasPorCliente.entregas.size
+
+        )
+
+        val mensagem = "$nomeCliente<br>$localCliente<br><b>$qtdEntregas</b>"
+
+        DialogRaioCliente(
+            getString(R.string.label_proximo_do_cliente),
+            mensagem,
+            getString(R.string.label_marcar_chegada_cliente),
+            getString(R.string.label_silenciar),
+            acaoPositiva = {
+                isNoRaioCliente = false
+            },
+            acaoNegativa = {}
+        ).show(requireActivity().supportFragmentManager, DialogRaioCliente.TAG)
+    }
+
     private fun adicionarEventoEntrega(idEvento: Int, entrega: Entrega) {
         when (idEvento) {
             ENTREGA_CHEGADA_CLIENTE -> {
@@ -591,7 +663,9 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                         Manifest.permission.ACCESS_COARSE_LOCATION
                     ) == PackageManager.PERMISSION_GRANTED -> {
                 permissionRequestDialog?.dismiss()
-                bindMap()
+                if (!isMapaCarregado) {
+                    bindMap()
+                }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     permissionRequestDialog = null
                     verificarPermissaoBackground()
@@ -700,25 +774,52 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             })
     }
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission", "PotentialBehaviorOverride")
     private fun bindMap() {
-        val mapFragment =
-            childFragmentManager.findFragmentById(br.com.fusiondms.feature.mapa.R.id.map_fragment) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+            val mapFragment =
+                childFragmentManager.findFragmentById(br.com.fusiondms.feature.mapa.R.id.map_fragment) as SupportMapFragment
+            mapFragment.getMapAsync(this)
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-            location?.let {
-                val loc = LatLng(it.latitude, it.longitude)
-                mMap.addMarker(MarkerOptions().position(loc).title(getString(R.string.label_voce_esta_aqui)))
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 18.0f))
+        if (::mapaGoogle.isInitialized) {
+            if (!isMapaCarregado) {
+                mapaGoogle.isMyLocationEnabled = true
+                mapaGoogle.uiSettings.isCompassEnabled = false
+                mapaGoogle.uiSettings.isMyLocationButtonEnabled = false
+
+                fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                    location?.run {
+                        val latLng = LatLng(latitude, longitude)
+                        mapaGoogle.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18.0f))
+                    }
+                }
+
+                listaCliente.forEachIndexed { index, item ->
+                    val cliente = item as Conteudo.CarouselEntrega
+
+                    val loc = LatLng(
+                        cliente.entregasPorCliente.latitude,
+                        cliente.entregasPorCliente.longitude
+                    )
+                    val markerOptions = MarkerOptions().position(loc)
+
+                    markerOptions.icon(layoutInflater.criarIconeLocalCliente(index))
+                    val marker = mapaGoogle.addMarker(markerOptions)
+                    marker?.tag = index
+                    mapaGoogle.setInfoWindowAdapter(layoutInflater.bindInfoWindowLocalCliente(cliente))
+                    mapaGoogle.addPolyline(requireContext().bindLinhaRotaEntrePontos(listaCliente))
+                    val raio = mapaGoogle.addCircle(bindCirculoRaioCliente(cliente))
+                    raioMarkerMap[raio] = marker!!
+                }
+                bindMarkerListener()
+                isMapaCarregado = true
             }
         }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-        setMapStyle(mMap)
+        mapaGoogle = googleMap
+        setMapStyle(mapaGoogle)
     }
 
     private fun setMapStyle(map: GoogleMap) {
@@ -738,7 +839,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun bindSericoLocalizacao() {
+    private fun bindServicoLocalizacao() {
         if (verificarPermissao()) {
             val serviceIntent = Intent(requireActivity(), ForegroundLocationService::class.java)
             requireActivity().bindService(
@@ -773,7 +874,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 
     override fun onStart() {
         super.onStart()
-        bindSericoLocalizacao()
+        bindServicoLocalizacao()
     }
 
     override fun onStop() {
@@ -808,7 +909,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         }
 
         override fun onFinish() {
-            binding.root.showMessage("Tempo de espera finalizado: ${currentTime()}", TipoMensagem.NORMAL)
+            binding.root.exibirMensagemSnack("Tempo de espera finalizado: ${currentTime()}", TipoMensagem.NORMAL)
         }
         private fun currentTime() : String {
             val segundos = ((elapsedTime / secondsInMillis) % 60)

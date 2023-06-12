@@ -67,6 +67,8 @@
     <string name="label_alterar_forma_pagamento">Alterar forma de pagamento</string>
     <string name="label_devolucao_parcial">Devolução parcial</string>
     <string name="label_devolucao_total">Devolução total</string>
+    <string name="label_marcar_chegada_cliente">Marcar chegada no cliente</string>
+    <string name="label_silenciar">Silenciar</string>
     <!--    label de botoes-->
 
     <!--    label de uma palavra apenas-->
@@ -180,6 +182,7 @@
     <string name="label_escolher_forma_pagamento">Escolha a forma de pagamento</string>
     <string name="label_escolher_filtro_busca">Escolha o filtro para realizar a busca</string>
     <string name="label_qual_tipo_devolucao">Que tipo de devolução será realizada?</string>
+    <string name="label_proximo_do_cliente">Você está próximo de um cliente!</string>
     <!--    label de frases-->
 
     <!--    Label das preferencias-->
@@ -241,6 +244,11 @@
     <plurals name="label_volume">
         <item quantity="one">Volume</item>
         <item quantity="other">Volumes</item>
+    </plurals>
+
+    <plurals name="label_quantidade_entregas">
+        <item quantity="one">Você tem %d entrega neste local.</item>
+        <item quantity="other">Você tem %d entregas neste local.</item>
     </plurals>
     <!--    Label com plural-->
 

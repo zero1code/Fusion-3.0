@@ -19,6 +19,8 @@ import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_ENTREGAS_SOL
 import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_ENTREGAS_TEMPO_ESPERA
 import br.com.fusiondms.core.datastore.chaves.PreferencesChaves.KEY_LOCALIZACAO_TEMPO_ENVIO
 import br.com.fusiondms.core.model.parametros.Parametros
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -98,15 +100,15 @@ class DataStoreRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getCurrentLocation(chave: String): String? {
+    override fun getCurrentLocation(chave: String): Flow<String?> {
         return try {
             val preferencesKey = stringPreferencesKey(chave)
             context.dataStore.data.map { preferences ->
                 preferences[preferencesKey]
-            }.first()
+            }
         } catch (e: Exception) {
             e.printStackTrace()
-            null
+            emptyFlow()
         }
     }
 

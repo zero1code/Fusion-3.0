@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.transition.TransitionInflater
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,8 +23,7 @@ import br.com.fusiondms.core.common.R
 import br.com.fusiondms.core.common.getColorFromAttr
 import br.com.fusiondms.core.common.getSerializable
 import br.com.fusiondms.core.common.snackbar.TipoMensagem
-import br.com.fusiondms.core.common.snackbar.mensagemCurta
-import br.com.fusiondms.core.common.snackbar.showMessage
+import br.com.fusiondms.core.common.snackbar.exibirMensagemSnack
 import br.com.fusiondms.core.common.toMoedaLocal
 import br.com.fusiondms.core.model.entrega.Entrega
 import br.com.fusiondms.core.model.entrega.EntregaItem
@@ -45,7 +43,6 @@ import br.com.fusiondms.feature.entregas.presentation.viewmodel.EntregaViewModel
 import br.com.fusiondms.feature.entregas.util.CustomHorizontalGridLayoutManager
 import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_ADIADA
 import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_CHEGADA_CLIENTE
-import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA
 import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA_PARCIAL
 import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_DEVOLVIDA_TOTAL
 import br.com.fusiondms.feature.entregas.util.EventoEntregaId.ENTREGA_INICIADA
@@ -174,7 +171,7 @@ class DetalheEntregaFragment : Fragment() {
                 when (result) {
                     is DetalheEntregaViewModel.Status.SuccessRecebimento -> recebimentoAdicionado()
                     is DetalheEntregaViewModel.Status.Error -> result.message?.let {
-                        binding.root.showMessage(it, TipoMensagem.ERROR)
+                        binding.root.exibirMensagemSnack(it, TipoMensagem.ERROR)
                     }
                     else -> Unit
                 }
@@ -195,7 +192,7 @@ class DetalheEntregaFragment : Fragment() {
     private fun bindListeners () {
         bindingRecebimentos.btnNovoRecebimento.setOnClickListener {
             if (valorRestante <= BigDecimal.ZERO) {
-                binding.root.showMessage(requireContext().getString(R.string.label_pagamento_entrega_efetuado), TipoMensagem.NORMAL)
+                binding.root.exibirMensagemSnack(requireContext().getString(R.string.label_pagamento_entrega_efetuado), TipoMensagem.NORMAL)
             } else {
                 if (::tipoPagamento.isInitialized) {
                     val intent =
@@ -205,7 +202,7 @@ class DetalheEntregaFragment : Fragment() {
                         }
                     pagamentoLauncher.launch(intent)
                 } else {
-                    binding.root.showMessage(
+                    binding.root.exibirMensagemSnack(
                         requireContext().getString(R.string.label_forma_pagamento_nao_encontrada),
                         TipoMensagem.ERROR
                     )
@@ -313,7 +310,7 @@ class DetalheEntregaFragment : Fragment() {
 
     private fun recebimentoAdicionado() {
         detalheEntregaViewModel.getListaRecebimento(entregaSelecionada)
-        binding.root.showMessage(requireContext().getString(R.string.label_pagamento_efetuado), TipoMensagem.SUCCESS)
+        binding.root.exibirMensagemSnack(requireContext().getString(R.string.label_pagamento_efetuado), TipoMensagem.SUCCESS)
     }
 
     private fun bindStatus(statusEntrega: Int) {

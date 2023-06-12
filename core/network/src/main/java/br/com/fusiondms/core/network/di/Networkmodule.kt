@@ -1,6 +1,7 @@
 package br.com.fusiondms.core.network.di
 
 import br.com.fusiondms.core.network.api.FusionApi
+import br.com.fusiondms.core.network.utils.NullOrEmptyConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-private const val BASE_URL = "http://192.168.1.7:3002/"
+private const val BASE_URL = "http://192.168.1.8:3002/"
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -30,6 +31,7 @@ object Networkmodule {
             .build()
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .addConverterFactory(NullOrEmptyConverterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

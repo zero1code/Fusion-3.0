@@ -6,7 +6,6 @@ import android.text.Html
 import android.util.TypedValue
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +15,7 @@ import br.com.fusiondms.core.common.*
 import br.com.fusiondms.core.common.R.dimen
 import br.com.fusiondms.core.common.R.font
 import br.com.fusiondms.core.common.snackbar.TipoMensagem
-import br.com.fusiondms.core.common.snackbar.showMessage
+import br.com.fusiondms.core.common.snackbar.exibirMensagemSnack
 import br.com.fusiondms.core.model.recebimento.Recebimento
 import br.com.fusiondms.core.model.recebimento.TipoPagamento
 import br.com.fusiondms.feature.pagamentos.databinding.ActivityPagamentoMainBinding
@@ -73,7 +72,7 @@ class PagamentoMainActivity : AppCompatActivity() {
         binding.btnProximo.setOnClickListener { tipoPagamentoActivity() }
 
         binding.ivCompartilhar.setOnClickListener {
-            binding.root.showMessage("Compartilhar", TipoMensagem.NORMAL)
+            binding.root.exibirMensagemSnack("Compartilhar", TipoMensagem.NORMAL)
         }
     }
 
@@ -127,7 +126,7 @@ class PagamentoMainActivity : AppCompatActivity() {
             intent.putExtra(TIPO_PAGAMENTO_KEY, radioButtonSelecionado)
             pagamentoLauncher.launch(intent)
         } else {
-            binding.btnProximo.showMessage(
+            binding.btnProximo.exibirMensagemSnack(
                 getString(R.string.label_forma_pagamento_nao_encontrada),
                 TipoMensagem.ERROR,
                 true

@@ -9,7 +9,7 @@
 
     <application>
         <service
-            android:name=".location.ForegroundLocationService"
+            android:name="br.com.fusiondms.core.services.location.ForegroundLocationService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="location" />

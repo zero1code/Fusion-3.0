@@ -27,6 +27,7 @@ ext.addFragmentNavigation = {
 ext.addGoogleMaps = {
     implementation Deps.play_services_maps
     implementation Deps.play_services_location
+    implementation Deps.maps_utils
 }
 
 ext.addRoom = {

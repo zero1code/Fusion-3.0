@@ -1,6 +1,7 @@
 package br.com.fusiondms.core.datastore.repository
 
 import br.com.fusiondms.core.model.parametros.Parametros
+import kotlinx.coroutines.flow.Flow
 
 interface DataStoreRepository {
     suspend fun putString(chave: String, valor: String)
@@ -10,7 +11,6 @@ interface DataStoreRepository {
     suspend fun getString(chave: String): String?
     suspend fun getInt(chave: String): Int?
     suspend fun getBoolean(chave: String): Boolean?
-    suspend fun getCurrentLocation(chave: String) : String?
-
+    fun getCurrentLocation(chave: String) : Flow<String?>
     suspend fun getParametros() : Parametros?
 }

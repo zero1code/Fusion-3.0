@@ -47,6 +47,7 @@ object Versions {
     const val work_gcm_version = "2.8.0"
     const val dagger_version = "2.41.1"
     const val lottie = "6.0.0"
+    const val maps_utils = "3.4.0"
 }
 
 object Deps {
@@ -85,6 +86,7 @@ object Deps {
     const val dagger = "com.google.dagger:dagger:${Versions.dagger_version}"
     const val kapt_dagger = "com.google.dagger:dagger-compiler:${Versions.dagger_version}"
     const val lottie = "com.airbnb.android:lottie:${Versions.lottie}"
+    const val maps_utils = "com.google.maps.android:android-maps-utils:${Versions.maps_utils}"
 }
 
 object LocalLibs {

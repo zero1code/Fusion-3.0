@@ -12,14 +12,13 @@ import br.com.fusiondms.core.common.*
 import br.com.fusiondms.core.common.R.*
 import br.com.fusiondms.core.common.bottomdialog.Dialog
 import br.com.fusiondms.core.common.snackbar.TipoMensagem
-import br.com.fusiondms.core.common.snackbar.showMessage
+import br.com.fusiondms.core.common.snackbar.exibirMensagemSnack
 import br.com.fusiondms.core.model.recebimento.Recebimento
 import br.com.fusiondms.feature.pagamentos.R
 import br.com.fusiondms.feature.pagamentos.databinding.ActivityPagamentoCartaoBinding
 import br.com.fusiondms.feature.pagamentos.utils.MoedaTextWatcher
 import br.com.fusiondms.feature.pagamentos.utils.formatPrice
 import br.com.fusiondms.feature.pagamentos.utils.valorPagamentoParaSalvar
-import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
@@ -129,7 +128,7 @@ class PagamentoCartaoActivity : AppCompatActivity() {
             getString(string.label_sim),
             getString(string.label_nao),
             acaoPositiva = {
-                binding.btnPagar.showMessage(
+                binding.btnPagar.exibirMensagemSnack(
                     "Máquina conectada",
                     TipoMensagem.SUCCESS,
                     true

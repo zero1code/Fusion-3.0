@@ -1,6 +1,9 @@
 package br.com.fusiondms.feature.entregas.presentation.adapter
 
 import android.content.Context
+import android.graphics.Color
+import android.os.Handler
+import android.os.Looper
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +19,7 @@ import br.com.fusiondms.feature.entregas.util.NestedRecyclerViewStateRecoverAdap
 import br.com.fusiondms.core.model.entrega.Entrega
 import br.com.fusiondms.feature.entregas.databinding.ItemEntregaChildBinding
 import br.com.fusiondms.feature.entregas.databinding.ItemEntregaParentBinding
+import java.util.concurrent.TimeUnit
 
 private enum class ViewType {
     CAROUSEL_ENTREGA,
@@ -26,6 +30,8 @@ class EntregasParentAdapter() : NestedRecyclerViewStateRecoverAdapter<Conteudo, 
 ) {
     var onEntregaClickListener: (binding: ItemEntregaChildBinding, entrega: Entrega) -> Unit = { _: ItemEntregaChildBinding, _: Entrega -> }
     var onEntregaLongClickListener: (entrega: Entrega, position: Int) -> Unit = { _: Entrega, _: Int -> }
+
+    var itemDestacado = RecyclerView.NO_POSITION
 
     private var listaCompleta = listOf<Conteudo.CarouselEntrega>()
     private var filtroEntrega = arrayListOf<Int>()
@@ -58,13 +64,12 @@ class EntregasParentAdapter() : NestedRecyclerViewStateRecoverAdapter<Conteudo, 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             ViewType.CAROUSEL_ENTREGA.ordinal -> (holder as ViewHolder.CarouselEntregaViewHolder)
-                .bind(getItem(position) as Conteudo.CarouselEntrega)
+                .bind(getItem(position) as Conteudo.CarouselEntrega, itemDestacado)
         }
         super.onBindViewHolder(holder, position)
     }
 
     sealed class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
         class CarouselEntregaViewHolder(
             private val binding: ItemEntregaParentBinding,
             private val listener: (binding: ItemEntregaChildBinding, entrega: Entrega) -> Unit,
@@ -72,12 +77,20 @@ class EntregasParentAdapter() : NestedRecyclerViewStateRecoverAdapter<Conteudo, 
         ) : ViewHolder(binding.root), NestedRecyclerViewViewHolder {
 
             private lateinit var content: Conteudo.CarouselEntrega
-            fun bind(content: Conteudo.CarouselEntrega) {
+            fun bind(content: Conteudo.CarouselEntrega, itemDestacado: Int) {
                 bindChildAdapter()
 
                 val context = binding.root.context
                 this.content = content
                 with(binding) {
+                    if (adapterPosition == itemDestacado) {
+                        binding.root.strokeColor = Color.parseColor("#f3f402")
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            binding.root.strokeColor = Color.TRANSPARENT
+                        }, TimeUnit.SECONDS.toMillis(4))
+                    } else {
+                        binding.root.strokeColor = Color.TRANSPARENT
+                    }
 //                    tvCliente.text = Html.fromHtml(context.getString(string.label_dados_cliente), 0)
 //                    tvLocal.text = Html.fromHtml(context.getString(string.label_localizacao_cliente), 0)
                     tvCliente.text = Html.fromHtml(content.entregasPorCliente.cliente, 0)
@@ -217,6 +230,11 @@ class EntregasParentAdapter() : NestedRecyclerViewStateRecoverAdapter<Conteudo, 
         }
         listaCompleta = lista.toList()
         submitList(listaCliente)
+    }
+
+    fun destacarPosicao(position: Int) {
+        itemDestacado = position
+        notifyItemChanged(position)
     }
 
     private class ContentAdapterDiffUtil : DiffUtil.ItemCallback<Conteudo>() {

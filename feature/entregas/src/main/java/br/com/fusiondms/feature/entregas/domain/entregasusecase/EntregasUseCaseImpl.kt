@@ -53,6 +53,8 @@ class EntregasUseCaseImpl @Inject constructor(
                     idCliente = cliente.key,
                     cliente = cliente.value[0].dadosCliente,
                     local = cliente.value[0].localCliente,
+                    latitude = cliente.value[0].latitude,
+                    longitude = cliente.value[0].longitude,
                     entregas = cliente.value
                 )
                 entregasPorCliente.add(

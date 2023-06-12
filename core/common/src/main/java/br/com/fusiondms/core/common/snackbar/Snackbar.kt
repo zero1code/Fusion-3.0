@@ -112,7 +112,7 @@ enum class TipoMensagem {
     SUCCESS
 }
 
-fun View.showMessage(message: String, tipoMensagem: TipoMensagem, possuiAncora: Boolean = false) {
+fun View.exibirMensagemSnack(message: String, tipoMensagem: TipoMensagem, possuiAncora: Boolean = false) {
     Snackbar
         .make(this, message, Snackbar.LENGTH_LONG)
         .tipoMensagem(tipoMensagem)

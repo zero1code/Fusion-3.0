@@ -8,6 +8,8 @@ import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.os.Build.VERSION.SDK_INT
+import android.os.Parcelable
 import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -49,7 +51,7 @@ fun Context.hideKeyboard(view: View) {
 }
 
 fun ImageView.mudarCorIcone(context: Context, color: Int) {
-    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+    if(SDK_INT >= Build.VERSION_CODES.Q) {
         this.colorFilter = BlendModeColorFilter(ContextCompat.getColor(context, color), BlendMode.SRC_ATOP)
     } else {
         this.setColorFilter(ContextCompat.getColor(context, color), PorterDuff.Mode.SRC_IN)
@@ -101,14 +103,14 @@ fun converterDataParatextoLegivel(dataAtual: Long): String {
 }
 
 fun <T : Serializable?> getSerializable(activity: Activity, name: String, clazz: Class<T>): T? {
-    return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+    return if(SDK_INT >= Build.VERSION_CODES.TIRAMISU)
         activity.intent.getSerializableExtra(name, clazz)
     else
         activity.intent.getSerializableExtra(name) as T
 }
 
 fun <T : Serializable?> getSerializable(intent: Intent?, name: String, clazz: Class<T>): T? {
-    return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+    return if(SDK_INT >= Build.VERSION_CODES.TIRAMISU)
         intent?.getSerializableExtra(name, clazz)
     else
         intent?.getSerializableExtra(name) as T

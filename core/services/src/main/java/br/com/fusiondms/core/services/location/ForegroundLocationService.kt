@@ -1,4 +1,4 @@
-package br.com.fusiondms.core.servives.location
+package br.com.fusiondms.core.services.location
 
 import android.annotation.SuppressLint
 import android.app.*
@@ -78,10 +78,6 @@ class ForegroundLocationService : Service() {
                 val myCurrentLocation = currentLocation?.toText() ?: "Sem localização 2"
                 Log.d(TAG, "Current location: $myCurrentLocation")
                 runBlocking { dataStoreRepository.putLocation(myCurrentLocation, latitude, longitude) }
-
-                val intent = Intent(ACTION_FOREGROUND_LOCATION_BROADCAST)
-                intent.putExtra(EXTRA_LOCATION, currentLocation)
-                applicationContext.sendBroadcast(intent)
 
                 if (serviceRunningInForeground) {
                     notificationManager.notify(
@@ -218,11 +214,10 @@ class ForegroundLocationService : Service() {
         val titleText = "Localização ativada"
 
         val notificationChannel = NotificationChannel(
-            NOTIFICATION_CHANNEL_ID, titleText, NotificationManager.IMPORTANCE_DEFAULT
+            NOTIFICATION_CHANNEL_ID, titleText, NotificationManager.IMPORTANCE_LOW
         )
         // Desabilita a vibração para o canal de notificação
-        notificationChannel.vibrationPattern = longArrayOf(0L)
-        notificationChannel.enableVibration(true)
+        notificationChannel.vibrationPattern = null
 
         notificationManager.createNotificationChannel(notificationChannel)
 
@@ -259,11 +254,6 @@ class ForegroundLocationService : Service() {
         private const val TAG = "ForegroundLocationService"
 
         private const val PACKAGE_NAME = "br.com.fusiondms.core.services.location"
-
-        const val ACTION_FOREGROUND_LOCATION_BROADCAST =
-            "$PACKAGE_NAME.action.FOREGROUND_LOCATION_BROADCAST"
-
-        const val EXTRA_LOCATION = "$PACKAGE_NAME.extra.LOCATION"
 
         private const val EXTRA_CANCEL_LOCATION_TRACKING_FROM_NOTIFICATION =
             "$PACKAGE_NAME.extra.CANCEL_LOCATION_TRACKING_FROM_NOTIFICATION"
