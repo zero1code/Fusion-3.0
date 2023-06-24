@@ -15,6 +15,7 @@ packagingOptions {
 
 dependencies {
     implementation project(':core:common')
+    implementation project(':core:notification')
     implementation project(':core:model')
     implementation project(":core:navigation")
     implementation project(":core:database")

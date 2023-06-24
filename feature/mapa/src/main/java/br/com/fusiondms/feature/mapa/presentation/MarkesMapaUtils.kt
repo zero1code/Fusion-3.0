@@ -78,7 +78,7 @@ fun Context.bindLinhaRotaEntrePontos(listaCliente: List<Conteudo>): PolylineOpti
 
 fun bindCirculoRaioCliente(cliente: Conteudo.CarouselEntrega): CircleOptions {
     val centroRaio   = LatLng(cliente.entregasPorCliente.latitude, cliente.entregasPorCliente.longitude)
-    val raioEmMetros = 150.0
+    val raioEmMetros = 30.0
 
     val random = Random()
     val alpha = (255 * 0.53).toInt()
@@ -100,27 +100,45 @@ fun bindCirculoRaioCliente(cliente: Conteudo.CarouselEntrega): CircleOptions {
 fun checarSeEstaDentroRaioCliente(localizacaoAtual: String, raioMarkerMap: MutableMap<Circle, Marker>): Marker? {
     var result: Marker? = null
     for ((raio, marker) in raioMarkerMap.entries) {
-        val latlng = localizacaoAtual.split(", ")
-        val latitudeAtual = latlng[0].toDouble()
-        val longitudeAtual = latlng[1].toDouble()
+        val latlng = localizacaoAtual.toLatLng()
 
         val localAtual = Location("").apply {
-            latitude = latitudeAtual
-            longitude = longitudeAtual
+            latitude = latlng.latitude
+            longitude = latlng.longitude
         }
 
-        val tamanhoRaio = 150.0
+        val tamanhoRaio = 30.0
         val centroRaio = Location("").apply {
             latitude = raio.center.latitude
             longitude = raio.center.longitude
         }
 
         val distanciaEmMetros = localAtual.distanceTo(centroRaio)
-        Log.d("TAG", "checarSeEstaDentroRaioCliente: $distanciaEmMetros")
+//        Log.d("TAG", "checarSeEstaDentroRaioCliente: $distanciaEmMetros")
         if (distanciaEmMetros <= tamanhoRaio) {
             result = marker
             break
         }
     }
     return result
+}
+
+fun String.toLatLng() : LatLng {
+    val latlng = this.split(", ")
+    val latitudeAtual = latlng[0].toDouble()
+    val longitudeAtual = latlng[1].toDouble()
+
+    return LatLng(latitudeAtual, longitudeAtual)
+}
+
+fun calcularDistanciaMetros(inicio: LatLng, fim: LatLng): Float {
+    val results = FloatArray(1)
+    Location.distanceBetween(
+        inicio.latitude,
+        inicio.longitude,
+        fim.latitude,
+        fim.longitude,
+        results
+    )
+    return results[0]
 }

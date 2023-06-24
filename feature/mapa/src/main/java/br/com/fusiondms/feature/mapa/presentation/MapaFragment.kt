@@ -46,6 +46,8 @@ import br.com.fusiondms.core.common.snackbar.mensagemCurta
 import br.com.fusiondms.core.model.Conteudo
 import br.com.fusiondms.core.model.entrega.Entrega
 import br.com.fusiondms.core.model.parametros.Parametros
+import br.com.fusiondms.core.notification.EnumNotificacao
+import br.com.fusiondms.core.notification.Notificacao
 import br.com.fusiondms.core.services.location.ForegroundLocationService
 import br.com.fusiondms.feature.entregas.databinding.ItemEntregaChildBinding
 import br.com.fusiondms.feature.entregas.presentation.adapter.EntregasParentAdapter
@@ -236,6 +238,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         lifecycleScope.launchWhenCreated {
             entregaViewModel.listaEntrega.collect { result ->
                 listaCliente = result
+                mapaViewModel.setListaCliente(result)
                 adapterEntregas.atualizarLista(result)
             }
         }
@@ -278,6 +281,8 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             mapaViewModel.localizacaoAtual.collect { localizacaoAtual ->
                 if (!isNoRaioCliente) {
                     localizacaoAtual?.let {
+                        if (listaCliente.isNotEmpty())
+                            mapaViewModel.moverParaProximoCliente(localizacaoAtual.toLatLng(), listaCliente)
                         checarSeEstaDentroRaioCliente(localizacaoAtual, raioMarkerMap)?.let { marker ->
                             isNoRaioCliente = true
                             dialogEstaNoRaioCliente(
@@ -286,6 +291,12 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
                         }
                     }
                 }
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            mapaViewModel.progresso.collect { progresso ->
+                Notificacao.distanciaProximoCliente(requireContext(), progresso, EnumNotificacao.UPDATE_LOCAL_PROXIMO_CLIENTE)
             }
         }
     }
@@ -595,9 +606,11 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
             getString(R.string.label_marcar_chegada_cliente),
             getString(R.string.label_silenciar),
             acaoPositiva = {
-                isNoRaioCliente = false
+                isNoRaioCliente = true
             },
-            acaoNegativa = {}
+            acaoNegativa = {
+                isNoRaioCliente = false
+            }
         ).show(requireActivity().supportFragmentManager, DialogRaioCliente.TAG)
     }
 

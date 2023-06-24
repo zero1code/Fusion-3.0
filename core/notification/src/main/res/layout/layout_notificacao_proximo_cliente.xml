@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/medium_text"
+        android:textStyle="bold"
+        android:textColor="#24292f"
+        android:text="@string/label_em_transito" />
+
+    <TextView
+        android:id="@+id/tv_mensagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/normal_text"
+        android:textColor="#24292f"
+        android:singleLine="true"
+        android:text="@string/label_proximo_cliente_em_breve" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_chegada"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_destino" />
+
+        <ProgressBar
+            android:id="@+id/pb_proximo_cliente"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_normal"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/iv_chegada"
+            android:max="100"
+            android:progressDrawable="@drawable/custom_progress_bar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_progresso_caminhao_1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_big"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_progresso_caminhao_2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_big"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_progresso_caminhao_3"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_big"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_progresso_caminhao_4"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_big"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_progresso_caminhao_5"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_big"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_progresso_caminhao_6"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_big"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_progresso_caminhao_7"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_big"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/iv_progresso_caminhao_8"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_big"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_progresso_caminhao_9"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_big"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_progresso_caminhao_10"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_big"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_progresso_caminhao_11"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_big"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

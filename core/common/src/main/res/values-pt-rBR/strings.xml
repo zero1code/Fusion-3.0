@@ -167,6 +167,7 @@
     <string name="label_nome_fantasia">Nome fantasia</string>
     <string name="label_razao_social">Razão social</string>
     <string name="label_devolucao_mercadoria">Devolução de mercadoria</string>
+    <string name="label_em_transito">Em trânsito</string>
     <!--    label de 2 ou 3 palavras-->
 
     <!--    label de frases-->
@@ -183,6 +184,7 @@
     <string name="label_escolher_filtro_busca">Escolha o filtro para realizar a busca</string>
     <string name="label_qual_tipo_devolucao">Que tipo de devolução será realizada?</string>
     <string name="label_proximo_do_cliente">Você está próximo de um cliente!</string>
+    <string name="label_proximo_cliente_em_breve">Você chegará no próximo cliene em breve.</string>
     <!--    label de frases-->
 
     <!--    Label das preferencias-->

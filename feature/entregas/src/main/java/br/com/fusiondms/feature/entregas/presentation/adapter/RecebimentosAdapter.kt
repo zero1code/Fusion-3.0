@@ -37,6 +37,7 @@ class RecebimentosAdapter() : ListAdapter<Recebimento, RecebimentosAdapter.Receb
                 tvValor.text = recebimento.valor.toMoedaLocal()
                 ivIconeCartao.setImageResource(iconeBandeira(recebimento.tipo, recebimento.bandeira))
             }
+
         }
 
         private fun iconeBandeira(tipo: String, bandeira: String): Int {

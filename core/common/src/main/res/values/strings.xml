@@ -167,6 +167,7 @@
     <string name="label_nome_fantasia">Fantasy name</string>
     <string name="label_razao_social">Corporate reason</string>
     <string name="label_devolucao_mercadoria">Products return</string>
+    <string name="label_em_transito">In transit</string>
     <!--    label de 2 ou 3 palavras-->
 
     <!--    label de frases-->
@@ -183,6 +184,7 @@
     <string name="label_escolher_filtro_busca">Choose the filter to perform the search</string>
     <string name="label_qual_tipo_devolucao">What type of returns will be made?</string>
     <string name="label_proximo_do_cliente">You are close to a customer!</string>
+    <string name="label_proximo_cliente_em_breve">You will arrive at the next client soon.</string>
 
     <!--    label de frases-->
 
