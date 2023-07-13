@@ -295,8 +295,14 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
         }
 
         lifecycleScope.launchWhenCreated {
-            mapaViewModel.progresso.collect { progresso ->
-                Notificacao.distanciaProximoCliente(requireContext(), progresso, EnumNotificacao.UPDATE_LOCAL_PROXIMO_CLIENTE)
+            mapaViewModel.velocidadeAtual.collect { velocidade ->
+                bindingSheet.tvTitulo.text = velocidade.toString()
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            mapaViewModel.notificacaoViagem.collect { notificacao ->
+                Notificacao.distanciaProximoCliente(requireContext(), notificacao, EnumNotificacao.UPDATE_LOCAL_PROXIMO_CLIENTE)
             }
         }
     }

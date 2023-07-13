@@ -11,11 +11,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat.getFont
-import br.com.fusiondms.core.common.*
+import br.com.fusiondms.core.common.R
 import br.com.fusiondms.core.common.R.dimen
 import br.com.fusiondms.core.common.R.font
+import br.com.fusiondms.core.common.getSerializable
+import br.com.fusiondms.core.common.setStatusBarColor
 import br.com.fusiondms.core.common.snackbar.TipoMensagem
 import br.com.fusiondms.core.common.snackbar.exibirMensagemSnack
+import br.com.fusiondms.core.common.toDataLegivel
+import br.com.fusiondms.core.common.toMoedaLocal
 import br.com.fusiondms.core.model.recebimento.Recebimento
 import br.com.fusiondms.core.model.recebimento.TipoPagamento
 import br.com.fusiondms.feature.pagamentos.databinding.ActivityPagamentoMainBinding
@@ -150,7 +154,7 @@ class PagamentoMainActivity : AppCompatActivity() {
                 tvDataPagamento.text = Html.fromHtml(
                     getString(
                         R.string.label_data_pagamento,
-                        converterDataParatextoLegivel(recebimento.dataRecebimento)
+                        recebimento.dataRecebimento.toDataLegivel()
                     ), 0
                 )
                 tvValor.text = Html.fromHtml(

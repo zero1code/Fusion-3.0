@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-private const val BASE_URL = "http://192.168.1.7:3002/"
+private const val BASE_URL = "http://192.168.1.6:3002/"
 
 @Module
 @InstallIn(SingletonComponent::class)

@@ -4,6 +4,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.NotificationManager.IMPORTANCE_DEFAULT
+import android.app.NotificationManager.IMPORTANCE_HIGH
 import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.Color
@@ -26,7 +27,7 @@ class NotificacaoUltis(context: Context?, tipoChannel: EnumTipoChannel) : Contex
                 NotificationChannel(
                     LOCALIZACAO_PROXIMO_CLIENTE_CHANNEL_ID,
                     LOCALIZACAO_PROXIMO_CLIENTE_CHANNEL_NAME,
-                    IMPORTANCE_DEFAULT
+                    IMPORTANCE_HIGH
                 )
             }
             else -> null

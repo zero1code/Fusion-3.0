@@ -17,16 +17,24 @@ import br.com.fusiondms.core.datastore.chaves.DataStoreChaves
 import br.com.fusiondms.core.datastore.repository.DataStoreRepository
 import br.com.fusiondms.core.datastore.repository.DataStoreRepositoryImpl
 import com.google.android.gms.location.*
+import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import java.math.BigDecimal
+import java.math.RoundingMode
+import java.time.Instant
 import java.util.concurrent.TimeUnit
+import kotlin.math.round
 
 @AndroidEntryPoint
 class ForegroundLocationService : Service() {
 
     var dataStoreRepository: DataStoreRepository = DataStoreRepositoryImpl(this)
 
-    private val locationInterval = TimeUnit.SECONDS.toMillis(10)
+    private val locationInterval = TimeUnit.SECONDS.toMillis(20)
     private val locationFastestInterval = TimeUnit.SECONDS.toMillis(5)
     private val locationMaxWaitTime = TimeUnit.SECONDS.toMillis(30)
 
@@ -62,7 +70,7 @@ class ForegroundLocationService : Service() {
         locationRequest = LocationRequest.Builder(
             Priority.PRIORITY_HIGH_ACCURACY,
             locationInterval)
-            .setWaitForAccurateLocation(false)
+            .setWaitForAccurateLocation(true)
             .setMinUpdateIntervalMillis(locationFastestInterval)
             .setMaxUpdateDelayMillis(locationMaxWaitTime)
             .build()
@@ -71,13 +79,18 @@ class ForegroundLocationService : Service() {
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
 
+                locationResult.lastLocation
                 currentLocation = locationResult.lastLocation
                 val latitude = currentLocation?.latitude.toString()
                 val longitude = currentLocation?.longitude.toString()
                 //AQUI PEGA A LOCALIZACAO
                 val myCurrentLocation = currentLocation?.toText() ?: "Sem localização 2"
-                Log.d(TAG, "Current location: $myCurrentLocation")
-                runBlocking { dataStoreRepository.putLocation(myCurrentLocation, latitude, longitude) }
+                val velocidade = currentLocation?.run {
+                    if (hasSpeed()) (speed * 3.6)
+                    else getSpeed(this)
+                } ?: 0.0
+                Log.d(TAG, "Velocidade: ${velocidade}")
+                runBlocking { dataStoreRepository.putLocation(myCurrentLocation, latitude, longitude, velocidade.toInt()) }
 
                 if (serviceRunningInForeground) {
                     notificationManager.notify(
@@ -239,6 +252,38 @@ class ForegroundLocationService : Service() {
             .setOngoing(true)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .build()
+    }
+
+    private fun getSpeed(localizacaoAtual: Location): Double {
+        try {
+            var velocidade = 0.0
+            runBlocking {
+                val strLocalizacao = dataStoreRepository.getLastLocation(DataStoreChaves.KEY_CURRENT_LOCATION)
+                strLocalizacao?.toLatLng()?.let { localizacao ->
+                    val localizacaoAnterior = Location("Fusion")
+                    localizacaoAnterior.latitude = localizacao.latitude
+                    localizacaoAnterior.longitude = localizacao.longitude
+                    localizacaoAnterior.time = (Instant.now().epochSecond - 10)
+
+                    val tempoDecorrido = (localizacaoAtual.time - localizacaoAnterior.time) / 1000
+                    val distancia = localizacaoAnterior.distanceTo(localizacaoAtual)
+
+                    velocidade = (distancia / tempoDecorrido) * 3.6
+                }
+            }
+            return velocidade
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return 0.0
+        }
+    }
+
+    fun String.toLatLng() : LatLng {
+        val latlng = this.split(", ")
+        val latitudeAtual = latlng[0].toDouble()
+        val longitudeAtual = latlng[1].toDouble()
+
+        return LatLng(latitudeAtual, longitudeAtual)
     }
 
     /**

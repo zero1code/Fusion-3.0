@@ -7,4 +7,5 @@ object DataStoreChaves {
     const val KEY_CURRENT_LOCATION = "current_location"
     const val KEY_CURRENT_LATITUDE = "current_latitude"
     const val KEY_CURRENT_LONGITUDE = "current_longitude"
+    const val KEY_CURRENT_SPEED = "current_speed"
 }

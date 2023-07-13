@@ -57,11 +57,13 @@ class DataStoreRepositoryImpl @Inject constructor(
     override suspend fun putLocation(
         currentLocation: String,
         latitude: String,
-        longitude: String
+        longitude: String,
+        velocidade: Int
     ) {
         putString(DataStoreChaves.KEY_CURRENT_LOCATION, currentLocation)
         putString(DataStoreChaves.KEY_CURRENT_LATITUDE, latitude)
         putString(DataStoreChaves.KEY_CURRENT_LONGITUDE, longitude)
+        putInt(DataStoreChaves.KEY_CURRENT_SPEED, velocidade)
     }
 
     override suspend fun getString(chave: String): String? {
@@ -109,6 +111,30 @@ class DataStoreRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             e.printStackTrace()
             emptyFlow()
+        }
+    }
+
+    override fun getCurrentVelocidade(chave: String): Flow<Int?> {
+        return try {
+            val preferencesKey = intPreferencesKey(chave)
+            context.dataStore.data.map { preferences ->
+                preferences[preferencesKey]
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emptyFlow()
+        }
+    }
+
+    override suspend fun getLastLocation(chave: String): String? {
+        return try {
+            val preferencesKey = stringPreferencesKey(chave)
+            context.dataStore.data.map { preferences ->
+                preferences[preferencesKey]
+            }.first()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
     }
 

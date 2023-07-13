@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import br.com.fusiondms.core.common.converterDataParatextoLegivel
+import br.com.fusiondms.core.common.toDataLegivel
 import br.com.fusiondms.core.common.toMoedaLocal
 import br.com.fusiondms.core.model.recebimento.Recebimento
-import br.com.fusiondms.feature.entregas.R
 import br.com.fusiondms.feature.entregas.databinding.ItemRecebimentoBinding
 import br.com.fusiondms.feature.pagamentos.utils.ETipoPagamento
 
@@ -33,7 +32,7 @@ class RecebimentosAdapter() : ListAdapter<Recebimento, RecebimentosAdapter.Receb
             val context = binding.root.context
             with(binding) {
                 tvFormaPagamento.text = recebimento.formaPagamento
-                tvDataPagamento.text = converterDataParatextoLegivel(recebimento.dataRecebimento)
+                tvDataPagamento.text = recebimento.dataRecebimento.toDataLegivel()
                 tvValor.text = recebimento.valor.toMoedaLocal()
                 ivIconeCartao.setImageResource(iconeBandeira(recebimento.tipo, recebimento.bandeira))
             }

@@ -6,10 +6,8 @@ import android.content.Intent
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
-import android.os.Parcelable
 import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -84,8 +82,8 @@ fun converterDataParaDiaMesAno(data: Long) : String {
 
 }
 
-fun converterDataParaHorasMinutos(dataAtual: Long): String {
-    val timestamp = Math.multiplyExact(dataAtual, 1000)
+fun Long.toHorasMinutos(): String {
+    val timestamp = Math.multiplyExact(this, 1000)
     val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
 //    sdf.timeZone = TimeZone.getTimeZone("UTC")
     val netDate = Date(timestamp)
@@ -93,8 +91,8 @@ fun converterDataParaHorasMinutos(dataAtual: Long): String {
     return date.toString()
 }
 
-fun converterDataParatextoLegivel(dataAtual: Long): String {
-    val timestamp = Math.multiplyExact(dataAtual, 1000)
+fun Long.toDataLegivel(): String {
+    val timestamp = Math.multiplyExact(this, 1000)
     val sdf = SimpleDateFormat("E, dd MMM HH:mm", Locale.getDefault())
 //    sdf.timeZone = TimeZone.getTimeZone("UTC")
     val netDate = Date(timestamp)

@@ -10,7 +10,7 @@
 <item android:id="@android:id/secondaryProgress">
     <shape>
         <corners android:radius="@dimen/progress_bar_track_radius" />
-        <solid android:color="#24292f" />
+        <solid android:color="#dddddb" />
     </shape>
 </item>
 <item android:id="@android:id/progress">
