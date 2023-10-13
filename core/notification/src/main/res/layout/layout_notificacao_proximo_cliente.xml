@@ -43,7 +43,6 @@
             android:layout_centerVertical="true"
             android:layout_toStartOf="@id/iv_chegada"
             android:max="100"
-            android:progress="100"
             android:progressDrawable="@drawable/custom_progress_bar" />
 
         <RelativeLayout
